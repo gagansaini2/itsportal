@@ -1,5 +1,5 @@
 <?php
-class user{
+class employer{
 
 	 var $db;
 	 var $validity;
@@ -186,7 +186,7 @@ class user{
 							$insert_sql_array['user'] = $this->username;
 							$insert_sql_array['password'] = $this->password;
 							$insert_sql_array['phoneno'] = $this->phoneno;
-							$insert_sql_array['type'] = '1';
+							$insert_sql_array['type'] = '3';
 							$insert_sql_array['status'] = '1';
 							//$insert_sql_array['auth_to'] = 'Superadmin';
 							$this->db->insert(TBL_USER,$insert_sql_array);
@@ -208,16 +208,40 @@ class user{
 						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 						                            $header.= "X-Priority: 1\r\n"; 
 
-						                            mail($to, $subject, $comment, $header);
+						                           // mail($to, $subject, $comment, $header);
 							
 							$_SESSION['msg'] = 'User has been created Successfully';
 							
 							?>
-							<script type="text/javascript">
-								window.location = "post-a-resume1.php";
-							</script>
+								
+						<div class="container">
+						<div class="row text-center">
+							<div class="col-sm-12">
+							
+						
+							</div>
+						</div>
+
+			
+					
+				<div class="jumbotron">	
+					
+					<div class="row text-center">
+						<h4>You are successfully registered</h4>
+						<h5>Click next to proceed</h5>
+					</div>
+					<div class="row text-center">
+						<p>&nbsp;</p>
+						
+						<a class="btn btn-primary btn-lg" name="submit" href="jobs2.php" value="register">Next <i class="fa fa-arrow-right"></i></a>
+						
+					</div>
+				</div>
+			
+
+			</div>
 							<?php
-							exit();
+							
 							
 							} else {
 							echo $this->Form->ErrtxtPrefix.$this->Form->ErrorString.$this->Form->ErrtxtSufix; 
@@ -229,123 +253,6 @@ class user{
 		}
 	}
 
-	
-
-	/*function forgot_password($runat)
-	{
-		
-		switch($runat){
-			
-			case 'local' :
-
-					?>
-				
-
-				<div class="login_container">
-			<div class="container">
-	 	
-	 		<div class="row">
-
-	 		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offest-2 col-xs-12">
-				<div class="panel panel-default pad70 wow fadeInUp" data-wow-delay="0.5s">
-				  <h4 class="headforget">Find Your Account</h4>
-
-					<div class="form-group">
-				 	<form class="form-signup">
-		
-			 	
-					<label for="username" class="userforget"> Enter Your Email address</label>		 	 
-			        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" style="cursor:auto">
-			        		
-			        <p class="recover">A recovery password will be send to your email address</p>
-            		</div>
-
-                	
-                	<div class="form-group">
-					<button class="btn btn-success btn-success-for" name="submit" type="submit" value="forget"> submit</button>
-				</div>      			
-                </form>
-      			    
-				
-			</div>	
-			
-		</div>
-
-		</div>
-
-
-			<?php
-					
-						
-						break;
-
-			case 'server' :			
-						
-						extract($_POST);
-						$this->email = $email;
-
-
-							if($this->Form->IsEmail($email)){
-								// true email valid 
-								
-								$sql="select * from ".TBL_USER." where user = '".$email."' ";
-								$result= $this->db->query($sql,__FILE__,__LINE__);
-									if($this->db->num_rows($result)>0)
-									{
-									
-						                
-						               $length = 10;
-
-						               $randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
-						               
-						                            $to = $email;
-						                    
-						                            $subject = "Forgot password reset @ Sales web" ;
-						                            $comment = '<div style="text-align:left">
-
-						                            <p>Hello ,</p>
-						                            <p>Your new password is "'.$randomString.'".</p>
-						                            <p>Regards,</p>
-						                            <p>The shakedup Team</p>
-						                            </div>';
-						                            $header = "From: noreply@Salesweb.com\r\n"; 
-						                            $header.= "MIME-Version: 1.0\r\n"; 
-						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
-						                            $header.= "X-Priority: 1\r\n"; 
-
-						                            mail($to, $subject, $comment, $header);
-						                
-						                        
-													$update_sql_array = array();
-													$update_sql_array['password'] = $randomString;						
-													$this->db->update(TBL_USER,$update_sql_array,'user',$email);
-													
-
-													?>
-
-
-													<script>
-													window.location = "login.php";
-
-													</script>
-						                
-						                        <?php
-												exit();
-						                   
-						                
-									
-									}
-								
-						}
-							
-			
-								break;
-					
-
-					default :		echo "Invalid Parameter";
-				
-		}
-	}*/
 	
 
 	

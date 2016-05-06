@@ -41,9 +41,9 @@ $user_obj=new employee();
 			<?php
 				extract($_REQUEST);
 					if($submit=='register'){
-						$user_obj->CreateUser('server');
+						$user_obj->empprofile1('server');
 					}else{
-						$user_obj->CreateUser('local');
+						$user_obj->empprofile1('local');
 					}
 				
 
