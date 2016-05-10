@@ -20,12 +20,15 @@
 		}
 		
 		public function fetch_array($result) {
+		
 		$row=mysql_fetch_array($result);
 		
+		
 		if(count($row)-1>0)
+		{
 		foreach($row as $key=>$value)
 		$row[$key]=stripslashes($value);
-		
+		}
 		return $row;
 		}
 		
