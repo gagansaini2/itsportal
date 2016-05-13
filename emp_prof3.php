@@ -4,9 +4,6 @@ $user_obj=new employee();
 
  ?>
 
-
-
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -40,13 +37,12 @@ $user_obj=new employee();
 		<section id="resume">
 			
 
-
 			<?php
 				extract($_REQUEST);
 					if($submit=='register'){
-						$user_obj->CreateUser('server');
+						$user_obj->empprofile3('server');
 					}else{
-						$user_obj->CreateUser('local');
+						$user_obj->empprofile3('local');
 					}
 				
 

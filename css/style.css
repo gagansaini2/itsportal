@@ -858,8 +858,8 @@ header {
 
 	.form-control {
 		box-shadow: none;
-		height: 45px;
-		padding: 10px 15px;
+		height: 35px;
+		padding: auto;
 		-webkit-box-shadow: none;
 		-mozilla-box-shadow: none;
 		-ms-box-shadow: none;

@@ -491,6 +491,14 @@
 			$(this).parent().parent().parent().before(NewEducation);
 		});
 
+		// 3. addin certificate
+
+		var NewCertificate='<div class="row certificate"><div class="col-sm-6"><div class="form-group" id="school-group"><input type="text" class="form-control" name="certificate2" id="certificate" placeholder="course name"></div></div></div>'
+
+			$("#add-certificate").click(function(){
+				$(this).parent().parent().parent().before(NewCertificate);
+			});
+
 		// ====================================================================
 
 		// Scroll Reveal

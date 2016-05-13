@@ -12,7 +12,7 @@ $user_obj=new employer();
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="description" content="Jobseek - Job Board Responsive HTML Template">
 		<meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
-		<title>Jobseek - Job Board Responsive HTML Template</title>
+		<title>its</title>
 		<link rel="shortcut icon" href="images/favicon.png">
 
 		<!-- Main Stylesheet -->

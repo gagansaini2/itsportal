@@ -1,11 +1,8 @@
 <?php include('include/common_includes.php');  ?>
-<?php require_once("class/class.employee.php"); 
-$user_obj=new employee();
+<?php require_once("class/class.employer.php"); 
+$user_obj=new employer();
 
  ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -44,9 +41,9 @@ $user_obj=new employee();
 			<?php
 				extract($_REQUEST);
 					if($submit=='register'){
-						$user_obj->CreateUser('server');
+						$user_obj->comp_prof('server');
 					}else{
-						$user_obj->CreateUser('local');
+						$user_obj->comp_prof('local');
 					}
 				
 

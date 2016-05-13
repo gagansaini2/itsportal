@@ -4,7 +4,10 @@
 // master management tables
 
 define("TBL_USER",'tbl_user',true);
-define("EMPLOYEEPROF1",'employeeprof1',true);
+define("TBL_EMPLOYEE_DEL",'tbl_employee_del',true);
+define("TBL_EMPLOYEE_EXP",'tbl_employee_exp',true);
+define("TBL_EMPLOYEE_EDD",'tbl_employee_edd',true);
+
 
 
 
