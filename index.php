@@ -2,6 +2,7 @@
 <?php require_once("class/class.user.php"); 
 
  ?>
+ <?php  require_once("class/config.inc.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,6 +1,6 @@
 <?php
 @session_start();
-//error_reporting("Error");
+error_reporting("Error");
 
 	//**************** include classes *************************
 	require_once("global.config.php");

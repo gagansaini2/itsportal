@@ -25,16 +25,18 @@ var $adminuser;
 			$_SESSION['http_referer'] =	'..'.$http_referer;		
 		}
 				  
-		function Create_Session($user_name,$user_id,$groups,$user_type){
+		function Create_Session1($user_name,$user_id,$name,$user_type,$company_id,$employee_id){
 			$this->user_name=$user_name;
 			$this->user_id=$user_id;
-			$this->groups=$groups;
+			$this->name=$name;
 			$this->user_type=$user_type;
 			$_SESSION['user_name'] = $this->user_name;
 			$_SESSION['user_id'] = $this->user_id;
-			$_SESSION['groups']= $this->groups;
+			$_SESSION['name']= $this->name;
 			$_SESSION['user_type'] = $this->user_type;
-			
+			$_SESSION['company_id']=$company_id;
+			$_SESSION['employee_id']=$employee_id;
+						
 		}
 		
 		function Get_user_id()

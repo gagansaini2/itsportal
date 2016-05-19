@@ -21,7 +21,65 @@ class employee{
 			case 'local' :
 
 			?>
+				<div class="container">
+						<div class="row text-center">
+							<div class="col-sm-12">
+							<h2 style="height: 2px;">Sign In</h2>
+							<style>
+							h2::after {
+								
+								content: none;
+								
+								/*display: block;
+								height: 5px;
+								margin-top: 10px;
+								width: 60px;*/
+							}
+							</style>
+							<h4></h4>
+						
+							</div>
+						</div>
+
+				<form name="" method="POST">
+
+					<!-- Resume Details Start -->
+				<div class="jumbotron">	
+
 				
+
+					<div class="row">
+						
+						<div class="col-sm-6">
+							<div class="form-group" id="email-group">
+								<label for="resume-name">Email</label>
+								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+							</div>
+						</div>
+						
+						<div class="col-sm-6">
+							<div class="form-group" id="password-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" name="password" id="password" placeholder="password">
+							</div>
+						</div>
+						
+					</div>
+					<div class="row text-center">
+						<p>&nbsp;</p>
+						
+						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
+						<button class="btn btn-primary btn-lg" name="submit" value="register">Sign in <i class="fa fa-arrow-right"></i></button>
+					</div>
+				</div>
+					
+					<!-- Resume File Start -->
+
+					
+
+				</form>
+
+			</div>
 
 
 
@@ -51,13 +109,16 @@ class employee{
 									else
 									{
 									$this->user_id= $row['user_id'];
-									$this->groups= $row['auth_to'];
+									//$this->groups= $row['auth_to'];
 									$this->user_type= $row['type'];
+									$this->name= $row['name'];
+									$this->employee_id= $row['employee_id'];
 									
-									$this->auth->Create_Session($username,$this->user_id,$this->groups,$this->user_type);
+									
+									$this->auth->Create_Session1($username,$this->user_id,$this->name,$this->user_type,$this->company_id,$this->employee_id);
 									?>
 									<script type="text/javascript">
-									window.location="web_app/";
+									window.location="emp_prof1.php";
 									</script>
 									<?php
 									exit();
@@ -108,7 +169,9 @@ class employee{
 
 					<!-- Resume Details Start -->
 				<div class="jumbotron">	
-					
+
+				
+
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group" id="name-group">
@@ -181,6 +244,7 @@ class employee{
 							$result= $this->db->query($sql,__FILE__,__LINE__);
 							if($this->db->num_rows($result)>0)
 							{
+
 								$_SESSION['error_msg'] = 'User already exist. Please select another username';
 								?>
 								<script type="text/javascript">
@@ -248,7 +312,7 @@ class employee{
 					<div class="row text-center">
 						<p>&nbsp;</p>
 						
-						<a class="btn btn-primary btn-lg" name="submit" href="emp_prof1.php" value="register">Next <i class="fa fa-arrow-right"></i></a>
+						<a class="btn btn-primary btn-lg" name="submit" href="signin.php" value="register">Next <i class="fa fa-arrow-right"></i></a>
 						
 					</div>
 				</div>
@@ -401,7 +465,7 @@ class employee{
 							//if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
 							//	$return =false;	
 							
-							$sql="select * from ".tbl_employee_del." where name='".$this->name."'";
+							$sql="select * from ".tbl_employee_del." where email='".$this->username."'";
 							$result= $this->db->query($sql,__FILE__,__LINE__);
 							if($this->db->num_rows($result)>0)
 							{
@@ -426,7 +490,13 @@ class employee{
 							$insert_sql_array['age'] = $this->age;
 							$insert_sql_array['address'] = $this->address;
 							$insert_sql_array['gender'] = $this->gender;
+
+							$insert_sql_array['user_id']=$_SESSION['user_id'];
 							$this->db->insert(tbl_employee_del,$insert_sql_array);
+
+
+							$id=$this->db->last_insert_id();
+							$_SESSION['employee_id']=$id;
 
 ?>
 								<script type="text/javascript">
@@ -843,20 +913,7 @@ class employee{
 							//if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
 							//	$return =false;	
 							
-							$sql="select * from ".tbl_employee_edd." where school_name='".$this->school."'";
-							$result= $this->db->query($sql,__FILE__,__LINE__);
-							if($this->db->num_rows($result)>0)
-							{
-								$_SESSION['error_msg'] = 'User already exist. Please select another username';
-								?>
-								<script type="text/javascript">
-									window.location = "emp_prof2.php"
-								</script>
-								<?php
-								exit();
-
-								
-							}
+							// 
 								
 							if($return){
 							
@@ -881,7 +938,9 @@ class employee{
 
 
 							$insert_sql_array['certificate'] = $this->certificate1.','.$this->certificate2;
-							//$insert_sql_array['gender'] = $this->gender;
+
+							$insert_sql_array['user_id'] = $_SESSION['user_id'];
+							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
 							$this->db->insert(tbl_employee_edd,$insert_sql_array);
 
 ?>
@@ -1044,20 +1103,7 @@ class employee{
 							//if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
 							//	$return =false;	
 							
-							$sql="select * from ".tbl_employee_exp." where experience_yrs='".$this->exyear."'";
-							$result= $this->db->query($sql,__FILE__,__LINE__);
-							if($this->db->num_rows($result)>0)
-							{
-								$_SESSION['error_msg'] = 'User already exist. Please select another username';
-								?>
-								<script type="text/javascript">
-									window.location = "emp_prof3.php"
-								</script>
-								<?php
-								exit();
-
-								
-							}
+							
 								
 							if($return){
 							
@@ -1069,6 +1115,9 @@ class employee{
 							// $insert_sql_array['age'] = $this->age;
 							// $insert_sql_array['address'] = $this->address;
 							// $insert_sql_array['gender'] = $this->gender;
+
+							$insert_sql_array['user_id'] = $_SESSION['user_id'];
+							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
 							$this->db->insert(tbl_employee_exp,$insert_sql_array);
 
 ?>
