@@ -10,6 +10,7 @@ class employee{
 		$this->auth=new Authentication();
 		
 		$this->Form = new ValidateForm();
+		$this->validity = new ClsJSFormValidation();
 
 		
 		}
@@ -20,17 +21,37 @@ class employee{
 		switch($runat){
 			case 'local' :
 
+
+			 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->username = $username;
+                $this->password = $password;
+               
+            }
+            $FormName = "signin_form";
+            $ControlNames=array(
+                                 
+                                "name"=>array('username',"EMail","Please enter Email","span_username"),
+                                "password"=>array('password',"","Please enter Password","span_password")
+                               
+            );
+
+            $ValidationFunctionName="Login_form";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
+
 			?>
 				<div class="container">
 						<div class="row text-center">
 							<div class="col-sm-12">
-							<h2 style="height: 2px;">Sign In</h2>
+							<h1 style="font-size:34px;">Sign In</h1>
 							<style>
 							h2::after {
 								
-								content: none;
+								/*content: none;
 								
-								/*display: block;
+								display: block;
 								height: 5px;
 								margin-top: 10px;
 								width: 60px;*/
@@ -41,10 +62,15 @@ class employee{
 							</div>
 						</div>
 
-				<form name="" method="POST">
+				<form name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
 				<div class="jumbotron">	
+
+					<h5 class="text-center"><?php if (isset($_SESSION['error_msg1'])) {
+							echo $_SESSION['error_msg1'];
+							
+					}?></h5><br><br>
 
 				
 
@@ -54,6 +80,7 @@ class employee{
 							<div class="form-group" id="email-group">
 								<label for="resume-name">Email</label>
 								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								 <span id="span_username"></span>
 							</div>
 						</div>
 						
@@ -61,6 +88,7 @@ class employee{
 							<div class="form-group" id="password-group">
 								<label for="password">Password</label>
 								<input type="password" class="form-control" name="password" id="password" placeholder="password">
+								 <span id="span_password"></span>
 							</div>
 						</div>
 						
@@ -69,7 +97,7 @@ class employee{
 						<p>&nbsp;</p>
 						
 						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
-						<button class="btn btn-primary btn-lg" name="submit" value="register">Sign in <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" value="register" onclick="return <?php echo $ValidationFunctionName;?>()" >Sign in <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>
 					
@@ -98,10 +126,11 @@ class employee{
 								{
 									if($row['status'] == 'block')
 									{
-									$_SESSION['error_msg']='User is Blocked Please Contact Administrator ...';
+									$_SESSION['error_msg1']='User is Blocked Please Contact Administrator ...';
+
 									?>
 									<script type="text/javascript">
-									window.location="index.php";
+									window.location="signin.php";
 									</script>
 									<?php
 									exit();
@@ -126,7 +155,8 @@ class employee{
 								}
 								else
 								{
-									$_SESSION['error_msg']='Invalid username or password, please try again ...';
+									$_SESSION['error_msg1']='Invalid username or password, please try again';
+									$this->Login_form('local');
 								}
 						
 						break;
@@ -140,7 +170,31 @@ class employee{
 	{
 		switch($runat){
 			case 'local':
-						
+					
+
+					 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->name = $name;
+                $this->username = $username;
+                $this->password = $password;
+                $this->phoneno = $phoneno;
+              
+               
+            }
+            $FormName = "signup_form";
+            $ControlNames=array(
+                                 
+                                "name"=>array('name',"''","Please enter Name","span_name"),
+                                "password"=>array('password',"Password","Please enter Password","span_password"),
+                                "username"=>array('username',"EMail","Please enter Email","span_username"),
+                                "phoneno"=>array('phoneno',"Number","Please enter Phone Number","span_phoneno")
+                               
+            );
+
+            $ValidationFunctionName="CreateUser";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;	
 
 						?>
 
@@ -148,11 +202,11 @@ class employee{
 					<div class="container">
 						<div class="row text-center">
 							<div class="col-sm-12">
-							<h2 style="height: 2px;">Sign Up Here</h2>
+							<h1>Sign Up Here</h1>
 							<style>
 							h2::after {
 								
-								content: none;
+								/*content: none;*/
 								
 								/*display: block;
 								height: 5px;
@@ -165,24 +219,28 @@ class employee{
 							</div>
 						</div>
 
-				<form name="" method="POST">
+				<form name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
 				<div class="jumbotron">	
 
-				
+				<h5 class="text-center"><?php if (isset($_SESSION['error_msg'])) {
+							echo $_SESSION['error_msg'];
+					}?></h5><br><br>
 
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group" id="name-group">
 								<label for="resume-name">Name</label>
 								<input type="text" class="form-control" name="name" id="name" placeholder="e.g. John Doe">
+								<span id="span_name"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group" id="email-group">
 								<label for="resume-name">Email</label>
-								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								<input type="email" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								<span id="span_username"></span>
 							</div>
 						</div>
 						
@@ -190,12 +248,14 @@ class employee{
 							<div class="form-group" id="password-group">
 								<label for="password">Password</label>
 								<input type="password" class="form-control" name="password" id="password" placeholder="password">
+								<span id="span_password"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group" id="phoneno-group">
 								<label for="resume-name">Phone No.</label>
 								<input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="e.g. John Doe">
+								<span id="span_phoneno"></span>
 							</div>
 						</div>
 					</div>
@@ -203,7 +263,7 @@ class employee{
 						<p>&nbsp;</p>
 						
 						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
-						<button class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Sign up <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>
 					
@@ -235,10 +295,10 @@ class employee{
 
 							//server side validation
 							$return =true;
-							if($this->Form->ValidField($username,'empty','User field is Empty or Invalid')==false)
-								$return =false;
-							if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
-								$return =false;	
+							// if($this->Form->ValidField($username,'empty','User field is Empty or Invalid')==false)
+							// 	$return =false;
+							// if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
+							// 	$return =false;	
 							
 							$sql="select * from ".TBL_USER." where user='".$this->username."'";
 							$result= $this->db->query($sql,__FILE__,__LINE__);
@@ -294,12 +354,7 @@ class employee{
 							
 							
 						<div class="container">
-						<div class="row text-center">
-							<div class="col-sm-12">
-							
 						
-							</div>
-						</div>
 
 			
 					
@@ -342,20 +397,43 @@ class employee{
 		switch($runat){
 			case 'local':
 						
+				 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->name = $name;
+                $this->username = $username;
+                $this->phoneno = $phoneno;
+                $this->address = $address;
+                $this->gender = $gender;
+                $this->age = $age;
+               
+            }
+            $FormName = "empdetails";
+            $ControlNames=array(
+                                 
+                                "name"=>array('name',"''","Please enter name","span_name"),
+                                "username"=>array('username',"EMail","Please enter your Email ","span_username"),
+                                "phoneno"=>array('phoneno',"Number","Please enter Phoneno","span_phoneno"),
+                                "address"=>array('address',"''","Please enter location ","span_location"),
+                               
+                                "gender"=>array('gender',"''","Please select one ","span_gender"),
+                                "age"=>array('age',"Number","Please enter your Age ","span_age")
+                               
+            );
+
+            $ValidationFunctionName="empprofile1";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
+
 
 						?>
 
 
 					<div class="container">
-						<div class="row ">
-							<div class="col-sm-12">
-							<h2>add your details</h2>
-							
 						
-							</div>
-						</div>
+						<h2>add your details</h2>
 
-				<form name="" method="POST">
+				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
 				<div class="jumbotron">	
@@ -366,6 +444,7 @@ class employee{
 							<div class="form-group" id="name-group">
 								<label for="resume-name">Name</label>
 								<input type="text" class="form-control" name="name" id="name" placeholder="e.g. John Doe">
+								<span id="span_name"></span>
 							</div>
 						</div>
 					</div>
@@ -374,6 +453,7 @@ class employee{
 							<div class="form-group" id="email-group">
 								<label for="resume-name">Email</label>
 								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								<span id="span_username"></span>
 							</div>
 						</div>
 					</div>	
@@ -382,6 +462,8 @@ class employee{
 							<div class="form-group" id="phoneno-group">
 								<label for="resume-name">Phone No.</label>
 								<input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="e.g. John Doe">
+								<span id="span_phoneno"></span>
+
 							</div>
 						</div>
 					</div>	
@@ -390,6 +472,7 @@ class employee{
 							<div class="form-group" id="address-group">
 								<label for="address">address</label>
 								<input type="textarea" class="form-control" name="address" id="address" placeholder="address">
+								<span id="span_location"></span>
 							</div>
 						</div>
 					</div>	
@@ -399,7 +482,8 @@ class employee{
 								<label for="gender">Gender</label><br>
 								<input type="radio" name="gender" value="male" id="gender" >Male&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="radio" name="gender" value="female" id="gender" >Female&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="gender" value="Other">Others
+								
+								<span id="span_gender"></span>
 							</div>
 						</div>
 					</div>	
@@ -408,6 +492,7 @@ class employee{
 							<div class="form-group" id="age-group">
 								<label for="">Age</label>
 								<input type="number" id="age" class="form-control" name="age">
+								<span id="span_age"></span>
 							</div>
 						</div>
 					</div>	
@@ -426,7 +511,7 @@ class employee{
 						<p>&nbsp;</p>
 						
 						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
-						<button class="btn btn-primary btn-lg" name="submit" value="register">Next <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>
 					
@@ -526,20 +611,64 @@ class employee{
 		switch($runat){
 			case 'local':
 						
+				if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                	extract($_POST);
+
+                $this->school = $school;
+                $this->school_city = $school_city;
+                $this->school_qualifications = $school_qualifications;
+                $this->school_board = $school_board;
+                $this->school_passing = $school_passing;
+				$this->grad_name = $grad_name;
+				$this->grad_city = $grad_city;
+				$this->grad_qualifications = $grad_qualifications;
+				$this->grad_board = $grad_board;
+				$this->grad_passing = $grad_passing;
+				$this->postgrad_name = $postgrad_name;
+				$this->postgrad_city = $postgrad_city;
+				$this->postgrad_qualifications = $postgrad_qualifications;
+				$this->postgrad_board = $postgrad_board;
+				$this->postgrad_passing = $postgrad_passing;
+
+				
+       
+            }
+            $FormName = "empeducation";
+            $ControlNames=array(
+                                 
+                                "school"=>array('school',"''","Please enter Name","span_school"),
+                                "school_city"=>array('school_city',"''","Please enter city ","span_school_city"),
+                                "school_qualifications"=>array('school_qualifications',"''","Please enter your qualifications","span_school_qualifications"),
+                                "school_board"=>array('school_board',"''","Please enter the Affilation ","span_school_board"),
+                                "school_passing"=>array('school_passing',"''","Please select one ","span_school_passing"),
+                                "grad_name"=>array('grad_name',"''","Please enter Name","span_grad_name"),
+                                "grad_city"=>array('grad_city',"''","Please enter city","span_grad_city"),
+                                "grad_qualifications"=>array('grad_qualifications',"''","Please enter your qualifications","span_grad_qualifications"),
+                                "grad_passing"=>array('grad_passing',"''","Please select one ","span_grad_passing"),
+                                "grad_board"=>array('grad_board',"''","Please enter the Affilation  ","span_grad_board"),
+                               
+                                "postgrad_name"=>array('postgrad_name',"''","Please enter Name ","span_postgrad_name"),
+                                "postgrad_city"=>array('postgrad_city',"''","Please enter city ","span_postgrad_city"),
+                                "postgrad_qualifications"=>array('postgrad_qualifications',"''","Please enter your qualifications","span_postgrad_qualifications"),
+                              	"postgrad_board"=>array('postgrad_board',"''","Please enter the Affilation  ","span_postgrad_board"),
+                                "postgrad_passing"=>array('postgrad_passing',"''","Please select one","span_postgrad_passing")
+                                  
+            );
+
+            $ValidationFunctionName="empprofile2";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
 
 						?>
 
 
 					<div class="container">
-						<div class="row">
-							<div class="col-sm-12">
-							<h2>Education</h2>
-							
 						
-							</div>
-						</div>
 
-				<form name="" method="POST">
+						<h2>Education</h2>
+
+				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
 				<div class="jumbotron">	
@@ -551,12 +680,14 @@ class employee{
 							<div class="form-group" id="school-group">
 								<label for="school">School Name</label>
 								<input type="text" class="form-control" id="school" name="school" placeholder="School name">
+								<span id="span_school"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group" id="city-group">
 								<label for="city">City</label>
 								<input type="text" class="form-control" name="school_city" id="city" placeholder="Name of city">
+								<span id="span_school_city"></span>
 							</div>
 						</div>
 						
@@ -566,18 +697,21 @@ class employee{
 							<div class="form-group" id="qualifications-group">
 								<label for="qualifications">Qualifications</label>
 								<input type="text" class="form-control" name="school_qualifications" id="qualifications" placeholder="e.g. Master Engineer">
+								<span id="span_school_qualifications"></span>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group" id="qualifications-group">
 								<label for="qualifications">Board</label>
 								<input type="text" class="form-control" name="school_board" id="board" placeholder="Affilation">
+								<span id="span_school_board"></span>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group" id="education-dates-group">
 								<label for="education-dates">Year of passing</label><br>
 								<select  name="school_passing" class="form-control">
+	<option value="">Select</option>								
 	<option value="2016">2016</option>								
 	<option value="2015">2015</option>
 	<option value="2014">2014</option>
@@ -626,7 +760,7 @@ class employee{
 	<option value="1971">1971</option>
 	<option value="1970">1970</option>
 	
-   </select>
+   </select><span id="span_school_passing"></span>
 								
 								
 							</div>
@@ -646,12 +780,14 @@ class employee{
 							<div class="form-group" id="school-group">
 								<label for="school">college Name</label>
 								<input type="text" class="form-control" name="grad_name" id="grad" placeholder="College name">
+								<span id="span_grad_name"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group" id="city-group">
 								<label for="city">City</label>
 								<input type="text" class="form-control" name="grad_city" id="city" placeholder="Name of city">
+								<span id="span_grad_city"></span>
 							</div>
 						</div>
 						
@@ -661,18 +797,21 @@ class employee{
 							<div class="form-group" id="qualifications-group">
 								<label for="qualifications">Qualifications</label>
 								<input type="text" class="form-control" name="grad_qualifications" id="qualifications" placeholder="e.g. Master Engineer">
+								<span id="span_grad_qualifications"></span>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group" id="qualifications-group">
 								<label for="qualifications">University</label>
 								<input type="text" class="form-control" name="grad_board" id="board" placeholder="Affilation">
+								<span id="span_grad_board"></span>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group" id="education-dates-group">
 								<label for="education-dates">Year of passing</label><br>
 								<select  name="grad_passing" class="form-control">
+	<option value="">Select</option>								
 	<option value="2016">2016</option>								
 	<option value="2015">2015</option>
 	<option value="2014">2014</option>
@@ -721,7 +860,7 @@ class employee{
 	<option value="1971">1971</option>
 	<option value="1970">1970</option>
 	
-   </select>
+   </select><span id="span_grad_passing"></span>
 								
 								
 							</div>
@@ -740,12 +879,14 @@ class employee{
 							<div class="form-group" id="school-group">
 								<label for="school">college Name</label>
 								<input type="text" class="form-control" name="postgrad_name" id="postgrad" placeholder="College name">
+								<span id="span_postgrad_name"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group" id="city-group">
 								<label for="city">City</label>
 								<input type="text" class="form-control" name="postgrad_city" id="city" placeholder="Name of city">
+								<span id="span_postgrad_city"></span>
 							</div>
 						</div>
 						
@@ -755,18 +896,21 @@ class employee{
 							<div class="form-group" id="qualifications-group">
 								<label for="qualifications">Qualifications</label>
 								<input type="text" class="form-control" name="postgrad_qualifications" id="qualifications" placeholder="e.g. Master Engineer">
+								<span id="span_postgrad_qualifications"></span>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group" id="qualifications-group">
 								<label for="qualifications">University</label>
 								<input type="text" class="form-control" name="postgrad_board" id="board" placeholder="Affilation">
+								<span id="span_postgrad_board"></span>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group" id="education-dates-group">
 								<label for="education-dates">Year of passing</label><br>
 								<select  name="postgrad_passing" class="form-control">
+	<option value="">Select</option>								
 	<option value="2016">2016</option>								
 	<option value="2015">2015</option>
 	<option value="2014">2014</option>
@@ -815,7 +959,7 @@ class employee{
 	<option value="1971">1971</option>
 	<option value="1970">1970</option>
 	
-   </select>
+   </select><span id="span_postgrad_passing"></span>
 								
 								
 							</div>
@@ -851,7 +995,7 @@ class employee{
 						<p>&nbsp;</p>
 						
 						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
-						<button class="btn btn-primary btn-lg" name="submit" value="register">Next <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>
 
 					
@@ -860,13 +1004,6 @@ class employee{
 				</div>	
 
 
-					
-					
-				</div>
-					
-				
-
-					
 
 				</form>
 
@@ -943,7 +1080,7 @@ class employee{
 							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
 							$this->db->insert(tbl_employee_edd,$insert_sql_array);
 
-?>
+		?>
 								<script type="text/javascript">
 									window.location = "emp_prof3.php"
 								</script>
@@ -971,34 +1108,107 @@ class employee{
 	{
 		switch($runat){
 			case 'local':
+
+
+			 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->exyear = $exyear;
+                $this->keyskills = $keyskills;
+               
+            }
+            $FormName = "empexp";
+            $ControlNames=array(
+                                 
+                                "exyear"=>array('exyear',"''","Please select","span_exyear"),
+                                "keyskills"=>array('keyskills',"''","Please enter atleast one keyskill","span_keyskills")
+                               
+            );
+
+            $ValidationFunctionName="empprofile3";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
+
 						
 
 						?>
 
 
 						<div class="container">
-						<div class="row ">
-							<div class="col-sm-12">
-							<h2>experience</h2>
-							
 						
-							</div>
-						</div>
 
-				<form name="" method="POST">
+						<h2>experience</h2>
+
+				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
-				<div class="jumbotron form-center">	
+				<div class="jumbotron form-center" >	
+
+
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+								<label for="resume-name">What are your Key Skills?</label>
+								<input type="text" class="form-control" name="keyskills">
+								<span id="span_keyskills"></span>
+								
+								<!-- <input type="textarea" name="aabe" class=" form-control" style="height:120px;" /> -->
+							</div>
+						</div>
+					</div>	
 					
 					
 					<div class="row">
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<div class="form-group" >
 								<label for="resume-name">How much work experience do you have?</label>&nbsp;&nbsp;&nbsp;
-								<select style="width: 90px;" name="exyear" id="expyear" class="error">
-									<option value="-1" selected="">Select</option>
-									<option value="99">Fresher</option>
-									<option value="0" label="0">0</option>
+								<select style="width:;" name="exyear" id="expyear" class="form-control error">
+									<option value="" selected="">Select</option>
+									<option value="0">Fresher</option>
+									<option value="1" >1 years</option>
+									<option value="2" >2 years</option>
+									<option value="3" >3 years</option>
+									<option value="4" >4 years</option>
+									<option value="5" >5 years</option>
+									<option value="6" >6 years</option>
+									<option value="7" >7 years</option>
+									<option value="8" >8 years</option>
+									<option value="9" >9 years</option>
+									<option value="10" >10 years</option>
+									<option value="11" >11 years</option>
+									<option value="12" >12 years</option>
+									<option value="13" >13 years</option>
+									<option value="14" >14 years</option>
+									<option value="15" >15 years</option>
+									<option value="16" >16 years</option>
+									<option value="17" >17 years</option>
+									<option value="18" >18 years</option>
+									<option value="19" >19 years</option>
+									<option value="20" >20 years</option>
+									<option value="21" >21 years</option>
+									<option value="22" >22 years</option>
+									<option value="23" >23 years</option>
+									<option value="24" >24 years</option>
+									<option value="25" >25 years</option>
+									<option value="26" >26 years</option>
+									<option value="27" >27 years</option>
+									<option value="28" >28 years</option>
+									<option value="29" >29 years</option>
+									<option value="30" >30 years</option>
+									<option value="31" >30+ years</option>
+								</select>   
+								<span id="span_exyear"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+								<label for="resume-name">how many organisations worked with</label>
+								<select style="width: ;" name="worknum" class="form-control error" >
+									<option value="" selected="">Select</option>
+									<option value="none">None</option>
 									<option value="1" label="1">1</option>
 									<option value="2" label="2">2</option>
 									<option value="3" label="3">3</option>
@@ -1007,43 +1217,15 @@ class employee{
 									<option value="6" label="6">6</option>
 									<option value="7" label="7">7</option>
 									<option value="8" label="8">8</option>
-									<option value="9" label="9">9</option>
-									<option value="10" label="10">10</option>
-									<option value="11" label="11">11</option>
-									<option value="12" label="12">12</option>
-									<option value="13" label="13">13</option>
-									<option value="14" label="14">14</option>
-									<option value="15" label="15">15</option>
-									<option value="16" label="16">16</option>
-									<option value="17" label="17">17</option>
-									<option value="18" label="18">18</option>
-									<option value="19" label="19">19</option>
-									<option value="20" label="20">20</option>
-									<option value="21" label="21">21</option>
-									<option value="22" label="22">22</option>
-									<option value="23" label="23">23</option>
-									<option value="24" label="24">24</option>
-									<option value="25" label="25">25</option>
-									<option value="26" label="26">26</option>
-									<option value="27" label="27">27</option>
-									<option value="28" label="28">28</option>
-									<option value="29" label="29">29</option>
-									<option value="30" label="30">30</option>
-									<option value="31" label="30+">30+</option>
-								</select>  years
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-7">
-							<div class="form-group" >
-								<label for="resume-name">What are your Key Skills?</label>
-								<input type="text" class="form-control" name="keyskills">
-								
-								<!-- <input type="textarea" name="aabe" class=" form-control" style="height:120px;" /> -->
+									<option value="8+" label="8+">8+</option>
+									
+								</select>
 							</div>
 						</div>
 					</div>	
+
+
+					
 					
 					<div class="row">
 						<div class="col-sm-7">
@@ -1055,13 +1237,113 @@ class employee{
 					</div>	
 					
 
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group" >
+								<label for="resume-name">current salary</label>
+								<select style="width: 180px;" class="form-control" name="curentsalary"  class="error">
+									<option value="" selected="">Select</option>
+									<option value="none">None</option>
+									<option value="0.5" >0.5 lacs</option>
+									<option value="1" >1 lacs</option>
+									<option value="2" >2 lacs</option>
+									<option value="3" >3 lacs</option>
+									<option value="4" >4 lacs</option>
+									<option value="5" >5 lacs</option>
+									<option value="6" >6 lacs</option>
+									<option value="7" >7 lacs</option>
+									<option value="8" >8 lacs</option>
+									<option value="8+">8+ lacs</option>
+									
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group" >
+								<label for="resume-name">expected salary</label>
+								<select style="width: 180px;" class="form-control" name="expectsalary"  class="error">
+									<option value="" selected="">Select</option>
+									<option value="0.5" >0.5 lacs</option>
+									<option value="1" >1 lacs</option>
+									<option value="2" >2 lacs</option>
+									<option value="3" >3 lacs</option>
+									<option value="4" >4 lacs</option>
+									<option value="5" >5 lacs</option>
+									<option value="6" >6 lacs</option>
+									<option value="7" >7 lacs</option>
+									<option value="8" >8 lacs</option>
+									<option value="8+">8+ lacs</option>
+									
+								</select>
+							</div>
+						</div>
+					</div>	
+
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+								<label for="resume-name">preffered job location</label>
+								<select style="width: auto;" class="form-control" name="preferloc"  class="error">
+								<option value="" selected="">Select</option>
+								<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+								<option value="Andhra Pradesh">Andhra Pradesh</option>
+								<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+								<option value="Assam">Assam</option>
+								<option value="Bihar">Bihar</option>
+								<option value="Chandigarh">Chandigarh</option>
+								<option value="Chhattisgarh">Chhattisgarh</option>
+								<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+								<option value="Daman and Diu">Daman and Diu</option>
+								<option value="Delhi">Delhi</option>
+								<option value="Goa">Goa</option>
+								<option value="Gujarat">Gujarat</option>
+								<option value="Haryana">Haryana</option>
+								<option value="Himachal Pradesh">Himachal Pradesh</option>
+								<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+								<option value="Jharkhand">Jharkhand</option>
+								<option value="Karnataka">Karnataka</option>
+								<option value="Kerala">Kerala</option>
+								<option value="Lakshadweep">Lakshadweep</option>
+								<option value="Madhya Pradesh">Madhya Pradesh</option>
+								<option value="Maharashtra">Maharashtra</option>
+								<option value="Manipur">Manipur</option>
+								<option value="Meghalaya">Meghalaya</option>
+								<option value="Mizoram">Mizoram</option>
+								<option value="Nagaland">Nagaland</option>
+								<option value="Orissa">Orissa</option>
+								<option value="Pondicherry">Pondicherry</option>
+								<option value="Punjab">Punjab</option>
+								<option value="Rajasthan">Rajasthan</option>
+								<option value="Sikkim">Sikkim</option>
+								<option value="Tamil Nadu">Tamil Nadu</option>
+								<option value="Tripura">Tripura</option>
+								<option value="Uttaranchal">Uttaranchal</option>
+								<option value="Uttar Pradesh">Uttar Pradesh</option>
+								<option value="West Bengal">West Bengal</option>
+							</select>
+							</div>
+						</div>
+					</div>	
+
+					
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+								<label for="resume-name">ready to relocate</label>&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="relocation" value="yes"  >Yes&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="relocation" value="no" >No&nbsp;&nbsp;&nbsp;&nbsp;
+							</div>
+						</div>
+					</div>	
+					
+
 
 					
 					<div class="row text-center">
 						<p>&nbsp;</p>
 						
 						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
-						<button class="btn btn-primary btn-lg" name="submit" value="register">Next <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>
 					
@@ -1089,9 +1371,10 @@ class employee{
 							$this->exyear = $exyear;
 							$this->keyskills = $keyskills;
 							$this->lastjob = $lastjob;
-							// $this->phoneno = $phoneno;
-							// $this->gender = $gender;
-							// $this->age = $age;
+							$this->worknum = $worknum;
+							$this->curentsalary = $curentsalary;
+							$this->expectsalary = $expectsalary;
+							$this->preferloc = $preferloc;
 
 							//$this->type = $type;
 							//$this->auth_to = $auth_to;
@@ -1112,20 +1395,40 @@ class employee{
 							$insert_sql_array['key_skills'] = $this->keyskills;
 							//$insert_sql_array['password'] = $this->password;
 							$insert_sql_array['last_job'] = $this->lastjob;
-							// $insert_sql_array['age'] = $this->age;
-							// $insert_sql_array['address'] = $this->address;
-							// $insert_sql_array['gender'] = $this->gender;
-
+							$insert_sql_array['company_worked'] = $this->worknum;
+							$insert_sql_array['current_salary'] = $this->curentsalary;
+							$insert_sql_array['expected_salary'] = $this->expectsalary;
+							$insert_sql_array['prefered_loc'] = $this->preferloc;
 							$insert_sql_array['user_id'] = $_SESSION['user_id'];
 							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
 							$this->db->insert(tbl_employee_exp,$insert_sql_array);
 
 ?>
-								<script type="text/javascript">
-									window.location = "jobs2.php"
-								</script>
+								<div class="container">
+						
+
+			
+					
+				<div class="jumbotron">	
+					
+					<div class="row text-center">
+						<h4>You are successfully registered</h4>
+						<h5>Click next to see the jobs</h5>
+					</div>
+					<div class="row text-center">
+						<p>&nbsp;</p>
+						
+						<a class="btn btn-primary btn-lg" name="submit" href="jobslist.php" value="register">Next <i class="fa fa-arrow-right"></i></a>
+						
+					</div>
+				</div>
+			
+
+			</div>
+
+
 								<?php
-								exit();
+						
 							
 							
 							

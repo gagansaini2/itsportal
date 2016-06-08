@@ -10,6 +10,7 @@ class employer{
 		$this->auth=new Authentication();
 		
 		$this->Form = new ValidateForm();
+		$this->validity = new ClsJSFormValidation();
 
 		
 		}
@@ -20,17 +21,36 @@ class employer{
 		switch($runat){
 			case 'local' :
 
+			 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->username = $username;
+                $this->password = $password;
+               
+            }
+            $FormName = "signin_form";
+            $ControlNames=array(
+                                 
+                                "name"=>array('username',"EMail","Please enter Email","span_username"),
+                                "password"=>array('password',"","Please enter Password","span_password")
+                               
+            );
+
+            $ValidationFunctionName="Login_form";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
+
 			?>
 						
 
 						<div class="container">
 						<div class="row text-center">
 							<div class="col-sm-12">
-							<h2 style="height: 2px;">Sign In</h2>
+							<h1>Sign In</h1>
 							<style>
 							h2::after {
 								
-								content: none;
+								/*content: none;*/
 								
 								/*display: block;
 								height: 5px;
@@ -43,11 +63,15 @@ class employer{
 							</div>
 						</div>
 
-				<form name="" method="POST">
+				<form name="<?php echo $FormName?>" method="POST">
 
 					<!-- Resume Details Start -->
 				<div class="jumbotron">	
 
+					<h5 class="text-center"><?php if (isset($_SESSION['error_msg1'])) {
+							echo $_SESSION['error_msg1'];
+							
+					}?></h5><br><br>
 				
 
 					<div class="row">
@@ -56,6 +80,7 @@ class employer{
 							<div class="form-group" id="email-group">
 								<label for="resume-name">Email</label>
 								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								 <span id="span_username"></span>
 							</div>
 						</div>
 						
@@ -63,6 +88,7 @@ class employer{
 							<div class="form-group" id="password-group">
 								<label for="password">Password</label>
 								<input type="password" class="form-control" name="password" id="password" placeholder="password">
+								 <span id="span_password"></span>
 							</div>
 						</div>
 						
@@ -71,7 +97,7 @@ class employer{
 						<p>&nbsp;</p>
 						
 						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
-						<button class="btn btn-primary btn-lg" name="submit" value="register">Sign in <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Sign in <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>
 					
@@ -100,7 +126,7 @@ class employer{
 								{
 									if($row['status'] == 'block')
 									{
-									$_SESSION['error_msg']='User is Blocked Please Contact Administrator ...';
+									$_SESSION['error_msg1']='User is Blocked Please Contact Administrator ...';
 									?>
 									<script type="text/javascript">
 									window.location="index.php";
@@ -130,8 +156,7 @@ class employer{
 								else
 								{
 									
-    									$_SESSION['error_msg']='Invalid username or password, please try again';
-
+    								$_SESSION['error_msg1']='Invalid username or password, please try again';
                                     $this->Login_form('local');
                                     
 								}
@@ -147,6 +172,32 @@ class employer{
 	{
 		switch($runat){
 			case 'local':
+
+
+
+					 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->name = $name;
+                $this->username = $username;
+                $this->password = $password;
+                $this->phoneno = $phoneno;
+              
+               
+            }
+            $FormName = "signup_form";
+            $ControlNames=array(
+                                 
+                                "name"=>array('name',"''","Please enter Name","span_name"),
+                                "password"=>array('password',"Password","Please enter Password","span_password"),
+                                "username"=>array('username',"EMail","Please enter Email","span_username"),
+                                "phoneno"=>array('phoneno',"Number","Please enter Phone Number","span_phoneno")
+                               
+            );
+
+            $ValidationFunctionName="CreateUser";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
 						
 
 						?>
@@ -155,11 +206,11 @@ class employer{
 					<div class="container">
 						<div class="row text-center">
 							<div class="col-sm-12">
-							<h2 style="height: 2px;">Sign Up Here</h2>
+							<h1>Sign Up Here</h1>
 							<style>
 							h2::after {
 								
-								content: none;
+								/*content: none;*/
 								
 								/*display: block;
 								height: 5px;
@@ -172,22 +223,30 @@ class employer{
 							</div>
 						</div>
 
-				<form name="" method="POST">
+				<form name="<?php echo $FormName?>" method="POST">
+
+					
 
 					<!-- Resume Details Start -->
 				<div class="jumbotron">	
+					<h5 class="text-center"><?php if (isset($_SESSION['error_msg'])) {
+							echo $_SESSION['error_msg'];
+							
+					}?></h5><br><br>
 					
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group" id="name-group">
 								<label for="resume-name">Name</label>
 								<input type="text" class="form-control" name="name" id="name" placeholder="e.g. John Doe">
+								<span id="span_name"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group" id="email-group">
 								<label for="resume-name">Email</label>
 								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								<span id="span_username"></span>
 							</div>
 						</div>
 						
@@ -195,12 +254,14 @@ class employer{
 							<div class="form-group" id="password-group">
 								<label for="password">Password</label>
 								<input type="password" class="form-control" name="password" id="password" placeholder="password">
+								<span id="span_password"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group" id="phoneno-group">
 								<label for="resume-name">Phone No.</label>
 								<input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="e.g. John Doe">
+								<span id="span_phoneno"></span>
 							</div>
 						</div>
 					</div>
@@ -208,7 +269,7 @@ class employer{
 						<p>&nbsp;</p>
 						
 						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
-						<button class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Sign up <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>
 					
@@ -240,10 +301,10 @@ class employer{
 
 							//server side validation
 							$return =true;
-							if($this->Form->ValidField($username,'empty','User field is Empty or Invalid')==false)
-								$return =false;
-							if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
-								$return =false;	
+							// if($this->Form->ValidField($username,'empty','User field is Empty or Invalid')==false)
+							// 	$return =false;
+							// if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
+							// 	$return =false;	
 							
 							$sql="select * from ".TBL_USER." where user='".$this->username."'";
 							$result= $this->db->query($sql,__FILE__,__LINE__);
@@ -255,7 +316,10 @@ class employer{
 									window.location = "signup-employer.php"
 								</script>
 								<?php
-								exit();
+									exit();
+
+							
+								
 							}
 								
 							if($return){
@@ -290,16 +354,11 @@ class employer{
 						                           // mail($to, $subject, $comment, $header);
 							
 							$_SESSION['msg'] = 'User has been created Successfully';
-							
+								
 							?>
 								
 						<div class="container">
-						<div class="row text-center">
-							<div class="col-sm-12">
-							
 						
-							</div>
-						</div>
 
 			
 					
@@ -320,7 +379,7 @@ class employer{
 
 			</div>
 							<?php
-							
+						
 							
 							} else {
 							echo $this->Form->ErrtxtPrefix.$this->Form->ErrorString.$this->Form->ErrtxtSufix; 
@@ -339,6 +398,38 @@ class employer{
 	{
 		switch($runat){
 			case 'local':
+
+
+
+					 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->company_name = $company_name;
+                $this->company_email = $company_email;
+                $this->company_location = $company_location;
+                $this->company_num = $company_num;
+               	$this->company_website = $company_website;
+                $this->company_type = $company_type;
+                $this->company_description = $company_description;
+                
+               
+            }
+            $FormName = "signup_form";
+            $ControlNames=array(
+                                 
+                                "company_name"=>array('company_name',"''","Please enter Name","span_name"),
+                                "company_location"=>array('company_location',"''","Please enter location","span_location"),
+                                "company_email"=>array('company_email',"EMail","Please enter Email","span_username"),
+                                "company_num"=>array('company_num',"Number","Please enter Phone Number","span_phoneno"),
+                                "company_website"=>array('company_website',"''","Please enter Website","span_website"),
+                                "company_type"=>array('company_type',"''","Please select Domain","span_domain"),
+                                "company_description"=>array('company_description',"''","Please enter Description","span_descrip")
+                               
+            );
+
+            $ValidationFunctionName="CreateUser";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
 						
 
 						?>
@@ -347,7 +438,7 @@ class employer{
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-sm-12">
-						<h1>Add company</h1>
+						<h1 style="font-size:38px;">Add company</h1>
 						<h4>register your company</h4>
 						<!--div class="jumbotron">
 							<h3>Have an account?</h3>
@@ -364,29 +455,34 @@ class employer{
 					<div class="jumbotron">	
 
 						<div class="row">
-						<form name="" method="POST">	
+						<form name="<?php echo $FormName?>" method="POST">	
 							
 						<div class="col-sm-6">
 							
 							<div class="form-group" id="company-name-group">
 								<label for="company-name">Company Name</label>
 								<input type="text" class="form-control" id="company-name" name="company_name" placeholder="">
+								<span id="span_name"></span>
 							</div>
 							<div class="form-group" id="job-email-group">
 								<label for="job-email">Email</label>
 								<input type="email" class="form-control" id="job-email" name="company_email" placeholder="">
+								<span id="span_username"></span>
 							</div>
 							<div class="form-group" id="company-group">
 								<label for="company">location</label>
 								<input type="text" class="form-control" id="company-location" name="company_location" placeholder="">
+								<span id="span_location"></span>
 							</div>
 							<div class="form-group" id="company-group">
 								<label for="company">phone number</label>
 								<input type="text" class="form-control" id="company-num" name="company_num" placeholder="">
+								<span id="span_phoneno"></span>
 							</div>
 							<div class="form-group" id="company-website-group">
 								<label for="company-website">Website </label>
 								<input type="text" class="form-control" id="company-website" name="company_website" placeholder="http://">
+								<span id="span_website"></span>
 							</div>
 
 							
@@ -394,13 +490,14 @@ class employer{
 							<div class="form-group col-sm-6" id="company-group">
 								<label for="company">Domain</label>
 								<select  class="form-control" id="job-type" name="company_type">
-									<option>Choose a job type</option>
+									<option value="">Choose a job type</option>
 									<option>Freelance</option>
 									<option>Part Time</option>
 									<option>Full Time</option>
 									<option>Internship</option>
 									<option>Volunteer</option>
 								</select>
+								<span id="span_domain"></span>
 							</div>
 							<div class="form-group col-sm-6" id="company-group">
 								<label for="company">size of employees</label>
@@ -436,6 +533,7 @@ class employer{
 							<div class="form-group" id="company-description-group">
 								<label for="company-description">Description </label>
 								<textarea class="textarea form-control" id="company-description" style="height:77px;" name="company_description"></textarea>
+								<span id="span_descrip"></span>
 							</div>
 							<div class="form-group" id="company-video-group">
 								<label for="company-video">Company Vision</label>
@@ -457,7 +555,7 @@ class employer{
 
 
 						<div align="center">
-							<button class="btn btn-primary btn-lg" name="submit" value="register">Submit <i class="fa fa-arrow-right"></i></button>
+							<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Submit <i class="fa fa-arrow-right"></i></button>
 						</div>
 						</form>
 					</div>
@@ -561,6 +659,49 @@ class employer{
 	{
 		switch($runat){
 			case 'local':
+
+			 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->roletitle = $roletitle;
+                $this->rolelocation = $rolelocation;
+                $this->jobtype = $jobtype;
+                $this->department = $department;
+               	$this->jobcategory = $jobcategory;
+                $this->qualifications = $qualifications;
+                $this->description = $description;
+                $this->experience = $experience;
+                $this->remuneration = $remuneration;
+               	$this->designation = $designation;
+                $this->keyskills = $keyskills;
+                $this->keysaccountabilities = $keysaccountabilities;
+                
+               
+            }
+            $FormName = "signup_form";
+            $ControlNames=array(
+                                 
+                                "roletitle"=>array('roletitle',"''","Please enter the Roletitle","span_roletitle"),
+                                "rolelocation"=>array('rolelocation',"''","Please enter location","span_location"),
+                                "jobtype"=>array('jobtype',"''","Please select one","span_type"),
+                                "department"=>array('department',"''","Please select one","span_department"),
+                                "jobcategory"=>array('jobcategory',"''","Please select one","span_category"),
+                                "qualifications"=>array('qualifications',"''","Please enter qualifications","span_qualifications"),
+                                "description"=>array('description',"''","Please enter Description","span_descrip"),
+                                "experience"=>array('experience',"''","Please enter Experience","span_experience"),
+                                "remuneration"=>array('remuneration',"''","Please enter remuneration","span_remuneration"),
+                                "designation"=>array('designation',"''","Please enter designation","span_designation"),
+                                "keyskills"=>array('keyskills',"''","Please enter atleast one","span_keyskill"),
+                                "keysaccountabilities"=>array('keysaccountabilities',"''","Please enter atleast one","span_keysaccountabilities")
+                               
+            );
+
+            $ValidationFunctionName="CreateUser";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
+						
+
+						
 						
 
 						?>
@@ -570,7 +711,7 @@ class employer{
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-sm-12">
-						<h1>Post a Job</h1>
+						<h1 style="font-size:40px;">Post a Job</h1>
 						<h4>Find a Right Candidate</h4>
 						<!--div class="jumbotron">
 							<h3>Have an account?</h3>
@@ -583,7 +724,7 @@ class employer{
 				<h2 >Job Details</h2>
 
 				<div class="jumbotron">
-				<form name="" method="POST">
+				<form name="<?php echo $FormName?>" method="POST">
 					<div class="row">
 						
 						<div class="col-sm-6">
@@ -592,6 +733,7 @@ class employer{
 							<div class="form-group" id="job-title-group">
 								<label for="job-title">Role Title</label>
 								<input type="text" class="form-control" id="job-title" name="roletitle" placeholder="e.g. Web Designer">
+								<span id="span_roletitle"></span>
 							</div>
 							<div class="form-group" id="job-title-group">
 								<label for="job-title">Department</label>
@@ -602,12 +744,13 @@ class employer{
 									<option>Account manager</option>
 									<option>Web developer</option>
 									
-								</select>
+								</select><span id="span_department"></span>
 								
 							</div>
 							<div class="form-group" id="job-location-group">
 								<label for="job-location">Role Location</label>
 								<input type="text" class="form-control" id="job-location" name="rolelocation" placeholder="e.g. New York">
+								<span id="span_location"></span>
 							</div>
 							
 							<div class="row">
@@ -620,7 +763,7 @@ class employer{
 									<option>Full Time</option>
 									<option>Internship</option>
 									<option>Volunteer</option>
-								</select>
+								</select><span id="span_type"></span>
 							</div>
 							<div class="form-group col-sm-6" id="job-category-group">
 								<label for="job-category">Job Category</label>
@@ -631,18 +774,20 @@ class employer{
 									<option>Financial</option>
 									<option>Marketing</option>
 									<option>Management</option>
-								</select>
+								</select><span id="span_category"></span>
 							</div>
 							</div>
 							
 							<div class="form-group" id="job-description-group">
 								<label for="job-description">Qualifications</label>
 								<input type="text" class="form-control" name="qualifications" placeholder="Needed as per Job">
+								<span id="span_qualifications"></span>
 							</div>
 							
 							<div class="form-group" id="job-description-group">
 								<label for="job-description">Description</label>
 								<textarea class="textarea form-control" style="height:120px;" name="description" id="job-description"></textarea>
+								<span id="span_descrip"></span>
 							</div>
 							
 							
@@ -654,24 +799,29 @@ class employer{
 							<div class="form-group" id="job-location-group">
 								<label for="job-location">Experience</label>
 								<input type="text" class="form-control" id="job-Experience"  name="experience" placeholder="Needed for job">
+								<span id="span_experience"></span>
 							</div>
 							<div class="form-group" id="job-location-group">
 								<label for="job-location">Designation </label>
 								<input type="text" class="form-control" id="job-Designation " name="designation" placeholder="">
+								<span id="span_designation"></span>
 							</div>
 							<div class="form-group" id="job-location-group">
 								<label for="job-location">Remuneration</label>
 								<input type="text" class="form-control" id="job-Remuneration" name="remuneration" placeholder="">
+								<span id="span_remuneration"></span>
 							</div>
 
 							
 							<div class="form-group" id="job-description-group">
 								<label for="job-description">Key Skills</label>
 								<textarea class="textarea form-control" style="height:77px;" name="keyskills" id="job-keyskills"></textarea>
+								<span id="span_keyskill"></span>
 							</div>
 							<div class="form-group" id="job-description-group">
 								<label for="job-description">Key Accountabilities</label>
 								<textarea class="textarea form-control"  style="height:120px;" name="keysaccountabilities" id="job-Accountabilities"></textarea>
+								<span id="span_keysaccountabilities"></span>
 							</div>
 							
 						</div>
@@ -680,7 +830,7 @@ class employer{
 					</div><br><br>
 					
 					<div class="row text-center">
-						<button class="btn btn-primary btn-lg" name="submit" value="register">Submit <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Submit <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</form>
 				</div>
