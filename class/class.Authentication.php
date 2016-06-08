@@ -63,7 +63,8 @@ var $adminuser;
     		unset($_SESSION['user_name']); 
 			unset($_SESSION['user_id']); 
 			unset($_SESSION['groups']); 
-			unset($_SESSION['user_type']); 
+			unset($_SESSION['user_type']);
+			
 			unset($_SESSION['http_referer']); 
 			$_SESSION['msg']='You have logged out successfully';
 			?>

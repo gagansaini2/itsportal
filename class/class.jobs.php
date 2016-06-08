@@ -22,8 +22,8 @@ class jobs{
 		?>
 		<div class="row text-center">
 					<div class="col-sm-12">
-						<h1>find jobs</h1>
-						<h4>Find a Right job</h4>
+						<h1 style="font-size:38px;">find jobs</h1>
+						<h4>There is no better place to start</h4>
 						<!--div class="jumbotron">
 							<h3>Have an account?</h3>
 							<p>If you don’t have an account you can create one below by entering your email address/username.<br>
@@ -40,7 +40,9 @@ class jobs{
 			$result= $this->db->query($sql,__FILE__,__LINE__);
 
 			while($row= $this->db->fetch_array($result)){
-			
+				$id=$row['job_id'];
+
+				// print_r($id);
 
 			?>
 
@@ -55,7 +57,7 @@ class jobs{
 						<div class="jobs">
 							
 							<!-- Job offer 1 -->
-							<a href="#" class="featured applied">
+							<a href="job_details.php?id=<?php echo($id) ?>"  class="featured applied">
 								<div class="row">
 									<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
 										<img src="http://placehold.it/60x60.jpg" alt="" class="img-responsive" />
@@ -100,10 +102,12 @@ class jobs{
 
 
 
-	function get_job_details(){
+	function get_job_details($id){
 
-					$sql="select * from ".TBL_JOBS." where 1 ";
-					// $sql.="inner join ".TBL_COMPANY." on ".TBL_JOBS." where 1 ";
+
+					$sql="select * from ".TBL_JOBS." where job_id='".$id."' ";
+					//$sql.="inner join ".TBL_COMPANY." on ".TBL_JOBS.".company_id=".TBL_COMPANY.".company_id ";
+
 					$result= $this->db->query($sql,__FILE__,__LINE__);
 
 					
@@ -115,7 +119,7 @@ class jobs{
 					<div class="container">
 				<div class="row">
 					<div class="col-sm-12 text-center">
-						<h1><?php echo $row['role_title'];?></h1>
+						<h1><?php echo $row['role_title']; ?></h1>
 						<h4>
 							<span><i class="fa fa-map-marker"></i><?php echo $row['role_location'];?></span>
 							<span><i class="fa fa-clock-o"></i><?php echo $row['job_type'];?></span>
@@ -191,8 +195,8 @@ class jobs{
 						<div class="sidebar-widget" id="company">
 							<h2>About this company</h2>
 							<p><img src="http://placehold.it/300x109.gif" alt="" class="img-responsive"></p>
-							<p><?php echo $row['role_location'];?></p>
-							<p><a href="about.php" class="btn btn-primary">Read more</a></p>
+							<p><?php echo $row['company_description'];?></p>
+							
 						</div>
 						<hr>
 						<!-- <div class="sidebar-widget" id="company-jobs">

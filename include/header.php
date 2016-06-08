@@ -16,6 +16,15 @@
       <li><a href="about.php">About Us</a></li>
       <li><a href="company.php">Our Process</a></li>
       <li><a href="post-a-resume.html">Post a Resume</a></li>
+    
+
+      <?php 
+        
+
+      if(isset($_SESSION['user_id'])){ 
+        echo "<li><a href='logout.php'>Logout</a></li>";
+
+      } ?>
       </li>
     </ul>
   </div>

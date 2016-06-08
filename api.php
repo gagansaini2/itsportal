@@ -15,6 +15,8 @@ $jobs_obj=new jobs();
 
 extract($_REQUEST);
 
+print_r($id);
+
 if($work=="user_logged"){
     if(!isset($_SESSION['user_id'])){
        

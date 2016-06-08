@@ -46,9 +46,9 @@ $job_obj=new jobs();
 
 
 			<?php
+				extract($_REQUEST);			
+				$job_obj->get_job_details($id);
 				
-				$job_obj->get_job_details();
-
 				 ?>
 
 
