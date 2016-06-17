@@ -504,8 +504,22 @@
 				$(this).parent().parent().parent().before(NewCertificate);
 			});
 
-		
+		$("#workex").change(function (){
+			var selVal = $(this).val();
+			$("#textboxDiv").html('');
+			if (selVal > 0 ) {
+				$("#div1").empty();
+			
+				$("#div1").show();
+				for(var i = 1; i<= selVal; i++) {
+                $("#div1").append('<input type="text" class="form-control" name=""  placeholder="Company Name"><br>');
+            	}
+			}else{
 
+				$("#div1").empty();
+			};
+		});
+ 
 		// ====================================================================
 
 		// Scroll Reveal
@@ -521,3 +535,4 @@
 	})
 
 })(jQuery);
+

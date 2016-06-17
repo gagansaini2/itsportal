@@ -1187,9 +1187,7 @@ class employee{
 						</div>
 					</div>
 <script type="text/javascript">
-function show21(){
-			$('#div1').show() ;
-		}	
+
 
 
 </script>
@@ -1199,7 +1197,7 @@ function show21(){
 								<label for="resume-name">how many organisations worked with</label>
 								<select style="width: ;" name="worknum" id="workex" class="form-control error" >
 									<option value="" selected="">Select</option>
-									<option value="none">None</option>
+									<option value="0">None</option>
 									<option value="1" label="1">1</option>
 									<option value="2" label="2">2</option>
 									<option value="3" label="3">3</option>
@@ -1212,9 +1210,9 @@ function show21(){
 									
 								</select>
 							</div>
-							<input type="button" onclick="show21()">
-							<div class="form-group" id="div1" style="display:none;">
-								<input type="text" class="form-control" name="n"  placeholder="in months">
+							
+							<div class="form-group" id="div1">
+								<!-- <input type="text" class="form-control" name="n"  placeholder="in months"> -->
 							</div>
 						</div>
 					</div>	
