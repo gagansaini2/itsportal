@@ -1496,7 +1496,7 @@ function show21(){
 
 
 
-	function empprofile3($runat)
+	function empprofile4($runat)
 	{
 		switch($runat){
 			case 'local':
@@ -1529,7 +1529,7 @@ function show21(){
 						<div class="container">
 						
 
-						<h2>experience</h2>
+						<h2>More Details</h2>
 
 				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
