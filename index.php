@@ -52,7 +52,7 @@
         <div class="slide-content">
           <h2>Need an employee?</h2>
           <h3>We've got perfect candidates</h3>
-          <p><a href="candidates.html""></a></p>
+          <p><a href="candidates.html"></a></p>
         </div>
       </div>
     </div>
