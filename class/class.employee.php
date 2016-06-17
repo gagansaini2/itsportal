@@ -1535,23 +1535,72 @@ function show21(){
 
 					<!-- Resume Details Start -->
 				<div class="jumbotron form-center" >	
+			
+            <div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+								<label for="resume-name">Language Known</label>
+								<input type="text" class="form-control" name="language" />																
+							</div>
+						</div>
+					</div>	
 
 
-					
+			<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+								<label for="resume-name">Expected Salary</label>
+								<input type="text" class="form-control" name="salary" />																
+							</div>
+						</div>
+					</div>
+			<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+								<label for="resume-name">Job Type</label>&nbsp;&nbsp;&nbsp;
+								<select style="width:;" name="jobtype" id="jobtype" class="form-control error">
+									<option value="" selected="">Select</option>
+									<option value="inter">Intership</option>
+									<option value="part" >Part Time</option>
+									<option value="full" >Full Time</option>
+									<option value="freelance" >Freelance</option>																		
+								</select>   								
+							</div>
+						</div>
+					</div>					
 
-
-
-
-					code here!!	
-
-
-
-
-
-
-
-
-					
+				<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+                            	<label>Do you have Passport?</label>
+								&nbsp;&nbsp;&nbsp;
+							    <input type="radio" id="chkYes" name="chkPassPort" onclick="ShowHideDiv()" />Yes                               			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							    <input type="radio" id="chkNo" name="chkPassPort" onclick="ShowHideDiv()" />
+							    No									
+								<div id="dvPassport" style="display: none">
+							    <label>Passport Number</label>
+							    <input type="text" id="txtPassportNumber" />
+								</div>										
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+    				function ShowHideDiv() {
+			        var chkYes = document.getElementById("chkYes");
+			        var dvPassport = document.getElementById("dvPassport");
+			        dvPassport.style.display = chkYes.checked ? "block" : "none";
+				    }
+					</script>
+                    
+                    <div class="row">
+						<div class="col-sm-7">
+							<div class="form-group" >
+								<label for="resume-name">Key Skills </label>&nbsp;&nbsp;&nbsp;			
+								<input type="text" class="form-control" name="keyskills" />   								
+							</div>
+						</div>
+					</div>
+                    
 					<div class="row text-center">
 						<p>&nbsp;</p>
 						
