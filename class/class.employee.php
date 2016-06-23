@@ -389,6 +389,11 @@ class employee{
 		}
 	}
 
+
+
+
+
+
 	
 
 
@@ -417,13 +422,13 @@ class employee{
             $FormName = "empdetails";
             $ControlNames=array(
                                  
-                                "fname"=>array('fname',"''","Please enter name","span_name"),
-                                "lname"=>array('lname',"''","Please enter name","span_lname"),
+                                "fname"=>array('fname',"''","Please enter First name","span_name"),
+                                "lname"=>array('lname',"''","Please enter Last name","span_lname"),
                                 "username"=>array('username',"EMail","Please enter your Email ","span_username"),
                                 "phoneno"=>array('phoneno',"Number","Please enter Phoneno","span_phoneno"),
-                                "street"=>array('street',"''","Please enter location ","span_street"),
+                                "street"=>array('street',"''","Please enter Street ","span_street"),
                                 "city"=>array('city',"''","Please enter location ","span_city"),
-                                "zip"=>array('zip',"''","Please enter location ","span_zip"),
+                                "zip"=>array('zip',"''","Please enter ZIP","span_zip"),
                                 "state"=>array('state',"''","Please select one ","span_state"),
                                
                                 "gender"=>array('gender',"''","Please select one ","span_gender"),
@@ -440,68 +445,313 @@ class employee{
 
 
 						?>
+<script type="text/javascript">
 
+// 	$(document).ready(function() { 
+// 		$("#emptype").click(function(){
+// 			$("#li1").addClass("active");
+// 			$("#li2").removeClass("active");
+// 			$("#li3").removeClass("active");
+// 			$("#li4").removeClass("active");
+// 		})
+
+// 		$("#submitpersonal").click(function(){
+// 			$("#li2").addClass("active");
+// 			$("#li1").removeClass("active");
+// 			$("#li3").removeClass("active");
+// 			$("#li4").removeClass("active");
+// 		})
+
+// 		$("#submiteducation").click(function(){
+// 			$("#li3").addClass("active");
+// 			$("#li2").removeClass("active");
+// 			$("#li1").removeClass("active");
+// 			$("#li4").removeClass("active");
+// 		})
+
+// 		$("#submitexperience").click(function(){
+// 			$("#li4").addClass("active");
+// 			$("#li3").removeClass("active");
+// 			$("#li2").removeClass("active");
+// 			$("#li1").removeClass("active");
+// 		})
+// });
+
+</script>
 
 					<div class="container">
+						<?php include('include/head.php'); ?>
 						
 						<h2>add your details</h2>
 
 				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
-				<div class="jumbotron">	
-					
-					
-					<div class="row col-sm-9">
-						
-							<label for="resume-name">Name</label><br>
+				<div class="panel-group">	
+					<div class="panel panel-default panel-deefault col-sm-9">
+						<div class="panel-heading heeading"><label>Personal Details</label></div>
 
-							<div class="form-group col-sm-6" id="name-group">
+
+						<div class="panel-body">
+
+							<div class="col-sm-12">
+						
+							<label for="resume-name">Name*</label><br>
+
+							<div class="form-group col-sm-4" id="name-group">
 								
-								<input type="text" class="form-control co-sm-6" name="fname" id="name" placeholder="First Name">
+								<input type="text" class="form-control " name="fname" id="name" placeholder="First Name">
 								<span id="span_name"></span>
 							</div>
-							<div class="form-group col-sm-6" id="name-group">
+							<div class="form-group col-sm-4" id="name-group">
 								
-								<input type="text" class="form-control co-sm-6" name="lname" id="name" placeholder="Last Name">
+								<input type="text" class="form-control " name="name" id="name" placeholder="Middle Name">
+								<span id="span_mname"></span>
+							</div>
+							<div class="form-group col-sm-4" id="name-group">
+								
+								<input type="text" class="form-control " name="lname" id="name" placeholder="Last Name">
 								<span id="span_lname"></span>
 							</div>
+							</div>
 
-						
-					</div>
-					<div class="row">
-						<div class="col-sm-9">
+							<div class="col-sm-12">
+								<label for="resume-name">Email*</label>
 							<div class="form-group col-sm-12" id="email-group">
-								<label for="resume-name">Email</label>
+								
 								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
 								<span id="span_username"></span>
 							</div>
-						</div>
-					</div>	
-					<div class="row">
-						<div class="col-sm-9">
-							<div class="form-group col-sm-12" id="phoneno-group">
+							</div>
+
+							<div class="col-sm-12">
 								<label for="resume-name">Phone No.</label>
+							<div class="form-group col-sm-12" id="phoneno-group">
+								
 								<input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="10 digit number">
 								<span id="span_phoneno"></span>
 
 							</div>
+							</div>
+
+
+
+
+							<div class="col-sm-12">
+									<label for="address">Address</label>
+									<div class="form-group col-sm-12" id="address-group">
+										<input type="text" class="form-control" name="street" id="address" placeholder="Street">
+										<span id="span_street"></span>
+									</div>
+									<div class="form-group col-sm-12" id="address-group">
+										<input type="text" class="form-control" name="city" id="address" placeholder="City">
+										<span id="span_city"></span>
+									</div>
+									<div class="form-group col-sm-6" id="address-group">
+										<select  class="form-control" name="state"  class="error" placeholder="City">
+										<option value="" selected="">State</option>
+										<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+										<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+										<option value="Assam">Assam</option>
+										<option value="Bihar">Bihar</option>
+										<option value="Chandigarh">Chandigarh</option>
+										<option value="Chhattisgarh">Chhattisgarh</option>
+										<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+										<option value="Daman and Diu">Daman and Diu</option>
+										<option value="Delhi">Delhi</option>
+										<option value="Goa">Goa</option>
+										<option value="Gujarat">Gujarat</option>
+										<option value="Haryana">Haryana</option>
+										<option value="Himachal Pradesh">Himachal Pradesh</option>
+										<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+										<option value="Jharkhand">Jharkhand</option>
+										<option value="Karnataka">Karnataka</option>
+										<option value="Kerala">Kerala</option>
+										<option value="Lakshadweep">Lakshadweep</option>
+										<option value="Madhya Pradesh">Madhya Pradesh</option>
+										<option value="Maharashtra">Maharashtra</option>
+										<option value="Manipur">Manipur</option>
+										<option value="Meghalaya">Meghalaya</option>
+										<option value="Mizoram">Mizoram</option>
+										<option value="Nagaland">Nagaland</option>
+										<option value="Orissa">Orissa</option>
+										<option value="Pondicherry">Pondicherry</option>
+										<option value="Punjab">Punjab</option>
+										<option value="Rajasthan">Rajasthan</option>
+										<option value="Sikkim">Sikkim</option>
+										<option value="Tamil Nadu">Tamil Nadu</option>
+										<option value="Tripura">Tripura</option>
+										<option value="Uttaranchal">Uttaranchal</option>
+										<option value="Uttar Pradesh">Uttar Pradesh</option>
+										<option value="West Bengal">West Bengal</option>
+									</select>
+										<span id="span_state"></span>
+									</div>
+									<div class="form-group col-sm-6" id="address-group">
+										<input type="text" class="form-control" name="zip" id="address" placeholder="ZIP Code">
+										<span id="span_zip"></span>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<label>DOB</label><br>
+									<div class="form-group col-sm-6" id="age-group">
+									<select name="month" id="month" class="form-control">
+										<option value="">Month</option>
+									    <option value="01">January</option>
+									    <option value="02">February</option>
+									    <option value="03">March</option>
+									    <option value="04">April</option>
+									    <option value="05">May</option>
+									    <option value="06">June</option>
+									    <option value="07">July</option>
+									    <option value="08">August</option>
+									    <option value="09">September</option>
+									    <option value="10">October</option>
+									    <option value="11">November</option>
+									    <option value="12">December</option>
+									</select>
+										<span id="span_month"></span>
+									</div>
+									<div class="form-group col-sm-3" id="age-group">
+										<input type="text" id="age" class="form-control" name="day" placeholder="Day">
+										<span id="span_day"></span>
+									</div>
+									<div class="form-group col-sm-3" id="age-group">
+										<input type="text" id="age" class="form-control" name="year" placeholder="Year">
+										<span id="span_year"></span>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<label class="" >Gender</label><br>
+									<div class="form-group col-sm-6" id="gender-group">
+									<input type="radio" name="gender" value="male" id="gender" >Male&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="gender" value="female" id="gender" >Female&nbsp;&nbsp;&nbsp;&nbsp;
+									<br>
+									<span id="span_gender"></span>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<label for="photo">Upload your Photo</label>
+									<div class="form-group" id="photo-group">
+										<input type="file" id="photo" name="photo">
+										<p class="help-block">JPG PNG . file size: 5 MB.</p>
+										<br><br>
+									</div>
+								</div>
+						
+
+
+
+
+
 						</div>
-					</div>	
-					<div class="row">
-						<div class="col-sm-9">
-							<label for="address">address</label>
-							<div class="form-group col-sm-12" id="address-group">
-								<input type="text" class="form-control" name="street" id="address" placeholder="Street">
-								<span id="span_street"></span>
+					</div>
+
+					<div class="panel panel-default panel-deefault col-sm-9">
+						<div class="panel-heading heeading"><label>Other Details</label></div>
+						<div class="panel-body">
+
+							<div class="col-sm-12">
+						<label>Marital Status</label><br>
+						<div class="form-group" id="age-group">		
+							<select name="maritalStatus"  class="form-control"> 
+                             <option value="">Select</option>  
+                             <option value="N" >Single/unmarried</option>  
+                             <option value="M">Married</option>  
+                             <option value="W">Widowed</option>  
+                             <option value="D">Divorced</option>  
+                             <option value="S">Separated</option>  
+                             <option value="O">Other</option>             
+                             	</select>
+								
 							</div>
-							<div class="form-group col-sm-12" id="address-group">
-								<input type="text" class="form-control" name="city" id="address" placeholder="City">
-								<span id="span_city"></span>
+						</div>
+						
+						<div class="col-sm-12">
+						
+						<label >Physically Challenged</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio"  name="disability" id="disability" value="1" >Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio"  name="disability" id="disability" value="0" >No<br>
+						
+							<input type="text" class="form-control" name="disabilitytype" id="disabilitytype" style="display:none;" placeholder="Type of Disability"><br>
+						
+						</div> 
+
+
+						<div class="col-sm-12">
+							<label>Passport</label>&nbsp;&nbsp;&nbsp;
+								
+							    <input type="radio" id="chkYes" name="chkPassPort" onclick="ShowHideDiv()" />Yes  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                             			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							    <input type="radio" id="chkNo" name="chkPassPort" onclick="ShowHideDiv()" />No<br>									
+								
+							   
+							    <input type="text" class="form-control" placeholder="Passport Number" id="txtPassportNumber" style="display: none"/><br>
+																	
+						
+						</div>
+				
+
+					<script type="text/javascript">
+    				function ShowHideDiv() {
+			        var chkYes = document.getElementById("chkYes");
+			        var dvPassport = document.getElementById("txtPassportNumber");
+			        dvPassport.style.display = chkYes.checked ? "block" : "none";
+				    }
+					</script>
+
+						<div class="col-sm-12">
+							<label >Facebook</label>
+							<div class="form-group" id="photo-group">
+								
+								<input type="text" class="form-control"  name="facebook" >
 							</div>
-							<div class="form-group col-sm-6" id="address-group">
-								<select  class="form-control" name="state"  class="error" placeholder="City">
-								<option value="" selected="">State</option>
+						</div>
+
+
+						<div class="col-sm-12">
+							<label >Linkedin</label>
+							<div class="form-group" id="photo-group">
+								
+								<input type="text" class="form-control"  name="linkedin"><br><br>
+							</div>
+						</div>	
+
+
+
+
+						</div>
+					</div>
+
+
+					<div class="panel panel-default panel-deefault col-sm-9">
+						<div class="panel-heading heeading"><label>Job Details</label></div>
+						<div class="panel-body">
+
+							<div class="col-sm-12">
+							<label for="resume-name">Job Type</label>&nbsp;&nbsp;&nbsp;
+							<div class="form-group" >
+								
+								<select style="width:;" name="jobtype" id="jobtype" class="form-control error">
+									<option value="" selected="">Select</option>
+									<option value="internship">Internship</option>
+									<option value="part" >Part Time</option>
+									<option value="full" >Full Time</option>
+									<option value="freelance" >Freelance</option>
+									<option value="Fixed term contractor" >Fixed term contractor</option>																		
+								</select>   								
+							</div>
+						</div>
+
+						<div class="col-sm-12">
+							<label for="resume-name">Preffered Job Location</label>
+							<div class="form-group" >
+								
+								<select  class="form-control" name="preferloc"  class="error">
+								<option value="" selected="">Select</option>
 								<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
 								<option value="Andhra Pradesh">Andhra Pradesh</option>
 								<option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -538,126 +788,48 @@ class employee{
 								<option value="Uttar Pradesh">Uttar Pradesh</option>
 								<option value="West Bengal">West Bengal</option>
 							</select>
-								<span id="span_state"></span>
-							</div>
-							<div class="form-group col-sm-6" id="address-group">
-								<input type="text" class="form-control" name="zip" id="address" placeholder="ZIP Code">
-								<span id="span_zip"></span>
 							</div>
 						</div>
-					</div>	
-					<div class="row">
-						<div class="col-sm-9">
-							<label>DOB</label><br>
-							<div class="form-group col-sm-6" id="age-group">
-							<select name="month" id="month" class="form-control">
-								<option value="">Month</option>
-							    <option value="01">January</option>
-							    <option value="02">February</option>
-							    <option value="03">March</option>
-							    <option value="04">April</option>
-							    <option value="05">May</option>
-							    <option value="06">June</option>
-							    <option value="07">July</option>
-							    <option value="08">August</option>
-							    <option value="09">September</option>
-							    <option value="10">October</option>
-							    <option value="11">November</option>
-							    <option value="12">December</option>
-							</select>
-								<span id="span_month"></span>
-							</div>
-							<div class="form-group col-sm-3" id="age-group">
-								<input type="text" id="age" class="form-control" name="day" placeholder="Day">
-								<span id="span_day"></span>
-							</div>
-							<div class="form-group col-sm-3" id="age-group">
-								<input type="text" id="age" class="form-control" name="year" placeholder="Year">
-								<span id="span_year"></span>
+
+
+						<div class="col-sm-12">
+							<div class="form-group" >
+								<label for="resume-name">Ready to Relocate</label>&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="relocation" value="yes"  >Yes&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="relocation" value="no" >No&nbsp;&nbsp;&nbsp;&nbsp;
 							</div>
 						</div>
-					</div>
-					<div class="row ">
-						<div class="col-sm-9">
-							<label class="" >Gender</label><br>
-							<div class="form-group col-sm-6" id="gender-group">
-							<input type="radio" name="gender" value="male" id="gender" >Male&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="radio" name="gender" value="female" id="gender" >Female&nbsp;&nbsp;&nbsp;&nbsp;
-							<br>
-							<span id="span_gender"></span>
-							</div>
-						</div>
-					</div>
-					<div class="row col-sm-9">
-						<label>martial status</label><br>
-						<div class="form-group col-sm-7" id="age-group">		
-							<select name="maritalStatus"  class="form-control"> 
-                             <option value="">Select</option>  
-                             <option value="N" >Single/unmarried</option>  
-                             <option value="M">Married</option>  
-                             <option value="W">Widowed</option>  
-                             <option value="D">Divorced</option>  
-                             <option value="S">Separated</option>  
-                             <option value="O">Other</option>             
-                             	</select>
+
+
+						<div class="col-sm-12">
+							<label for="photo">Upload your Resume</label>
+							<div class="form-group" id="photo-group">
 								
-						</div>
-					</div>
-
-					<div class="row col-sm-9">
-						
-						<label >Physically challenged</label>&nbsp;&nbsp;&nbsp;
-							<input type="radio"  name="disability" value="yes" >Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="radio"  name="disability" value="yes" >No<br>
-						
-							<input type="text" class="form-control "  name="disabilitytype" placeholder="Type of Disability"><br>
-						
-					</div> 
-						
-						
-
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="form-group" id="photo-group">
-								<label >Facebook</label>
-								<input type="text" class="form-control" style="width: 395px;" name="facebook" >
-							</div>
-						</div>
-						<div class="col-sm-5">
-							<div class="form-group" id="photo-group">
-								<label for="photo">upload your Photo</label>
-								<input type="file" id="photo" name="photo">
-								<p class="help-block">Optionally upload your resume for employers to view. Max. file size: 1 MB.</p>
-							</div>
-						</div>
-						
-					</div>
-
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="form-group" id="photo-group">
-								<label >linkedin</label>
-								<input type="text" class="form-control" style="width: 395px;" name="linkedin">
-							</div>
-						</div>
-						
-						<div class="col-sm-5">
-							<div class="form-group" id="photo-group">
-								<label for="photo">Upload your resume</label>
 								<input type="file"  name="resume">
-								<p class="help-block">JPG PNG . file size: 5 MB.</p>
+								<p class="help-block">Optionally upload your resume for employers to view. Max. file size: 1 MB.</p>
+								
 							</div>
 						</div>
+
+
+
+
+						</div>
 					</div>
+
+
+				</div>	
+					
+					
 
 
 
 					
-					<div class="row text-center">
+					<div class="col-sm-12 text-center">
 						<p>&nbsp;</p>
 						
-						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
-						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
+						<a class="btn btn-primary btn-lg" name="back" href="emp_type.php" value=""><i class="fa fa-arrow-left"></i> Back</a>
+						<button class="btn btn-primary btn-lg" name="submit" id="submitpersonal" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>
 					
@@ -819,6 +991,8 @@ class employee{
 
 
 					<div class="container">
+
+						<?php include('include/head.php'); ?>
 						
 
 						<h2>Education</h2>
@@ -826,16 +1000,16 @@ class employee{
 				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
-				<div class="jumbotron">	
+				<div class="">	
 
-					<div class="row form-group col-sm-7">
-						<label>Highest qualification</label>
+					<div class="row form-group col-sm-9">
+						<label>Highest Qualification</label>
 						<select name="highestqualification" class="form-control" id="highestqualification">
 							<option value="">Select your highest qualification</option>
 							<option value="Doctorate/Phd">Doctorate/Phd</option>
-							<option value="Masters">Masters</option>
+							<option value="Masters">Postgraduate</option>
 							<option value="Undergraduate">Undergraduate</option>
-							<option value="Not pursuing education">Not pursuing education</option>
+							
 						</select><span id="span_school"></span>
 
 
@@ -843,37 +1017,37 @@ class employee{
 					
 
 					<div class="row">
-						<div class="form-group col-sm-7">
-							<label>course</label>
-							<input type="text" class="form-control" name="course" placeholder="enter course">
+						<div class="form-group col-sm-9">
+							<label>Course</label>
+							<input type="text" class="form-control" name="course" placeholder="Enter Course">
 							<span id="span_school"></span>
 
 						</div>
 
-						<div class="form-group col-sm-7">
-							<label>specialization</label>
-							<input type="text" class="form-control" name="specialization" placeholder="enter specialization">
+						<div class="form-group col-sm-9">
+							<label>Specialization</label>
+							<input type="text" class="form-control" name="specialization" placeholder="Enter Specialization">
 							<span id="span_school"></span>
 
 						</div>
 
-						<div class="form-group col-sm-7">
-							<label>university/college</label>
-							<input type="text" class="form-control" name="university" placeholder="Institude Name">
+						<div class="form-group col-sm-9">
+							<label>University/College</label>
+							<input type="text" class="form-control" name="university" placeholder="Institute Name">
 							<span id="span_school"></span>
 
 						</div>
 
-						<div class="form-group col-sm-7">
-							<label>city</label>
+						<div class="form-group col-sm-9">
+							<label>City</label>
 							<input type="text" class="form-control" name="city" placeholder="City Name">
 							<span id="span_school"></span>
 
 						</div>
-						<div class="form-group col-sm-7">
+						<div class="form-group col-sm-9">
 							
 							<div class="form-group" id="education-dates-group">
-								<label for="education-dates">Year of passing</label><br>
+								<label for="education-dates">Year of Passing</label><br>
 								<select  name="year_passing" class="form-control">
 											<option value="">Select</option>								
 											<option value="2016">2016</option>								
@@ -949,13 +1123,13 @@ class employee{
 							<hr class="dashed">
 						</div>
 					</div>
-					<h3>certificates</h3>
-					<div class="row certificate">
+					<h3>certification</h3>
+					<div class="row certificate col-sm-9">
 						
 						<div class="col-sm-6">
 							<div class="form-group" id="school-group">
 								
-								<input type="text" class="form-control" name="certificate1" id="certificate" placeholder="course name">
+								<input type="text" class="form-control" name="certificate1" id="certificate" placeholder="Course Name">
 								
 							</div>
 						</div>
@@ -972,15 +1146,15 @@ class employee{
 					<div class="row">
 						<div class="col-sm-12">
 							<p><a id="add-certificate">+ Add certificate</a></p>
-							<hr>
+							
 						</div>
 					</div>
 
 					<div class="row text-center">
 						<p>&nbsp;</p>
-						
+						<a class="btn btn-primary btn-lg" name="back" href="emp_prof1.php" value=""><i class="fa fa-arrow-left"></i> Back</a>
 						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
-						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" id="submiteducation" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>
 
 					
@@ -1120,6 +1294,8 @@ class employee{
 
 
 						<div class="container">
+
+							<?php include('include/head.php'); ?>
 						
 
 						<h2>experience</h2>
@@ -1127,27 +1303,28 @@ class employee{
 				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
-				<div class="jumbotron form-center" >	
+				<div class="" >	
 
 
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-sm-7">
 							<div class="form-group" >
 								<label for="resume-name">What are your Key Skills?</label>
 								<input type="text" class="form-control" name="keyskills">
 								<span id="span_keyskills"></span>
 								
-								<!-- <input type="textarea" name="aabe" class=" form-control" style="height:120px;" /> -->
+								
 							</div>
 						</div>
 					</div>	
+					 -->
 					
 					
-					<div class="row">
-						<div class="col-sm-7">
+						<div class="col-sm-9">
+							<label for="resume-name">Work Experience</label>
 							<div class="form-group" >
-								<label for="resume-name">How much work experience do you have?</label>&nbsp;&nbsp;&nbsp;
-								<select style="width:;" name="exyear" id="expyear" class="form-control error">
+								
+								<select  name="exyear" id="expyear" class="form-control error">
 									<option value="" selected="">Select</option>
 									<option value="0">Fresher</option>
 									<option value="1" >1 years</option>
@@ -1185,17 +1362,14 @@ class employee{
 								<span id="span_exyear"></span>
 							</div>
 						</div>
-					</div>
-<script type="text/javascript">
+					
 
-
-
-</script>
-					<div class="row">
-						<div class="col-sm-7">
+					
+						<div class="col-sm-9">
+							<label for="resume-name">No. of Organisations Worked with</label>
 							<div class="form-group" >
-								<label for="resume-name">how many organisations worked with</label>
-								<select style="width: ;" name="worknum" id="workex" class="form-control error" >
+								
+								<select  name="" id="workex" class="form-control error" >
 									<option value="" selected="">Select</option>
 									<option value="0">None</option>
 									<option value="1" label="1">1</option>
@@ -1211,32 +1385,115 @@ class employee{
 								</select>
 							</div>
 							
-							<div class="form-group" id="div1">
-								<!-- <input type="text" class="form-control" name="n"  placeholder="in months"> -->
+							
+						</div>
+					
+
+					
+						<div class="col-sm-9">
+							<label for="resume-name">About Current/Last Organisation</label>
+							<div class="form-group" >
+								
+								<input type="text" class="form-control" name="worknum[]"  placeholder="Company Name"><br>
+								<div class="row col-sm-6"><input type="text" class="form-control" name="lastjob"  placeholder="Job Title"></div>
+								<div class="col-sm-6"><input type="text" class="form-control" name="lastjob"  placeholder="Working Since"><br></div>
+									
+								
+							</div>
+							<div class="row">
+							<div class="col-sm-12">
+							<p><a id="add-experience">+ Add More Experience</a></p>
+							
+						</div></div>
+							
+						</div>
+					
+
+
+					
+					
+					<div class="col-sm-9">
+						<div class="row col-sm-6">
+							<label for="resume-name">Current Salary</label>
+							<div class="form-group" >
+								
+								<select  class="form-control" name="curentsalary"  class="error">
+									
+										<option value="Select">Select</option>
+										<option value="<1 Lac"><1 Lac</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										<option value="31">31</option>
+										<option value="32">32</option>
+										<option value="33">33</option>
+										<option value="34">34</option>
+										<option value="35">35</option>
+										<option value="36">36</option>
+										<option value="37">37</option>
+										<option value="38">38</option>
+										<option value="39">39</option>
+										<option value="40">40</option>
+										<option value="41">41</option>
+										<option value="42">42</option>
+										<option value="43">43</option>
+										<option value="44">44</option>
+										<option value="45">45</option>
+										<option value="46">46</option>
+										<option value="47">47</option>
+										<option value="48">48</option>
+										<option value="49">49</option>
+										<option value="50">50</option>
+										<option value="50+">50+</option>
+
+									
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<label for="resume-name">Notice Period</label>
+							<div class="form-group" >
+								
+								<select name="noticeperiod" id="noticeperiod" class="form-control">
+								<option value="Select">Select</option>
+								<option value="<1 month"><1 month</option>
+								<option value="1 month">1 month</option>
+								<option value="2 months">2 months</option>
+								<option value="3 months">3 months</option>
+								</select>
 							</div>
 						</div>
 					</div>	
-
-
-					
-					
-					<div class="row">
-						<div class="col-sm-4">
-							<div class="form-group" >
-								<label for="resume-name">job title of the last/current job</label>
-								<input type="text" class="form-control" name="lastjob"  placeholder="Job Title">
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group" >
-								<label for="resume-name">notice period</label>
-								<input type="text" class="form-control" name="noticeperiod"  placeholder="in months">
-							</div>
-						</div>
-					</div>	
 					
 
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-sm-4">
 							<div class="form-group" >
 								<label for="resume-name">current salary</label>
@@ -1277,72 +1534,17 @@ class employee{
 							</div>
 						</div>
 					</div>	
-
-					<div class="row">
-						<div class="col-sm-7">
-							<div class="form-group" >
-								<label for="resume-name">preffered job location</label>
-								<select style="width: auto;" class="form-control" name="preferloc"  class="error">
-								<option value="" selected="">Select</option>
-								<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-								<option value="Andhra Pradesh">Andhra Pradesh</option>
-								<option value="Arunachal Pradesh">Arunachal Pradesh</option>
-								<option value="Assam">Assam</option>
-								<option value="Bihar">Bihar</option>
-								<option value="Chandigarh">Chandigarh</option>
-								<option value="Chhattisgarh">Chhattisgarh</option>
-								<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-								<option value="Daman and Diu">Daman and Diu</option>
-								<option value="Delhi">Delhi</option>
-								<option value="Goa">Goa</option>
-								<option value="Gujarat">Gujarat</option>
-								<option value="Haryana">Haryana</option>
-								<option value="Himachal Pradesh">Himachal Pradesh</option>
-								<option value="Jammu and Kashmir">Jammu and Kashmir</option>
-								<option value="Jharkhand">Jharkhand</option>
-								<option value="Karnataka">Karnataka</option>
-								<option value="Kerala">Kerala</option>
-								<option value="Lakshadweep">Lakshadweep</option>
-								<option value="Madhya Pradesh">Madhya Pradesh</option>
-								<option value="Maharashtra">Maharashtra</option>
-								<option value="Manipur">Manipur</option>
-								<option value="Meghalaya">Meghalaya</option>
-								<option value="Mizoram">Mizoram</option>
-								<option value="Nagaland">Nagaland</option>
-								<option value="Orissa">Orissa</option>
-								<option value="Pondicherry">Pondicherry</option>
-								<option value="Punjab">Punjab</option>
-								<option value="Rajasthan">Rajasthan</option>
-								<option value="Sikkim">Sikkim</option>
-								<option value="Tamil Nadu">Tamil Nadu</option>
-								<option value="Tripura">Tripura</option>
-								<option value="Uttaranchal">Uttaranchal</option>
-								<option value="Uttar Pradesh">Uttar Pradesh</option>
-								<option value="West Bengal">West Bengal</option>
-							</select>
-							</div>
-						</div>
-					</div>	
-
-					
-					<div class="row">
-						<div class="col-sm-7">
-							<div class="form-group" >
-								<label for="resume-name">ready to relocate</label>&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="relocation" value="yes"  >Yes&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="relocation" value="no" >No&nbsp;&nbsp;&nbsp;&nbsp;
-							</div>
-						</div>
-					</div>	
-					
-
-
-					
-					<div class="row text-center">
-						<p>&nbsp;</p>
+ -->
 						
+					
+
+
+					
+					<div class="col-sm-12 text-center">
+						<p>&nbsp;</p>
+						<a class="btn btn-primary btn-lg" name="back" href="emp_prof2.php" value=""><i class="fa fa-arrow-left"></i> Back</a>
 						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
-						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" id="submitexperience" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>
 					
@@ -1407,28 +1609,9 @@ class employee{
 							$this->db->insert(tbl_employee_exp,$insert_sql_array);
 
 ?>
-								<div class="container">
-						
-
-			
-					
-				<div class="jumbotron">	
-					
-					<div class="row text-center">
-						<h4>You are successfully registered</h4>
-						<h5>Click next to see the jobs</h5>
-					</div>
-					<div class="row text-center">
-						<p>&nbsp;</p>
-						
-						<a class="btn btn-primary btn-lg" name="submit" href="jobslist.php" value="register">Next <i class="fa fa-arrow-right"></i></a>
-						
-					</div>
-				</div>
-			
-
-			</div>
-
+							<script type="text/javascript">
+							window.location="emp_prof4.php"
+							</script>
 
 								<?php
 						
@@ -1460,11 +1643,11 @@ class employee{
 						<div class="row">
 							<div class="col-sm-6 ">
 
-								<a href="emp_prof1.php"><img src="images/1466098131_1.png"><div><h4><b>PROFESSIONAL</b></h4></div></a>
+								<a href="emp_prof1.php"><img src="images/1466098131_1.png" id="emptype"><div><h4><b>PROFESSIONAL</b></h4></div></a>
 								<p class="help-block">I have at least 1 month of work experience</p>
 							</div>
 							<div class="col-sm-6 ">
-								<a href="emp_prof1.php"><img src="images/1466102498_avatar-03.png"><div></div><h4><b>FRESHER</b></h4></div></a>
+								<a href="emp_prof1.php"><img src="images/1466102498_avatar-03.png" id="emptype"><div></div><h4><b>FRESHER</b></h4></div></a>
 								<p class="help-block">I have just graduated/I haven't worked after graduation</p>
 							</div>
 
@@ -1526,82 +1709,309 @@ class employee{
 
 						<div class="container">
 						
-
+							<?php include('include/head.php'); ?>
 						<h2>More Details</h2>
 
 				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
 					<!-- Resume Details Start -->
-				<div class="jumbotron form-center" >	
+				<div class="" >	
 			
-            <div class="row">
-						<div class="col-sm-7">
-							<div class="form-group" >
-								<label for="resume-name">Language Known</label>
-								<input type="text" class="form-control" name="language" />																
-							</div>
-						</div>
-					</div>	
+		            
+								<div class="col-sm-5">
+									<label for="resume-name">Languages Known</label>
+									<div class="form-group" >
+										
+										<select class="selectpicker" data-style="form-control selectpickerr" name="langknown" id="langknown" multiple data-live-search="true">
+    					
+							<option value="English">English</option>
+							<option value="Abkhaz">Abkhaz</option>
+							<option value="Adyghe">Adyghe</option>
+							<option value="Afrikaans">Afrikaans</option>
+							<option value="Akan">Akan</option>
+							<option value="Albanian">Albanian</option>
+							<option value="American Sign Language">American Sign Language</option>
+							<option value="Amharic">Amharic</option>
+							<option value="Arabic">Arabic</option>
+							<option value="Aragonese">Aragonese</option>
+							<option value="Aramaic">Aramaic</option>
+							<option value="Armenian">Armenian</option>
+							<option value="Aymara">Aymara</option>
+							<option value="Balinese">Balinese</option>
+							<option value="Basque">Basque</option>
+							<option value="Betawi">Betawi</option>
+							<option value="Bosnian">Bosnian</option>
+							<option value="Breton">Breton</option>
+							<option value="Bulgarian">Bulgarian</option>
+							<option value="Cantonese">Cantonese</option>
+							<option value="Catalan">Catalan</option>
+							<option value="Cherokee">Cherokee</option>
+							<option value="Chickasaw">Chickasaw</option>
+							<option value="Chinese">Chinese</option>
+							<option value="Coptic">Coptic</option>
+							<option value="Cornish">Cornish</option>
+							<option value="Corsican">Corsican</option>
+							<option value="Crimean Tatar">Crimean Tatar</option>
+							<option value="Croatian">Croatian</option>
+							<option value="Czech">Czech</option>
+							<option value="Danish">Danish</option>
+							<option value="Dutch">Dutch</option>
+							<option value="Dawro">Dawro</option>
+							<option value="Esperanto">Esperanto</option>
+							<option value="Estonian">Estonian</option>
+							<option value="Ewe">Ewe</option>
+							<option value="Fiji Hindi">Fiji Hindi</option>
+							<option value="Filipino">Filipino</option>
+							<option value="Finnish">Finnish</option>
+							<option value="French">French</option>
+							<option value="Galician">Galician</option>
+							<option value="Georgian">Georgian</option>
+							<option value="German">German</option>
+							<option value="Greek, Modern">Greek, Modern</option>
+							<option value="Ancient Greek">Ancient Greek</option>
+							<option value="Greenlandic">Greenlandic</option>
+							<option value="Haitian Creole">Haitian Creole</option>
+							<option value="Hawaiian">Hawaiian</option>
+							<option value="Hebrew">Hebrew</option>
+							<option value="Hindi">Hindi</option>
+							<option value="Hungarian">Hungarian</option>
+							<option value="Icelandic">Icelandic</option>
+							<option value="Indonesian">Indonesian</option>
+							<option value="Inuktitut">Inuktitut</option>
+							<option value="Interlingua">Interlingua</option>
+							<option value="Irish">Irish</option>
+							<option value="Italian">Italian</option>
+							<option value="Japanese">Japanese</option>
+							<option value="Kabardian">Kabardian</option>
+							<option value="Kannada">Kannada</option>
+							<option value="Kashubian">Kashubian</option>
+							<option value="Khmer">Khmer</option>
+							<option value="Kinyarwanda">Kinyarwanda</option>
+							<option value="Korean">Korean</option>
+							<option value="Kurdish/Kurdî">Kurdish/Kurdî</option>
+							<option value="Ladin">Ladin</option>
+							<option value="Latgalian">Latgalian</option>
+							<option value="Latin">Latin</option>
+							<option value="Lingala">Lingala</option>
+							<option value="Livonian">Livonian</option>
+							<option value="Lojban">Lojban</option>
+							<option value="Lower Sorbian">Lower Sorbian</option>
+							<option value="Low German">Low German</option>
+							<option value="Macedonian">Macedonian</option>
+							<option value="Malay">Malay</option>
+							<option value="Malayalam">Malayalam</option>
+							<option value="Mandarin">Mandarin</option>
+							<option value="Manx">Manx</option>
+							<option value="Maori">Maori</option>
+							<option value="Mauritian Creole">Mauritian Creole</option>
+							<option value="Min Nan">Min Nan</option>
+							<option value="Mongolian">Mongolian</option>
+							<option value="Norwegian">Norwegian</option>
+							<option value="Old Armenian">Old Armenian</option>
+							<option value="Old English">Old English</option>
+							<option value="Old French">Old French</option>
+							<option value="Old Norse">Old Norse</option>
+							<option value="Old Prussian">Old Prussian</option>
+							<option value="Oriya">Oriya</option>
+							<option value="Pangasinan">Pangasinan</option>
+							<option value="Papiamentu">Papiamentu</option>
+							<option value="Pashto">Pashto</option>
+							<option value="Persian">Persian</option>
+							<option value="Pitjantjatjara">Pitjantjatjara</option>
+							<option value="Polish">Polish</option>
+							<option value="Portuguese">Portuguese</option>
+							<option value="Proto-Slavic">Proto-Slavic</option>
+							<option value="Quenya">Quenya</option>
+							<option value="Rapa Nui">Rapa Nui</option>
+							<option value="Romanian">Romanian</option>
+							<option value="Russian">Russian</option>
+							<option value="Sanskrit">Sanskrit</option>
+							<option value="Scots">Scots</option>
+							<option value="Scottish Gaelic">Scottish Gaelic</option>
+							<option value="Serbian">Serbian</option>
+							<option value="Serbo-Croatian">Serbo-Croatian</option>
+							<option value="Slovak">Slovak</option>
+							<option value="Slovene">Slovene</option>
+							<option value="Spanish">Spanish</option>
+							<option value="Sinhalese">Sinhalese</option>
+							<option value="Swahili">Swahili</option>
+							<option value="Swedish">Swedish</option>
+							<option value="Tagalog">Tagalog</option>
+							<option value="Tajik">Tajik</option>
+							<option value="Tamil">Tamil</option>
+							<option value="Tarantino">Tarantino</option>
+							<option value="Telugu">Telugu</option>
+							<option value="Thai">Thai</option>
+							<option value="Tok Pisin">Tok Pisin</option>
+							<option value="Turkish">Turkish</option>
+							<option value="Twi">Twi</option>
+							<option value="Ukrainian">Ukrainian</option>
+							<option value="Upper Sorbian">Upper Sorbian</option>
+							<option value="Urdu">Urdu</option>
+							<option value="Uzbek">Uzbek</option>
+							<option value="Venetian">Venetian</option>
+							<option value="Vietnamese">Vietnamese</option>
+							<option value="Vilamovian">Vilamovian</option>
+							<option value="Volapük">Volapük</option>
+							<option value="Võro">Võro</option>
+							<option value="Welsh">Welsh</option>
+							<option value="Xhosa">Xhosa</option>
+							<option value="Yiddish">Yiddish</option>
+
+  							</select>																
+									</div>
+								</div>
+								
 
 
-			<div class="row">
-						<div class="col-sm-7">
-							<div class="form-group" >
-								<label for="resume-name">Expected Salary</label>
-								<input type="text" class="form-control" name="salary" />																
-							</div>
-						</div>
-					</div>
-			<div class="row">
-						<div class="col-sm-7">
-							<div class="form-group" >
-								<label for="resume-name">Job Type</label>&nbsp;&nbsp;&nbsp;
-								<select style="width:;" name="jobtype" id="jobtype" class="form-control error">
-									<option value="" selected="">Select</option>
-									<option value="inter">Intership</option>
-									<option value="part" >Part Time</option>
-									<option value="full" >Full Time</option>
-									<option value="freelance" >Freelance</option>																		
-								</select>   								
-							</div>
-						</div>
-					</div>					
+					
+								<div class="col-sm-5" style="float:none;">
+									<div class="form-group" >
+										<label for="resume-name">Expected Salary</label>
+										<select  class="form-control" name="expectedsalary"  class="error">
+									
+										<option value="Select">Select</option>
+										<option value="<1 Lac"><1 Lac</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										<option value="31">31</option>
+										<option value="32">32</option>
+										<option value="33">33</option>
+										<option value="34">34</option>
+										<option value="35">35</option>
+										<option value="36">36</option>
+										<option value="37">37</option>
+										<option value="38">38</option>
+										<option value="39">39</option>
+										<option value="40">40</option>
+										<option value="41">41</option>
+										<option value="42">42</option>
+										<option value="43">43</option>
+										<option value="44">44</option>
+										<option value="45">45</option>
+										<option value="46">46</option>
+										<option value="47">47</option>
+										<option value="48">48</option>
+										<option value="49">49</option>
+										<option value="50">50</option>
+										<option value="50+">50+</option>
 
-				<div class="row">
-						<div class="col-sm-7">
+									
+								</select>																
+									</div>
+								</div>
+
+
+							<div class="col-sm-5">
+							<label for="resume-name">Current Location</label><br>
 							<div class="form-group" >
-                            	<label>Do you have Passport?</label>
-								&nbsp;&nbsp;&nbsp;
-							    <input type="radio" id="chkYes" name="chkPassPort" onclick="ShowHideDiv()" />Yes                               			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							    <input type="radio" id="chkNo" name="chkPassPort" onclick="ShowHideDiv()" />
-							    No									
-								<div id="dvPassport" style="display: none">
-							    <label>Passport Number</label>
-							    <input type="text" id="txtPassportNumber" />
-								</div>										
+											
+								<select  class="form-control" name="currentlocation"  class="error">
+								<option value="" selected="">Select</option>
+								<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+								<option value="Andhra Pradesh">Andhra Pradesh</option>
+								<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+								<option value="Assam">Assam</option>
+								<option value="Bihar">Bihar</option>
+								<option value="Chandigarh">Chandigarh</option>
+								<option value="Chhattisgarh">Chhattisgarh</option>
+								<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+								<option value="Daman and Diu">Daman and Diu</option>
+								<option value="Delhi">Delhi</option>
+								<option value="Goa">Goa</option>
+								<option value="Gujarat">Gujarat</option>
+								<option value="Haryana">Haryana</option>
+								<option value="Himachal Pradesh">Himachal Pradesh</option>
+								<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+								<option value="Jharkhand">Jharkhand</option>
+								<option value="Karnataka">Karnataka</option>
+								<option value="Kerala">Kerala</option>
+								<option value="Lakshadweep">Lakshadweep</option>
+								<option value="Madhya Pradesh">Madhya Pradesh</option>
+								<option value="Maharashtra">Maharashtra</option>
+								<option value="Manipur">Manipur</option>
+								<option value="Meghalaya">Meghalaya</option>
+								<option value="Mizoram">Mizoram</option>
+								<option value="Nagaland">Nagaland</option>
+								<option value="Orissa">Orissa</option>
+								<option value="Pondicherry">Pondicherry</option>
+								<option value="Punjab">Punjab</option>
+								<option value="Rajasthan">Rajasthan</option>
+								<option value="Sikkim">Sikkim</option>
+								<option value="Tamil Nadu">Tamil Nadu</option>
+								<option value="Tripura">Tripura</option>
+								<option value="Uttaranchal">Uttaranchal</option>
+								<option value="Uttar Pradesh">Uttar Pradesh</option>
+								<option value="West Bengal">West Bengal</option>
+							</select>   								
 							</div>
-						</div>
-					</div>
-					<script type="text/javascript">
-    				function ShowHideDiv() {
-			        var chkYes = document.getElementById("chkYes");
-			        var dvPassport = document.getElementById("dvPassport");
-			        dvPassport.style.display = chkYes.checked ? "block" : "none";
-				    }
-					</script>
+
+							
+							</div>
+
+
+
+				
+					
                     
-                    <div class="row">
-						<div class="col-sm-7">
-							<div class="form-group" >
-								<label for="resume-name">Key Skills </label>&nbsp;&nbsp;&nbsp;			
-								<input type="text" class="form-control" name="keyskills" />   								
-							</div>
-						</div>
-					</div>
                     
-					<div class="row text-center">
+						<div class="col-sm-9">
+							<label for="resume-name">Key Skills </label><br>
+							<div class="row form-group col-sm-7" >
+											
+								<input type="text" class="form-control" name="keyskills" /> 
+								 
+							
+						</div>
+
+						<div class="ratex center_form col-sm-5" data-toggle="tooltip" title="Rate Yourself">
+							        <input type="radio" name="example" class="rating" value="1" />
+							        <input type="radio" name="example" class="rating" value="2" />
+							        <input type="radio" name="example" class="rating" value="3" />
+							        <input type="radio" name="example" class="rating" value="4" />
+							        <input type="radio" name="example" class="rating" value="5" />
+							    </div>
+						<div class="row">
+							<div class="col-sm-12">
+							<p><a id="add-more-skills">+ Add More skills</a></p>
+							
+						</div></div></div>
+
+					
+
+					
+
+					<div class="col-sm-12 text-center">
 						<p>&nbsp;</p>
-						
+						<a class="btn btn-primary btn-lg" name="back" href="emp_prof3.php" value=""><i class="fa fa-arrow-left"></i>Back</a>
 						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
 						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>

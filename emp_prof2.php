@@ -60,3 +60,11 @@ $user_obj=new employee();
 
 	</body>
 </html>
+
+<script type="">
+var list = $("#li2");
+		if (!list.hasClass("active")) {
+			$("#li2").addClass("active");
+			
+		};
+</script>

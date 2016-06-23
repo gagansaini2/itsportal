@@ -5,7 +5,9 @@
 @import url(jquery.fancybox.css);
 @import url(jquery.nouislider.css);
 @import url(font-awesome.min.css);
+@import url(rating.css);
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:700);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css);
 
 /*------------------------------------------------------------------
 
@@ -849,7 +851,7 @@ header {
 	label {
 		color: #222;
 		font-weight: normal;
-		text-transform: uppercase;
+		
 	}
 
 		.checkbox label {
@@ -1994,3 +1996,22 @@ header {
 		}
 
 	}
+
+	.panel-deefault{
+		border-color: white;
+	}
+
+	.heeading{
+		font-size: large;
+		font-variant: small-caps;
+	}
+	.selectpickerr{
+	
+    text-transform: initial;
+    min-width: 32em;
+    
+
+	}
+
+
+

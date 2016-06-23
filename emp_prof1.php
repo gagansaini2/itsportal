@@ -23,6 +23,8 @@ $user_obj=new employee();
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.min.js"></script>
 		<![endif]-->
+		
+
 
 	</head>
 	<body>
@@ -61,3 +63,11 @@ $user_obj=new employee();
 
 	</body>
 </html>
+
+<script type="">
+var list = $("#li1");
+		if (!list.hasClass("active")) {
+			$("#li1").addClass("active");
+			
+		};
+</script>

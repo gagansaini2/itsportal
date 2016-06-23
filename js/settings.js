@@ -8,6 +8,8 @@
 	$(document).ready(function() {
 
 		// ====================================================================
+		
+
 
 		// Header scroll function
 		$("#workex").change(function(){
@@ -476,33 +478,39 @@
 
 		// 1. Adding social networks
 
-		var NewSocialNetwork='<div class="row social-network"><div class="col-sm-6"><div class="form-group" id="resume-social-network-group"><label for="resume-social-network">Choose Social Network</label><select  class="form-control" id="resume-social-network"><option>Choose social network</option><option>Facebook</option><option>Twitter</option><option>Google+</option><option>LinkedIn</option><option>YouTube</option><option>Vimeo</option><option>Github</option><option>Flickr</option><option>YouTube</option><option>DeviantArt</option><option>ThemeForest</option><option>CodeCanyon</option><option>VideoHive</option><option>AudioJungle</option><option>GraphicRiver</option><option>PhotoDune</option><option>3dOcean</option><option>ActiveDen</option><option>Other</option></select></div></div><div class="col-sm-6"><div class="form-group" id="resume-social-network-url-group"><label for="resume-social-network-url">URL</label><input type="text" class="form-control" id="resume-social-network-url" placeholder="http://"></div></div></div><div class="row"><div class="col-sm-12"><hr class="dashed"></div></div>'
-
-		$("#add-social-network").click(function(){
+		var NewSocialNetwork='<div class="row form-group col-sm-7" ><input type="text" class="form-control" name="keyskills"/> </div><div class="ratex center_form col-sm-5" data-toggle="tooltip" title="Rate Yourself"> <input type="radio" name="example" class="rating" value="1"/> <input type="radio" name="example" class="rating" value="2"/> <input type="radio" name="example" class="rating" value="3"/> <input type="radio" name="example" class="rating" value="4"/> <input type="radio" name="example" class="rating" value="5"/> </div>'
+		$("#add-more-skills").click(function(){
 			$(this).parent().parent().parent().before(NewSocialNetwork);
+			
+			
+			$('[data-toggle="tooltip"]').tooltip();
 		});
 
 		// 2. Adding experience
 
-		var NewExperience='<div class="row experience"><div class="col-sm-6"><div class="form-group" id="resume-employer-group"><label for="resume-employer">Employer</label><input type="text" class="form-control" id="resume-employer" placeholder="Company name"></div></div><div class="col-sm-6"><div class="form-group" id="resume-experience-dates-group"><label for="resume-experience-dates">Start/End Date</label><input type="text" class="form-control" id="resume-experience-dates" placeholder="e.g. April 2010 - June 2013"></div></div></div><div class="row"><div class="col-sm-6"><div class="form-group" id="resume-job-title-group"><label for="resume-job-title">Job Title</label><input type="text" class="form-control" id="resume-job-title" placeholder="e.g. Web Designer"></div></div><div class="col-sm-6"><div class="form-group" id="resume-responsibilities-group"><label for="resume-responsibilities">Responsibilities (Optional)</label><input type="text" class="form-control" id="resume-responsibilities" placeholder="e.g. Developing new websites"></div></div></div><div class="row"><div class="col-sm-12"><hr class="dashed"></div></div>'
-
+		var NewExperience='<div class="form-group" ><input type="text" class="form-control" name="lastjob" placeholder="Company Name"><br><div class="row col-sm-6"><input type="text" class="form-control" name="lastjob" placeholder="Job Title"></div><div class="col-sm-6"><input type="text" class="form-control" name="lastjob" placeholder="Working Since"><br></div></div>'
 		$("#add-experience").click(function(){
 			$(this).parent().parent().parent().before(NewExperience);
 		});
 
 		// 3. Adding education
 
-		var NewEducation='<div class=row><div class=col-sm-12><hr class=dashed></div></div><div class="form-group col-sm-7 row"><label>qualification</label><select class=form-control name=qualification id=highestqualification><option value="">Select your qualification<option value=Doctorate/Phd>Doctorate/Phd<option value=Masters>Masters<option value=Undergraduate>Undergraduate<option value="Not pursuing education">Not pursuing education</select></div><div class=row><div class="form-group col-sm-7"><label>course</label><input class=form-control name=course placeholder="enter course"></div><div class="form-group col-sm-7"><label>specialization</label><input class=form-control name=specialization placeholder="enter specialization"></div><div class="form-group col-sm-7"><label>university/college</label><input class=form-control name=university placeholder="Institude Name"></div><div class="form-group col-sm-7"><label>city</label><input class=form-control name=city placeholder="City Name"></div><div class="form-group col-sm-7"><div class=form-group id=education-dates-group><label for=education-dates>Year of passing</label><br><select class=form-control name=year_passing><option value="">Select<option value=2016>2016<option value=2015>2015<option value=2014>2014<option value=2013>2013<option value=2012>2012<option value=2011>2011<option value=2010>2010<option value=2009>2009<option value=2008>2008<option value=2007>2007<option value=2006>2006<option value=2005>2005<option value=2004>2004<option value=2003>2003<option value=2002>2002<option value=2001>2001<option value=2000>2000<option value=1999>1999<option value=1998>1998<option value=1997>1997<option value=1996>1996<option value=1995>1995<option value=1994>1994<option value=1993>1993<option value=1992>1992<option value=1991>1991<option value=1990>1990<option value=1989>1989<option value=1988>1988<option value=1987>1987<option value=1986>1986<option value=1985>1985<option value=1984>1984<option value=1983>1983<option value=1982>1982<option value=1981>1981<option value=1980>1980<option value=1979>1979<option value=1978>1978<option value=1977>1977<option value=1976>1976<option value=1975>1975<option value=1974>1974<option value=1973>1973<option value=1972>1972<option value=1971>1971<option value=1970>1970</select></div></div></div>'
+		var NewEducation='<div class="row form-group col-sm-9"><label>Qualification</label><select name="highestqualification" class="form-control" id="highestqualification"><option value="">Select your highest qualification</option><option value="Doctorate/Phd">Doctorate/Phd</option><option value="Masters">Postgraduate</option><option value="Undergraduate">Undergraduate</option></select><span id="span_school"></span></div><div class="row"><div class="form-group col-sm-9"><label>Course</label><input type="text" class="form-control" name="course" placeholder="Enter Course"><span id="span_school"></span></div><div class="form-group col-sm-9"><label>Specialization</label><input type="text" class="form-control" name="specialization" placeholder="Enter Specialization"><span id="span_school"></span></div><div class="form-group col-sm-9"><label>University/College</label><input type="text" class="form-control" name="university" placeholder="Institute Name"><span id="span_school"></span></div><div class="form-group col-sm-9"><label>City</label><input type="text" class="form-control" name="city" placeholder="City Name"><span id="span_school"></span></div><div class="form-group col-sm-9"><div class="form-group" id="education-dates-group"><label for="education-dates">Year of Passing</label><br><select name="year_passing" class="form-control"><option value="">Select</option><option value="2016">2016</option><option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option><option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option><option value="1995">1995</option><option value="1994">1994</option><option value="1993">1993</option><option value="1992">1992</option><option value="1991">1991</option><option value="1990">1990</option><option value="1989">1989</option><option value="1988">1988</option><option value="1987">1987</option><option value="1986">1986</option><option value="1985">1985</option><option value="1984">1984</option><option value="1983">1983</option><option value="1982">1982</option><option value="1981">1981</option><option value="1980">1980</option><option value="1979">1979</option><option value="1978">1978</option><option value="1977">1977</option><option value="1976">1976</option><option value="1975">1975</option><option value="1974">1974</option><option value="1973">1973</option><option value="1972">1972</option><option value="1971">1971</option><option value="1970">1970</option> </select><span id="span_school_passing"></span></div></div></div>'		
 		$("#add-education").click(function(){
 			$(this).parent().parent().parent().before(NewEducation);
 		});
 
 		// 3. addin certificate
 
-		var NewCertificate='<div class="certificate row"><div class=col-sm-6><div class=form-group id=school-group><input class=form-control id=certificate name=certificate1 placeholder="course name"></div></div><div class=col-sm-6><div class=form-group id=school-group><input class=form-control id=certificate name=certificate1 placeholder="Certificate No."></div></div></div>'
+		var NewCertificate='<div class="certificate row col-sm-9"><div class=col-sm-6><div class=form-group id=school-group><input class=form-control id=certificate name=certificate1 placeholder="Course Name"></div></div><div class=col-sm-6><div class=form-group id=school-group><input class=form-control id=certificate name=certificate1 placeholder="Certificate No."></div></div></div>'
 			$("#add-certificate").click(function(){
 				$(this).parent().parent().parent().before(NewCertificate);
 			});
+
+		
+			
+
+
 
 		$("#workex").change(function (){
 			var selVal = $(this).val();
@@ -519,8 +527,62 @@
 				$("#div1").empty();
 			};
 		});
+
+		$("#disability").click(function(){
+			var Val = $(this).val();
+			if (Val == 1) {
+				$("#disabilitytype").show();
+				console.log(Val);
+			}else{
+				console.log(Val);
+				$("#disabilitytype").hide();
+			};
+		});
+
+		$('.ratex').rating();
+		$('[data-toggle="tooltip"]').tooltip();
+		// $('.selectpicker').selectpicker({
+		// 	  style: 'btn-info',
+		// 	  height: '30px',
+  //   		  text-transform: 'initial',
+  //   		  background-color: '#f8f8f8'
+
+			 
+		// 	});
+	//$('.selectpicker').addClass('selectpickerr').selectpicker('setStyle')
+		
  
-		// ====================================================================
+		// $("#emptype").click(function(){
+		// 	$("#li1").addClass("active");
+		// 	$("#li2").removeClass("active");
+		// 	$("#li3").removeClass("active");
+		// 	$("#li4").removeClass("active");
+		// })
+
+		// $("#submitpersonal").click(function(){
+		// 	$("#li2").addClass("active");
+		// 	$("#li1").removeClass("active");
+		// 	$("#li3").removeClass("active");
+		// 	$("#li4").removeClass("active");
+		// })
+
+		// $("#submiteducation").click(function(){
+		// 	$("#li3").addClass("active");
+		// 	$("#li2").removeClass("active");
+		// 	$("#li1").removeClass("active");
+		// 	$("#li4").removeClass("active");
+		// })
+
+		// $("#submitexperience").click(function(){
+		// 	$("#li4").addClass("active");
+		// 	$("#li3").removeClass("active");
+		// 	$("#li2").removeClass("active");
+		// 	$("#li1").removeClass("active");
+		// })
+
+
+
+ 		// ====================================================================
 
 		// Scroll Reveal
 
