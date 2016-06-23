@@ -1647,7 +1647,11 @@ class employee{
 								<p class="help-block">I have at least 1 month of work experience</p>
 							</div>
 							<div class="col-sm-6 ">
+<<<<<<< HEAD
 								<a href="emp_prof1.php"><img src="images/1466102498_avatar-03.png" id="emptype"><div></div><h4><b>FRESHER</b></h4></div></a>
+=======
+								<a href="emp_prof1.php"><img src="images/fresher.png"><div></div><h4><b>FRESHER</b></h4></div></a>
+>>>>>>> origin/master
 								<p class="help-block">I have just graduated/I haven't worked after graduation</p>
 							</div>
 
