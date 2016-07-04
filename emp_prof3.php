@@ -69,8 +69,5 @@ var list = $("#li3");
 		};
 
 		
-								$('input[name="my-checkbox"]').on('switchChange.bootstrapSwitch' function( 'click', true){
-									alert("hi");
-								});
 							
 </script>
