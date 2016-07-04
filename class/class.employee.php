@@ -392,8 +392,6 @@ class employee{
 
 
 
-
-
 	
 
 
@@ -479,6 +477,7 @@ class employee{
 
 </script>
 
+
 					<div class="container">
 						<?php include('include/head.php'); ?>
 						
@@ -489,7 +488,7 @@ class employee{
 					<!-- Resume Details Start -->
 				<div class="panel-group">	
 					<div class="panel panel-default panel-deefault col-sm-9">
-						<div class="panel-heading heeading"><label>Personal Details</label></div>
+						<div class="panel-heading panel-heeading"edue><label>Personal Details</label></div>
 
 
 						<div class="panel-body">
@@ -525,7 +524,7 @@ class employee{
 							</div>
 
 							<div class="col-sm-12">
-								<label for="resume-name">Phone No.</label>
+								<label for="resume-name">Phone No.*</label>
 							<div class="form-group col-sm-12" id="phoneno-group">
 								
 								<input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="10 digit number">
@@ -538,7 +537,7 @@ class employee{
 
 
 							<div class="col-sm-12">
-									<label for="address">Address</label>
+									<label for="address">Address*</label>
 									<div class="form-group col-sm-12" id="address-group">
 										<input type="text" class="form-control" name="street" id="address" placeholder="Street">
 										<span id="span_street"></span>
@@ -595,8 +594,8 @@ class employee{
 								</div>
 
 								<div class="col-sm-12">
-									<label>DOB</label><br>
-									<div class="form-group col-sm-6" id="age-group">
+									<label>DOB*</label><br>
+									<div class="form-group col-sm-4" id="age-group">
 									<select name="month" id="month" class="form-control">
 										<option value="">Month</option>
 									    <option value="01">January</option>
@@ -614,18 +613,18 @@ class employee{
 									</select>
 										<span id="span_month"></span>
 									</div>
-									<div class="form-group col-sm-3" id="age-group">
-										<input type="text" id="age" class="form-control" name="day" placeholder="Day">
+									<div class="form-group col-sm-4" id="age-group">
+										<input type="text" id="age" class="form-control" name="day" placeholder="Date">
 										<span id="span_day"></span>
 									</div>
-									<div class="form-group col-sm-3" id="age-group">
+									<div class="form-group col-sm-4" id="age-group">
 										<input type="text" id="age" class="form-control" name="year" placeholder="Year">
 										<span id="span_year"></span>
 									</div>
 								</div>
 
 								<div class="col-sm-12">
-									<label class="" >Gender</label><br>
+									<label class="" >Gender*</label><br>
 									<div class="form-group col-sm-6" id="gender-group">
 									<input type="radio" name="gender" value="male" id="gender" >Male&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="radio" name="gender" value="female" id="gender" >Female&nbsp;&nbsp;&nbsp;&nbsp;
@@ -634,15 +633,18 @@ class employee{
 									</div>
 								</div>
 
-								<div class="col-sm-12">
+								<div class="col-sm-12" data-toggle="tooltip" title="Profiles with pictures are 70% more likely to be contacted">
 									<label for="photo">Upload your Photo</label>
-									<div class="form-group" id="photo-group">
-										<input type="file" id="photo" name="photo">
+									<div class="form-group" id="photo-group" >
+										<input type="file" id="photo" name="photo" >
+										
 										<p class="help-block">JPG PNG . file size: 5 MB.</p>
 										<br><br>
 									</div>
 								</div>
-						
+		
+
+
 
 
 
@@ -652,11 +654,11 @@ class employee{
 					</div>
 
 					<div class="panel panel-default panel-deefault col-sm-9">
-						<div class="panel-heading heeading"><label>Other Details</label></div>
+						<div class="panel-heading panel-heeading"><label>Other Details</label></div>
 						<div class="panel-body">
 
 							<div class="col-sm-12">
-						<label>Marital Status</label><br>
+						<label>Marital Status*</label><br>
 						<div class="form-group" id="age-group">		
 							<select name="maritalStatus"  class="form-control"> 
                              <option value="">Select</option>  
@@ -713,7 +715,7 @@ class employee{
 
 
 						<div class="col-sm-12">
-							<label >Linkedin</label>
+							<label >Linkedin  &nbsp;&nbsp;&nbsp; (Profiles with Linkedin are more Trustworthy)</label>
 							<div class="form-group" id="photo-group">
 								
 								<input type="text" class="form-control"  name="linkedin"><br><br>
@@ -728,11 +730,11 @@ class employee{
 
 
 					<div class="panel panel-default panel-deefault col-sm-9">
-						<div class="panel-heading heeading"><label>Job Details</label></div>
+						<div class="panel-heading panel-heeading"><label>Job Details</label></div>
 						<div class="panel-body">
 
 							<div class="col-sm-12">
-							<label for="resume-name">Job Type</label>&nbsp;&nbsp;&nbsp;
+							<label for="resume-name">Job Type*</label>&nbsp;&nbsp;&nbsp;
 							<div class="form-group" >
 								
 								<select style="width:;" name="jobtype" id="jobtype" class="form-control error">
@@ -747,7 +749,7 @@ class employee{
 						</div>
 
 						<div class="col-sm-12">
-							<label for="resume-name">Preffered Job Location</label>
+							<label for="resume-name">Preffered Job Location*</label>
 							<div class="form-group" >
 								
 								<select  class="form-control" name="preferloc"  class="error">
@@ -995,7 +997,7 @@ class employee{
 						<?php include('include/head.php'); ?>
 						
 
-						<h2>Education</h2>
+						<h2>Academics</h2>
 
 				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 
@@ -1123,7 +1125,7 @@ class employee{
 							<hr class="dashed">
 						</div>
 					</div>
-					<h3>certification</h3>
+					<h3>certifications</h3>
 					<div class="row certificate col-sm-9">
 						
 						<div class="col-sm-6">
@@ -1321,7 +1323,7 @@ class employee{
 					
 					
 						<div class="col-sm-9">
-							<label for="resume-name">Work Experience</label>
+							<label for="resume-name">Work Experience*</label>
 							<div class="form-group" >
 								
 								<select  name="exyear" id="expyear" class="form-control error">
@@ -1391,30 +1393,24 @@ class employee{
 
 					
 						<div class="col-sm-9">
-							<label for="resume-name">About Current/Last Organisation</label>
+							<label for="resume-name">About Current/Last Organisation*</label>
 							<div class="form-group" >
 								
 								<input type="text" class="form-control" name="worknum[]"  placeholder="Company Name"><br>
-								<div class="row col-sm-6"><input type="text" class="form-control" name="lastjob"  placeholder="Job Title"></div>
-								<div class="col-sm-6"><input type="text" class="form-control" name="lastjob"  placeholder="Working Since"><br></div>
+								<input type="text" class="form-control" name="lastjob"  placeholder="Job Title"><br>
+								<input type="text" class="form-control" name="lastjob"  placeholder="Working Since">
 									
 								
 							</div>
-							<div class="row">
-							<div class="col-sm-12">
-							<p><a id="add-experience">+ Add More Experience</a></p>
 							
-						</div></div>
 							
 						</div>
-					
+						
 
-
-					
 					
 					<div class="col-sm-9">
-						<div class="row col-sm-6">
-							<label for="resume-name">Current Salary</label>
+						
+							<label for="resume-name">Current/Last Annual Package</label>
 							<div class="form-group" >
 								
 								<select  class="form-control" name="curentsalary"  class="error">
@@ -1477,21 +1473,50 @@ class employee{
 								</select>
 							</div>
 						</div>
-						<div class="col-sm-6">
-							<label for="resume-name">Notice Period</label>
+
+
+						<div class="col-sm-9">
+						<div class="row col-sm-6">
+							<label for="resume-name">Notice Period*</label>
 							<div class="form-group" >
 								
 								<select name="noticeperiod" id="noticeperiod" class="form-control">
 								<option value="Select">Select</option>
-								<option value="<1 month"><1 month</option>
+								<option value="Immediate">Immediate</option>
+								<option value="<1 month"> <1 month</option>
 								<option value="1 month">1 month</option>
 								<option value="2 months">2 months</option>
 								<option value="3 months">3 months</option>
 								</select>
 							</div>
 						</div>
-					</div>	
+						<div class="col-sm-6" style="padding: 30px 30px 30px 100px;">
+
+							<label for="resume-name">Is Buy-Back Available</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name="my-checkbox" data-size='small' data-on-text="Yes" data-off-text="No" data-on-color="info" data-on-value="1">
+							
+							
+							<script type="text/javascript">
+								$("[name='my-checkbox']").change(function(){
+									alert("hi");
+								})
+							</script>
+						</div>
+					</div>
 					
+						
+					
+
+					<div class="row">
+							<div class="col-sm-12">
+							<p><a id="add-experience">+ Add More Experience</a></p>
+							
+							</div>
+						</div>
+
+
+					
+
 
 					<!-- <div class="row">
 						<div class="col-sm-4">
@@ -1723,7 +1748,7 @@ class employee{
 			
 		            
 								<div class="col-sm-5">
-									<label for="resume-name">Languages Known</label>
+									<label for="resume-name">Languages Known*</label>
 									<div class="form-group" >
 										
 										<select class="selectpicker" data-style="form-control selectpickerr" name="langknown" id="langknown" multiple data-live-search="true">
@@ -1871,7 +1896,7 @@ class employee{
 					
 								<div class="col-sm-5" style="float:none;">
 									<div class="form-group" >
-										<label for="resume-name">Expected Salary</label>
+										<label for="resume-name">Expected Salary  &nbsp;&nbsp;&nbsp;<span style="color:#c8c8c8;">Lacs per anum </span></label>
 										<select  class="form-control" name="expectedsalary"  class="error">
 									
 										<option value="Select">Select</option>
@@ -1988,7 +2013,7 @@ class employee{
                     
                     
 						<div class="col-sm-9">
-							<label for="resume-name">Key Skills </label><br>
+							<label for="resume-name">Key Skills*</label><br>
 							<div class="row form-group col-sm-7" >
 											
 								<input type="text" class="form-control" name="keyskills" /> 
@@ -1996,7 +2021,7 @@ class employee{
 							
 						</div>
 
-						<div class="ratex center_form col-sm-5" data-toggle="tooltip" title="Rate Yourself">
+						<div class="center_form col-sm-5" data-toggle="tooltip" id="ratex" title="Rate Yourself">
 							        <input type="radio" name="example" class="rating" value="1" />
 							        <input type="radio" name="example" class="rating" value="2" />
 							        <input type="radio" name="example" class="rating" value="3" />
@@ -2081,7 +2106,7 @@ class employee{
 							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
 							$this->db->insert(tbl_employee_exp,$insert_sql_array);
 
-?>
+	?>
 								<div class="container">
 						
 
@@ -2119,6 +2144,8 @@ class employee{
 			default 	: 
 							echo "Wrong Parameter passed";
 		}
-	}	
+	}
+
+	
 }
 ?> 

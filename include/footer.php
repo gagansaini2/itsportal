@@ -353,6 +353,7 @@ else                /* send the submitted data */
     <script src="js/settings.js"></script>
 
     <script src="js/rating.js"></script>
+    <script src="js/bootstrap-switch.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 

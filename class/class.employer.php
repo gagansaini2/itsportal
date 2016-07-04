@@ -460,47 +460,100 @@ class employer{
 						<div class="col-sm-6">
 							
 							<div class="form-group" id="company-name-group">
-								<label for="company-name">Company Name</label>
+								<label for="company-name">Company Name*</label>
 								<input type="text" class="form-control" id="company-name" name="company_name" placeholder="">
 								<span id="span_name"></span>
 							</div>
 							<div class="form-group" id="job-email-group">
-								<label for="job-email">Email</label>
+								<label for="job-email">Email*</label>
 								<input type="email" class="form-control" id="job-email" name="company_email" placeholder="">
 								<span id="span_username"></span>
 							</div>
 							<div class="form-group" id="company-group">
-								<label for="company">location</label>
+								<label for="company">Location*</label>
 								<input type="text" class="form-control" id="company-location" name="company_location" placeholder="">
 								<span id="span_location"></span>
 							</div>
 							<div class="form-group" id="company-group">
-								<label for="company">phone number</label>
+								<label for="company">Phone Number*</label>
 								<input type="text" class="form-control" id="company-num" name="company_num" placeholder="">
 								<span id="span_phoneno"></span>
 							</div>
 							<div class="form-group" id="company-website-group">
-								<label for="company-website">Website </label>
+								<label for="company-website">Website*</label>
 								<input type="text" class="form-control" id="company-website" name="company_website" placeholder="http://">
 								<span id="span_website"></span>
 							</div>
 
 							
 
-							<div class="form-group col-sm-6" id="company-group">
-								<label for="company">Domain</label>
+							<div class="row form-group col-sm-6" id="company-group">
+								<label for="company">Domain*</label>
 								<select  class="form-control" id="job-type" name="company_type">
-									<option value="">Choose a job type</option>
-									<option>Freelance</option>
-									<option>Part Time</option>
-									<option>Full Time</option>
-									<option>Internship</option>
-									<option>Volunteer</option>
+				                    <option selected="selected" value="-1">- Select an Industry -</option>
+				                    <option value="2">Accessories/Apparel/Fashion Design</option>
+				                    <option value="3">Accounting/Consulting/Taxation</option>
+				                    <option value="4">Advertising/Event Management/PR</option>
+				                    <option value="5">Agriculture/Dairy Technology</option>
+				                    <option value="6">Airlines/Hotel/Hospitality/Travel/Tourism/Restaurants</option>
+				                    <option value="40">Animation / Gaming</option>
+				                    <option value="7">Architectural Services/ Interior Designing</option>
+				                    <option value="8">Auto Ancillary/Automobiles/Components</option>
+				                    <option value="9">Banking/Financial Services/Stockbroking/Securities</option>
+				                    <option value="41">Banking/FinancialServices/Broking</option>
+				                    <option value="10">Biotechnology/Pharmaceutical/Clinical Research</option>
+				                    <option value="43">Brewery/Distillery</option>
+				                    <option value="11">Cement/Construction/Engineering/Metals/Steel/Iron</option>
+				                    <option value="44">Ceramics/Sanitaryware</option>
+				                    <option value="12">Chemicals/Petro Chemicals/Plastics</option>
+				                    <option value="22">Computer Hardware/Networking</option>
+				                    <option value="13">Consumer FMCG/Foods/Beverages</option>
+				                    <option value="14">Consumer Goods - Durables</option>
+				                    <option value="15">Courier/Freight/Transportation/Warehousing</option>
+				                    <option value="16">CRM/ IT Enabled Services/BPO</option>
+				                    <option value="17">Education/Training/Teaching</option>
+				                    <option value="46">Electricals/Switchgears</option>
+				                    <option value="18">Employment Firms/Recruitment Services Firms</option>
+				                    <option value="19">Entertainment/Media/Publishing/Dotcom</option>
+				                    <option value="20">Export Houses/Textiles/Merchandise</option>
+				                    <option value="48">FacilityManagement</option>
+				                    <option value="49">Fertilizers/Pesticides</option>
+				                    <option value="50">FoodProcessing</option>
+				                    <option value="21">Gems and Jewellery</option>
+				                    <option value="51">Glass</option>
+				                    <option value="45">Government/Defence</option>
+				                    <option value="23">Healthcare/Medicine</option>
+				                    <option value="52">HeatVentilation/AirConditioning</option>
+				                    <option value="24">Insurance</option>
+				                    <option value="53">KPO/Research/Analytics</option>
+				                    <option value="25">Law/Legal Firms</option>
+				                    <option value="26">Machinery/Equipment Manufacturing/Industrial Products</option>
+				                    <option value="54">Mining</option>
+				                    <option value="27">NGO/Social Services</option>
+				                    <option value="28">Office Automation</option>
+				                    <option value="37">Others/Engg. Services/Service Providers</option>
+				                    <option value="29">Petroleum/Oil and Gas/Projects/Infrastructure/Power/Non-conventional Energy</option>
+				                    <option value="30">Printing/Packaging</option>
+				                    <option value="55">Publishing</option>
+				                    <option value="31">Real Estate</option>
+				                    <option value="32">Retailing</option>
+				                    <option value="33">Security/Law Enforcement</option>
+				                    <option value="38">Shipping/Marine</option>
+				                    <option value="34">Software Services</option>
+				                    <option value="56">Steel</option>
+				                    <option value="57">Strategy/ManagementConsultingFirms</option>
+				                    <option value="35">Telecom Equipment/Electronics/Electronic Devices/RF/Mobile Network/Semi-conductor</option>
+				                    <option value="36">Telecom/ISP</option>
+				                    <option value="58">Tyres</option>
+				                    <option value="59">WaterTreatment/WasteManagement</option>
+				                    <option value="60">Wellness/Fitness/Sports</option>
+
+                
 								</select>
 								<span id="span_domain"></span>
 							</div>
 							<div class="form-group col-sm-6" id="company-group">
-								<label for="company">size of employees</label>
+								<label for="company">Size of Employees</label>
 								<input type="text" class="form-control" id="company-emp" name="company_size" placeholder="">
 							</div>
 							
@@ -526,13 +579,10 @@ class employer{
 						</div>
 					
 						<div class="col-sm-6">
-							<div class="form-group" id="company-tagline-group">
-								<label for="company-tagline">Tagline </label>
-								<input type="text" class="form-control" id="company-tagline"  name="company_tagline" placeholder="Brief description">
-							</div>
+							
 							<div class="form-group" id="company-description-group">
-								<label for="company-description">Description </label>
-								<textarea class="textarea form-control" id="company-description" style="height:77px;" name="company_description"></textarea>
+								<label for="company-description">About Company*</label>
+								<textarea class="textarea form-control" id="company-description" style="height:156px;" name="company_description"></textarea>
 								<span id="span_descrip"></span>
 							</div>
 							<div class="form-group" id="company-video-group">
@@ -731,31 +781,33 @@ class employer{
 						
 							
 							<div class="form-group" id="job-title-group">
-								<label for="job-title">Role Title</label>
+								<label for="job-title">Job Title*</label>
 								<input type="text" class="form-control" id="job-title" name="roletitle" placeholder="e.g. Web Designer">
 								<span id="span_roletitle"></span>
 							</div>
 							<div class="form-group" id="job-title-group">
-								<label for="job-title">Department</label>
+								<label for="job-title">Department*</label>
 								<select  class="form-control" name="department">
-									<option>Choose a job category</option>
-									<option>Sales Executive</option>
-									<option>Marketing Manager</option>
-									<option>Account manager</option>
-									<option>Web developer</option>
+									<option>Choose a Department</option>
+									<option value="Production">Production</option>
+									<option value="Marketing & Sales">Marketing & Sales</option>
+									<option value="Finance">Finance</option>
+									<option value="Human resource">Human resource</option>
+									<option value="Information Technology">Information Technology</option>
+
 									
 								</select><span id="span_department"></span>
 								
 							</div>
 							<div class="form-group" id="job-location-group">
-								<label for="job-location">Role Location</label>
+								<label for="job-location">Role Location*</label>
 								<input type="text" class="form-control" id="job-location" name="rolelocation" placeholder="e.g. New York">
 								<span id="span_location"></span>
 							</div>
 							
-							<div class="row">
-							<div class="form-group col-sm-6" id="job-type-group">
-								<label for="job-type">Job Type</label>
+							
+							<div class="form-group" id="job-type-group">
+								<label for="job-type">Job Type*</label>
 								<select  class="form-control" id="job-type" name="jobtype">
 									<option>Choose a job type</option>
 									<option>Freelance</option>
@@ -763,30 +815,21 @@ class employer{
 									<option>Full Time</option>
 									<option>Internship</option>
 									<option>Volunteer</option>
+									<option>Fixed term contractor</option>
 								</select><span id="span_type"></span>
 							</div>
-							<div class="form-group col-sm-6" id="job-category-group">
-								<label for="job-category">Job Category</label>
-								<select  class="form-control" id="job-category" name="jobcategory">
-									<option>Choose a job category</option>
-									<option>Internet Services</option>
-									<option>Banking</option>
-									<option>Financial</option>
-									<option>Marketing</option>
-									<option>Management</option>
-								</select><span id="span_category"></span>
-							</div>
-							</div>
+							
+							
 							
 							<div class="form-group" id="job-description-group">
-								<label for="job-description">Qualifications</label>
+								<label for="job-description">Qualifications*</label>
 								<input type="text" class="form-control" name="qualifications" placeholder="Needed as per Job">
 								<span id="span_qualifications"></span>
 							</div>
 							
 							<div class="form-group" id="job-description-group">
-								<label for="job-description">Description</label>
-								<textarea class="textarea form-control" style="height:120px;" name="description" id="job-description"></textarea>
+								<label for="job-description">Description*</label>
+								<textarea class="textarea form-control"  name="description" id="job-description"></textarea>
 								<span id="span_descrip"></span>
 							</div>
 							
@@ -797,12 +840,23 @@ class employer{
 						<div class="col-sm-6">
 
 							<div class="form-group" id="job-location-group">
-								<label for="job-location">Experience</label>
-								<input type="text" class="form-control" id="job-Experience"  name="experience" placeholder="Needed for job">
+								<label for="job-location">Experience*</label>
+								<select name="req_experience" id="req_experience" class="form-control">
+									<option value="">Experience required in years</option>
+									<option value="Fresher">Fresher</option>
+									<option value="0-2">0-2</option>
+									<option value="2-5">2-5</option>
+									<option value="5-8">5-8</option>
+									<option value="8-11">8-11</option>
+									<option value="11-14">11-14</option>
+									<option value="14-17">14-17</option>
+									<option value="17-20">17-20</option>
+									<option value="20+">20+</option>
+									</select>
 								<span id="span_experience"></span>
 							</div>
 							<div class="form-group" id="job-location-group">
-								<label for="job-location">Designation </label>
+								<label for="job-location">Designation</label>
 								<input type="text" class="form-control" id="job-Designation " name="designation" placeholder="">
 								<span id="span_designation"></span>
 							</div>
@@ -811,16 +865,21 @@ class employer{
 								<input type="text" class="form-control" id="job-Remuneration" name="remuneration" placeholder="">
 								<span id="span_remuneration"></span>
 							</div>
+							<div class="form-group" id="job-location-group">
+								<label for="job-location">Employee Value Proposition</label>
+								<input type="text" class="form-control" id="job-Remuneration" name="remuneration" placeholder="">
+								<span id="span_remuneration"></span>
+							</div>
 
 							
 							<div class="form-group" id="job-description-group">
-								<label for="job-description">Key Skills</label>
-								<textarea class="textarea form-control" style="height:77px;" name="keyskills" id="job-keyskills"></textarea>
+								<label for="job-description">Key Skills*</label>
+								<textarea class="textarea form-control" style="height:100px;" name="keyskills" id="job-keyskills"></textarea>
 								<span id="span_keyskill"></span>
 							</div>
 							<div class="form-group" id="job-description-group">
 								<label for="job-description">Key Accountabilities</label>
-								<textarea class="textarea form-control"  style="height:120px;" name="keysaccountabilities" id="job-Accountabilities"></textarea>
+								<textarea class="textarea form-control"  style="height:100px;" name="keysaccountabilities" id="job-Accountabilities"></textarea>
 								<span id="span_keysaccountabilities"></span>
 							</div>
 							

@@ -6,6 +6,7 @@
 @import url(jquery.nouislider.css);
 @import url(font-awesome.min.css);
 @import url(rating.css);
+@import url(bootstrap-switch.min.css);
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:700);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css);
 
@@ -1999,11 +2000,13 @@ header {
 
 	.panel-deefault{
 		border-color: white;
-	}
 
-	.heeading{
+	}
+	.panel-default>.panel-heeading{
 		font-size: large;
-		font-variant: small-caps;
+		font-variant: normal;
+		background-color: #00FA9A;
+
 	}
 	.selectpickerr{
 	
@@ -2013,5 +2016,9 @@ header {
 
 	}
 
-
+	.activee{
+		background-color: white;
+		font-weight: bold;
+		color: yellow;
+	}
 

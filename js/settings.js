@@ -478,18 +478,19 @@
 
 		// 1. Adding social networks
 
-		var NewSocialNetwork='<div class="row form-group col-sm-7" ><input type="text" class="form-control" name="keyskills"/> </div><div class="ratex center_form col-sm-5" data-toggle="tooltip" title="Rate Yourself"> <input type="radio" name="example" class="rating" value="1"/> <input type="radio" name="example" class="rating" value="2"/> <input type="radio" name="example" class="rating" value="3"/> <input type="radio" name="example" class="rating" value="4"/> <input type="radio" name="example" class="rating" value="5"/> </div>'
+		var NewSkill='<div class="row form-group col-sm-7" ><input type="text" class="form-control" name="keyskills"/> </div><div class="center_form col-sm-5" id="rating" data-toggle="tooltip" title="Rate Yourself"> <input type="radio" name="example" class="rating" value="1"/> <input type="radio" name="example" class="rating" value="2"/> <input type="radio" name="example" class="rating" value="3"/> <input type="radio" name="example" class="rating" value="4"/> <input type="radio" name="example" class="rating" value="5"/> </div>'
 		$("#add-more-skills").click(function(){
-			$(this).parent().parent().parent().before(NewSocialNetwork);
+			$(this).parent().parent().parent().before(NewSkill);
 			
-			
+			$("#rating").rating();
 			$('[data-toggle="tooltip"]').tooltip();
-		});
+			$("#rating").attr("id","rating1");
 
+		});
 		// 2. Adding experience
 
-		var NewExperience='<div class="form-group" ><input type="text" class="form-control" name="lastjob" placeholder="Company Name"><br><div class="row col-sm-6"><input type="text" class="form-control" name="lastjob" placeholder="Job Title"></div><div class="col-sm-6"><input type="text" class="form-control" name="lastjob" placeholder="Working Since"><br></div></div>'
-		$("#add-experience").click(function(){
+		var NewExperience='<div class=row><div class=col-sm-9><hr class=dashed></div></div><div class="col-sm-9"><div class="form-group" ><input type="text" class="form-control" name="worknum[]" placeholder="Company Name"><br><input type="text" class="form-control" name="lastjob" placeholder="Job Title"><br><input type="text" class="form-control" name="lastjob" placeholder="Working Since"><br></div></div>'	
+			$("#add-experience").click(function(){
 			$(this).parent().parent().parent().before(NewExperience);
 		});
 
@@ -539,8 +540,9 @@
 			};
 		});
 
-		$('.ratex').rating();
+		$('#ratex').rating();
 		$('[data-toggle="tooltip"]').tooltip();
+		$("[name='my-checkbox']").bootstrapSwitch();
 		// $('.selectpicker').selectpicker({
 		// 	  style: 'btn-info',
 		// 	  height: '30px',

@@ -1,7 +1,8 @@
 <?php include('include/common_includes.php');  ?>
-<?php require_once("class/class.employee.php"); 
+<?php require_once("class/class.employee.php");
+require_once("class/class.skills.php"); 
 $user_obj=new employee();
-
+$skill_obj=new skills();
  ?>
 <!DOCTYPE html>
 <html>
@@ -45,6 +46,12 @@ $user_obj=new employee();
 					}else{
 						$user_obj->empprofile4('local');
 					}
+
+					// if ($sub=="reg") {
+					// 	$skill_obj->skillfun1('server');
+					// }else{
+					// 	$skill_obj->skillfun1('local');
+					// }
 				
 
 				 ?>
