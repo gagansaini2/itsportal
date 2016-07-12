@@ -413,7 +413,7 @@ class employer{
                 
                
             }
-            $FormName = "signup_form";
+            $FormName = "company_prof";
             $ControlNames=array(
                                  
                                 "company_name"=>array('company_name',"''","Please enter Name","span_name"),
@@ -426,7 +426,7 @@ class employer{
                                
             );
 
-            $ValidationFunctionName="CreateUser";
+            $ValidationFunctionName="comp_prof";
           
             $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
             echo $JsCodeForFormValidation;
@@ -464,21 +464,24 @@ class employer{
 								<input type="text" class="form-control" id="company-name" name="company_name" placeholder="">
 								<span id="span_name"></span>
 							</div>
-							<div class="form-group" id="job-email-group">
+							<div class="row">
+							<div class="form-group col-sm-6" id="job-email-group">
 								<label for="job-email">Email*</label>
 								<input type="email" class="form-control" id="job-email" name="company_email" placeholder="">
 								<span id="span_username"></span>
+							</div>
+							<div class="form-group col-sm-6" id="company-group">
+								<label for="company">Phone Number*</label>
+								<input type="text" class="form-control" id="company-num" name="company_num" placeholder="">
+								<span id="span_phoneno"></span>
+							</div>
 							</div>
 							<div class="form-group" id="company-group">
 								<label for="company">Location*</label>
 								<input type="text" class="form-control" id="company-location" name="company_location" placeholder="">
 								<span id="span_location"></span>
 							</div>
-							<div class="form-group" id="company-group">
-								<label for="company">Phone Number*</label>
-								<input type="text" class="form-control" id="company-num" name="company_num" placeholder="">
-								<span id="span_phoneno"></span>
-							</div>
+							
 							<div class="form-group" id="company-website-group">
 								<label for="company-website">Website*</label>
 								<input type="text" class="form-control" id="company-website" name="company_website" placeholder="http://">
@@ -487,10 +490,10 @@ class employer{
 
 							
 
-							<div class="row form-group col-sm-6" id="company-group">
+							<div class="form-group" id="company-group">
 								<label for="company">Domain*</label>
 								<select  class="form-control" id="job-type" name="company_type">
-				                    <option selected="selected" value="-1">- Select an Industry -</option>
+				                    <option selected="" value="">- Select an Industry -</option>
 				                    <option value="2">Accessories/Apparel/Fashion Design</option>
 				                    <option value="3">Accounting/Consulting/Taxation</option>
 				                    <option value="4">Advertising/Event Management/PR</option>
@@ -552,7 +555,7 @@ class employer{
 								</select>
 								<span id="span_domain"></span>
 							</div>
-							<div class="form-group col-sm-6" id="company-group">
+							<div class="form-group" id="company-group">
 								<label for="company">Size of Employees</label>
 								<input type="text" class="form-control" id="company-emp" name="company_size" placeholder="">
 							</div>
@@ -719,7 +722,7 @@ class employer{
                	$this->jobcategory = $jobcategory;
                 $this->qualifications = $qualifications;
                 $this->description = $description;
-                $this->experience = $experience;
+                $this->req_experience = $req_experience;
                 $this->remuneration = $remuneration;
                	$this->designation = $designation;
                 $this->keyskills = $keyskills;
@@ -727,34 +730,32 @@ class employer{
                 
                
             }
-            $FormName = "signup_form";
+            $FormName = "posting_job";
             $ControlNames=array(
                                  
                                 "roletitle"=>array('roletitle',"''","Please enter the Roletitle","span_roletitle"),
                                 "rolelocation"=>array('rolelocation',"''","Please enter location","span_location"),
                                 "jobtype"=>array('jobtype',"''","Please select one","span_type"),
                                 "department"=>array('department',"''","Please select one","span_department"),
-                                "jobcategory"=>array('jobcategory',"''","Please select one","span_category"),
+                                
                                 "qualifications"=>array('qualifications',"''","Please enter qualifications","span_qualifications"),
                                 "description"=>array('description',"''","Please enter Description","span_descrip"),
-                                "experience"=>array('experience',"''","Please enter Experience","span_experience"),
+                                "req_experience"=>array('req_experience',"''","Please enter Experience","span_experience"),
                                 "remuneration"=>array('remuneration',"''","Please enter remuneration","span_remuneration"),
                                 "designation"=>array('designation',"''","Please enter designation","span_designation"),
                                 "keyskills"=>array('keyskills',"''","Please enter atleast one","span_keyskill"),
                                 "keysaccountabilities"=>array('keysaccountabilities',"''","Please enter atleast one","span_keysaccountabilities")
                                
             );
-
-            $ValidationFunctionName="CreateUser";
+  		$ValidationFunctionName="post_job";
           
             $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
             echo $JsCodeForFormValidation;
 						
 
-						
-						
-
 						?>
+
+
 
 
 			
@@ -788,7 +789,7 @@ class employer{
 							<div class="form-group" id="job-title-group">
 								<label for="job-title">Department*</label>
 								<select  class="form-control" name="department">
-									<option>Choose a Department</option>
+									<option value="">Choose a Department</option>
 									<option value="Production">Production</option>
 									<option value="Marketing & Sales">Marketing & Sales</option>
 									<option value="Finance">Finance</option>
@@ -809,13 +810,13 @@ class employer{
 							<div class="form-group" id="job-type-group">
 								<label for="job-type">Job Type*</label>
 								<select  class="form-control" id="job-type" name="jobtype">
-									<option>Choose a job type</option>
-									<option>Freelance</option>
-									<option>Part Time</option>
-									<option>Full Time</option>
-									<option>Internship</option>
-									<option>Volunteer</option>
-									<option>Fixed term contractor</option>
+									<option value="">Choose a job type</option>
+									<option value="Freelance">Freelance</option>
+									<option value="Part Time">Part Time</option>
+									<option value="Full Time">Full Time</option>
+									<option value="Internship">Internship</option>
+									<option value="Volunteer">Volunteer</option>
+									<option value="Fixed term contractor">Fixed term contractor</option>
 								</select><span id="span_type"></span>
 							</div>
 							
@@ -856,12 +857,12 @@ class employer{
 								<span id="span_experience"></span>
 							</div>
 							<div class="form-group" id="job-location-group">
-								<label for="job-location">Designation</label>
+								<label for="job-location">Designation*</label>
 								<input type="text" class="form-control" id="job-Designation " name="designation" placeholder="">
 								<span id="span_designation"></span>
 							</div>
 							<div class="form-group" id="job-location-group">
-								<label for="job-location">Remuneration</label>
+								<label for="job-location">Remuneration*</label>
 								<input type="text" class="form-control" id="job-Remuneration" name="remuneration" placeholder="">
 								<span id="span_remuneration"></span>
 							</div>
@@ -878,7 +879,7 @@ class employer{
 								<span id="span_keyskill"></span>
 							</div>
 							<div class="form-group" id="job-description-group">
-								<label for="job-description">Key Accountabilities</label>
+								<label for="job-description">Key Accountabilities*</label>
 								<textarea class="textarea form-control"  style="height:100px;" name="keysaccountabilities" id="job-Accountabilities"></textarea>
 								<span id="span_keysaccountabilities"></span>
 							</div>
@@ -889,6 +890,7 @@ class employer{
 					</div><br><br>
 					
 					<div class="row text-center">
+
 						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Submit <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</form>
@@ -982,7 +984,7 @@ class employer{
 				<div class="jumbotron">	
 					
 					<div class="row text-center">
-						<h4>Your Job is posted</h4>
+						<h4>Your Job has posted</h4>
 						<h5>thank you !!</h5>
 					</div><br><br><br>
 					<div class="row text-center">

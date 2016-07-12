@@ -82,7 +82,7 @@
 											if (!ck_email.test(checkEmail))
 											{
 												document.getElementById('$SingleControlName[3]').className='alert_error';
-												document.getElementById('$SingleControlName[3]').innerHTML='<img src=\"images/icon_error.png\" alt=\"delete\" class=\"mid_align\"/> Invalid Email Address.';
+												document.getElementById('$SingleControlName[3]').innerHTML='<img src=\"images/icon_error.png\" alt=\"delete\" class=\"mid_align\"/> Enter valid Email Address.';
 												//document.$FormName.$SingleControlName[0].focus();			
 												returnValue=false;
 											}

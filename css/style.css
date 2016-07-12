@@ -9,8 +9,9 @@
 @import url(bootstrap-switch.min.css);
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:700);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css);
-
+@import url(http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css);
 /*------------------------------------------------------------------
+
 
 [Master Stylesheet]
 
@@ -2005,7 +2006,7 @@ header {
 	.panel-default>.panel-heeading{
 		font-size: large;
 		font-variant: normal;
-		background-color: #00FA9A;
+		
 
 	}
 	.selectpickerr{
