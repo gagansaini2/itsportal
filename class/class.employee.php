@@ -147,7 +147,7 @@ class employee{
 									$this->auth->Create_Session1($username,$this->user_id,$this->name,$this->user_type,$this->company_id,$this->employee_id);
 									?>
 									<script type="text/javascript">
-									window.location="emp_prof1.php";
+									window.location="emp_type.php";
 									</script>
 									<?php
 									exit();
@@ -519,12 +519,12 @@ class employee{
 								<div class="row">
 								<div class="form-group col-sm-2" id="phoneno-group">
 								
-								<input type="text" class="form-control" name="countrycode" value="+91" placeholder="">
+								<input type="text" class="form-control" name="altrnatecountrycode" value="+91" placeholder="">
 
 								</div>
 								<div class="form-group col-sm-10" id="phoneno-group">
 								
-								<input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="9999999999">	
+								<input type="text" class="form-control" name="altrnatephoneno"  placeholder="9999999999">	
 
 								</div>
 								</div>
@@ -736,6 +736,54 @@ class employee{
 							</div>
 						</div>
 
+
+						<div class="col-sm-12">
+							<label for="resume-name">Current Location</label><br>
+							<div class="form-group" >
+											
+								<select  class="form-control" name="currentlocation"  class="error">
+									<option value="" selected="">Select</option>
+									<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+									<option value="Andhra Pradesh">Andhra Pradesh</option>
+									<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+									<option value="Assam">Assam</option>
+									<option value="Bihar">Bihar</option>
+									<option value="Chandigarh">Chandigarh</option>
+									<option value="Chhattisgarh">Chhattisgarh</option>
+									<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+									<option value="Daman and Diu">Daman and Diu</option>
+									<option value="Delhi">Delhi</option>
+									<option value="Goa">Goa</option>
+									<option value="Gujarat">Gujarat</option>
+									<option value="Haryana">Haryana</option>
+									<option value="Himachal Pradesh">Himachal Pradesh</option>
+									<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+									<option value="Jharkhand">Jharkhand</option>
+									<option value="Karnataka">Karnataka</option>
+									<option value="Kerala">Kerala</option>
+									<option value="Lakshadweep">Lakshadweep</option>
+									<option value="Madhya Pradesh">Madhya Pradesh</option>
+									<option value="Maharashtra">Maharashtra</option>
+									<option value="Manipur">Manipur</option>
+									<option value="Meghalaya">Meghalaya</option>
+									<option value="Mizoram">Mizoram</option>
+									<option value="Nagaland">Nagaland</option>
+									<option value="Orissa">Orissa</option>
+									<option value="Pondicherry">Pondicherry</option>
+									<option value="Punjab">Punjab</option>
+									<option value="Rajasthan">Rajasthan</option>
+									<option value="Sikkim">Sikkim</option>
+									<option value="Tamil Nadu">Tamil Nadu</option>
+									<option value="Tripura">Tripura</option>
+									<option value="Uttaranchal">Uttaranchal</option>
+									<option value="Uttar Pradesh">Uttar Pradesh</option>
+									<option value="West Bengal">West Bengal</option>
+							</select>  <span id="span_currentlocation"></span> 								
+							</div>
+
+							
+							</div>
+
 						<div class="col-sm-12">
 							<label for="resume-name">Preffered Job Location*</label>
 							<div class="form-group" >
@@ -781,6 +829,8 @@ class employee{
 							<span id="span_preloc"></span>
 							</div>
 						</div>
+
+
 
 
 						<div class="col-sm-12">
@@ -863,6 +913,7 @@ class employee{
 							$this->jobtype = $jobtype;
 							$this->chkPassPort = $chkPassPort;
 							$this->relocation = $relocation;
+							$this->currentlocation = $currentlocation;
 
 							//$this->type = $type;
 							//$this->auth_to = $auth_to;
@@ -902,6 +953,7 @@ class employee{
 							$insert_sql_array['Passport'] = $this->chkPassPort;
 							$insert_sql_array['relocation'] = $this->relocation;
 							$insert_sql_array['prefered_loc'] = $this->preferloc;
+							$insert_sql_array['current_loc'] = $this->currentlocation;
 
 							$insert_sql_array['user_id']=$_SESSION['user_id'];
 							$this->db->insert(tbl_employee_del,$insert_sql_array);
@@ -909,6 +961,10 @@ class employee{
 
 							$id=$this->db->last_insert_id();
 							$_SESSION['employee_id']=$id;
+
+							$insert_sql_array = array();
+							$insert_sql_array['employee_id']=$_SESSION['employee_id'];
+							$this->db->update(TBL_USER,$insert_sql_array,user_id,$_SESSION['user_id']);
 
 							?>
 								<script type="text/javascript">
@@ -997,12 +1053,15 @@ class employee{
 
 						<h2>Academics</h2>
 
-				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
+
+				<div class="row">
+					<div class="col-sm-7">	
+				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST" >
 
 					<!-- Resume Details Start -->
-				<div class="">	
+					
 
-					<div class="row form-group col-sm-9">
+					<div class="row form-group col-sm-11">
 						<label>Highest Qualification</label>
 						<select name="highestqualification[]" class="form-control" id="highestqualification">
 							<option value="">Select your highest qualification</option>
@@ -1017,34 +1076,34 @@ class employee{
 					
 
 					<div class="row">
-						<div class="form-group col-sm-9">
+						<div class="form-group col-sm-11">
 							<label>Course</label>
 							<input type="text" class="form-control" name="course[]" placeholder="Enter Course">
 							<span id="span_course"></span>
 
 						</div>
 
-						<div class="form-group col-sm-9">
+						<div class="form-group col-sm-11">
 							<label>Specialization</label>
 							<input type="text" class="form-control" name="specialization[]" placeholder="Enter Specialization">
 							<span id="span_specialization"></span>
 
 						</div>
 
-						<div class="form-group col-sm-9">
+						<div class="form-group col-sm-11">
 							<label>University/College</label>
 							<input type="text" class="form-control" name="university[]" placeholder="Institute Name">
 							<span id="span_university"></span>
 
 						</div>
 
-						<div class="form-group col-sm-9">
+						<div class="form-group col-sm-11">
 							<label>City</label>
 							<input type="text" class="form-control" name="city[]" placeholder="City Name">
 							<span id="span_city"></span>
 
 						</div>
-						<div class="form-group col-sm-9">
+						<div class="form-group col-sm-11">
 							
 							<div class="form-group" id="education-dates-group">
 								<label for="education-dates">Year of Passing</label><br>
@@ -1108,7 +1167,7 @@ class employee{
 
 
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-sm-11">
 							<p><a id="add-education">+ Add Education</a></p>
 							
 						</div>
@@ -1119,13 +1178,13 @@ class employee{
 					
 					
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-sm-11">
 							<hr class="dashed">
 						</div>
 					</div>
 					<h3>professtional certifications </h3>
 
-					<div class="row certificate col-sm-9">
+					<div class="row certificate col-sm-11">
 						
 						<div class="col-sm-6">
 							<div class="form-group" id="school-group">
@@ -1146,7 +1205,7 @@ class employee{
 					</div>
 
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-sm-11">
 							<p><a id="add-certificate">+ Add certificate</a></p>
 							
 						</div>
@@ -1160,13 +1219,42 @@ class employee{
 					</div>
 
 					
-					
+					</form></div>
 
+					<div class="col-sm-5" style="background:#e7e7e7; min-height: 250px;">
+						<?php
+
+							$sql="select * from ".TBL_EMPLOYEE_DEL." where employee_id='".$_SESSION['employee_id']."' ";
+					//$sql.="inner join ".TBL_COMPANY." on ".TBL_JOBS.".company_id=".TBL_COMPANY.".company_id ";
+
+							$result= $this->db->query($sql,__FILE__,__LINE__);
+
+					
+							$row= $this->db->fetch_array($result)
+							
+
+							?>
+							<h3 style="text-align:center;">form</h3><br>
+							<div class="row">
+								<div class="col-sm-6">
+									<label>Name: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['name'];?></span><br>
+									<label>Email: &nbsp;</label><span ><?php echo $row['email'];?></span><br>
+									<label>Mob: &nbsp;</label><span ><?php echo $row['phoneno'];?></span><br>
+									<label>Location: &nbsp;</label><span ><?php echo $row['current_loc'];?></span>
+								</div>
+								<div class="col-sm-6" style="text-align:center;">
+									<img src="images/1466102498_avatar-03.png">
+								</div>
+
+							</div>
+
+
+					</div>
 				</div>	
 
 
 
-				</form>
+				
 
 			</div>
 
@@ -1370,12 +1458,12 @@ class employee{
 
 						<h2>experience</h2>
 
-				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
+			
 
 					<!-- Resume Details Start -->
-				<div class="" >	
-
-
+				<div class="row" >	
+					<div class="col-sm-7">
+					<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
 					<!-- <div class="row">
 						<div class="col-sm-7">
 							<div class="form-group" >
@@ -1390,7 +1478,7 @@ class employee{
 					 -->
 					
 					
-						<div class="col-sm-9">
+						<div class="col-sm-11">
 							<label for="resume-name">Work Experience*</label>
 							<div class="form-group" >
 								
@@ -1435,7 +1523,7 @@ class employee{
 					
 
 					
-						<div class="col-sm-9">
+						<div class="col-sm-11">
 							<label for="resume-name">No. of Organisations Worked with</label>
 							<div class="form-group" >
 								
@@ -1460,7 +1548,7 @@ class employee{
 					
 
 					
-						<div class="col-sm-9">
+						<div class="col-sm-11">
 							<label for="resume-name">About Current/Last Organisation*</label>
 							<div class="form-group" >
 								
@@ -1506,7 +1594,7 @@ class employee{
 						
 
 					
-					<div class="col-sm-9">
+					<div class="col-sm-11">
 						
 							<label for="resume-name">Current/Last Annual Package*</label>
 							<div class="form-group" >
@@ -1574,7 +1662,7 @@ class employee{
 						</div>
 
 
-						<div class="col-sm-9">
+						<div class="col-sm-11">
 						<div class="row col-sm-6">
 							<label for="resume-name">Notice Period*</label>
 							<div class="form-group" >
@@ -1590,7 +1678,7 @@ class employee{
 								<span id="span_notice"></span>
 							</div>
 						</div>
-						<div class="col-sm-6" style="padding: 30px 30px 30px 100px;">
+						<div class="col-sm-6" style="padding: 25px 25px 30px 45px;">
 
 							<label for="resume-name">Is Buy-Back Available</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="checkbox" name="buyback" data-size='small' data-on-text="Yes" data-off-text="No" data-on-color="info" value="yes" >
@@ -1604,7 +1692,7 @@ class employee{
 					
 
 					<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-11">
 							<p><a id="add-experience">+ Add More Experience</a></p>
 							
 							</div>
@@ -1667,14 +1755,51 @@ class employee{
 						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
 						<button class="btn btn-primary btn-lg" id="submitexperience" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>
-				</div>
-					
+				
 				
 
-					
-
 				</form>
+				</div>
+				<div class="col-sm-5" style="background:#e7e7e7; min-height: 250px;">
+						<?php
 
+							// $sql="select * from ".TBL_EMPLOYEE_DEL." join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id where employee_id='".$_SESSION['employee_id']."' ";
+					// $sql.="inner join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id ";
+							$sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_EMPLOYEE_EDD ON TBL_EMPLOYEE_DEL.user_id = TBL_EMPLOYEE_EDD.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
+							
+							$result= $this->db->query($sql,__FILE__,__LINE__);
+
+					
+							$row= $this->db->fetch_array($result)
+							
+
+							?>
+							<h3 style="text-align:center;">form</h3><br>
+							<div class="row">
+								<div class="col-sm-6">
+									<label>Name: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['name'];?></span><br>
+									<label>Email: &nbsp;</label><span ><?php echo $row['email'];?></span><br>
+									<label>Mob: &nbsp;</label><span ><?php echo $row['phoneno'];?></span><br>
+									<label>Location: &nbsp;</label><span ><?php echo $row['current_loc'];?></span>
+								</div>
+								<div class="col-sm-6" style="text-align:center;">
+									<img src="images/1466102498_avatar-03.png">
+								</div>
+
+							</div>
+							
+								<h5 style="color:black;">Academics</h5><br>
+							<div>
+								<label>Highest Qualifications: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['qualification_type'];?></span><br>
+								<label>Specialization: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['specialization'];?></span><br>
+								<label>Passing Year: &nbsp;</label><span ><?php echo $row['passing_year'];?></span>	
+								
+							</div>
+
+
+					</div>
+
+				</div>
 			</div>
 
 
@@ -1807,11 +1932,10 @@ class employee{
 								<p class="help-block">I have at least 1 month of work experience</p>
 							</div>
 							<div class="col-sm-6 ">
-<<<<<<< HEAD
-								<a href="emp_prof1.php"><img src="images/1466102498_avatar-03.png" id="emptype"><div></div><h4><b>FRESHER</b></h4></div></a>
-=======
-								<a href="emp_prof1.php"><img src="images/fresher.png"><div></div><h4><b>FRESHER</b></h4></div></a>
->>>>>>> origin/master
+
+							<!-- 	<a href="emp_prof1.php"><img src="images/1466102498_avatar-03.png" id="emptype"><div></div><h4><b>FRESHER</b></h4></div></a> -->
+							<a href="emp_prof1.php"><img src="images/fresher.png" id="emptype"><div><h4><b>FRESHER</b></h4></div></a>
+
 								<p class="help-block">I have just graduated/I haven't worked after graduation</p>
 							</div>
 
@@ -1878,17 +2002,18 @@ class employee{
 							<?php include('include/head.php'); ?>
 						<h2>More Details</h2>
 
-				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" id="fff" method="POST">
+				
 
 					<!-- Resume Details Start -->
-				<div class="" >	
-			
-		            
-								<div class="col-sm-5">
+				<div class="row" >	
+					<div class="col-sm-7">
+		            <form  name="<?php echo $FormName?>" enctype="multipart/form-data" id="fff" method="POST">
+								
+								<div class="col-sm-11">
 									<label for="resume-name">Languages Known*</label>
 									<div class="form-group" >
 										
-										<select class="selectpicker required" data-style="form-control selectpickerr" name="langknown" id="lang" multiple data-live-search="true" title="Select">
+										<select class="selectpicker required" data-style="form-control selectpickerr" name="langknown[]" id="lang" multiple data-live-search="true" title="Select">
     						
 							<option value="English">English</option>
 							<option value="Abkhaz">Abkhaz</option>
@@ -2031,7 +2156,7 @@ class employee{
 
 
 					
-								<div class="col-sm-5" style="float:none;">
+								<div class="col-sm-11" style="float:none;">
 									<div class="form-group" >
 										<label for="resume-name">Expected Salary  &nbsp;&nbsp;&nbsp;<span class="help-block" style="display:initial;">Lacs per anum </span></label>
 										<select  class="form-control" name="expectedsalary"  class="error">
@@ -2096,63 +2221,18 @@ class employee{
 								</div>
 
 
-							<div class="col-sm-5">
-							<label for="resume-name">Current Location</label><br>
-							<div class="form-group" >
-											
-								<select  class="form-control" name="currentlocation"  class="error">
-								<option value="" selected="">Select</option>
-								<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-								<option value="Andhra Pradesh">Andhra Pradesh</option>
-								<option value="Arunachal Pradesh">Arunachal Pradesh</option>
-								<option value="Assam">Assam</option>
-								<option value="Bihar">Bihar</option>
-								<option value="Chandigarh">Chandigarh</option>
-								<option value="Chhattisgarh">Chhattisgarh</option>
-								<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-								<option value="Daman and Diu">Daman and Diu</option>
-								<option value="Delhi">Delhi</option>
-								<option value="Goa">Goa</option>
-								<option value="Gujarat">Gujarat</option>
-								<option value="Haryana">Haryana</option>
-								<option value="Himachal Pradesh">Himachal Pradesh</option>
-								<option value="Jammu and Kashmir">Jammu and Kashmir</option>
-								<option value="Jharkhand">Jharkhand</option>
-								<option value="Karnataka">Karnataka</option>
-								<option value="Kerala">Kerala</option>
-								<option value="Lakshadweep">Lakshadweep</option>
-								<option value="Madhya Pradesh">Madhya Pradesh</option>
-								<option value="Maharashtra">Maharashtra</option>
-								<option value="Manipur">Manipur</option>
-								<option value="Meghalaya">Meghalaya</option>
-								<option value="Mizoram">Mizoram</option>
-								<option value="Nagaland">Nagaland</option>
-								<option value="Orissa">Orissa</option>
-								<option value="Pondicherry">Pondicherry</option>
-								<option value="Punjab">Punjab</option>
-								<option value="Rajasthan">Rajasthan</option>
-								<option value="Sikkim">Sikkim</option>
-								<option value="Tamil Nadu">Tamil Nadu</option>
-								<option value="Tripura">Tripura</option>
-								<option value="Uttaranchal">Uttaranchal</option>
-								<option value="Uttar Pradesh">Uttar Pradesh</option>
-								<option value="West Bengal">West Bengal</option>
-							</select>  <span id="span_currentlocation"></span> 								
-							</div>
-
 							
-							</div>
 
 
 
-					<div class="col-sm-5" style="float:none;">
+					<div class="col-sm-11" style="float:none;">
 									<label for="resume-name">Any other relevant details</label>
 									<div class="form-group" >
 										<input type="text" class="form-control" name="anyother" />
 									</div>
                     </div>
                     
-						<div class="col-sm-9">
+						<div class="col-sm-11">
 							<label for="resume-name">Key Skills*</label><br>
 							<div class="row form-group col-sm-7" >
 											
@@ -2169,7 +2249,7 @@ class employee{
 							        <input type="radio" name="example[]" class="rating" value="5" />
 							    </div>
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-11">
 							<p><a id="add-more-skills">+ Add More skills</a></p>
 							
 						</div></div></div>
@@ -2182,17 +2262,65 @@ class employee{
 						<p>&nbsp;</p>
 						<a class="btn btn-primary btn-lg" name="back" href="emp_prof3.php" value=""><i class="fa fa-arrow-left"></i>Back</a>
 						<!-- <a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a> -->
-						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Submit <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-primary btn-lg" name="submit" id="butto" onclick="return <?php echo $ValidationFunctionName;?>()"  value="register">Submit <i class="fa fa-arrow-right"></i></button>
 					</div>
-				</div>
-					
 				
-
 					
-
 				</form>
+				</div>
+				<div class="col-sm-5" style="background:#e7e7e7; min-height: 250px;">
+						<?php
 
+							// $sql="select * from ".TBL_EMPLOYEE_DEL." join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id where employee_id='".$_SESSION['employee_id']."' ";
+					// $sql.="inner join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id ";
+							$sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_EMPLOYEE_EDD ON TBL_EMPLOYEE_DEL.user_id = TBL_EMPLOYEE_EDD.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
+							$sql2="SELECT * from TBL_EMPLOYEE_EXP inner join TBL_EMPLOYEE_WORKEX on TBL_EMPLOYEE_EXP.employee_id = TBL_EMPLOYEE_WORKEX.employee_id where TBL_EMPLOYEE_EXP.employee_id = '".$_SESSION['employee_id']."' ";
+							$result= $this->db->query($sql,__FILE__,__LINE__);
+							$result2= $this->db->query($sql2,__FILE__,__LINE__);
+					
+							$row= $this->db->fetch_array($result);
+							$row2= $this->db->fetch_array($result2);
+							
+							
+
+							?>
+							<h3 style="text-align:center;">form</h3><br>
+							<div class="row">
+								<div class="col-sm-6">
+									<label>Name: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['name'];?></span><br>
+									<label>Email: &nbsp;</label><span ><?php echo $row['email'];?></span><br>
+									<label>Mob: &nbsp;</label><span ><?php echo $row['phoneno'];?></span><br>
+									<label>Location: &nbsp;</label><span ><?php echo $row['current_loc'];?></span>
+								</div>
+								<div class="col-sm-6" style="text-align:center;">
+									<img src="images/1466102498_avatar-03.png">
+								</div>
+
+							</div>
+							
+								<h5 style="color:black;">Academics</h5><br>
+							<div>
+								<label>Highest Qualifications: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['qualification_type'];?></span><br>
+								<label>Specialization: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['specialization'];?></span><br>
+								<label>Passing Year: &nbsp;</label><span ><?php echo $row['passing_year'];?></span>									
+							</div>
+
+								<h5 style="color:black;">Experience</h5><br>
+							<div>
+								<label>Work Experience: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row2['experience_yrs'];?> years</span><br>
+								<label>Current/Last Organisation: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row2['company_name'];?></span><br>
+								<label>Job Title: &nbsp;</label><span style="text-transform:capitalize;" ><?php echo $row2['job_title'];?></span><br>
+								<label>Annual Salary: &nbsp;</label><span ><?php echo $row2['current_salary'];?> Lacs</span>
+
+								
+							</div>
+
+
+					</div>
 			</div>
+			</div>
+
+
 
 
 
@@ -2208,8 +2336,8 @@ class employee{
 							extract($_POST);
 
 							//$this->example=$example;
-
-							print_r($example);
+							//print_r($_POST);
+							 //print_r($example);
 
 							for ($i=0; $i <count($keyskills) ; $i++) { 
 								
@@ -2234,7 +2362,8 @@ class employee{
 							}
 							
 							$this->langknown = $langknown;
-							//$this->keyskills = $keyskills;
+
+							$this->anyother = $anyother;
 							$this->currentlocation = $currentlocation;
 							
 							
@@ -2246,7 +2375,7 @@ class employee{
 							//$this->auth_to = $auth_to;
 
 							//server side validation
-							$return =true;
+							
 							//if($this->Form->ValidField($username,'empty','User field is Empty or Invalid')==false)
 							//	$return =false;
 							//if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
@@ -2254,7 +2383,7 @@ class employee{
 							
 							
 								
-							if($return){
+						
 							
 							// $insert_sql_array = array();
 							// $insert_sql_array['languages_known'] = $this->langknown;
@@ -2272,7 +2401,13 @@ class employee{
 							// $this->db->insert(tbl_others,$insert_sql_array);
 
 	?>
-								<!-- <div class="container">
+
+	
+
+
+
+
+								<div class="container">
 						
 
 			
@@ -2293,7 +2428,6 @@ class employee{
 			
 
 			</div>
- -->
 
 								<?php
 						
@@ -2301,10 +2435,7 @@ class employee{
 							
 							
 							
-							} else {
-							echo $this->Form->ErrtxtPrefix.$this->Form->ErrorString.$this->Form->ErrtxtSufix; 
-							$this->CreateUser.('local');
-							}
+							
 							break;
 			default 	: 
 							echo "Wrong Parameter passed";

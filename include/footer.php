@@ -353,7 +353,7 @@ else                /* send the submitted data */
 
     <!-- jQuery Settings -->
     
-<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!-- <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
     <script src="js/rating.js"></script>
     <script src="js/bootstrap-switch.min.js"></script>
 
@@ -366,7 +366,7 @@ else                /* send the submitted data */
 
 <!-- <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
  -->
- 
+
 
 
 

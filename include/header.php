@@ -3,6 +3,10 @@
 <!-- ============ PAGE LOADER END ============ --> 
 
 <!-- ============ NAVBAR START ============ -->
+<link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- Main Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
 
 <div class="fm-container"> 
   <!-- Menu -->
@@ -10,12 +14,12 @@
     <div class="button-close text-right"> <a class="fm-button"><i class="fa fa-close fa-2x"></i></a> </div>
     <ul class="nav">
       <li class="active"><a href="index.php">Home</a></li>
-      <li><a href="jobs2.php">Jobs</a></li>
-      <li><a href="candidates.php">Candidates</a></li>
-      <li><a href="post-a-job.php">Post a job</a></li>
+      <!-- <li><a href="jobs2.php">Jobs</a></li> -->
+      <!-- <li><a href="candidates.php">Candidates</a></li> -->
+      <!-- <li><a href="post-a-job.php">Post a job</a></li> -->
       <li><a href="about.php">About Us</a></li>
       <li><a href="company.php">Our Process</a></li>
-      <li><a href="post-a-resume.html">Post a Resume</a></li>
+      <!-- <li><a href="post-a-resume.html">Post a Resume</a></li> -->
     
 
       <?php 
@@ -24,6 +28,8 @@
       if(isset($_SESSION['user_id'])){ 
         echo "<li><a href='logout.php'>Logout</a></li>";
 
+      }else{
+        echo "<li><a href='signup.php'>Sign Up</a></li>";
       } ?>
       </li>
     </ul>

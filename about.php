@@ -8,7 +8,7 @@
 		<meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
 		<title>Jobseek - Job Board Responsive HTML Template</title>
 		
-<?php include('include/head.php'); ?>
+
 
 	</head>
 	<body>
