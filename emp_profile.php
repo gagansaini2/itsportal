@@ -69,6 +69,7 @@ $user_obj=new employee1();
 <script type="text/javascript">
 
 $(document).ready(function() {
+	
   	$('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
 		var $total = navigation.find('li').length;
 		var $current = index+1;

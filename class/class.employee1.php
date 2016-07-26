@@ -16,39 +16,84 @@ class employee1{
 		
 		}
 
-	function empprofile($runat){
-
-		switch ($runat) {
-			case 'local':
-				
-			?>
 
 
-<div class="container" >
+		function empprofile($runat){
+			switch ($runat) {
+				case 'local':
+				?>
 
-	<div id="rootwizard">
-		<div class="navbar">
-		  <div class="navbar-inner">
-		    <div class="container">
-		<ul>
-		  	<li><a href="#tab1" data-toggle="tab">Personal</a></li>
-			<li><a href="#tab2" data-toggle="tab">Academics</a></li>
-			<li><a href="#tab3" data-toggle="tab">Experience</a></li>
-			<li><a href="#tab4" data-toggle="tab">Other Details</a></li>
-			
-		</ul>
-		   </div>
-		  </div>
-		</div>
-<form name="sub" method="POST" enctype="multipart/form-data"  id="wizform">
-		<!-- <div id="bar" class="progress progress-striped active">
-		  <div class="bar"></div>
-		</div> -->
-		<div class="tab-content" ng-app="its"  ng-controller="wizform">
-			
-				
 
-								<div class="tab-pane" id="tab1" >
+					<div class="container">
+				<div id="rootwizard">
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <div class="container">
+	<ul>
+	  	<li><a href="#tab1" data-toggle="tab">Personal</a></li>
+		<li><a href="#tab2" data-toggle="tab">Academics</a></li>
+		<li><a href="#tab3" data-toggle="tab">Experience</a></li>
+		<li><a href="#tab4" data-toggle="tab">Other Details</a></li>
+		
+	</ul>
+	 </div>
+	  </div>
+	</div>
+	<form method="POST" enctype="multipart/form-data">
+	<div class="tab-content" ng-app="its" style="position: relative;">
+	    
+			<div class="col-sm-offset-7 col-sm-5" style="background:#e7e7e7; min-height: 250px; position: absolute; margin-top: 100px;" >
+							     
+							        <h3 style="text-align:center;">form</h3>
+							        <br>
+							        <div class="row">
+							          <div class="col-sm-6">
+							            <label>Name: &nbsp;</label><span style="text-transform:capitalize;">{{fname}}&nbsp;{{mname}}&nbsp;{{lname}}</span>
+							            <br>
+							            <label>Email: &nbsp;</label><span>{{email}}</span>
+							            <br>
+							            <label>Mob: &nbsp;</label><span>{{phnno}}</span>
+							            <br>
+							            <label>Preferred Location: &nbsp;</label><span>{{preffloc}}</span>
+							            <br>
+							            <label>Highest Qualification: &nbsp;</label><span>{{highquad}}</span>
+							            <br>
+							            <label>Specification: &nbsp;</label><span>{{spec}}</span>
+							            <br>
+							            <label>Experience: &nbsp;</label><span>{{expyrs}}</span>
+							            <br>
+							            <label>Annual Salary: &nbsp;</label><span>{{annualsalary}}</span>
+							            <br>
+							            <label>Notice Period: &nbsp;</label><span>{{noticeperiod}}</span>
+							            <br>
+							          </div>
+							          <div class="col-sm-6" style="text-align:center;">
+							            <img src="images/1466102498_avatar-03.png">
+							          </div>
+
+							        </div>
+
+
+							    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	    <div class="tab-pane" id="tab1">
+	     
+
+	     
 
 							  <h2>add your details</h2>
 							  <div class="row">
@@ -73,17 +118,17 @@ class employee1{
 							              <div class="row">
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="fname" id="name" placeholder="First Name" ng-model="name" >
+							                  <input type="text" class="form-control " name="fname" id="name" placeholder="First Name" ng-model="fname" >
 							                  <span id="span_name"></span>
 							                </div>
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="mname" id="mname" placeholder="Middle Name">
+							                  <input type="text" class="form-control " name="mname" id="mname" placeholder="Middle Name" ng-model="mname">
 							                  <!-- <span id="span_mname"></span> -->
 							                </div>
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="lname" id="lname" placeholder="Last Name">
+							                  <input type="text" class="form-control " name="lname" id="lname" placeholder="Last Name" ng-model="lname">
 							                  <span id="span_lname"></span>
 							                </div>
 							              </div>
@@ -108,7 +153,7 @@ class employee1{
 							                </div>
 							                <div class="form-group col-sm-10" id="phoneno-group">
 
-							                  <input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="9999999999">
+							                  <input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="9999999999" ng-model="phnno">
 							                  <span id="span_phoneno"></span>
 							                </div>
 							              </div>
@@ -384,10 +429,10 @@ class employee1{
 							            </div>
 
 							            <div class="col-sm-12">
-							              <label for="resume-name">Preffered Job Location*</label>
+							              <label for="resume-name">Preferred Job Location*</label>
 							              <div class="form-group">
 
-							                <select class="form-control" name="preferloc" class="error">
+							                <select class="form-control" name="preferloc" class="error" ng-model="preffloc">
 							                  <option value="" selected="">Select</option>
 							                  
 							                  <?php
@@ -459,56 +504,17 @@ class employee1{
 							      <!-- 	</form> -->
 
 							    </div>
-							    <!-- <div class="col-sm-5" style="background:#f5f5f5; min-height: 250px;">
-							      <?php
-
-
-							      //	$sql="select * from ".TBL_IMAGE." where 1 ";
-															// $sql="select * from ".TBL_EMPLOYEE_DEL." join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id where employee_id='".$_SESSION['employee_id']."' ";
-													// $sql.="inner join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id ";
-															// $sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_EMPLOYEE_EDD ON TBL_EMPLOYEE_DEL.user_id = TBL_EMPLOYEE_EDD.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
-															
-														//	$result= $this->db->query($sql,__FILE__,__LINE__);
-
-													
-														//	$row= $this->db->fetch_array($result);
-															
-
-															?>
-							        <h3 style="text-align:center;">form</h3>
-							        <br>
-							        <div class="row">
-							          <div class="col-sm-6">
-							            <label>Name: &nbsp;</label><span style="text-transform:capitalize;">{{name}}<?php echo $row['name'];?></span>
-							            <br>
-							            <label>Email: &nbsp;</label><span>{{email}}<?php echo $row['email'];?></span>
-							            <br>
-							            <label>Mob: &nbsp;</label><span><?php echo $row['phoneno'];?></span>
-							            <br>
-							            <label>Location: &nbsp;</label><span><?php echo $row['current_loc'];?></span>
-							          </div>
-							          <div class="col-sm-6" style="text-align:center;">
-							            <img src="uploads/<?php echo $row['image_name'];?>" class="img-circle" width="125" height="125"> 
-							            <img ng-src="{{photo}}" class="img-circle" width="125" height="125">
-							          </div>
-
-							        </div>
-
-							        
-
-
-							    </div>  -->
+							   
 							  </div>
 
 
 
 							</div>
+	    
+	    <div class="tab-pane" id="tab2">
+	     
 
-
-							<div class="tab-pane" id="tab2" >
-
-
-							  <h2>Academics</h2>
+	     <h2>Academics</h2>
 
 
 							  <div class="row">
@@ -520,7 +526,7 @@ class employee1{
 							      <div class="row">
 							      <div class="form-group col-sm-11">
 							        <label>Highest Qualification</label>
-							        <select name="highestqualification[]" class="form-control" id="highestqualification" ng-model="edddd">
+							        <select name="highestqualification[]" class="form-control" id="highestqualification" ng-model="highquad">
 							          <option value="">Select your highest qualification</option>
 							          <option value="Doctorate/Phd">Doctorate/Phd</option>
 							          <option value="Masters">Postgraduate</option>
@@ -542,7 +548,7 @@ class employee1{
 
 							        <div class="form-group col-sm-11">
 							          <label>Specialization</label>
-							          <input type="text" class="form-control" name="specialization[]" placeholder="Enter Specialization">
+							          <input type="text" class="form-control" name="specialization[]" placeholder="Enter Specialization" ng-model="spec">
 							          <span id="span_specialization"></span>
 
 							        </div>
@@ -680,56 +686,17 @@ class employee1{
 							      <!-- </form> -->
 							    </div>
 
-							    <div class="col-sm-5" style="background:#e7e7e7; min-height: 250px;">
-							      <?php
-
-																$sql="select * from ".TBL_EMPLOYEE_DEL." where employee_id='".$_SESSION['employee_id']."' ";
-														//$sql.="inner join ".TBL_COMPANY." on ".TBL_JOBS.".company_id=".TBL_COMPANY.".company_id ";
-
-																$result= $this->db->query($sql,__FILE__,__LINE__);
-
-														
-																$row= $this->db->fetch_array($result)
-																
-
-																?>
-							        <h3 style="text-align:center;">form</h3>
-							        <br>
-							        <div class="row">
-							          <div class="col-sm-6">
-							            <label>Name: &nbsp;</label>{{edddd}}<span style="text-transform:capitalize;"><?php echo $row['name'];?></span>
-							            <br>
-							            <label>Email: &nbsp;</label><span><?php echo $row['email'];?></span>
-							            <br>
-							            <label>Mob: &nbsp;</label><span><?php echo $row['phoneno'];?></span>
-							            <br>
-							            <label>Location: &nbsp;</label><span><?php echo $row['current_loc'];?></span>
-							          </div>
-							          <div class="col-sm-6" style="text-align:center;">
-							            <img src="images/1466102498_avatar-03.png">
-							          </div>
-
-							        </div>
-
-
-							    </div>
+							    
 							  </div>
 
 
 							</div>
 
+	    
+		<div class="tab-pane" id="tab3">
+			
 
-
-
-
-
-
-
-
-							<div class="tab-pane" id="tab3">
-
-
-							  <h2>experience</h2>
+			<h2>experience</h2>
 
 
 
@@ -755,40 +722,40 @@ class employee1{
 							        <label for="resume-name">Work Experience*</label>
 							        <div class="form-group">
 
-							          <select name="exyear" id="expyear" class="form-control error">
+							          <select name="exyear" id="expyear" class="form-control error" ng-model="expyrs">
 							            <option value="" selected="">Select</option>
 							            <option value="0">Fresher</option>
-							            <option value="1">1 years</option>
-							            <option value="2">2 years</option>
-							            <option value="3">3 years</option>
-							            <option value="4">4 years</option>
-							            <option value="5">5 years</option>
-							            <option value="6">6 years</option>
-							            <option value="7">7 years</option>
-							            <option value="8">8 years</option>
-							            <option value="9">9 years</option>
-							            <option value="10">10 years</option>
-							            <option value="11">11 years</option>
-							            <option value="12">12 years</option>
-							            <option value="13">13 years</option>
-							            <option value="14">14 years</option>
-							            <option value="15">15 years</option>
-							            <option value="16">16 years</option>
-							            <option value="17">17 years</option>
-							            <option value="18">18 years</option>
-							            <option value="19">19 years</option>
-							            <option value="20">20 years</option>
-							            <option value="21">21 years</option>
-							            <option value="22">22 years</option>
-							            <option value="23">23 years</option>
-							            <option value="24">24 years</option>
-							            <option value="25">25 years</option>
-							            <option value="26">26 years</option>
-							            <option value="27">27 years</option>
-							            <option value="28">28 years</option>
-							            <option value="29">29 years</option>
-							            <option value="30">30 years</option>
-							            <option value="31">30+ years</option>
+							            <option value="1 years">1 years</option>
+							            <option value="2 years">2 years</option>
+							            <option value="3 years">3 years</option>
+							            <option value="4 years">4 years</option>
+							            <option value="5 years">5 years</option>
+							            <option value="6 years">6 years</option>
+							            <option value="7 years">7 years</option>
+							            <option value="8 years">8 years</option>
+							            <option value="9 years">9 years</option>
+							            <option value="10 years">10 years</option>
+							            <option value="11 years">11 years</option>
+							            <option value="12 years">12 years</option>
+							            <option value="13 years">13 years</option>
+							            <option value="14 years">14 years</option>
+							            <option value="15 years">15 years</option>
+							            <option value="16 years">16 years</option>
+							            <option value="17 years">17 years</option>
+							            <option value="18 years">18 years</option>
+							            <option value="19 years">19 years</option>
+							            <option value="20 years">20 years</option>
+							            <option value="21 years">21 years</option>
+							            <option value="22 years">22 years</option>
+							            <option value="23 years">23 years</option>
+							            <option value="24 years">24 years</option>
+							            <option value="25 years">25 years</option>
+							            <option value="26 years">26 years</option>
+							            <option value="27 years">27 years</option>
+							            <option value="28 years">28 years</option>
+							            <option value="29 years">29 years</option>
+							            <option value="30 years">30 years</option>
+							            <option value="31 years">30+ years</option>
 							          </select>
 							          <span id="span_exyear"></span>
 							        </div>
@@ -874,62 +841,62 @@ class employee1{
 							        <label for="resume-name">Current/Last Annual Package*</label>
 							        <div class="form-group">
 
-							          <select name="anumsal" class="form-control error">
+							          <select name="anumsal" class="form-control error" ng-model="annualsalary">
 
 							            <option value="">Select</option>
 							            <option value="<1 Lac">
 							              <1 Lac</option>
-							                <option value="1">1</option>
-							                <option value="2">2</option>
-							                <option value="3">3</option>
-							                <option value="4">4</option>
-							                <option value="5">5</option>
-							                <option value="6">6</option>
-							                <option value="7">7</option>
-							                <option value="8">8</option>
-							                <option value="9">9</option>
-							                <option value="10">10</option>
-							                <option value="11">11</option>
-							                <option value="12">12</option>
-							                <option value="13">13</option>
-							                <option value="14">14</option>
-							                <option value="15">15</option>
-							                <option value="16">16</option>
-							                <option value="17">17</option>
-							                <option value="18">18</option>
-							                <option value="19">19</option>
-							                <option value="20">20</option>
-							                <option value="21">21</option>
-							                <option value="22">22</option>
-							                <option value="23">23</option>
-							                <option value="24">24</option>
-							                <option value="25">25</option>
-							                <option value="26">26</option>
-							                <option value="27">27</option>
-							                <option value="28">28</option>
-							                <option value="29">29</option>
-							                <option value="30">30</option>
-							                <option value="31">31</option>
-							                <option value="32">32</option>
-							                <option value="33">33</option>
-							                <option value="34">34</option>
-							                <option value="35">35</option>
-							                <option value="36">36</option>
-							                <option value="37">37</option>
-							                <option value="38">38</option>
-							                <option value="39">39</option>
-							                <option value="40">40</option>
-							                <option value="41">41</option>
-							                <option value="42">42</option>
-							                <option value="43">43</option>
-							                <option value="44">44</option>
-							                <option value="45">45</option>
-							                <option value="46">46</option>
-							                <option value="47">47</option>
-							                <option value="48">48</option>
-							                <option value="49">49</option>
-							                <option value="50">50</option>
-							                <option value="50+">50+</option>
+							                <option value="1" Lacs>1</option>
+							                <option value="2" Lacs>2</option>
+							                <option value="3" Lacs>3</option>
+							                <option value="4" Lacs>4</option>
+							                <option value="5" Lacs>5</option>
+							                <option value="6" Lacs>6</option>
+							                <option value="7" Lacs>7</option>
+							                <option value="8" Lacs>8</option>
+							                <option value="9" Lacs>9</option>
+							                <option value="10 Lacs">10</option>
+							                <option value="11 Lacs">11</option>
+							                <option value="12 Lacs">12</option>
+							                <option value="13 Lacs">13</option>
+							                <option value="14 Lacs">14</option>
+							                <option value="15 Lacs">15</option>
+							                <option value="16 Lacs">16</option>
+							                <option value="17 Lacs">17</option>
+							                <option value="18 Lacs">18</option>
+							                <option value="19 Lacs">19</option>
+							                <option value="20 Lacs">20</option>
+							                <option value="21 Lacs">21</option>
+							                <option value="22 Lacs">22</option>
+							                <option value="23 Lacs">23</option>
+							                <option value="24 Lacs">24</option>
+							                <option value="25 Lacs">25</option>
+							                <option value="26 Lacs">26</option>
+							                <option value="27 Lacs">27</option>
+							                <option value="28 Lacs">28</option>
+							                <option value="29 Lacs">29</option>
+							                <option value="30 Lacs">30</option>
+							                <option value="31 Lacs">31</option>
+							                <option value="32 Lacs">32</option>
+							                <option value="33 Lacs">33</option>
+							                <option value="34 Lacs">34</option>
+							                <option value="35 Lacs">35</option>
+							                <option value="36 Lacs">36</option>
+							                <option value="37 Lacs">37</option>
+							                <option value="38 Lacs">38</option>
+							                <option value="39 Lacs">39</option>
+							                <option value="40 Lacs">40</option>
+							                <option value="41 Lacs">41</option>
+							                <option value="42 Lacs">42</option>
+							                <option value="43 Lacs">43</option>
+							                <option value="44 Lacs">44</option>
+							                <option value="45 Lacs">45</option>
+							                <option value="46 Lacs">46</option>
+							                <option value="47 Lacs">47</option>
+							                <option value="48 Lacs">48</option>
+							                <option value="49 Lacs">49</option>
+							                <option value="50 Lacs">50</option>
+							                <option value="50+ Lacs">50+</option>
 
 
 							          </select>
@@ -943,7 +910,7 @@ class employee1{
 							          <label for="resume-name">Notice Period*</label>
 							          <div class="form-group">
 
-							            <select name="noticeperiod" id="noticeperiod" class="form-control error">
+							            <select name="noticeperiod" id="noticeperiod" class="form-control error" ng-model="noticeperiod">
 							              <option value="">Select</option>
 							              <option value="Immediate">Immediate</option>
 							              <option value="<1 month">
@@ -1037,61 +1004,19 @@ class employee1{
 
 							      <!-- </form> -->
 							    </div>
-							    <div class="col-sm-5" style="background:#e7e7e7; min-height: 250px;">
-							      <?php
-
-														// $sql="select * from ".TBL_EMPLOYEE_DEL." join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id where employee_id='".$_SESSION['employee_id']."' ";
-												// $sql.="inner join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id ";
-														$sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_EMPLOYEE_EDD ON TBL_EMPLOYEE_DEL.user_id = TBL_EMPLOYEE_EDD.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
-														
-														$result= $this->db->query($sql,__FILE__,__LINE__);
-
-												
-														$row= $this->db->fetch_array($result)
-														
-
-														?>
-							        <h3 style="text-align:center;">form</h3>
-							        <br>
-							        <div class="row">
-							          <div class="col-sm-6">
-							            <label>Name: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['name'];?></span>
-							            <br>
-							            <label>Email: &nbsp;</label><span><?php echo $row['email'];?></span>
-							            <br>
-							            <label>Mob: &nbsp;</label><span><?php echo $row['phoneno'];?></span>
-							            <br>
-							            <label>Location: &nbsp;</label><span><?php echo $row['current_loc'];?></span>
-							          </div>
-							          <div class="col-sm-6" style="text-align:center;">
-							            <img src="images/1466102498_avatar-03.png">
-							          </div>
-
-							        </div>
-
-							        <h5 style="color:black;">Academics</h5>
-							        <br>
-							        <div>
-							          <label>Highest Qualifications: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['qualification_type'];?></span>
-							          <br>
-							          <label>Specialization: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['specialization'];?></span>
-							          <br>
-							          <label>Passing Year: &nbsp;</label><span><?php echo $row['passing_year'];?></span>
-
-							        </div>
-
-
-							    </div>
+							
 
 							  </div>
 
 
 
 							</div>
-							<div class="tab-pane" id="tab4">
 
+	    
+	    <div class="tab-pane" id="tab4">
+			
 
-							  <h2>More Details</h2>
+			 <h2>More Details</h2>
 
 
 
@@ -1329,7 +1254,7 @@ class employee1{
 							        <br>
 							        <div class="row form-group col-sm-7">
 
-							          <input type="text" class="form-control" name="keyskills[]" />
+							          <input type="text" class="form-control" name="keyskills[]" id="keys"/>
 							          <span id="span_keyskills"></span>
 
 							        </div>
@@ -1363,108 +1288,33 @@ class employee1{
 
 							      <!-- </form> -->
 							    </div>
-							    <div class="col-sm-5" style="background:#e7e7e7; min-height: 250px;">
-							      <?php
-
-														// $sql="select * from ".TBL_EMPLOYEE_DEL." join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id where employee_id='".$_SESSION['employee_id']."' ";
-												// $sql.="inner join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id ";
-														$sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_EMPLOYEE_EDD ON TBL_EMPLOYEE_DEL.user_id = TBL_EMPLOYEE_EDD.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
-														$sql2="SELECT * from TBL_EMPLOYEE_EXP inner join TBL_EMPLOYEE_WORKEX on TBL_EMPLOYEE_EXP.employee_id = TBL_EMPLOYEE_WORKEX.employee_id where TBL_EMPLOYEE_EXP.employee_id = '".$_SESSION['employee_id']."' ";
-														$result= $this->db->query($sql,__FILE__,__LINE__);
-														$result2= $this->db->query($sql2,__FILE__,__LINE__);
-												
-														$row= $this->db->fetch_array($result);
-														$row2= $this->db->fetch_array($result2);
-														
-														
-
-														?>
-							        <h3 style="text-align:center;">form</h3>
-							        <br>
-							        <div class="row">
-							          <div class="col-sm-6">
-							            <label>Name: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['name'];?></span>
-							            <br>
-							            <label>Email: &nbsp;</label><span><?php echo $row['email'];?></span>
-							            <br>
-							            <label>Mob: &nbsp;</label><span><?php echo $row['phoneno'];?></span>
-							            <br>
-							            <label>Location: &nbsp;</label><span><?php echo $row['current_loc'];?></span>
-							          </div>
-							          <div class="col-sm-6" style="text-align:center;">
-							            <img src="images/1466102498_avatar-03.png">
-							          </div>
-
-							        </div>
-
-							        <h5 style="color:black;">Academics</h5>
-							        <br>
-							        <div>
-							          <label>Highest Qualifications: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['qualification_type'];?></span>
-							          <br>
-							          <label>Specialization: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['specialization'];?></span>
-							          <br>
-							          <label>Passing Year: &nbsp;</label><span><?php echo $row['passing_year'];?></span>
-							        </div>
-
-							        <h5 style="color:black;">Experience</h5>
-							        <br>
-							        <div>
-							          <label>Work Experience: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row2['experience_yrs'];?> years</span>
-							          <br>
-							          <label>Current/Last Organisation: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row2['company_name'];?></span>
-							          <br>
-							          <label>Job Title: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row2['job_title'];?></span>
-							          <br>
-							          <label>Annual Salary: &nbsp;</label><span><?php echo $row2['current_salary'];?> Lacs</span>
-
-
-							        </div>
-
-
-							    </div>
+							   
 							  </div>
 
-
-
-
-			</div>
-
-
-
-
-
-
-
-
-
-
-
-		   
-			
-			<ul class="pager wizard" >
-				<li class="previous first" style="display:none;"><a href="javascript:void(0)">First</a></li>
-				<li class="previous btn btn-primary btn-lg"><i class="fa fa-arrow-left"></i><a style="float:none;color:white;" href="javascript:void(0)">Previous</a></li>
-				<li class="next last" style="display:none;"><a href="javascript:void(0)">Last</a></li>
-			  	<li class="next btn btn-primary btn-lg"><i class="fa fa-arrow-right"></i><a style="float:none;color:white;" href="javascript:void(0)">Next</a></li>
-			  	<button type="submit" id="cb" class="finish btn btn-primary btn-lg" name="submit" value="register" style="display:none;"><a style="float:none;color:white;">Submit</a></button>
-
-			</ul>
-		</div>	
-
-</form>
+	    </div>
+		
+		<ul class="pager wizard">
+			<li class="previous first btn btn-lg" style="display:none;"><a href="#">First</a></li>
+			<li class="previous btn"><a href="#">Previous</a></li>
+			<li class="next last btn" style="display:none;"><a href="#">Last</a></li>
+		  	<li class="next btn"><a href="#">Next</a></li>
+		  	<button class="finish btn" name="submit" value="register" style="display:none;">Submit </button>
+		</ul>
+		
 	</div>
-
+</form>
+		
+	
+</div>
 </div>
 
 
-			<?php
 
-
-				break;
-			
-			case 'server':
-				extract($_POST);
+<?php
+					break;
+				
+				case 'server':
+					extract($_POST);
 
 //image upload....
 				$image = sha1(uniqid());
@@ -1535,9 +1385,11 @@ class employee1{
 			default:
 				# code...
 				break;
+			}
+
 		}
 
-	}
+	
 
 
 	
