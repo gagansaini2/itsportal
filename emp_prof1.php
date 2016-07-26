@@ -27,7 +27,7 @@ $user_obj=new employee();
 
 
 	</head>
-	<body>
+	<body ng-app="its">
 
 		<!-- ============ PAGE LOADER START ============ -->
 <?php include('include/header.php'); ?>

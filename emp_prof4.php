@@ -26,7 +26,7 @@ $skill_obj=new skills();
 		
 
 	</head>
-	<body>
+	<body >
 
 		<!-- ============ PAGE LOADER START ============ -->
 <?php include('include/header.php'); ?>

@@ -305,7 +305,8 @@ else                /* send the submitted data */
 <!-- Modernizr Plugin -->
     <script src="js/modernizr.custom.79639.js"></script>
 
-
+<script src="angular/bower_components/angular/angular.js"></script>
+<script src="angular/app.js"></script>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-1.11.2.min.js"></script>
@@ -355,6 +356,7 @@ else                /* send the submitted data */
     
 <!-- <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
     <script src="js/rating.js"></script>
+    <script src="js/select2.js"></script>
     <script src="js/bootstrap-switch.min.js"></script>
 
     <script src="js/settings.js"></script>
@@ -362,11 +364,11 @@ else                /* send the submitted data */
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script> -->
 
 <!-- <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
  -->
-
+<!-- <script src="js\bower_components\twitter-bootstrap-wizard\jquery.bootstrap.wizard.js"></script> -->
 
 
 

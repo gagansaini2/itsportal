@@ -457,12 +457,13 @@ class employee{
 						<?php include('include/head.php'); ?>
 						
 						<h2>add your details</h2>
-
-				<form  name="<?php echo $FormName?>" enctype="multipart/form-data" method="POST">
+						<div class="row">
+						<div class="col-sm-7">	
+				<form  name="form1"  method="POST">
 
 					<!-- Resume Details Start -->
-				<div class="panel-group">	
-					<div class="panel panel-default panel-deefault col-sm-9">
+				<div class="panel-group col-sm-7">	
+					<div class="panel panel-default panel-deefault">
 						<div class="panel-heading panel-heeading"><label>Personal Details</label></div>
 
 
@@ -474,7 +475,7 @@ class employee{
 							<div class="row">	
 							<div class="form-group col-sm-4" id="name-group">
 								
-								<input type="text" class="form-control " name="fname" id="name" placeholder="First Name">
+								<input type="text" class="form-control " name="fname" id="name" placeholder="First Name" ng-model="name" required>
 								<span id="span_name"></span>
 							</div>
 							<div class="form-group col-sm-4" id="name-group">
@@ -494,7 +495,7 @@ class employee{
 								<label for="resume-name">Email*</label>
 							<div class="row form-group col-sm-12" id="email-group">
 								
-								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com" ng-model="email">
 								<span id="span_username"></span>
 							</div>
 							</div>
@@ -872,7 +873,7 @@ class employee{
 						<a class="btn btn-primary btn-lg" name="back" href="emp_type.php" value=""><i class="fa fa-arrow-left"></i> Back</a>
 						<button class="btn btn-primary btn-lg" name="submit" id="submitpersonal" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Next <i class="fa fa-arrow-right"></i></button>
 					</div>
-				</div>
+				
 					
 				
 
@@ -880,6 +881,46 @@ class employee{
 
 				</form>
 
+			</div>
+			<div class="col-sm-5" style="background:#e7e7e7; min-height: 250px;">
+						<?php
+
+							// $sql="select * from ".TBL_EMPLOYEE_DEL." join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id where employee_id='".$_SESSION['employee_id']."' ";
+					// $sql.="inner join ".TBL_EMPLOYEE_EDD." on ".TBL_EMPLOYEE_DEL.".employee_id=".TBL_EMPLOYEE_EDD.".employee_id ";
+							// $sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_EMPLOYEE_EDD ON TBL_EMPLOYEE_DEL.user_id = TBL_EMPLOYEE_EDD.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
+							
+							// $result= $this->db->query($sql,__FILE__,__LINE__);
+
+					
+							// $row= $this->db->fetch_array($result)
+							
+
+							?>
+							<h3 style="text-align:center;">form</h3><br>
+							<div class="row">
+								<div class="col-sm-6">
+									<label>Name: &nbsp;</label><span style="text-transform:capitalize;">{{name}}<?php echo $row['name'];?></span><br>
+									<label>Email: &nbsp;</label><span >{{email}}<?php echo $row['email'];?></span><br>
+									<label>Mob: &nbsp;</label><span ><?php echo $row['phoneno'];?></span><br>
+									<label>Location: &nbsp;</label><span ><?php echo $row['current_loc'];?></span>
+								</div>
+								<div class="col-sm-6" style="text-align:center;">
+									<img src="images/1466102498_avatar-03.png">
+								</div>
+
+							</div>
+							
+								<h5 style="color:black;">Academics</h5><br>
+							<div>
+								<label>Highest Qualifications: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['qualification_type'];?></span><br>
+								<label>Specialization: &nbsp;</label><span style="text-transform:capitalize;"><?php echo $row['specialization'];?></span><br>
+								<label>Passing Year: &nbsp;</label><span ><?php echo $row['passing_year'];?></span>	
+								
+							</div>
+
+
+					</div>
+			</div>
 			</div>
 
 
@@ -1928,13 +1969,13 @@ class employee{
 						<div class="row">
 							<div class="col-sm-6 ">
 
-								<a href="emp_prof1.php"><img src="images/1466098131_1.png" id="emptype"><div><h4><b>PROFESSIONAL</b></h4></div></a>
+								<a href="emp_profile.php"><img src="images/1466098131_1.png" id="emptype"><div><h4><b>PROFESSIONAL</b></h4></div></a>
 								<p class="help-block">I have at least 1 month of work experience</p>
 							</div>
 							<div class="col-sm-6 ">
 
 							<!-- 	<a href="emp_prof1.php"><img src="images/1466102498_avatar-03.png" id="emptype"><div></div><h4><b>FRESHER</b></h4></div></a> -->
-							<a href="emp_prof1.php"><img src="images/fresher.png" id="emptype"><div><h4><b>FRESHER</b></h4></div></a>
+							<a href="emp_profile.php"><img src="images/fresher.png" id="emptype"><div><h4><b>FRESHER</b></h4></div></a>
 
 								<p class="help-block">I have just graduated/I haven't worked after graduation</p>
 							</div>

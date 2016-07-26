@@ -15,6 +15,7 @@ define("TBL_EMPLOYEE_KEYSKILS",'tbl_employee_keyskils',true);
 define("TBL_JOBS",'tbl_jobs',true);
 define("TBL_SKILLS",'tbl_skills',true);
 define("TBL_IMAGE",'tbl_image',true);
+define("TBL_STATELIST",'tbl_statelist',true);
 
 
 
