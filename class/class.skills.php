@@ -69,5 +69,165 @@ class skills{
 		}
 
 
+		function getskills(){
+			// print_r("expression");
+
+				$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+
+				$sql="select * from ".TBL_SKILLS." where 1  ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				$lang=array();
+				while ( $row= $this->db->fetch_array($result)) {
+					
+				$lang['skills']=$row['key_val'];
+
+				$data[]=$lang;
+				
+				}
+				//print_r($data);
+
+				$resp['data']=$data;
+
+				echo json_encode($resp);
+
+		}
+
+
+
+		function getlang(){
+			// print_r("expression");
+
+				$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+
+				$sql="select * from ".TBL_LANGUAGES." where 1  ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				$lang=array();
+				while ( $row= $this->db->fetch_array($result)) {
+					
+				$lang['lang']=$row['Language'];
+
+				$data[]=$lang;
+				
+				}
+				//print_r($data);
+
+				$resp['data']=$data;
+
+				echo json_encode($resp);
+
+		}
+
+
+		function saveinfo(){
+
+			$resp=array();
+			$resp['status']=false;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+ 			
+			$result=mysql_query("SELECT count(*) as total from TBL_EMPINFO where employee_id='".$_SESSION['employee_id']."'");
+			$sql=mysql_fetch_assoc($result);
+			// print_r($sql);
+			//  print_r(count($sql));
+
+			if ($sql['total'] > 0 ) {
+				
+
+				$insert_sql_array=array();
+			$insert_sql_array['user_id'] = $_SESSION['user_id'];
+			$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+			$insert_sql_array['info'] = $_REQUEST[name];	
+
+			$this->db->update(TBL_EMPINFO,$insert_sql_array,employee_id,$_SESSION['employee_id']);
+
+
+			}else{
+
+
+			$insert_sql_array=array();
+			$insert_sql_array['user_id'] = $_SESSION['user_id'];
+			$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+			$insert_sql_array['info'] = $_REQUEST[name];	
+
+			$this->db->insert(TBL_EMPINFO,$insert_sql_array);
+
+
+			}
+
+			$resp['status']=true;
+			$resp['data']=$_REQUEST[name];
+			echo json_encode($resp);
+
+		}
+
+
+
+
+		function addskills(){
+
+			$resp=array();
+			$resp['status']=false;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+			$insert_sql_array=array();
+			$insert_sql_array['key_val']=$_REQUEST[skills];
+			$this->db->insert(TBL_SKILLS,$insert_sql_array);
+
+			$resp['status']=true;
+			$resp['data']=$_REQUEST[skills];
+			echo json_encode($resp);
+
+
+
+		}
+
+
+		function getinfo(){
+
+
+
+				$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+
+				$sql="select * from ".TBL_EMPINFO." where employee_id='".$_SESSION['employee_id']."' ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				
+				$row= $this->db->fetch_array($result);
+					
+				$data['backinfo']=$row['info'];
+
+				
+				
+				
+				//print_r($data);
+
+				$resp['data']=$data;
+
+				echo json_encode($resp);
+
+		}
+
+
 }
 ?> 

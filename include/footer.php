@@ -304,12 +304,13 @@ else                /* send the submitted data */
 
 <!-- Modernizr Plugin -->
     <script src="js/modernizr.custom.79639.js"></script>
-
+<script src="js\bower_components\jquery\dist\jquery.min.js"></script>
 <script src="angular/bower_components/angular/angular.js"></script>
 <script src="angular/app.js"></script>
+<script src="js\bower_components\bower_components\angular-file-upload\dist/angular-file-upload.js"></script>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-1.11.2.min.js"></script>
+    <!-- // <script src="js/jquery-1.11.2.min.js"></script> -->
 
     <!-- Bootstrap Plugins -->
     <script src="js/bootstrap.min.js"></script>
@@ -362,7 +363,11 @@ else                /* send the submitted data */
     <script src="js/settings.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="js/selectize.js"></script>
+
+    
+    <script type="text/javascript" src="js/bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
+    
+    <script type="text/javascript" src="js/bower_components/angular-selectize2/dist/angular-selectize.js"></script>
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script> -->

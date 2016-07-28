@@ -2033,5 +2033,18 @@ header {
 
 
 	.pager li>a:hover {
-		background-color: inherit;
+		background-color: #0d7076;
+		color: white;
+	}
+
+	.btan{
+		float: right;
+	    background-color: white;
+	    border: none;
+	    padding: 6px 14px 5px 14px;
+	    color: #14b1bb;
+	}
+
+	.btan:hover{
+		background-color: #0d7076;
 	}

@@ -39,40 +39,45 @@ class employee1{
 	 </div>
 	  </div>
 	</div>
-	<form method="POST" enctype="multipart/form-data">
-	<div class="tab-content" ng-app="its" style="position: relative;">
+	<form method="POST" enctype="multipart/form-data" >
+	<div class="tab-content" ng-app="its" ng-controller="wizform" style="position: relative;" >
 	    
-			<div class="col-sm-offset-7 col-sm-5" style="background:#e7e7e7; min-height: 250px; position: absolute; margin-top: 100px;" >
+			<div class="col-sm-offset-7 col-sm-5" style="background:#e7e7e7; min-height: 500px; position: absolute; margin-top: 100px;line-height:2.5;" >
 							     
-							        <h3 style="text-align:center;">form</h3>
+							        <h3 style="text-align:center;">Applicant form</h3>
 							        <br>
 							        <div class="row">
 							          <div class="col-sm-6">
-							            <label>Name: &nbsp;</label><span style="text-transform:capitalize;">{{fname}}&nbsp;{{mname}}&nbsp;{{lname}}</span>
+							            <label>Name: &nbsp;</label><span style="text-transform:capitalize;">{{form.fname}}&nbsp;{{form.mname}}&nbsp;{{form.lname}}</span>
 							            <br>
-							            <label>Email: &nbsp;</label><span>{{email}}</span>
+							            <label>Email: &nbsp;</label><span>{{form.email}}</span>
 							            <br>
-							            <label>Mob: &nbsp;</label><span>{{phnno}}</span>
+							            <label>Mob: &nbsp;</label><span>{{form.altcncode}}&nbsp;{{form.phnno}}</span>
 							            <br>
-							            <label>Preferred Location: &nbsp;</label><span>{{preffloc}}</span>
-							            <br>
-							            <label>Highest Qualification: &nbsp;</label><span>{{highquad}}</span>
-							            <br>
-							            <label>Specification: &nbsp;</label><span>{{spec}}</span>
-							            <br>
-							            <label>Experience: &nbsp;</label><span>{{expyrs}}</span>
-							            <br>
-							            <label>Annual Salary: &nbsp;</label><span>{{annualsalary}}</span>
-							            <br>
-							            <label>Notice Period: &nbsp;</label><span>{{noticeperiod}}</span>
-							            <br>
-							          </div>
+							            <label>Preferred Location: &nbsp;</label><span>{{form.preffloc}}</span>
+							            </div>
+							            
+							          
 							          <div class="col-sm-6" style="text-align:center;">
-							            <img src="images/1466102498_avatar-03.png">
+							            <img id="output" class="img-circle" width="130" height="130" >
 							          </div>
 
 							        </div>
+							        <label>Highest Qualification: &nbsp;</label><span>{{form.highquad}}</span>
+							            <br>
+							            <label>Specification: &nbsp;</label><span>{{form.spec}}</span>
+							            <br>
+							            <label>Experience: &nbsp;</label><span>{{form.expyrs}}</span>
+							            <br>
+							            <label>Annual Salary: &nbsp;</label><span>{{form.annualsalary}}</span>
+							            <br>
+							            <label>Notice Period: &nbsp;</label><span>{{form.noticeperiod}}</span>
+							            <br>
+<pre>
+{{json || form}}
+</pre>
 
+<input type="button" ng-click="savenow()" value="Save" >
 
 							    </div>
 
@@ -118,17 +123,17 @@ class employee1{
 							              <div class="row">
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="fname" id="name" placeholder="First Name" ng-model="fname" >
+							                  <input type="text" class="form-control " name="fname" id="name" placeholder="First Name" ng-model="form.fname">
 							                  <span id="span_name"></span>
 							                </div>
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="mname" id="mname" placeholder="Middle Name" ng-model="mname">
+							                  <input type="text" class="form-control " name="mname" id="mname" placeholder="Middle Name" ng-model="form.mname">
 							                  <!-- <span id="span_mname"></span> -->
 							                </div>
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="lname" id="lname" placeholder="Last Name" ng-model="lname">
+							                  <input type="text" class="form-control " name="lname" id="lname" placeholder="Last Name" ng-model="form.lname">
 							                  <span id="span_lname"></span>
 							                </div>
 							              </div>
@@ -138,7 +143,7 @@ class employee1{
 							              <label for="resume-name">Email*</label>
 							              <div class="form-group" id="email-group">
 
-							                <input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com" ng-model="email">
+							                <input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com" ng-model="form.email">
 							                <span id="span_username"></span>
 							              </div>
 							            </div>
@@ -149,11 +154,11 @@ class employee1{
 							              <div class="row">
 							                <div class="form-group col-sm-2" id="phoneno-group">
 
-							                  <input type="text" class="form-control" name="countrycode" value="+91" placeholder="">
+							                  <input type="text" class="form-control" name="countrycode" value="+91" placeholder="" ng-model="form.cncode">
 							                </div>
 							                <div class="form-group col-sm-10" id="phoneno-group">
 
-							                  <input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="9999999999" ng-model="phnno">
+							                  <input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="9999999999" ng-model="form.phnno">
 							                  <span id="span_phoneno"></span>
 							                </div>
 							              </div>
@@ -165,12 +170,12 @@ class employee1{
 							              <div class="row">
 							                <div class="form-group col-sm-2" id="phoneno-group">
 
-							                  <input type="text" class="form-control" name="altrnatecountrycode" value="+91" placeholder="">
+							                  <input type="text" class="form-control" name="altrnatecountrycode" value="+91" placeholder=""ng-model="form.altcncode">
 
 							                </div>
 							                <div class="form-group col-sm-10" id="phoneno-group">
 
-							                  <input type="text" class="form-control" name="altrnatephoneno" placeholder="9999999999">
+							                  <input type="text" class="form-control" name="altrnatephoneno" placeholder="9999999999" ng-model="form.altphno">
 
 							                </div>
 							              </div>
@@ -183,15 +188,15 @@ class employee1{
 							              <label for="address">Residential Address*</label>
 							              <div class="row">
 							                <div class="form-group col-sm-12" id="address-group">
-							                  <input type="text" class="form-control" name="street" id="address" placeholder="Street">
+							                  <input type="text" class="form-control" name="street" id="address" placeholder="Street" ng-model="form.street">
 							                  <span id="span_street"></span>
 							                </div>
 							                <div class="form-group col-sm-12" id="address-group">
-							                  <input type="text" class="form-control" name="city" id="address" placeholder="City">
+							                  <input type="text" class="form-control" name="city" id="address" placeholder="City" ng-model="form.city">
 							                  <span id="span_city"></span>
 							                </div>
 							                <div class="form-group col-sm-6" id="address-group">
-							                  <select class="form-control" name="state" class="error" placeholder="City">
+							                  <select class="form-control" name="state" class="error" ng-model="form.state">
 							                    <option value="" selected="">State</option>
 							                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
 							                    <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -232,7 +237,7 @@ class employee1{
 							                  <span id="span_state"></span>
 							                </div>
 							                <div class="form-group col-sm-6" id="address-group">
-							                  <input type="text" class="form-control" name="zip" id="address" placeholder="ZIP Code">
+							                  <input type="text" class="form-control" name="zip" id="address" placeholder="ZIP Code" ng-model="form.zip">
 							                  <span id="span_zip"></span>
 							                </div>
 							              </div>
@@ -243,7 +248,7 @@ class employee1{
 							              <br>
 							              <div class="row">
 							                <div class="form-group col-sm-4" id="age-group">
-							                  <select name="month" id="month" class="form-control" placeholder="January">
+							                  <select name="month" id="month" class="form-control" placeholder="January" ng-model="form.dobmonth">
 							                    <option value="" selected="">Month</option>
 							                    <option value="01">January</option>
 							                    <option value="02">February</option>
@@ -261,11 +266,11 @@ class employee1{
 							                  <span id="span_month"></span>
 							                </div>
 							                <div class="form-group col-sm-4" id="age-group">
-							                  <input type="text" id="age" class="form-control" name="day" placeholder="Date">
+							                  <input type="text" id="age" class="form-control" name="day" placeholder="Date" ng-model="form.dobdate">
 							                  <span id="span_day"></span>
 							                </div>
 							                <div class="form-group col-sm-4" id="age-group">
-							                  <input type="text" id="age" class="form-control" name="year" placeholder="Year">
+							                  <input type="text" id="age" class="form-control" name="year" placeholder="Year" ng-model="form.dobyear">
 							                  <span id="span_year"></span>
 							                </div>
 							              </div>
@@ -276,8 +281,8 @@ class employee1{
 							              <br>
 							              <div class="row">
 							                <div class="form-group col-sm-6" id="gender-group">
-							                  <input type="radio" name="gender" value="male" id="gender">Male&nbsp;&nbsp;&nbsp;&nbsp;
-							                  <input type="radio" name="gender" value="female" id="gender">Female&nbsp;&nbsp;&nbsp;&nbsp;
+							                  <input type="radio" name="gender" value="male" id="gender" ng-model="form.gender">Male&nbsp;&nbsp;&nbsp;&nbsp;
+							                  <input type="radio" name="gender" value="female" id="gender" ng-model="form.gender">Female&nbsp;&nbsp;&nbsp;&nbsp;
 							                  <br>
 							                  <span id="span_gender"></span>
 							                </div>
@@ -288,8 +293,22 @@ class employee1{
 							              <label for="photo">Upload your Photo</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							              <p class="help-block" style="display:initial;">Profiles with pictures are 70% more likely to be contacted</p>
 							              <div class="form-group" id="photo-group">
-							                <input type="file" id="photo" name="photo"  ng-model="photo">
+							                <!-- <input type="file" id="photo" name="photo"  file-model="form.photo"> -->
+							                <!-- <span class="btn btn-default btn-file" >
+											Add photo <input type = "file" name="photo" nv-file-model = "form.myFile" />
+											</span> -->
+											<input type ="file" name="photo" onchange="showImg(event)" file-model="form.file" />
+											<script type="text/javascript">
 
+												function showImg(event){
+												
+													var output = document.getElementById('output');
+    												output.src = URL.createObjectURL(event.target.files[0]);
+													
+
+												}
+											</script>
+											
 							                <p class="help-block">JPG PNG . file size: 5 MB</p>
 							                <br>
 
@@ -310,7 +329,7 @@ class employee1{
 							              <label>Marital Status*</label>
 							              <br>
 							              <div class="form-group" id="age-group">
-							                <select name="maritalStatus" class="form-control">
+							                <select name="maritalStatus" class="form-control" ng-model="form.mrital">
 							                  <option value="" selected="">Select</option>
 							                  <option value="Unmarried">Single/unmarried</option>
 							                  <option value="Married">Married</option>
@@ -323,8 +342,8 @@ class employee1{
 
 							              <label>Physically Challenged</label>&nbsp;&nbsp;&nbsp;
 
-							              <input type="radio" name="disability" id="disability" value="1">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							              <input type="radio" name="disability" id="disability" value="0">No
+							              <input type="radio" name="disability" id="disability" value="1" ng-model="form.disability">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							              <input type="radio" name="disability" id="disability" value="0" ng-model="form.disability">No
 
 							              <div id="disabilitytype"></div>
 
@@ -335,8 +354,8 @@ class employee1{
 							              <br>
 							              <label>Passport</label>&nbsp;&nbsp;&nbsp;
 
-							              <input type="radio" id="chkYes" name="chkPassPort" value="1">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							              <input type="radio" id="chkNo" name="chkPassPort" value="0">No
+							              <input type="radio" id="chkYes" name="chkPassPort" value="1" ng-model="form.passport">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							              <input type="radio" id="chkNo" name="chkPassPort" value="0" ng-model="form.passport">No
 
 							              <div id="txtPassportNumber"></div>
 
@@ -351,7 +370,7 @@ class employee1{
 							              <label>Facebook ID</label>
 							              <div class="form-group" id="photo-group">
 
-							                <input type="text" class="form-control" name="facebook">
+							                <input type="text" class="form-control" name="facebook" ng-model="form.facebook">
 							              </div>
 							            </div>
 
@@ -361,7 +380,7 @@ class employee1{
 							              <p class="help-block" style="display:initial;">Profiles with Linkedin are considered more Trustworthy</p>
 							              <div class="form-group" id="photo-group">
 
-							                <input type="text" class="form-control" name="linkedin">
+							                <input type="text" class="form-control" name="linkedin" ng-model="form.linkedin">
 							                <br>
 							              </div>
 							            </div>
@@ -383,7 +402,7 @@ class employee1{
 							              <label for="resume-name">Job Type*</label>&nbsp;&nbsp;&nbsp;
 							              <div class="form-group">
 
-							                <select style="width:;" name="jobtype" id="jobtype" class="form-control error">
+							                <select style="width:;" name="jobtype" id="jobtype" class="form-control error" ng-model="form.jobtype">
 							                  <option value="" selected="">Select</option>
 							                  <option value="internship">Internship</option>
 							                  <option value="part">Part Time</option>
@@ -401,7 +420,7 @@ class employee1{
 							              <br>
 							              <div class="form-group">
 
-							                <select class="form-control" name="currentlocation" class="error">
+							                <select class="form-control" name="currentlocation" class="error" ng-model="form.curentloc">
 							                  <option value="" selected="">Select</option>
 							                  
 							                  <?php
@@ -432,7 +451,7 @@ class employee1{
 							              <label for="resume-name">Preferred Job Location*</label>
 							              <div class="form-group">
 
-							                <select class="form-control" name="preferloc" class="error" ng-model="preffloc">
+							                <select class="form-control" name="preferloc" class="error" ng-model="form.preffloc">
 							                  <option value="" selected="">Select</option>
 							                  
 							                  <?php
@@ -459,8 +478,8 @@ class employee1{
 							            <div class="col-sm-12">
 							              <div class="form-group">
 							                <label for="resume-name">Ready to Relocate</label>&nbsp;&nbsp;&nbsp;
-							                <input type="radio" name="relocation" value="1">Yes&nbsp;&nbsp;&nbsp;&nbsp;
-							                <input type="radio" name="relocation" value="0">No&nbsp;&nbsp;&nbsp;&nbsp;
+							                <input type="radio" name="relocation" value="1" ng-model="form.relocate">Yes&nbsp;&nbsp;&nbsp;&nbsp;
+							                <input type="radio" name="relocation" value="0" ng-model="form.relocate">No&nbsp;&nbsp;&nbsp;&nbsp;
 							              </div>
 							            </div>
 
@@ -526,7 +545,7 @@ class employee1{
 							      <div class="row">
 							      <div class="form-group col-sm-11">
 							        <label>Highest Qualification</label>
-							        <select name="highestqualification[]" class="form-control" id="highestqualification" ng-model="highquad">
+							        <select name="highestqualification[]" class="form-control" id="highestqualification" ng-model="form.highquad">
 							          <option value="">Select your highest qualification</option>
 							          <option value="Doctorate/Phd">Doctorate/Phd</option>
 							          <option value="Masters">Postgraduate</option>
@@ -541,28 +560,28 @@ class employee1{
 							      
 							        <div class="form-group col-sm-11">
 							          <label>Course</label>
-							          <input type="text" class="form-control" name="course[]" placeholder="Enter Course">
+							          <input type="text" class="form-control" name="course[]" placeholder="Enter Course" ng-model="form.course">
 							          <span id="span_course"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
 							          <label>Specialization</label>
-							          <input type="text" class="form-control" name="specialization[]" placeholder="Enter Specialization" ng-model="spec">
+							          <input type="text" class="form-control" name="specialization[]" placeholder="Enter Specialization" ng-model="form.spec">
 							          <span id="span_specialization"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
 							          <label>University/College</label>
-							          <input type="text" class="form-control" name="university[]" placeholder="Institute Name">
+							          <input type="text" class="form-control" name="university[]" placeholder="Institute Name" ng-model="form.college">
 							          <span id="span_university"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
 							          <label>City</label>
-							          <input type="text" class="form-control" name="city[]" placeholder="City Name">
+							          <input type="text" class="form-control" name="city[]" placeholder="City Name" ng-model="form.clgcity">
 							          <span id="span_city"></span>
 
 							        </div>
@@ -571,7 +590,7 @@ class employee1{
 							          <div class="form-group" id="education-dates-group">
 							            <label for="education-dates">Year of Passing</label>
 							            <br>
-							            <select name="year_passing[]" class="form-control">
+							            <select name="year_passing[]" class="form-control" ng-model="form.pasinyr">
 							              <option value="">Select</option>
 							              <option value="2016">2016</option>
 							              <option value="2015">2015</option>
@@ -653,14 +672,14 @@ class employee1{
 								        <div class="row">
 							          <div class="col-sm-6">
 
-							            <input type="text" class="form-control" name="certificate[]" id="certificate" placeholder="Certification Name eg. CCNA">
+							            <input type="text" class="form-control" name="certificate[]" id="certificate" placeholder="Certification Name eg. CCNA" ng-model="form.cername">
 
 							          </div>
 							        
 							        
 							          <div class="col-sm-6" >
 
-							            <input type="text" class="form-control" name="certificatenum[]" id="certificate" placeholder="Certificate No.">
+							            <input type="text" class="form-control" name="certificatenum[]" id="certificate" placeholder="Certificate No." ng-model="form.cerno">
 
 							          </div>
 							        </div>
@@ -722,7 +741,7 @@ class employee1{
 							        <label for="resume-name">Work Experience*</label>
 							        <div class="form-group">
 
-							          <select name="exyear" id="expyear" class="form-control error" ng-model="expyrs">
+							          <select name="exyear" id="expyear" class="form-control error" ng-model="form.expyrs">
 							            <option value="" selected="">Select</option>
 							            <option value="0">Fresher</option>
 							            <option value="1 years">1 years</option>
@@ -767,7 +786,7 @@ class employee1{
 							        <label for="resume-name">No. of Organisations Worked with</label>
 							        <div class="form-group">
 
-							          <select name="worknum" class="form-control error">
+							          <select name="worknum" class="form-control error" ng-model="form.worknum">
 							            <option value="" selected="">Select</option>
 							            <option value="0">None</option>
 							            <option value="1" label="1">1</option>
@@ -792,9 +811,9 @@ class employee1{
 							        <label for="resume-name">About Current/Last Organisation*</label>
 							        <div class="form-group">
 
-							          <input type="text" class="form-control" name="compname[]" placeholder="Company Name"><span id="span_compname"></span>
+							          <input type="text" class="form-control" name="compname[]" placeholder="Company Name" ng-model="form.compname"><span id="span_compname"></span>
 							          <br>
-							          <input type="text" class="form-control" name="jobtitle[]" placeholder="Job Title"><span id="span_jobtitle"></span>
+							          <input type="text" class="form-control" name="jobtitle[]" placeholder="Job Title" ng-model="form.jobtitle"><span id="span_jobtitle"></span>
 							          <br>
 							          <input type="text" class="form-control" name="workingtime[]" placeholder="Working Since"><span id="span_workingtime"></span>
 							          <!-- <div class="row">
@@ -841,7 +860,7 @@ class employee1{
 							        <label for="resume-name">Current/Last Annual Package*</label>
 							        <div class="form-group">
 
-							          <select name="anumsal" class="form-control error" ng-model="annualsalary">
+							          <select name="anumsal" class="form-control error" ng-model="form.annualsalary">
 
 							            <option value="">Select</option>
 							            <option value="<1 Lac">
@@ -910,7 +929,7 @@ class employee1{
 							          <label for="resume-name">Notice Period*</label>
 							          <div class="form-group">
 
-							            <select name="noticeperiod" id="noticeperiod" class="form-control error" ng-model="noticeperiod">
+							            <select name="noticeperiod" id="noticeperiod" class="form-control error" ng-model="form.noticeperiod">
 							              <option value="">Select</option>
 							              <option value="Immediate">Immediate</option>
 							              <option value="<1 month">
@@ -1013,7 +1032,7 @@ class employee1{
 							</div>
 
 	    
-	    <div class="tab-pane" id="tab4">
+	    <div class="tab-pane" id="tab4" style="min-height: 750px;">
 			
 
 			 <h2>More Details</h2>
@@ -1028,144 +1047,10 @@ class employee1{
 							      <div class="col-sm-11">
 							        <label for="resume-name">Languages Known*</label>
 							        <div class="form-group">
+							        	<selectize config='myConfig1' options='myOptions1' ng-model="form.langs"></selectize>
+							         <!-- <selectize config='myConfig' options='myOptions' ng-model="myModel"> -->
 
-							          <select class="selectpicker required" data-style="form-control selectpickerr" name="langknown[]" id="lang" multiple data-live-search="true" title="Select">
-
-							            <option value="English">English</option>
-							            <option value="Abkhaz">Abkhaz</option>
-							            <option value="Adyghe">Adyghe</option>
-							            <option value="Afrikaans">Afrikaans</option>
-							            <option value="Akan">Akan</option>
-							            <option value="Albanian">Albanian</option>
-							            <option value="American Sign Language">American Sign Language</option>
-							            <option value="Amharic">Amharic</option>
-							            <option value="Arabic">Arabic</option>
-							            <option value="Aragonese">Aragonese</option>
-							            <option value="Aramaic">Aramaic</option>
-							            <option value="Armenian">Armenian</option>
-							            <option value="Aymara">Aymara</option>
-							            <option value="Balinese">Balinese</option>
-							            <option value="Basque">Basque</option>
-							            <option value="Betawi">Betawi</option>
-							            <option value="Bosnian">Bosnian</option>
-							            <option value="Breton">Breton</option>
-							            <option value="Bulgarian">Bulgarian</option>
-							            <option value="Cantonese">Cantonese</option>
-							            <option value="Catalan">Catalan</option>
-							            <option value="Cherokee">Cherokee</option>
-							            <option value="Chickasaw">Chickasaw</option>
-							            <option value="Chinese">Chinese</option>
-							            <option value="Coptic">Coptic</option>
-							            <option value="Cornish">Cornish</option>
-							            <option value="Corsican">Corsican</option>
-							            <option value="Crimean Tatar">Crimean Tatar</option>
-							            <option value="Croatian">Croatian</option>
-							            <option value="Czech">Czech</option>
-							            <option value="Danish">Danish</option>
-							            <option value="Dutch">Dutch</option>
-							            <option value="Dawro">Dawro</option>
-							            <option value="Esperanto">Esperanto</option>
-							            <option value="Estonian">Estonian</option>
-							            <option value="Ewe">Ewe</option>
-							            <option value="Fiji Hindi">Fiji Hindi</option>
-							            <option value="Filipino">Filipino</option>
-							            <option value="Finnish">Finnish</option>
-							            <option value="French">French</option>
-							            <option value="Galician">Galician</option>
-							            <option value="Georgian">Georgian</option>
-							            <option value="German">German</option>
-							            <option value="Greek, Modern">Greek, Modern</option>
-							            <option value="Ancient Greek">Ancient Greek</option>
-							            <option value="Greenlandic">Greenlandic</option>
-							            <option value="Haitian Creole">Haitian Creole</option>
-							            <option value="Hawaiian">Hawaiian</option>
-							            <option value="Hebrew">Hebrew</option>
-							            <option value="Hindi">Hindi</option>
-							            <option value="Hungarian">Hungarian</option>
-							            <option value="Icelandic">Icelandic</option>
-							            <option value="Indonesian">Indonesian</option>
-							            <option value="Inuktitut">Inuktitut</option>
-							            <option value="Interlingua">Interlingua</option>
-							            <option value="Irish">Irish</option>
-							            <option value="Italian">Italian</option>
-							            <option value="Japanese">Japanese</option>
-							            <option value="Kabardian">Kabardian</option>
-							            <option value="Kannada">Kannada</option>
-							            <option value="Kashubian">Kashubian</option>
-							            <option value="Khmer">Khmer</option>
-							            <option value="Kinyarwanda">Kinyarwanda</option>
-							            <option value="Korean">Korean</option>
-							            <option value="Kurdish/Kurdî">Kurdish/Kurdî</option>
-							            <option value="Ladin">Ladin</option>
-							            <option value="Latgalian">Latgalian</option>
-							            <option value="Latin">Latin</option>
-							            <option value="Lingala">Lingala</option>
-							            <option value="Livonian">Livonian</option>
-							            <option value="Lojban">Lojban</option>
-							            <option value="Lower Sorbian">Lower Sorbian</option>
-							            <option value="Low German">Low German</option>
-							            <option value="Macedonian">Macedonian</option>
-							            <option value="Malay">Malay</option>
-							            <option value="Malayalam">Malayalam</option>
-							            <option value="Mandarin">Mandarin</option>
-							            <option value="Manx">Manx</option>
-							            <option value="Maori">Maori</option>
-							            <option value="Mauritian Creole">Mauritian Creole</option>
-							            <option value="Min Nan">Min Nan</option>
-							            <option value="Mongolian">Mongolian</option>
-							            <option value="Norwegian">Norwegian</option>
-							            <option value="Old Armenian">Old Armenian</option>
-							            <option value="Old English">Old English</option>
-							            <option value="Old French">Old French</option>
-							            <option value="Old Norse">Old Norse</option>
-							            <option value="Old Prussian">Old Prussian</option>
-							            <option value="Oriya">Oriya</option>
-							            <option value="Pangasinan">Pangasinan</option>
-							            <option value="Papiamentu">Papiamentu</option>
-							            <option value="Pashto">Pashto</option>
-							            <option value="Persian">Persian</option>
-							            <option value="Pitjantjatjara">Pitjantjatjara</option>
-							            <option value="Polish">Polish</option>
-							            <option value="Portuguese">Portuguese</option>
-							            <option value="Proto-Slavic">Proto-Slavic</option>
-							            <option value="Quenya">Quenya</option>
-							            <option value="Rapa Nui">Rapa Nui</option>
-							            <option value="Romanian">Romanian</option>
-							            <option value="Russian">Russian</option>
-							            <option value="Sanskrit">Sanskrit</option>
-							            <option value="Scots">Scots</option>
-							            <option value="Scottish Gaelic">Scottish Gaelic</option>
-							            <option value="Serbian">Serbian</option>
-							            <option value="Serbo-Croatian">Serbo-Croatian</option>
-							            <option value="Slovak">Slovak</option>
-							            <option value="Slovene">Slovene</option>
-							            <option value="Spanish">Spanish</option>
-							            <option value="Sinhalese">Sinhalese</option>
-							            <option value="Swahili">Swahili</option>
-							            <option value="Swedish">Swedish</option>
-							            <option value="Tagalog">Tagalog</option>
-							            <option value="Tajik">Tajik</option>
-							            <option value="Tamil">Tamil</option>
-							            <option value="Tarantino">Tarantino</option>
-							            <option value="Telugu">Telugu</option>
-							            <option value="Thai">Thai</option>
-							            <option value="Tok Pisin">Tok Pisin</option>
-							            <option value="Turkish">Turkish</option>
-							            <option value="Twi">Twi</option>
-							            <option value="Ukrainian">Ukrainian</option>
-							            <option value="Upper Sorbian">Upper Sorbian</option>
-							            <option value="Urdu">Urdu</option>
-							            <option value="Uzbek">Uzbek</option>
-							            <option value="Venetian">Venetian</option>
-							            <option value="Vietnamese">Vietnamese</option>
-							            <option value="Vilamovian">Vilamovian</option>
-							            <option value="Volapük">Volapük</option>
-							            <option value="Võro">Võro</option>
-							            <option value="Welsh">Welsh</option>
-							            <option value="Xhosa">Xhosa</option>
-							            <option value="Yiddish">Yiddish</option>
-
-							          </select><span id="span_langknown"></span>
+							           
 							        </div>
 							      </div>
 
@@ -1175,7 +1060,7 @@ class employee1{
 							      <div class="col-sm-11" style="float:none;">
 							        <div class="form-group">
 							          <label for="resume-name">Expected Salary &nbsp;&nbsp;&nbsp;<span class="help-block" style="display:initial;">Lacs per anum </span></label>
-							          <select class="form-control" name="expectedsalary" class="error">
+							          <select class="form-control" name="expectedsalary" class="error" ng-model="form.expsal">
 
 							            <option value="Select">Select</option>
 							            <option value="<1 Lac">
@@ -1245,7 +1130,7 @@ class employee1{
 							      <div class="col-sm-11" style="float:none;">
 							        <label for="resume-name">Any other relevant details</label>
 							        <div class="form-group">
-							          <input type="text" class="form-control" name="anyother" />
+							          <input type="text" class="form-control" name="anyother" ng-model="form.anyother"/>
 							        </div>
 							      </div>
 
@@ -1254,8 +1139,7 @@ class employee1{
 							        <br>
 							        <div class="row form-group col-sm-7">
 
-							          <input type="text" class="form-control" name="keyskills[]" id="keys"/>
-							          <span id="span_keyskills"></span>
+							         <selectize config='myConfig' options='myOptions' ng-model="form.keyskill"></selectize>
 
 							        </div>
 
@@ -1298,7 +1182,7 @@ class employee1{
 			<li class="previous btn"><a href="#">Previous</a></li>
 			<li class="next last btn" style="display:none;"><a href="#">Last</a></li>
 		  	<li class="next btn"><a href="#">Next</a></li>
-		  	<button class="finish btn" name="submit" value="register" style="display:none;">Submit </button>
+		  	<button class="finish btn btan" name="submit" value="register" style="display:none;">Submit</button> 
 		</ul>
 		
 	</div>

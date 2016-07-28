@@ -14,6 +14,7 @@ $user_obj=new employee1();
 		<meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
 		<title>ITS Recruitment</title>
 		<link rel="shortcut icon" href="images/favicon.png">
+		<link rel="stylesheet" href="js/bower_components/selectize/dist/css/selectize.default.css ">
 		<!-- <link rel="stylesheet" type="text/css" href="js\bower_components\bootstrap\dist\css\bootstrap.min.css"> -->
 		<!-- Main Stylesheet -->
 		<!-- <link href="css/style.css" rel="stylesheet"> -->
@@ -63,32 +64,14 @@ $user_obj=new employee1();
 
 	</body>
 </html>
-<script src="js\bower_components\jquery\dist\jquery.min.js"></script>
+
 <script src="js\bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
 <script src="js\bower_components\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function() {
 	
-  	$('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
-		var $total = navigation.find('li').length;
-		var $current = index+1;
-		var $percent = ($current/$total) * 100;
-		$('#rootwizard').find('.bar').css({width:$percent+'%'});
-		
-		// If it's the last tab then hide the last button and show the finish instead
-		if($current >= $total) {
-			$('#rootwizard').find('.pager .next').hide();
-			$('#rootwizard').find('.pager .finish').show();
-			$('#rootwizard').find('.pager .finish').removeClass('disabled');
-			
-
-		} else {
-			$('#rootwizard').find('.pager .next').show();
-			$('#rootwizard').find('.pager .finish').hide();
-		}
-		
-	}, onNext: function(tab, navigation, index) {
+  	$('#rootwizard').bootstrapWizard({ onNext: function(tab, navigation, index) {
 			if(index==1) {
 				// Make sure we entered the name
 				// if(!$('#name').val()) {
@@ -99,12 +82,33 @@ $(document).ready(function() {
 			}
 			
 			
-		}});
+		}, onTabShow: function(tab, navigation, index) {
+		var $total = navigation.find('li').length;
+		var $current = index+1;
+		var $percent = ($current/$total) * 100;
+		$('#rootwizard').find('.bar').css({width:$percent+'%'});
+		
+		// If it's the last tab then hide the last button and show the finish instead
+		if($current >= $total) {
+			$('#rootwizard').find('.pager .next').hide();
+			$('#rootwizard').find('.finish').show();
+			$('#rootwizard').find('.pager .finish').removeClass('disabled');
+
+			
+
+		} else {
+			$('#rootwizard').find('.pager .next').show();
+			$('#rootwizard').find('.pager .finish').hide();
+		}
+		
+		}
+	});
 	// $('#rootwizard .finish').click(function() {
 	// 	alert('Finished!, Starting over!');
 	// 	$('#rootwizard').find("a[href*='tab1']").trigger('click');
 	// });
 });
+
 </script>
 <script type="text/javascript">
 							jQuery(document).ready(function($)
@@ -120,5 +124,6 @@ $(document).ready(function() {
 								
 							});
 						</script>
+
 
 
