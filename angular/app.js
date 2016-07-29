@@ -14,13 +14,17 @@ var app = angular.module('its', ['selectize','angularFileUpload']);
 	app.controller('wizform', function($scope, $http) {
   
 
-$scope.myModel;
+$scope.myModel;          //for selectize.........
 
 
-$scope.form={};
+$scope.form={};      //holds all employee details.....
+ 
 
 
 
+
+
+//selectize for keyskills..................
 
 
 $scope.myOptions = [];
@@ -68,7 +72,7 @@ $scope.myConfig = {
   },
 };
 
-
+//............
 
 
 
@@ -113,19 +117,24 @@ $scope.myConfig1 = {
 
 //ends.............
 
+$scope.addskill=function(){
+		// 	var NewSkill='<div class="row form-group col-sm-7" ><selectize config="myConfig" options="myOptions" ng-model="form.keyskill"></selectize><input type="text" class="form-control" name="keyskills[]" /> </div><div class="center_form col-sm-5" id="rating" data-toggle="tooltip" title="Rate Yourself"> <input type="radio" name="keyskills[][star][]" class="rating" value="1"/> <input type="radio" name="keyskills[][star][]" class="rating" value="2"/> <input type="radio" name="keyskills[][star][]" class="rating" value="3"/> <input type="radio" name="keyskills[][star][]" class="rating" value="4"/> <input type="radio" name="keyskills[][star][]" class="rating" value="5"/> </div>'
+		// $("#add-more-skills").click(function(){
+		// 	$(this).parent().parent().parent().before(NewSkill);
+			
+		// 	$("#rating").rating();
+		// 	$('[data-toggle="tooltip"]').tooltip();
+		// 	$("#rating").attr("id","rating1");
 
+		// });
+				console.log("kndmsjf");
+		};
 
+//save the info.............
 
-
-		$scope.savenow=function(){
-			// console.log($scope.form);
-			// localStorage.setItem('$scope.form', JSON.stringify($scope.form));
-
-
-			// var main=JSON.stringify($scope.form);
-
-			var main={};
-			main.name=JSON.stringify($scope.form);
+$( window ).unload(function() {
+  				var main={};
+				main.name=JSON.stringify($scope.form);
 
 		
 			$http({
@@ -139,12 +148,17 @@ $scope.myConfig1 = {
 			}).error(function(response){
 				console.log(response);
 			});
+});
+		
 
-		};
+//...........
+	
+
+	
 
 
 
-//retrevin from local storage
+//retrevin from server.........
 
 
 
@@ -173,24 +187,28 @@ $scope.myConfig1 = {
 		});
 //.......
 		
-		// $(window).unload(function(JSON.stringify($scope.form)){
-			
-
-
-		// });
-		// window.onbeforeunload = function() {
-		//     return "Bye now!";
-		// };
 		
 		
 
-
-		$scope.myfunc=function(){
-			console.log("gagan");
-		};
+		
+	
 
 
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
 
 
 app.directive('fileModel', ['$parse', function ($parse) {

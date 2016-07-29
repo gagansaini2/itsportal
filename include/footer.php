@@ -305,6 +305,8 @@ else                /* send the submitted data */
 <!-- Modernizr Plugin -->
     <script src="js/modernizr.custom.79639.js"></script>
 <script src="js\bower_components\jquery\dist\jquery.min.js"></script>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="angular/bower_components/angular/angular.js"></script>
 <script src="angular/app.js"></script>
 <script src="js\bower_components\bower_components\angular-file-upload\dist/angular-file-upload.js"></script>

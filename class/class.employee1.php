@@ -25,6 +25,9 @@ class employee1{
 
 
 					<div class="container">
+
+
+				<form id="fooorm" method="POST" enctype="multipart/form-data" >		
 				<div id="rootwizard">
 	<div class="navbar">
 	  <div class="navbar-inner">
@@ -39,7 +42,7 @@ class employee1{
 	 </div>
 	  </div>
 	</div>
-	<form method="POST" enctype="multipart/form-data" >
+	
 	<div class="tab-content" ng-app="its" ng-controller="wizform" style="position: relative;" >
 	    
 			<div class="col-sm-offset-7 col-sm-5" style="background:#e7e7e7; min-height: 500px; position: absolute; margin-top: 100px;line-height:2.5;" >
@@ -77,7 +80,6 @@ class employee1{
 {{json || form}}
 </pre>
 
-<input type="button" ng-click="savenow()" value="Save" >
 
 							    </div>
 
@@ -104,7 +106,7 @@ class employee1{
 							  <div class="row">
 
 							    <div class="col-sm-7">
-							      <!-- <form  name="form1"  method="POST"> -->
+							      
 
 							      <!-- Resume Details Start -->
 							      <div class="panel-group col-sm-12">
@@ -123,17 +125,17 @@ class employee1{
 							              <div class="row">
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="fname" id="name" placeholder="First Name" ng-model="form.fname">
+							                  <input type="text" class="form-control " name="fname" placeholder="First Name" ng-model="form.fname">
 							                  <span id="span_name"></span>
 							                </div>
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="mname" id="mname" placeholder="Middle Name" ng-model="form.mname">
+							                  <input type="text" class="form-control " name="mname"  placeholder="Middle Name" ng-model="form.mname">
 							                  <!-- <span id="span_mname"></span> -->
 							                </div>
 							                <div class="form-group col-sm-4" id="name-group">
 
-							                  <input type="text" class="form-control " name="lname" id="lname" placeholder="Last Name" ng-model="form.lname">
+							                  <input type="text" class="form-control " name="lname"  placeholder="Last Name" ng-model="form.lname">
 							                  <span id="span_lname"></span>
 							                </div>
 							              </div>
@@ -143,7 +145,7 @@ class employee1{
 							              <label for="resume-name">Email*</label>
 							              <div class="form-group" id="email-group">
 
-							                <input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com" ng-model="form.email">
+							                <input type="text" class="form-control" name="username"  placeholder="e.g.  abc@xyz.com" ng-model="form.email">
 							                <span id="span_username"></span>
 							              </div>
 							            </div>
@@ -154,11 +156,27 @@ class employee1{
 							              <div class="row">
 							                <div class="form-group col-sm-2" id="phoneno-group">
 
-							                  <input type="text" class="form-control" name="countrycode" value="+91" placeholder="" ng-model="form.cncode">
+							                  <select class="form-control" name="countrycode" placeholder="" ng-model="form.cncode" style="padding:2px 2px 2px 2px;">
+							                  	 <option value="+91" selected="">+91</option>
+							                  
+							                  <?php
+							                  	$sql="select * from ".TBL_COUNTRYCODE." where 1 ";
+
+							                  	$result= $this->db->query($sql,__FILE__,__LINE__);
+
+												while($row= $this->db->fetch_array($result)){
+
+													?>
+													<option value="<?php echo $row['phonecode'];?>"><?php echo $row['phonecode'];?></option>
+													<?php
+												}
+
+												?>
+							                  </select>
 							                </div>
 							                <div class="form-group col-sm-10" id="phoneno-group">
 
-							                  <input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="9999999999" ng-model="form.phnno">
+							                  <input type="text" class="form-control" name="phoneno"  placeholder="9999999999" ng-model="form.phnno">
 							                  <span id="span_phoneno"></span>
 							                </div>
 							              </div>
@@ -170,7 +188,25 @@ class employee1{
 							              <div class="row">
 							                <div class="form-group col-sm-2" id="phoneno-group">
 
-							                  <input type="text" class="form-control" name="altrnatecountrycode" value="+91" placeholder=""ng-model="form.altcncode">
+							                  
+							                  <select class="form-control" name="altrnatecountrycode" placeholder="" ng-model="form.altcncode" style="padding:2px 2px 2px 2px;">
+							                  	
+							                  	 <option value="+91" selected="">+91</option>
+							                  
+							                  <?php
+							                  	$sql="select * from ".TBL_COUNTRYCODE." where 1 ";
+
+							                  	$result= $this->db->query($sql,__FILE__,__LINE__);
+
+												while($row= $this->db->fetch_array($result)){
+
+													?>
+													<option value="<?php echo $row['phonecode'];?>"><?php echo $row['phonecode'];?></option>
+													<?php
+												}
+
+												?>
+							                  </select>
 
 							                </div>
 							                <div class="form-group col-sm-10" id="phoneno-group">
@@ -188,12 +224,12 @@ class employee1{
 							              <label for="address">Residential Address*</label>
 							              <div class="row">
 							                <div class="form-group col-sm-12" id="address-group">
-							                  <input type="text" class="form-control" name="street" id="address" placeholder="Street" ng-model="form.street">
-							                  <span id="span_street"></span>
+							                  <input type="text" class="form-control" name="street"  placeholder="Street" ng-model="form.street">
+							                 
 							                </div>
 							                <div class="form-group col-sm-12" id="address-group">
-							                  <input type="text" class="form-control" name="city" id="address" placeholder="City" ng-model="form.city">
-							                  <span id="span_city"></span>
+							                  <input type="text" class="form-control" name="resicity"  placeholder="City" ng-model="form.city">
+							                  
 							                </div>
 							                <div class="form-group col-sm-6" id="address-group">
 							                  <select class="form-control" name="state" class="error" ng-model="form.state">
@@ -234,11 +270,11 @@ class employee1{
 							                    <option value="Uttar Pradesh">Uttar Pradesh</option>
 							                    <option value="West Bengal">West Bengal</option>
 							                  </select>
-							                  <span id="span_state"></span>
+							                  
 							                </div>
 							                <div class="form-group col-sm-6" id="address-group">
-							                  <input type="text" class="form-control" name="zip" id="address" placeholder="ZIP Code" ng-model="form.zip">
-							                  <span id="span_zip"></span>
+							                  <input type="text" class="form-control" name="zip"  placeholder="ZIP Code" ng-model="form.zip">
+							                  
 							                </div>
 							              </div>
 							            </div>
@@ -248,7 +284,7 @@ class employee1{
 							              <br>
 							              <div class="row">
 							                <div class="form-group col-sm-4" id="age-group">
-							                  <select name="month" id="month" class="form-control" placeholder="January" ng-model="form.dobmonth">
+							                  <select name="month"  class="form-control" placeholder="January" ng-model="form.dobmonth">
 							                    <option value="" selected="">Month</option>
 							                    <option value="01">January</option>
 							                    <option value="02">February</option>
@@ -266,11 +302,11 @@ class employee1{
 							                  <span id="span_month"></span>
 							                </div>
 							                <div class="form-group col-sm-4" id="age-group">
-							                  <input type="text" id="age" class="form-control" name="day" placeholder="Date" ng-model="form.dobdate">
+							                  <input type="text"  class="form-control" name="day" placeholder="Date" ng-model="form.dobdate">
 							                  <span id="span_day"></span>
 							                </div>
 							                <div class="form-group col-sm-4" id="age-group">
-							                  <input type="text" id="age" class="form-control" name="year" placeholder="Year" ng-model="form.dobyear">
+							                  <input type="text"  class="form-control" name="year" placeholder="Year" ng-model="form.dobyear">
 							                  <span id="span_year"></span>
 							                </div>
 							              </div>
@@ -281,7 +317,7 @@ class employee1{
 							              <br>
 							              <div class="row">
 							                <div class="form-group col-sm-6" id="gender-group">
-							                  <input type="radio" name="gender" value="male" id="gender" ng-model="form.gender">Male&nbsp;&nbsp;&nbsp;&nbsp;
+							                  <input type="radio" name="gender" value="male" ng-model="form.gender">Male&nbsp;&nbsp;&nbsp;&nbsp;
 							                  <input type="radio" name="gender" value="female" id="gender" ng-model="form.gender">Female&nbsp;&nbsp;&nbsp;&nbsp;
 							                  <br>
 							                  <span id="span_gender"></span>
@@ -354,8 +390,8 @@ class employee1{
 							              <br>
 							              <label>Passport</label>&nbsp;&nbsp;&nbsp;
 
-							              <input type="radio" id="chkYes" name="chkPassPort" value="1" ng-model="form.passport">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							              <input type="radio" id="chkNo" name="chkPassPort" value="0" ng-model="form.passport">No
+							              <input type="radio"  name="chkPassPort" value="1" ng-model="form.passport">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							              <input type="radio"  name="chkPassPort" value="0" ng-model="form.passport">No
 
 							              <div id="txtPassportNumber"></div>
 
@@ -402,7 +438,7 @@ class employee1{
 							              <label for="resume-name">Job Type*</label>&nbsp;&nbsp;&nbsp;
 							              <div class="form-group">
 
-							                <select style="width:;" name="jobtype" id="jobtype" class="form-control error" ng-model="form.jobtype">
+							                <select style="width:;" name="jobtype"  class="form-control error" ng-model="form.jobtype">
 							                  <option value="" selected="">Select</option>
 							                  <option value="internship">Internship</option>
 							                  <option value="part">Part Time</option>
@@ -538,13 +574,13 @@ class employee1{
 
 							  <div class="row">
 							    <div class="col-sm-7">
-							      <!-- <form  name="form2" method="POST" > -->
+							     
 
 							      <!-- Resume Details Start -->
 
 							      <div class="row">
 							      <div class="form-group col-sm-11">
-							        <label>Highest Qualification</label>
+							        <label>Highest Qualification*</label>
 							        <select name="highestqualification[]" class="form-control" id="highestqualification" ng-model="form.highquad">
 							          <option value="">Select your highest qualification</option>
 							          <option value="Doctorate/Phd">Doctorate/Phd</option>
@@ -559,28 +595,28 @@ class employee1{
 
 							      
 							        <div class="form-group col-sm-11">
-							          <label>Course</label>
+							          <label>Course*</label>
 							          <input type="text" class="form-control" name="course[]" placeholder="Enter Course" ng-model="form.course">
 							          <span id="span_course"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
-							          <label>Specialization</label>
+							          <label>Specialization*</label>
 							          <input type="text" class="form-control" name="specialization[]" placeholder="Enter Specialization" ng-model="form.spec">
 							          <span id="span_specialization"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
-							          <label>University/College</label>
+							          <label>University/College*</label>
 							          <input type="text" class="form-control" name="university[]" placeholder="Institute Name" ng-model="form.college">
 							          <span id="span_university"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
-							          <label>City</label>
+							          <label>City*</label>
 							          <input type="text" class="form-control" name="city[]" placeholder="City Name" ng-model="form.clgcity">
 							          <span id="span_city"></span>
 
@@ -588,7 +624,7 @@ class employee1{
 							        <div class="form-group col-sm-11">
 
 							          <div class="form-group" id="education-dates-group">
-							            <label for="education-dates">Year of Passing</label>
+							            <label for="education-dates">Year of Passing*</label>
 							            <br>
 							            <select name="year_passing[]" class="form-control" ng-model="form.pasinyr">
 							              <option value="">Select</option>
@@ -722,7 +758,7 @@ class employee1{
 							  <!-- Resume Details Start -->
 							  <div class="row">
 							    <div class="col-sm-7">
-							      <!-- <form  name="form3" method="POST"> -->
+							      
 							      <!-- <div class="row">
 													<div class="col-sm-7">
 														<div class="form-group" >
@@ -815,36 +851,39 @@ class employee1{
 							          <br>
 							          <input type="text" class="form-control" name="jobtitle[]" placeholder="Job Title" ng-model="form.jobtitle"><span id="span_jobtitle"></span>
 							          <br>
-							          <input type="text" class="form-control" name="workingtime[]" placeholder="Working Since"><span id="span_workingtime"></span>
-							          <!-- <div class="row">
-																<div class="form-group col-sm-4" id="age-group">
-																<select name="month" id="month" class="form-control" placeholder="January">
-																	<option value="" selected="">Month</option>
-																    <option value="01">January</option>
-																    <option value="02">February</option>
-																    <option value="03">March</option>
-																    <option value="04">April</option>
-																    <option value="05" >May</option>
-																    <option value="06">June</option>
-																    <option value="07">July</option>
-																    <option value="08">August</option>
-																    <option value="09">September</option>
-																    <option value="10">October</option>
-																    <option value="11">November</option>
-																    <option value="12">December</option>
-																</select>
-																	<span id="span_month"></span>
-																</div>
-																<div class="form-group col-sm-4" id="age-group">
-																	<input type="text" id="age" class="form-control" name="day" placeholder="Date">
-																	<span id="span_day"></span>
-																</div>
-																<div class="form-group col-sm-4" id="age-group">
-																	<input type="text" id="age" class="form-control" name="year" placeholder="Year">
-																	<span id="span_year"></span>
-																</div>
-																</div> -->
-
+							          
+							          <div class="row">
+							          	<div class="form-group col-sm-3" id="age-group"  style="padding-top: 6px;">
+							                  <label>Working Time</label>
+							                  <span id="span_day"></span>
+							                </div>
+							                <div class="form-group col-sm-3" id="age-group">
+							                  <select name="workinmonth[]" id="month" class="form-control" placeholder="January" ng-model="form.workinmonth">
+							                    <option value="" selected="">Month</option>
+							                    <option value="01">January</option>
+							                    <option value="02">February</option>
+							                    <option value="03">March</option>
+							                    <option value="04">April</option>
+							                    <option value="05">May</option>
+							                    <option value="06">June</option>
+							                    <option value="07">July</option>
+							                    <option value="08">August</option>
+							                    <option value="09">September</option>
+							                    <option value="10">October</option>
+							                    <option value="11">November</option>
+							                    <option value="12">December</option>
+							                  </select>
+							                  <span id="span_month"></span>
+							                </div>
+							                <div class="form-group col-sm-3" id="age-group">
+							                  <input type="text" id="age" class="form-control" name="workinday[]" placeholder="Date" ng-model="form.workinday">
+							                  <span id="span_day"></span>
+							                </div>
+							                <div class="form-group col-sm-3" id="age-group">
+							                  <input type="text" id="age" class="form-control" name="workinyear[]" placeholder="Year" ng-model="form.workinyear">
+							                  <span id="span_year"></span>
+							                </div>
+							              </div>
 
 
 
@@ -1042,12 +1081,12 @@ class employee1{
 							  <!-- Resume Details Start -->
 							  <div class="row">
 							    <div class="col-sm-7">
-							      <!-- <form  name="form4" id="fff" method="POST"> -->
+							      
 
 							      <div class="col-sm-11">
 							        <label for="resume-name">Languages Known*</label>
 							        <div class="form-group">
-							        	<selectize config='myConfig1' options='myOptions1' ng-model="form.langs"></selectize>
+							        	<selectize config='myConfig1' options='myOptions1' ng-model="form.langs" name="langknown"></selectize>
 							         <!-- <selectize config='myConfig' options='myOptions' ng-model="myModel"> -->
 
 							           
@@ -1153,6 +1192,7 @@ class employee1{
 							        <div class="row">
 							          <div class="col-sm-11">
 							            <p><a id="add-more-skills">+ Add More skills</a></p>
+							            <!-- <p><button  ng-click="addskill()">+ Add More skills</button></p> -->
 
 							          </div>
 							        </div>
@@ -1186,10 +1226,11 @@ class employee1{
 		</ul>
 		
 	</div>
-</form>
+
 		
 	
 </div>
+</form>
 </div>
 
 
@@ -1200,51 +1241,298 @@ class employee1{
 				case 'server':
 					extract($_POST);
 
-//image upload....
-				$image = sha1(uniqid());
-				$target_dir = "uploads/";
-				
-				
-				$imageFileType = pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION);
-				$image1 = $image. "." .$imageFileType;
-				$target_file = $target_dir . $image. "." .$imageFileType;
 
-				$uploadOk = 1;
+		//tab1........
+					// $this->fname = $fname;
+					// $this->mname = $mname;
+					// $this->lname = $lname;
+					// $this->username = $username;
+					// $this->countrycode = $countrycode;
+					// $this->phoneno = $phoneno;
+					// $this->altrnatecountrycode = $altrnatecountrycode;
+					// $this->altphoneno = $altphoneno;
+					// $this->street = $street;
+					// $this->city = $city;
+					// $this->state = $state;
+					// $this->zip = $zip;
+					// $this->month = $month;
+					// $this->day = $day;
+					// $this->year = $year;
+					// $this->gender = $gender;
+					// $this->maritalStatus = $maritalStatus;
+					// $this->facebook = $facebook;
+					// $this->linkedin = $linkedin;
+					// $this->disability = $disability;
+					// $this->chkPassPort = $chkPassPort;
+					// $this->jobtype = $jobtype;
+					// $this->relocation = $relocation;
+					// $this->currentlocation = $currentlocation;
+					// $this->preferloc = $preferloc;
+
+
+
+					// 		$insert_sql_array = array();
+					// 		$insert_sql_array['name'] = $this->fname.' '.$this->mname.' '.$this->lname;
+					// 		$insert_sql_array['email'] = $this->username;
+					// 		$insert_sql_array['phoneno'] = $this->countrycode.' '.$this->phoneno;
+					// 		$insert_sql_array['altphoneno'] =$this->altrnatecountrycode.' '.$this->altphoneno;
+					// 		$insert_sql_array['age'] = $this->day.'-'.$this->month.'-'.$this->year;
+					// 		$insert_sql_array['address'] = $this->street.','.$this->city.','.$this->state;
+					// 		$insert_sql_array['zip'] = $this->zip;
+					// 		$insert_sql_array['gender'] = $this->gender;
+					// 		$insert_sql_array['martial_status'] = $this->maritalStatus;
+					// 		$insert_sql_array['facebook_id'] = $this->facebook;
+					// 		$insert_sql_array['linkedin_id'] = $this->linkedin;
+					// 		$insert_sql_array['Physically_challenged'] = $this->disability;
+					// 		$insert_sql_array['jobtype'] = $this->jobtype;
+					// 		$insert_sql_array['Passport'] = $this->chkPassPort;
+					// 		$insert_sql_array['relocation'] = $this->relocation;
+					// 		$insert_sql_array['prefered_loc'] = $this->preferloc;
+					// 		$insert_sql_array['current_loc'] = $this->currentlocation;
+
+					// 		$insert_sql_array['user_id']=$_SESSION['user_id'];
+					// 		$this->db->insert(tbl_employee_del,$insert_sql_array);
+
+
+					// 		$id=$this->db->last_insert_id();
+					// 		$_SESSION['employee_id']=$id;
+
+					// 		$insert_sql_array = array();
+					// 		$insert_sql_array['employee_id']=$_SESSION['employee_id'];
+					// 		$this->db->update(TBL_USER,$insert_sql_array,user_id,$_SESSION['user_id']);
+
+
+
+		//tab2................
+		
+					// for ($i=0; $i <count($course) ; $i++) { 
+
+					// 			for ($a=$i; $a <=$i ; $a++) { 
+					// 				$this->coursename=$course[$a];
+					// 			}
+					// 			for ($b=$i; $b <=$i ; $b++) { 
+					// 				$this->cityname=$city[$b];
+					// 			}
+					// 			for ($c=$i; $c <=$i ; $c++) { 
+					// 				$this->universityname=$university[$c];
+					// 			}
+					// 			for ($d=$i; $d <=$i ; $d++) { 
+					// 				$this->specializationname=$specialization[$d];
+					// 			}
+					// 			for ($e=$i; $e <=$i ; $e++) { 
+					// 				$this->qualificationname=$highestqualification[$e];
+					// 			}
+					// 			for ($f=$i; $f <=$i ; $f++) { 
+					// 				$this->passingyear=$year_passing[$f];
+					// 			}
+
+								
+					// 				$insert_sql_array = array();
+					// 				$insert_sql_array['course_name'] = $this->coursename;
+					// 				$insert_sql_array['city_name'] = $this->cityname;
+					// 				$insert_sql_array['university_name'] = $this->universityname;
+					// 				$insert_sql_array['specialization'] = $this->specializationname;
+					// 				$insert_sql_array['passing_year'] = $this->passingyear;
+					// 				$insert_sql_array['qualification_type'] = $this->qualificationname;
+
+					// 				$insert_sql_array['user_id'] = $_SESSION['user_id'];
+					// 				$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+					// 				$this->db->insert(tbl_employee_edd,$insert_sql_array);
+							
+
+					// 		}
+
+
+					// 		for ($i=0; $i <count($certificate) ; $i++) { 
+								
+					// 			for ($a=$i; $a <=$i ; $a++) { 
+					// 				$this->certificatename=$certificate[$a];
+					// 			}
+					// 			for ($b=$i; $b <=$i ; $b++) { 
+					// 				$this->certificatenumber=$certificatenum[$b];
+					// 			}
+
+					// 			$insert_sql_array = array();
+					// 			$insert_sql_array['certificate_name'] = $this->certificatename;
+					// 			$insert_sql_array['certificate_number'] = $this->certificatenumber;
+
+					// 			$insert_sql_array['user_id'] = $_SESSION['user_id'];
+					// 			$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+					// 			$this->db->insert(tbl_employee_certification,$insert_sql_array);
+							
+					// 		}
+
+
+
+
+
+
+
+
+		//tab3................
+		
+					$this->exyear = $exyear;
+					$this->worknum = $worknum;
+					$this->anumsal = $anumsal;
+					$this->buyback = $buyback;
+					$this->noticeperiod = $noticeperiod;
+
+					if ($this->buyback !=="yes") {
+								$this->buyback="no";
+								//print_r($buyback);
+								//return;
+							}
+
+
+
+					$insert_sql_array = array();
+					$insert_sql_array['experience_yrs'] = $this->exyear;
+					$insert_sql_array['company_worked'] = $this->worknum;
+					$insert_sql_array['current_salary'] = $this->anumsal;
+					$insert_sql_array['buyback'] = $this->buyback;
+					$insert_sql_array['notice_period'] = $this->noticeperiod;
+
+
+					$insert_sql_array['user_id'] = $_SESSION['user_id'];
+					$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+					$this->db->insert(tbl_employee_exp,$insert_sql_array);		
+
+
+
+
+					for ($i=0; $i <count($compname) ; $i++) { 
+							
+								for ($a=$i; $a <=$i ; $a++) { 
+									$this->companyname=$compname[$a];
+								}
+								for ($b=$i; $b <=$i ; $b++) { 
+									$this->titlejob=$jobtitle[$b];
+								}
+								for ($c=$i; $c <=$i ; $c++) { 
+									$this->workmnth=$workinmonth[$c];
+								}
+								for ($d=$i; $d <=$i ; $d++) { 
+									$this->workday=$workinday[$d];
+								}
+								for ($e=$i; $e <=$i ; $e++) { 
+									$this->workyear=$workinyear[$e];
+								}
+
+
+								$insert_sql_array = array();
+								$insert_sql_array['company_name'] = $this->companyname;
+								$insert_sql_array['job_title'] = $this->titlejob;
+								$insert_sql_array['working_time'] = $this->workday.'-'.$this->workmnth.'-'.$this->workyear;
+
+								$insert_sql_array['user_id'] = $_SESSION['user_id'];
+								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+								$this->db->insert(tbl_employee_workex,$insert_sql_array);
+
+
+							}
+
+
+
+						
+							
+			
+
+		//tab4.............
+
+
+					$this->langknown = $langknown;
+					$this->anyother = $anyother;
+					$this->expectedsalary = $expectedsalary;
+
+					print_r($langknown);			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//image upload....
+				// $image = sha1(uniqid());
+				// $target_dir = "uploads/";
+				
+				
+				// $imageFileType = pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION);
+				// $image1 = $image. "." .$imageFileType;
+				// $target_file = $target_dir . $image. "." .$imageFileType;
+
+				// $uploadOk = 1;
 
 			
-				//print_r($target_file);
-				//Check if image file is a actual image or fake image
+				// //print_r($target_file);
+				// //Check if image file is a actual image or fake image
 				
-				if(isset($_POST["submit"])) {
-				    $check = getimagesize($_FILES["photo"]["tmp_name"]);
-				    //print_r($check);
-				    if($check !== false) {
-				        echo "File is an image - " . $check["mime"] . ".";
-				        $uploadOk = 1;
+				// if(isset($_POST["submit"])) {
+				//     $check = getimagesize($_FILES["photo"]["tmp_name"]);
+				//     //print_r($check);
+				//     if($check !== false) {
+				//         echo "File is an image - " . $check["mime"] . ".";
+				//         $uploadOk = 1;
 
 
-				        if ($_FILES["photo"]["size"] > 5000000) {
-						    echo "Sorry, your file is too large.";
-						    $uploadOk = 0;
-						}
-						elseif (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
-						        echo "The file ". basename( $_FILES["photo"]["name"]). " has been uploaded.";
-						        $insert_sql_array = array();
-					            $insert_sql_array['image_name'] = $image1;
-					            $insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-					            $insert_sql_array['user_id'] = $_SESSION['user_id'];
-					            $this->db->insert(TBL_IMAGE,$insert_sql_array);
+				//         if ($_FILES["photo"]["size"] > 5000000) {
+				// 		    echo "Sorry, your file is too large.";
+				// 		    $uploadOk = 0;
+				// 		}
+				// 		elseif (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
+				// 		        echo "The file ". basename( $_FILES["photo"]["name"]). " has been uploaded.";
+				// 		        $insert_sql_array = array();
+				// 	            $insert_sql_array['image_name'] = $image1;
+				// 	            $insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+				// 	            $insert_sql_array['user_id'] = $_SESSION['user_id'];
+				// 	            $this->db->insert(TBL_IMAGE,$insert_sql_array);
 
 
-					    } else {
-					        echo "Sorry, there was an error uploading your file.";
-					    }
+				// 	    } else {
+				// 	        echo "Sorry, there was an error uploading your file.";
+				// 	    }
 
-				    } else {
-				        echo "File is not an image.";
-				        $uploadOk = 0;
-				    }
-				}
+				//     } else {
+				//         echo "File is not an image.";
+				//         $uploadOk = 0;
+				//     }
+				// }
 
 //image upload endsssss.....
 

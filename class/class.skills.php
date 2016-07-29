@@ -139,34 +139,34 @@ class skills{
 			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
 
  			
-			$result=mysql_query("SELECT count(*) as total from TBL_EMPINFO where employee_id='".$_SESSION['employee_id']."'");
-			$sql=mysql_fetch_assoc($result);
-			// print_r($sql);
-			//  print_r(count($sql));
+			// $result=mysql_query("SELECT count(*) as total from TBL_EMPINFO where user_id='".$_SESSION['user_id']."'");
+			// $sql=mysql_fetch_assoc($result);
+			// // print_r($sql);
+			// //  print_r(count($sql));
 
-			if ($sql['total'] > 0 ) {
+			// if ($sql['total'] > 0 ) {
 				
 
-				$insert_sql_array=array();
-			$insert_sql_array['user_id'] = $_SESSION['user_id'];
-			$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-			$insert_sql_array['info'] = $_REQUEST[name];	
+			// 	$insert_sql_array=array();
+			// $insert_sql_array['user_id'] = $_SESSION['user_id'];
+			
+			// $insert_sql_array['info'] = $_REQUEST[name];	
 
-			$this->db->update(TBL_EMPINFO,$insert_sql_array,employee_id,$_SESSION['employee_id']);
+			// $this->db->update(TBL_EMPINFO,$insert_sql_array,user_id,$_SESSION['user_id']);
 
 
-			}else{
+			// }else{
 
 
 			$insert_sql_array=array();
 			$insert_sql_array['user_id'] = $_SESSION['user_id'];
-			$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+			
 			$insert_sql_array['info'] = $_REQUEST[name];	
 
 			$this->db->insert(TBL_EMPINFO,$insert_sql_array);
 
 
-			}
+			// }
 
 			$resp['status']=true;
 			$resp['data']=$_REQUEST[name];
@@ -207,7 +207,7 @@ class skills{
 
 
 
-				$sql="select * from ".TBL_EMPINFO." where employee_id='".$_SESSION['employee_id']."' ";
+				$sql="select * from ".TBL_EMPINFO." where user_id='".$_SESSION['user_id']."' ";
 				$result= $this->db->query($sql,__FILE__,__LINE__);
 
 

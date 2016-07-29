@@ -70,16 +70,93 @@ $user_obj=new employee1();
 <script type="text/javascript">
 
 $(document).ready(function() {
+
+		var $validator = $("#fooorm").validate({
+
+		  rules: {
+		    username: {
+		      required: true,
+		      email: true
+		     
+		    },
+		    fname: {
+		      required: true,
+		    },
+		    lname: {
+		      required: true,
+		    },
+		    phoneno:{
+		    	required: true,
+		    	number: true
+		    },
+		    street: {
+		    	required: true
+		    },
+		    resicity: {
+		    	required: true
+		    },
+		    state: {
+		    	required: true
+		    },
+		    zip:{
+		    	required: true,
+		    	number: true
+		    },
+		    month: {
+		    	required: true
+		    },
+		    day: {
+		    	required: true
+		    },
+		    year: {
+		    	required: true
+		    },
+		    gender:{
+		    	required: true
+		    },
+		    maritalStatus:{
+		    	required: true
+		    },
+		    jobtype:{
+		    	required: true
+		    },
+		    currentlocation:{
+		    	required: true
+		    },
+		    preferloc:{
+		    	required: true
+		    },
+		   	exyear:{
+		    	required: true
+		    },
+		    anumsal:{
+		    	required: true
+		    },
+		    noticeperiod:{
+		    	required: true
+		    },
+		    expectedsalary:{
+		    	required: true
+		    },
+		    urlfield: {
+		      required: true,
+		      minlength: 3,
+		      url: true
+		    }
+		  }
+		});
+
+
 	
   	$('#rootwizard').bootstrapWizard({ onNext: function(tab, navigation, index) {
-			if(index==1) {
-				// Make sure we entered the name
-				// if(!$('#name').val()) {
-				// 	alert('You must enter your name');
-				// 	$('#name').focus();
-				// 	return false;
-				// }
-			}
+			
+	  			var $valid = $("#fooorm").valid();
+	  			if(!$valid) {
+	  				$validator.focusInvalid();
+	  				
+	  				return false;	 
+	  			}
+			
 			
 			
 		}, onTabShow: function(tab, navigation, index) {
@@ -103,10 +180,14 @@ $(document).ready(function() {
 		
 		}
 	});
-	// $('#rootwizard .finish').click(function() {
-	// 	alert('Finished!, Starting over!');
-	// 	$('#rootwizard').find("a[href*='tab1']").trigger('click');
-	// });
+	$('#rootwizard .finish').click(function() {
+		var $valid = $("#fooorm").valid();
+	  			if(!$valid) {
+	  				$validator.focusInvalid();
+	  				
+	  				return false;	 
+	  			}
+	});
 });
 
 </script>
