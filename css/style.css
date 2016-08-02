@@ -5,13 +5,14 @@
 @import url(jquery.fancybox.css);
 @import url(jquery.nouislider.css);
 @import url(font-awesome.min.css);
-@import url(rating.css);
+@import url(angular-toggle-switch-bootstrap-3.css);
 @import url(bootstrap-switch.min.css);
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:700);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css);
 @import url(http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css);
 @import url(select2.css);
 @import url(selectize.css);
+@import url(angular-input-stars.css);
 /*------------------------------------------------------------------
 
 

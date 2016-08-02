@@ -135,15 +135,46 @@ $(document).ready(function() {
 		    noticeperiod:{
 		    	required: true
 		    },
-		    expectedsalary:{
+		    
+		    highestqualification:{
 		    	required: true
 		    },
-		    urlfield: {
-		      required: true,
-		      minlength: 3,
-		      url: true
+		    course:{
+		    	required: true
+		    },
+		    specialization:{
+		    	required: true
+		    },
+		    university:{
+		    	required: true
+		    },
+		    city:{
+		    	required: true
+		    },
+		    year_passing:{
+		    	required: true
+		    },
+		    compname:{
+		    	required: true
+		    },
+		    jobtitle:{
+		    	required: true
+		    },
+		    workinmonth:{
+		    	required: true
+		    },
+		     workinday:{
+		    	required: true
+		    },
+
+		     workinyear:{
+		    	required: true
+		    },
+		    langknown:{
+		    	required: true
 		    }
 		  }
+		 	
 		});
 
 
@@ -178,16 +209,19 @@ $(document).ready(function() {
 			$('#rootwizard').find('.pager .finish').hide();
 		}
 		
-		}
-	});
-	$('#rootwizard .finish').click(function() {
-		var $valid = $("#fooorm").valid();
+		}, onFinish: function(tab, navigation, index){
+			
+			var $valid = $("#fooorm").valid();
 	  			if(!$valid) {
 	  				$validator.focusInvalid();
 	  				
 	  				return false;	 
 	  			}
+		}
 	});
+	// $('#rootwizard .finish').click(function() {
+		
+	// });
 });
 
 </script>

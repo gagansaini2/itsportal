@@ -370,6 +370,8 @@ else                /* send the submitted data */
     <script type="text/javascript" src="js/bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
     
     <script type="text/javascript" src="js/bower_components/angular-selectize2/dist/angular-selectize.js"></script>
+    <script type="text/javascript" src="js/bower_components/stars/bower_components/angular-input-stars-directive/angular-input-stars.js"></script>
+    <script type="text/javascript" src="js/bower_components/angular_switch/bower_components/angular-bootstrap-toggle-switch/angular-toggle-switch.min.js"></script>
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script> -->

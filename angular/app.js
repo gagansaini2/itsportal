@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 
-var app = angular.module('its', ['selectize','angularFileUpload']);
+var app = angular.module('its', ['selectize','angularFileUpload','angular-input-stars','toggle-switch']);
 
 	app.controller('wizform', function($scope, $http) {
   
@@ -18,9 +18,33 @@ $scope.myModel;          //for selectize.........
 
 
 $scope.form={};      //holds all employee details.....
- 
+  
+
+//add more functions.............
 
 
+  $scope.form.certs=[];
+  $scope.form.certs.push({});
+
+$scope.addCert=function(){
+$scope.form.certs.push({});
+}
+
+
+$scope.form.extraedd=[];
+// $scope.form.edd.push({});
+
+$scope.addedu=function(){
+$scope.form.extraedd.push({});	
+}
+
+$scope.form.extraexp=[];
+// $scope.form.edd.push({});
+
+$scope.addexp=function(){
+	//alert("asdad");
+$scope.form.extraexp.push({});	
+}
 
 
 
@@ -50,7 +74,7 @@ $scope.myConfig = {
   valueField: 'skills',
   labelField: 'skills',
   delimiter: '|',
-  placeholder: 'Pick something',
+  placeholder: 'Specify your keyskill',
   searchField: ['skills'],
   onInitialize: function(selectize){
     // receives the selectize object as an argument
@@ -103,7 +127,7 @@ $scope.myConfig1 = {
   valueField: 'lang',
   labelField: 'lang',
   delimiter: '|',
-  placeholder: 'Pick something',
+  placeholder: 'Pick Languages',
   searchField: ['lang'],
   onInitialize: function(selectize){
     // receives the selectize object as an argument
@@ -117,44 +141,68 @@ $scope.myConfig1 = {
 
 //ends.............
 
-$scope.addskill=function(){
-		// 	var NewSkill='<div class="row form-group col-sm-7" ><selectize config="myConfig" options="myOptions" ng-model="form.keyskill"></selectize><input type="text" class="form-control" name="keyskills[]" /> </div><div class="center_form col-sm-5" id="rating" data-toggle="tooltip" title="Rate Yourself"> <input type="radio" name="keyskills[][star][]" class="rating" value="1"/> <input type="radio" name="keyskills[][star][]" class="rating" value="2"/> <input type="radio" name="keyskills[][star][]" class="rating" value="3"/> <input type="radio" name="keyskills[][star][]" class="rating" value="4"/> <input type="radio" name="keyskills[][star][]" class="rating" value="5"/> </div>'
-		// $("#add-more-skills").click(function(){
-		// 	$(this).parent().parent().parent().before(NewSkill);
-			
-		// 	$("#rating").rating();
-		// 	$('[data-toggle="tooltip"]').tooltip();
-		// 	$("#rating").attr("id","rating1");
 
-		// });
-				console.log("kndmsjf");
+
+
+
+
+$scope.form.skills=[];
+$scope.form.skills.push({});
+$scope.addskill=function(){
+	
+$scope.form.skills.push({});
+			
+				
 		};
 
 //save the info.............
 
-$( window ).unload(function() {
-  				var main={};
-				main.name=JSON.stringify($scope.form);
+// $( window ).unload(function() {
 
-		
-			$http({
-				
-				method: "POST",
-				url: "api.php?work=save_info",
-				params: main
+// 	// console.log("super");
+  				
+// 				var main={};
+// 				main.name=JSON.stringify($scope.form);
+// 		//$scope.test(main);
 
-			}).success(function(response){
-				console.log(response);
-			}).error(function(response){
-				console.log(response);
-			});
-});
+// 		$.ajax({
+
+// 			method: "POST",
+// 				url: "api.php?work=save_info",
+// 				data: main,
+// 				success:function(data){
+// 					console.log("send ");
+
+// 				}
+
+// 		});
+// 		// console.log("second");
+			
+// });
 		
 
 //...........
 	
 
-	
+// $scope.save=function(){
+
+
+// 				var main={};
+// 				main.name=JSON.stringify($scope.form);
+// 		//$scope.test(main);
+
+// 		$.ajax({
+
+// 			method: "POST",
+// 				url: "api.php?work=save_info",
+// 				data: main,
+// 				success:function(data){
+// 					console.log("send ");
+
+// 				}
+
+// 		});
+// }
 
 
 
@@ -188,6 +236,43 @@ $( window ).unload(function() {
 //.......
 		
 		
+
+		$scope.submit=function(){
+
+			 var jsonData=angular.copy($scope.form);
+    		//var objectToSerialize={'object':jsonData};
+    		// var prof={};
+    		// prof=$scope.form;
+    		var objectToSerialize={'object':jsonData};
+
+		
+			$http({
+				
+				method: "POST",
+				url: "api.php?work=prof_submit",
+			
+				 params: objectToSerialize,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    // transformRequest: function (obj) {
+                    //     var str = [];
+                    //     for (var p in obj)
+                    //     str.push(p + "=" + obj[p]);
+                    //     return str.join("&");
+                    // },
+       
+
+			}).success(function(response){
+				 console.log(response);
+				
+				 
+				
+			}).error(function(response){
+				console.log(response);
+			});
+
+		}
 		
 
 		
@@ -227,3 +312,22 @@ app.directive('fileModel', ['$parse', function ($parse) {
                }
             };
          }]);
+
+app.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);

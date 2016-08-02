@@ -17,7 +17,7 @@ $skill_obj=new skills();
 
 extract($_REQUEST);
 
-print_r($id);
+// print_r($id);
 
 if($work=="user_logged"){
     if(!isset($_SESSION['user_id'])){
@@ -54,6 +54,12 @@ if ($work=='get_skills') {
 if ($work=='add_skills') {
 	
 	$skill_obj -> addskills();
+}
+
+
+if ($work=='prof_submit') {
+	
+	$skill_obj -> submitprof();
 }
 
 
