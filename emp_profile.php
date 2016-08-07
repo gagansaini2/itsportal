@@ -37,13 +37,13 @@ $user_obj=new employee1();
 
 		<!-- ============ RESUME START ============ -->
 
-		<section id="resume">
+		<section id="resume" class="">
 			
 
 
 			<?php
 				extract($_REQUEST);
-					if($submit=='register'){
+					if($submit1=='register'){
 						$user_obj->empprofile('server');
 					}else{
 						$user_obj->empprofile('local');
@@ -170,10 +170,12 @@ $(document).ready(function() {
 		     workinyear:{
 		    	required: true
 		    },
-		    langknown:{
+		    country:{
 		    	required: true
 		    }
 		  }
+
+		 
 		 	
 		});
 
@@ -208,15 +210,19 @@ $(document).ready(function() {
 			$('#rootwizard').find('.pager .next').show();
 			$('#rootwizard').find('.pager .finish').hide();
 		}
-		
+
+			
+		}, onTabClick:  function(tab, navigation, index){
+			// return false;
+
 		}, onFinish: function(tab, navigation, index){
 			
-			var $valid = $("#fooorm").valid();
-	  			if(!$valid) {
-	  				$validator.focusInvalid();
+			// var $valid = $("#fooorm").valid();
+	  // 			if(!$valid) {
+	  // 				$validator.focusInvalid();
 	  				
-	  				return false;	 
-	  			}
+	  // 				return false;	 
+	  // 			}
 		}
 	});
 	// $('#rootwizard .finish').click(function() {

@@ -212,13 +212,15 @@ class skills{
 				$data=array();
 				
 				$row= $this->db->fetch_array($result);
-					
+				if($row['info']){
 				$data['backinfo']=$row['info'];
+					
+				}	
 				// print_r($data['backinfo']);
 				
-				if ($data['backinfo']==null) {
-					echo $data['backinfo']="";
-				}
+				// if ($data['backinfo']==null) {
+				// 	echo $data['backinfo']="";
+				// }
 				
 				//print_r($data);
 
@@ -238,10 +240,15 @@ class skills{
 				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
 
 
-// print_r($_REQUEST);
-							
-                 //certificate retrive........
-							$cer1=$_REQUEST['object'];
+echo $fileName = $_FILES['file']['name'];
+echo $filetmp = $_FILES['file']['tmp_name'];
+// echo $fileType = $_FILES['file']['type'];
+// echo $fileError = $_FILES['file']['error'];
+
+							// echo (($_REQUEST[dataprof]));
+                // certificate retrive........
+							$cer1=$_REQUEST['profdata'];
+
 							$allinfo=json_decode($cer1, true);
 							 // print_r($allinfo);
 
@@ -264,218 +271,284 @@ class skills{
 				
 
 
-					$insert_sql_array = array();
-							$insert_sql_array['name'] =$allinfo['fname'].' '.$allinfo['mname'].' '.$allinfo['lname'];
-							$insert_sql_array['email'] =$allinfo['email'];
-							$insert_sql_array['phoneno'] = $allinfo['cncode'].' '.$allinfo['phnno'];
-							$insert_sql_array['altphoneno'] =$allinfo['altcncode'].' '.$allinfo['altphno'];
-							$insert_sql_array['age'] = $allinfo['dobdate'].'-'.$allinfo['dobmonth'].'-'.$allinfo['dobyear'];
-							$insert_sql_array['address'] = $allinfo['street'].','.$allinfo['city'].','.$allinfo['state'];
-							$insert_sql_array['zip'] = $allinfo['zip'];
-							$insert_sql_array['gender'] = $allinfo['gender'];
-							$insert_sql_array['martial_status'] = $allinfo['mrital'];
-							$insert_sql_array['facebook_id'] = $allinfo['facebook'];
-							$insert_sql_array['linkedin_id'] = $allinfo['linkedin'];
-							$insert_sql_array['Physically_challenged'] = $allinfo['disability'];
-							$insert_sql_array['jobtype'] = $allinfo['jobtype'];
-							$insert_sql_array['Passport'] = $allinfo['passport'];
-							$insert_sql_array['relocation'] = $allinfo['relocate'];
-							$insert_sql_array['prefered_loc'] = $allinfo['preffloc'];
-							$insert_sql_array['current_loc'] = $allinfo['curentloc'];
-							$insert_sql_array['disability_type'] = $allinfo['disabilitytype'];
-							$insert_sql_array['passport_no'] = $allinfo['passportno'];
+	// 				$insert_sql_array = array();
+	// 						$insert_sql_array['name'] =$allinfo['fname'].' '.$allinfo['mname'].' '.$allinfo['lname'];
+	// 						$insert_sql_array['email'] =$allinfo['email'];
+	// 						$insert_sql_array['phoneno'] = $allinfo['cncode'].' '.$allinfo['phnno'];
+	// 						$insert_sql_array['altphoneno'] =$allinfo['altcncode'].' '.$allinfo['altphno'];
+	// 						$insert_sql_array['age'] = $allinfo['dobdate'].'-'.$allinfo['dobmonth'].'-'.$allinfo['dobyear'];
+	// 						$insert_sql_array['address'] = $allinfo['street'].','.$allinfo['city'].','.$allinfo['state'];
+	// 						$insert_sql_array['zip'] = $allinfo['zip'];
+	// 						$insert_sql_array['gender'] = $allinfo['gender'];
+	// 						$insert_sql_array['martial_status'] = $allinfo['mrital'];
+	// 						$insert_sql_array['facebook_id'] = $allinfo['facebook'];
+	// 						$insert_sql_array['linkedin_id'] = $allinfo['linkedin'];
+	// 						$insert_sql_array['Physically_challenged'] = $allinfo['disability'];
+	// 						$insert_sql_array['jobtype'] = $allinfo['jobtype'];
+	// 						$insert_sql_array['Passport'] = $allinfo['passport'];
+	// 						$insert_sql_array['relocation'] = $allinfo['relocate'];
+	// 						$insert_sql_array['prefered_loc'] = $allinfo['preffloc'];
+	// 						$insert_sql_array['current_loc'] = $allinfo['curentloc'];
+	// 						$insert_sql_array['disability_type'] = $allinfo['disabilitytype'];
+	// 						$insert_sql_array['passport_no'] = $allinfo['passportno'];
 
 
-							$insert_sql_array['user_id']=$_SESSION['user_id'];
-							$this->db->insert(tbl_employee_del,$insert_sql_array);
+	// 						$insert_sql_array['user_id']=$_SESSION['user_id'];
+	// 						$this->db->insert(tbl_employee_del,$insert_sql_array);
 
 
-							$id=$this->db->last_insert_id();
-							$_SESSION['employee_id']=$id;
+	// 						$id=$this->db->last_insert_id();
+	// 						$_SESSION['employee_id']=$id;
 
-							$insert_sql_array = array();
-							$insert_sql_array['employee_id']=$_SESSION['employee_id'];
-							$this->db->update(TBL_USER,$insert_sql_array,user_id,$_SESSION['user_id']);
+	// 						$insert_sql_array = array();
+	// 						$insert_sql_array['employee_id']=$_SESSION['employee_id'];
+	// 						$this->db->update(TBL_USER,$insert_sql_array,user_id,$_SESSION['user_id']);
 
 
-				//tab2.........
+	// 			//tab2.........
 
-						$insert_sql_array = array();
-									$insert_sql_array['course_name'] = $allinfo['course'];
-									$insert_sql_array['city_name'] = $allinfo['clgcity'];
-									$insert_sql_array['university_name'] = $allinfo['college'];
-									$insert_sql_array['specialization'] = $allinfo['spec'];
-									$insert_sql_array['passing_year'] = $allinfo['pasinyr'];
-									$insert_sql_array['qualification_type'] = $allinfo['highquad'];
+	// 					$insert_sql_array = array();
+	// 								$insert_sql_array['course_name'] = $allinfo['course'];
+	// 								$insert_sql_array['city_name'] = $allinfo['clgcity'];
+	// 								$insert_sql_array['university_name'] = $allinfo['college'];
+	// 								$insert_sql_array['specialization'] = $allinfo['spec'];
+	// 								$insert_sql_array['passing_year'] = $allinfo['pasinyr'];
+	// 								$insert_sql_array['qualification_type'] = $allinfo['highquad'];
 
-									$insert_sql_array['user_id'] = $_SESSION['user_id'];
-									$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-									$this->db->insert(tbl_employee_edd,$insert_sql_array);
+	// 								$insert_sql_array['user_id'] = $_SESSION['user_id'];
+	// 								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+	// 								$this->db->insert(tbl_employee_edd,$insert_sql_array);
 							
-						if (count($education) > 0) {
+	// 					if (count($education) > 0) {
 									
 											
 
-							for ($i=0; $i <count($education) ; $i++) { 
+	// 						for ($i=0; $i <count($education) ; $i++) { 
 
-									$finaledd=$education[$i];
-									$this->coursename=$finaledd['course'];
-									$this->cityname=$finaledd['clgcity'];
-								    $this->universityname=$finaledd['college'];
-								    $this->specializationname=$finaledd['spec'];
-								    $this->passingyear=$finaledd['pasinyr'];
-								    $this->qualificationname=$finaledd['quad'];
+	// 								$finaledd=$education[$i];
+	// 								$this->coursename=$finaledd['course'];
+	// 								$this->cityname=$finaledd['clgcity'];
+	// 							    $this->universityname=$finaledd['college'];
+	// 							    $this->specializationname=$finaledd['spec'];
+	// 							    $this->passingyear=$finaledd['pasinyr'];
+	// 							    $this->qualificationname=$finaledd['quad'];
 									 
 
-									$insert_sql_array = array();
-									$insert_sql_array['course_name'] = $this->coursename;
-									$insert_sql_array['city_name'] = $this->cityname;
-									$insert_sql_array['university_name'] = $this->universityname;
-									$insert_sql_array['specialization'] = $this->specializationname;
-									$insert_sql_array['passing_year'] = $this->passingyear;
-									$insert_sql_array['qualification_type'] = $this->qualificationname;
+	// 								$insert_sql_array = array();
+	// 								$insert_sql_array['course_name'] = $this->coursename;
+	// 								$insert_sql_array['city_name'] = $this->cityname;
+	// 								$insert_sql_array['university_name'] = $this->universityname;
+	// 								$insert_sql_array['specialization'] = $this->specializationname;
+	// 								$insert_sql_array['passing_year'] = $this->passingyear;
+	// 								$insert_sql_array['qualification_type'] = $this->qualificationname;
 
-									$insert_sql_array['user_id'] = $_SESSION['user_id'];
-									$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-									$this->db->insert(tbl_employee_edd,$insert_sql_array);
+	// 								$insert_sql_array['user_id'] = $_SESSION['user_id'];
+	// 								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+	// 								$this->db->insert(tbl_employee_edd,$insert_sql_array);
 							
 
-							}
-						}		
+	// 						}
+	// 					}		
 
-						if (count($certificates) > 1) {
+	// 					if (count($certificates) > 1) {
 							
 						
-							for ($i=0; $i <count($certificates) ; $i++) { 
+	// 						for ($i=0; $i <count($certificates) ; $i++) { 
 								
 
-								$final=$certificates[$i];
-								$this->certificatename=$final['cername'];
-								$this->certificatenumber=$final['cerno'];
+	// 							$final=$certificates[$i];
+	// 							$this->certificatename=$final['cername'];
+	// 							$this->certificatenumber=$final['cerno'];
 
-								$insert_sql_array = array();
-								$insert_sql_array['certificate_name'] = $this->certificatename;
-								$insert_sql_array['certificate_number'] = $this->certificatenumber;
+	// 							$insert_sql_array = array();
+	// 							$insert_sql_array['certificate_name'] = $this->certificatename;
+	// 							$insert_sql_array['certificate_number'] = $this->certificatenumber;
 
-								$insert_sql_array['user_id'] = $_SESSION['user_id'];
-								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-								$this->db->insert(tbl_employee_certification,$insert_sql_array);
+	// 							$insert_sql_array['user_id'] = $_SESSION['user_id'];
+	// 							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+	// 							$this->db->insert(tbl_employee_certification,$insert_sql_array);
 							
-							}
-						}
+	// 						}
+	// 					}
 
-	//tab3...........................
-
-
-
-							$insert_sql_array = array();
-							$insert_sql_array['experience_yrs'] = $allinfo['expyrs'];
-							$insert_sql_array['company_worked'] = $allinfo['worknum'];
-							$insert_sql_array['current_salary'] = $allinfo['annualsalary'];
-							$insert_sql_array['buyback'] = $allinfo['buyback'];
-							$insert_sql_array['notice_period'] = $allinfo['noticeperiod'];
+	// //tab3...........................
 
 
 
-							$insert_sql_array['user_id'] = $_SESSION['user_id'];
-							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-							$this->db->insert(tbl_employee_exp,$insert_sql_array);
+	// 						$insert_sql_array = array();
+	// 						$insert_sql_array['experience_yrs'] = $allinfo['expyrs'];
+	// 						$insert_sql_array['company_worked'] = $allinfo['worknum'];
+	// 						$insert_sql_array['current_salary'] = $allinfo['annualsalary'];
+	// 						$insert_sql_array['buyback'] = $allinfo['buyback'];
+	// 						$insert_sql_array['notice_period'] = $allinfo['noticeperiod'];
 
 
 
-							///workex........
+	// 						$insert_sql_array['user_id'] = $_SESSION['user_id'];
+	// 						$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+	// 						$this->db->insert(tbl_employee_exp,$insert_sql_array);
 
 
 
-							$insert_sql_array = array();
-							$insert_sql_array['company_name'] = $allinfo['compname'];
-							$insert_sql_array['job_title'] = $allinfo['jobtitle'];
-							$insert_sql_array['working_time'] = $allinfo['workinday'].'-'.$allinfo['workinmonth'].'-'.$allinfo['workinyear'];
+	// 						///workex........
+
+
+
+	// 						$insert_sql_array = array();
+	// 						$insert_sql_array['company_name'] = $allinfo['compname'];
+	// 						$insert_sql_array['job_title'] = $allinfo['jobtitle'];
+	// 						$insert_sql_array['working_time'] = $allinfo['workinday'].'-'.$allinfo['workinmonth'].'-'.$allinfo['workinyear'];
 							
 
 
-							$insert_sql_array['user_id'] = $_SESSION['user_id'];
-							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-							$this->db->insert(TBL_EMPLOYEE_WORKEX,$insert_sql_array);
+	// 						$insert_sql_array['user_id'] = $_SESSION['user_id'];
+	// 						$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+	// 						$this->db->insert(TBL_EMPLOYEE_WORKEX,$insert_sql_array);
 
-						if (count($experience) > 0) {
+	// 					if (count($experience) > 0) {
 								
 							
-							 for ($i=0; $i <count($experience) ; $i++) { 
+	// 						 for ($i=0; $i <count($experience) ; $i++) { 
 								
 
-								$finalexperience=$experience[$i];
-								$this->companyname=$finalexperience['compname'];
-								$this->jobtitle=$finalexperience['jobtitle'];
-								$this->workinmonth=$finalexperience['workinmonth'];
-								$this->workinday=$finalexperience['workinday'];
-								$this->workinyear=$finalexperience['workinyear'];
+	// 							$finalexperience=$experience[$i];
+	// 							$this->companyname=$finalexperience['compname'];
+	// 							$this->jobtitle=$finalexperience['jobtitle'];
+	// 							$this->workinmonth=$finalexperience['workinmonth'];
+	// 							$this->workinday=$finalexperience['workinday'];
+	// 							$this->workinyear=$finalexperience['workinyear'];
 								
 
-								$insert_sql_array = array();
-								$insert_sql_array['company_name'] = $this->companyname;
-								$insert_sql_array['job_title'] = $this->jobtitle;
-								$insert_sql_array['working_time'] = $this->workinday.'-'.$this->workinmonth.'-'.$this->workinyear;
+	// 							$insert_sql_array = array();
+	// 							$insert_sql_array['company_name'] = $this->companyname;
+	// 							$insert_sql_array['job_title'] = $this->jobtitle;
+	// 							$insert_sql_array['working_time'] = $this->workinday.'-'.$this->workinmonth.'-'.$this->workinyear;
 
-								$insert_sql_array['user_id'] = $_SESSION['user_id'];
-								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-								$this->db->insert(TBL_EMPLOYEE_WORKEX,$insert_sql_array);
+	// 							$insert_sql_array['user_id'] = $_SESSION['user_id'];
+	// 							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+	// 							$this->db->insert(TBL_EMPLOYEE_WORKEX,$insert_sql_array);
 							
-							}
-						 }
+	// 						}
+	// 					 }
 	
 
 
-				//tab4.....................
+	// 			//tab4.....................
 
 
 
-							$insert_sql_array = array();
-							$insert_sql_array['expected_salary'] = $allinfo['compname'];
-							$insert_sql_array['anyother_detail'] = $allinfo['jobtitle'];
-							$insert_sql_array['languages_known'] = $languages;
+	// 						$insert_sql_array = array();
+	// 						$insert_sql_array['expected_salary'] = $allinfo['compname'];
+	// 						$insert_sql_array['anyother_detail'] = $allinfo['jobtitle'];
+	// 						$insert_sql_array['languages_known'] = $languages;
 							
 							
 
 
-							$insert_sql_array['user_id'] = $_SESSION['user_id'];
-							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-							$this->db->insert(TBL_OTHERS,$insert_sql_array);
+	// 						$insert_sql_array['user_id'] = $_SESSION['user_id'];
+	// 						$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+	// 						$this->db->insert(TBL_OTHERS,$insert_sql_array);
 
 
-							for ($i=0; $i <count($skills) ; $i++) { 
+	// 						for ($i=0; $i <count($skills) ; $i++) { 
 								
 
-								$finalskills=$skills[$i];
-								$this->skillname=$finalskills['keyskill'];
-								$this->skillrating=$finalskills['rating'];
+	// 							$finalskills=$skills[$i];
+	// 							$this->skillname=$finalskills['keyskill'];
+	// 							$this->skillrating=$finalskills['rating'];
 
-								$insert_sql_array = array();
-								$insert_sql_array['keyskill_name'] = $this->skillname;
-								$insert_sql_array['key_rating'] = $this->skillrating;
+	// 							$insert_sql_array = array();
+	// 							$insert_sql_array['keyskill_name'] = $this->skillname;
+	// 							$insert_sql_array['key_rating'] = $this->skillrating;
 
-								$insert_sql_array['user_id'] = $_SESSION['user_id'];
-								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-								$this->db->insert(TBL_EMPLOYEE_KEYSKILS,$insert_sql_array);
+	// 							$insert_sql_array['user_id'] = $_SESSION['user_id'];
+	// 							$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+	// 							$this->db->insert(TBL_EMPLOYEE_KEYSKILS,$insert_sql_array);
 							
-							}
+	// 						}
+
+				// image upload....
+
+							
+
+				$image = sha1(uniqid());
+				$target_dir = "uploads/";
+				
+				
+				$imageFileType = pathinfo($fileName,PATHINFO_EXTENSION);
+				$image1 = $image. "." .$imageFileType;
+				$target_file = $target_dir . $image. "." .$imageFileType;
+
+				$uploadOk = 1;
+
+			
+				// print_r($target_file );
+				//Check if image file is a actual image or fake image
+
+				
+				    $check = getimagesize($filetmp);
+				    //print_r($check);
+				    if($check !== false) {
+				        echo "File is an image - " . $check["mime"] . ".";
+				        $uploadOk = 1;
 
 
+				  //       if ($_FILES["photo"]["size"] > 5000000) {
+						//     echo "Sorry, your file is too large.";
+						//     $uploadOk = 0;
+						// }
+						if (move_uploaded_file($filetmp, $target_file)) {
+						        echo "The file ". basename($fileName). " has been uploaded.";
+						        $insert_sql_array = array();
+					            $insert_sql_array['image_name'] = $image1;
+					            $insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+					            $insert_sql_array['user_id'] = $_SESSION['user_id'];
+					            $this->db->insert(TBL_IMAGE,$insert_sql_array);
+
+
+					    } else {
+					        echo "Sorry, there was an error uploading your file.";
+					    }
+
+				    } else {
+				        echo "File is not an image.";
+				        $uploadOk = 0;
+				    }
+				
+
+				// 	// image upload endsssss.....			
+
+					$resp['data']=$allinfo['email'];
+					echo json_encode($resp);
+			
+			}
+
+
+
+			function uploadpic(){
+
+
+
+				print_r($_FILES);
+				echo $fileName = $_FILES['file']['name'];
 // image upload....
+
+							
+
 				// $image = sha1(uniqid());
 				// $target_dir = "uploads/";
 				
 				
-				// $imageFileType = pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION);
+				// $imageFileType = pathinfo($_FILES['myphoto']['name'],PATHINFO_EXTENSION);
 				// $image1 = $image. "." .$imageFileType;
 				// $target_file = $target_dir . $image. "." .$imageFileType;
 
 				// $uploadOk = 1;
 
 			
-				// // print_r($target_file);
+				// //print_r($target_file );
 				// //Check if image file is a actual image or fake image
-				// print_r($_FILES["photo"]["name"]);
+				// print_r($_FILES['myphoto']['name']);
 
 				// if(isset($_POST["submit"])) {
 				//     $check = getimagesize($_FILES["photo"]["tmp_name"]);
@@ -508,10 +581,8 @@ class skills{
 				//     }
 				// }
 
-					// image upload endsssss.....
-					$resp['data']=$_REQUEST['email'];
-					echo json_encode($resp);
-			
+				// 	// image upload endsssss.....
+
 			}
 
 		

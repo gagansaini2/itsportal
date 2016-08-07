@@ -63,4 +63,11 @@ if ($work=='prof_submit') {
 }
 
 
+if ($work=='upload_pic') {
+	
+	$skill_obj -> uploadpic();
+}
+
+
+
  ?>

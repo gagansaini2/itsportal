@@ -24,15 +24,15 @@ class employee1{
 				?>
 
 
-					<div class="container">
+					<div class="container" ng-app="its" ng-controller="wizform">
 
 
-				<form id="fooorm" method="POST" enctype="multipart/form-data" >		
-				<div id="rootwizard">
+				<form id="fooorm" name="myform" method="POST" ng-submit="submit()" enctype="multipart/form-data" >		
+				<div id="rootwizard"  >
 	<div class="navbar">
 	  <div class="navbar-inner">
-	    <div class="container">
-	<ul>
+	    <div class="container" style="margin-top: -30px;padding-left: 30%;">
+	<ul class="text-center">
 	  	<li><a href="#tab1" data-toggle="tab">Personal</a></li>
 		<li><a href="#tab2" data-toggle="tab">Academics</a></li>
 		<li><a href="#tab3" data-toggle="tab">Experience</a></li>
@@ -43,7 +43,7 @@ class employee1{
 	  </div>
 	</div>
 	
-	<div class="tab-content" ng-app="its" ng-controller="wizform" style="position: relative;" >
+	<div class="tab-content" style="position: relative;" >
 	    
 			<div class="col-sm-offset-7 col-sm-5" style="background:#e7e7e7; min-height: 500px; position: absolute; margin-top: 100px;line-height:2.5;" >
 							     
@@ -335,9 +335,11 @@ class employee1{
 							                <!-- <span class="btn btn-default btn-file" >
 											Add photo <input type = "file" name="photo" nv-file-model = "form.myFile" />
 											</span> -->
-											<input type ="file" name="photo" fileread="form.pic"  />
-											<!-- <input type="text" id="outerr"> -->
+										
+											<input type="file" name="myphoto"  fileread="form.pic" />
 											
+											<!-- <input type="text" id="outerr"> -->
+									
 											
 							                <p class="help-block">JPG PNG . file size: 5 MB</p>
 							                <br>
@@ -1164,7 +1166,6 @@ class employee1{
 							       
 
 
-
 							      <div class="row">
 							        <div class="col-sm-11">
 							          <p><a ng-click="addexp()">+ Add More Experience</a></p>
@@ -1256,9 +1257,10 @@ class employee1{
 							      
 
 							      <div class="col-sm-11">
-							        <label for="resume-name">Languages Known</label>
+							        <label for="resume-name">Languages Known*</label>
 							        <div class="form-group" >
-							        <selectize config='myConfig1' options='myOptions1' ng-model="form.langs" ></selectize>
+							        <selectize config='myConfig1' options='myOptions1' ng-model="form.langs" required></selectize>
+							        <!-- <span ng-if="myform.$invalid" id="langerr" >This field is required.</span> -->
 
 							         <!-- <selectize config='myConfig' options='myOptions' ng-model="myModel"> -->
 
@@ -1342,7 +1344,8 @@ class employee1{
 							      <div class="col-sm-11" style="float:none;">
 							        <label for="resume-name">Any other relevant details</label>
 							        <div class="form-group">
-							          <input type="text" class="form-control" name="anyother" ng-model="form.anyother" />
+							          <input type="text" class="form-control" name="anyother" ng-model="form.anyother"/>
+
 							        </div>
 							      </div>
 
@@ -1371,17 +1374,7 @@ class employee1{
 							          </div>
 							        </div>
 
-							      <!-- <button class="btn btn-primary btn-lg" name="submit" value="register">Submit <i class="fa fa-arrow-right"></i></button> -->
-
-							      <!-- <div class="col-sm-12 text-center">
-													<p>&nbsp;</p>
-													<a class="btn btn-primary btn-lg" name="back" href="emp_prof3.php" value=""><i class="fa fa-arrow-left"></i>Back</a>
-													<a class="btn btn-primary btn-lg" name="submit" href="job2.php" value="register">Next <i class="fa fa-arrow-right"></i></a>
-													<button class="btn btn-primary btn-lg" name="submit" id="butto" onclick="return <?php echo $ValidationFunctionName;?>()"  value="register">Submit <i class="fa fa-arrow-right"></i></button>
-												</div> -->
-
-
-							      <!-- </form> -->
+							     
 							    </div>
 							   
 							  </div>
@@ -1393,7 +1386,7 @@ class employee1{
 			<li class="previous btn"><a href="#">Previous</a></li>
 			<li class="next last btn" style="display:none;"><a href="#">Last</a></li>
 		  	<li class="next btn"><a href="#">Next</a></li>
-		  	<button type="button" class="finish btn btan" name="submit" value="register" ng-click="submit()" style="display:none;">Submit</button> 
+		  	<button type="submit" class="finish btn btan" name="submit" value="submit" style="display:none;">Submit</button> 
 		</ul>
 		
 	</div>
@@ -1402,6 +1395,7 @@ class employee1{
 	
 </div>
 </form>
+
 </div>
 
 

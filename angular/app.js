@@ -224,9 +224,12 @@ $scope.form.skills.push({});
 				// console.log(response);
 				
 				 var returninfo=response.data.backinfo;
+         if(response.data.backinfo!= undefined){
+          $scope.form=JSON.parse(returninfo);
+        
+         }
 				
-				 $scope.form=JSON.parse(returninfo);
-				// console.log(backinfoo);
+				 // console.log(backinfoo);
 				
 			}).error(function(response){
 				console.log(response);
@@ -237,45 +240,69 @@ $scope.form.skills.push({});
 		
 		
 
-		$scope.submit=function(){
+		$scope.submit=function(isValid){
 
-			 var jsonData=angular.copy($scope.form);
-    		//var objectToSerialize={'object':jsonData};
-    		// var prof={};
-    		// prof=$scope.form;
-    		var objectToSerialize={'object':jsonData};
+      // if (isValid) {
 
+
+			 var profdata=angular.copy($scope.form);                                    
+       if (profdata.disability == true) {
+          profdata.disability = "Yes";
+       }else{
+        profdata.disability = "No";
+       }
+                          
+       if (profdata.passport == true) {
+          profdata.passport = "Yes";
+       }else{
+        profdata.passport = "No";
+       }
+
+       if (profdata.relocate == true) {
+          profdata.relocate = "Yes";
+       }else{
+        profdata.relocate = "No";
+       }
+
+         if (profdata.buyback == true) {
+          profdata.buyback = "Yes";
+       }else{
+        profdata.buyback = "No";
+       }
+
+
+         
+        profdata.pic = "";                                        
+    		
+    		var main={'profile':profdata};                            //main is json format object
+
+
+
+        var formData = new FormData();
+        formData.append('file', $('input[type=file]')[0].files[0] );
+        formData.append('profdata',  JSON.stringify(main));
 		
-			$http({
+			$.ajax({
 				
 				method: "POST",
 				url: "api.php?work=prof_submit",
-			
-				 params: objectToSerialize,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    // transformRequest: function (obj) {
-                    //     var str = [];
-                    //     for (var p in obj)
-                    //     str.push(p + "=" + obj[p]);
-                    //     return str.join("&");
-                    // },
+
+				//params: main,
+        data: formData,
+        contentType: false,
+        processData: false,
        
+                    
+       success:function(data){
+        console.log(data);
+       }
 
-			}).success(function(response){
-				 console.log(response);
-				
-				 
-				
-			}).error(function(response){
-				console.log(response);
-			});
+			})
 
-		}
-		
+		// }
 
 		
+    };
 	
 
 
@@ -313,7 +340,24 @@ app.directive('fileModel', ['$parse', function ($parse) {
             };
          }]);
 
-app.directive("fileread", [function () {
+
+// app.directive("fileread", [function () {
+//     return {
+//         scope: {
+//             fileread: "="
+//         },
+//         link: function (scope, element, attributes) {
+//             element.bind("change", function (changeEvent) {
+//                 scope.$apply(function () {
+//                     scope.fileread = changeEvent.target.files[0];
+//                     // or all selected files:
+//                     // scope.fileread = changeEvent.target.files;
+//                 });
+//             });
+//         }
+//     }
+// }]);
+app.directive("fileread", ['$http', function ($http) {
     return {
         scope: {
             fileread: "="
@@ -324,9 +368,11 @@ app.directive("fileread", [function () {
                 reader.onload = function (loadEvent) {
                     scope.$apply(function () {
                         scope.fileread = loadEvent.target.result;
-                    });
+                    }); 
                 }
                 reader.readAsDataURL(changeEvent.target.files[0]);
+                  
+                  
             });
         }
     }

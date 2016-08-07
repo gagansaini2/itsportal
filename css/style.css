@@ -2017,13 +2017,7 @@ header {
 		
 
 	}
-	.selectpickerr{
 	
-    text-transform: initial;
-    min-width: 32em;
-    
-
-	}
 
 	.activee{
 		background-color: white;
@@ -2048,4 +2042,42 @@ header {
 
 	.btan:hover{
 		background-color: #0d7076;
+	}
+
+	.nav>li>a:hover{
+		background-color: inherit; 
+		cursor: default;
+	}
+	.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+		border-bottom: 6px solid #14b1bb;
+		padding-bottom: 0px;
+		color: #14b1bb;
+    	background-color: inherit; 
+    	cursor: default;
+	}
+
+	.nav-pills>li>a {
+    	font-size: larger;
+    	border-radius: initial;
+    	cursor: default;
+	}
+
+	.wall{
+
+		background: url(../images/trees-abstract-bokeh.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*opacity: 0.5;*/
+	/*color:#FFF !important;
+	background:linear-gradient(
+      rgba(255, 255, 255, 0.8), 
+      rgba(255, 255, 255, 0.8)
+    ),url(../images/trees-abstract-bokeh.jpg)  !important; 
+background-repeat: no-repeat;
+   height:auto;
+    background-size: cover; 
+    padding-top:5% !important; 
+     padding-bottom:5% !important; */
 	}
