@@ -242,7 +242,7 @@ $scope.form.skills.push({});
 
 		$scope.submit=function(isValid){
 
-      // if (isValid) {
+      if (isValid) {
 
 
 			 var profdata=angular.copy($scope.form);                                    
@@ -299,7 +299,7 @@ $scope.form.skills.push({});
 
 			})
 
-		// }
+		}
 
 		
     };

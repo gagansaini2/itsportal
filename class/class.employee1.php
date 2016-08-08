@@ -27,7 +27,7 @@ class employee1{
 					<div class="container" ng-app="its" ng-controller="wizform">
 
 
-				<form id="fooorm" name="myform" method="POST" ng-submit="submit()" enctype="multipart/form-data" >		
+				<form id="fooorm" name="myform" method="POST" ng-submit="submit(myform.$valid)" enctype="multipart/form-data" >		
 				<div id="rootwizard"  >
 	<div class="navbar">
 	  <div class="navbar-inner">
@@ -319,8 +319,8 @@ class employee1{
 							              <br>
 							              <div class="row">
 							                <div class="form-group col-sm-6" id="gender-group">
-							                  <input type="radio" name="gender" value="male" ng-model="form.gender">Male&nbsp;&nbsp;&nbsp;&nbsp;
-							                  <input type="radio" name="gender" value="female" id="gender" ng-model="form.gender">Female&nbsp;&nbsp;&nbsp;&nbsp;
+							                  <input type="radio" name="gender" value="male" ng-model="form.gender">Male &nbsp;&nbsp;&nbsp;&nbsp;
+							                  <input type="radio" name="gender" value="female" ng-model="form.gender" >Female
 							                  <br>
 							                  <span id="span_gender"></span>
 							                </div>
@@ -976,7 +976,7 @@ class employee1{
 							          <div class="row">
 							          	<div class="form-group col-sm-3" id="age-group"  style="padding-top: 6px;">
 							                  <label>Working Time</label>
-							                  <span id="span_day"></span>
+							                 
 							                </div>
 							                <div class="form-group col-sm-3" id="age-group">
 							                  <select name="workinmonth" class="form-control" placeholder="January" ng-model="form.workinmonth">
@@ -1002,8 +1002,9 @@ class employee1{
 							                </div>
 							                <div class="form-group col-sm-3" id="age-group">
 							                  <input type="text" class="form-control" name="workinyear" placeholder="Year" ng-model="form.workinyear">
-							                  <span id="span_year"></span>
+							                 
 							                </div>
+							                 <span id="span_year"></span>
 							              </div>
 
 
@@ -1123,7 +1124,7 @@ class employee1{
 
 							          <input type="text" class="form-control" name="compname" placeholder="Company Name" ng-model="x.compname"><span id="span_compname"></span>
 							          <br>
-							          <input type="text" class="form-control" name="jobtitle[]" placeholder="Job Title" ng-model="x.jobtitle"><span id="span_jobtitle"></span>
+							          <input type="text" class="form-control" name="jobtitle" placeholder="Job Title" ng-model="x.jobtitle"><span id="span_jobtitle"></span>
 							          <br>
 							          
 							          <div class="row">
@@ -1259,8 +1260,8 @@ class employee1{
 							      <div class="col-sm-11">
 							        <label for="resume-name">Languages Known*</label>
 							        <div class="form-group" >
-							        <selectize config='myConfig1' options='myOptions1' ng-model="form.langs" required></selectize>
-							        <!-- <span ng-if="myform.$invalid" id="langerr" >This field is required.</span> -->
+							        <selectize config='myConfig1' options='myOptions1' ng-model="form.langs" name="langs" required></selectize>
+							        <span ng-if="myform.$submitted && myform.langs.$invalid" style="color:black;">This field is required.</span>
 
 							         <!-- <selectize config='myConfig' options='myOptions' ng-model="myModel"> -->
 
@@ -1344,7 +1345,7 @@ class employee1{
 							      <div class="col-sm-11" style="float:none;">
 							        <label for="resume-name">Any other relevant details</label>
 							        <div class="form-group">
-							          <input type="text" class="form-control" name="anyother" ng-model="form.anyother"/>
+							          <input type="text" class="form-control" name="anyother" ng-model="form.anyother">
 
 							        </div>
 							      </div>

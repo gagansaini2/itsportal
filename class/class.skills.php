@@ -242,6 +242,7 @@ class skills{
 
 echo $fileName = $_FILES['file']['name'];
 echo $filetmp = $_FILES['file']['tmp_name'];
+echo $filesize = $_FILES["file"]["size"];
 // echo $fileType = $_FILES['file']['type'];
 // echo $fileError = $_FILES['file']['error'];
 
@@ -487,18 +488,18 @@ echo $filetmp = $_FILES['file']['tmp_name'];
 
 				
 				    $check = getimagesize($filetmp);
-				    //print_r($check);
+				    // print_r($check);
 				    if($check !== false) {
 				        echo "File is an image - " . $check["mime"] . ".";
 				        $uploadOk = 1;
 
 
-				  //       if ($_FILES["photo"]["size"] > 5000000) {
-						//     echo "Sorry, your file is too large.";
-						//     $uploadOk = 0;
-						// }
+				        if ($filesize > 5000000) {
+						    echo "Sorry, your file is too large.";
+						    $uploadOk = 0;
+						}
 						if (move_uploaded_file($filetmp, $target_file)) {
-						        echo "The file ". basename($fileName). " has been uploaded.";
+						        //echo "The file ". basename($fileName). " has been uploaded.";
 						        $insert_sql_array = array();
 					            $insert_sql_array['image_name'] = $image1;
 					            $insert_sql_array['employee_id'] = $_SESSION['employee_id'];

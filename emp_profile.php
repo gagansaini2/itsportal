@@ -173,7 +173,21 @@ $(document).ready(function() {
 		    country:{
 		    	required: true
 		    }
-		  }
+
+
+		  },
+		 	errorPlacement: function(error, element) {
+			if (element.attr("name") == "gender")
+			    {
+			        error.insertBefore("#span_gender");
+			    }
+			    else
+			    {
+			        error.insertAfter(element);
+			    }
+			}
+
+
 
 		 
 		 	
