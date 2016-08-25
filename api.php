@@ -69,5 +69,56 @@ if ($work=='upload_pic') {
 }
 
 
+if ($work=='view_prof') {
+	
+	$skill_obj -> viewprof();
+}
 
+if ($work=='get_cities') {
+	
+	$skill_obj -> getcities();
+}
+
+if ($work=='save_personal') {
+	
+	$skill_obj -> savechanges_personal();
+}
+
+
+if ($work=='save_exp') {
+	
+	$skill_obj -> savechanges_exp();
+}
+
+
+if ($work=='save_education') {
+	
+	$skill_obj -> savechanges_education();
+}
+
+if ($work=='save_certification') {
+	
+	$skill_obj -> savechanges_certification();
+}
+
+if ($work=='save_skills') {
+	
+	$skill_obj -> savechanges_skills();
+}
+
+if ($work=='save_others') {
+	
+	$skill_obj -> savechanges_others();
+}
+
+if ($work=='comp_submit') {
+	
+	$jobs_obj -> subcompany();
+}
+
+
+if ($work=='job_submit') {
+	
+	$jobs_obj -> submitjob();
+}
  ?>

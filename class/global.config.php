@@ -19,6 +19,7 @@ define("TBL_STATELIST",'tbl_statelist',true);
 define("TBL_LANGUAGES",'tbl_languages',true);
 define("TBL_EMPINFO",'tbl_empinfo',true);
 define("TBL_COUNTRYCODE",'tbl_countrycode',true);
-
+define("TBL_RESUME",'tbl_resume',true);
+define("TBL_LOGO",'tbl_logo',true);
 
 ?>

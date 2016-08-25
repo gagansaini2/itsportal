@@ -48,27 +48,25 @@ class employee1{
 			<div class="col-sm-offset-7 col-sm-5" style="background:#e7e7e7; min-height: 500px; position: absolute; margin-top: 100px;line-height:2.5;" >
 							     
 							        <h3 style="text-align:center;">Applicant form</h3>
-							        <br>
-							        <div class="row">
-							          <div class="col-sm-6">
+							        
+
+							        <div class="col-sm-12" style="text-align:center;">
+
+								          	<img src="images/profile_default.png" class="img-circle" width="150" height="150" ng-if="!form.pic">
+								            <img ng-src="{{form.pic}}" class="img-circle" width="150" height="150" ng-if="form.pic">
+							        </div>
+							       
+							        <div class="col-sm-12">
+							        	<br>
 							            <label>Name: &nbsp;</label><span style="text-transform:capitalize;">{{form.fname}}&nbsp;{{form.mname}}&nbsp;{{form.lname}}</span>
 							            <br>
 							            <label>Email: &nbsp;</label><span>{{form.email}}</span>
 							            <br>
-							            <label>Mob: &nbsp;</label><span>{{form.altcncode}}&nbsp;{{form.phnno}}</span>
+							            <label>Mob: &nbsp;</label><span>{{form.cncode}}&nbsp;{{form.phnno}}</span>
 							            <br>
 							            <label>Preferred Location: &nbsp;</label><span>{{form.preffloc}}</span>
-							            </div>
-							            
-							          
-							          <div class="col-sm-6" style="text-align:center;">
-
-							          	<img src="images/profile_default.png" class="img-circle" width="130" height="130" ng-if="!form.pic">
-							            <img ng-src="{{form.pic}}" class="img-circle" width="130" height="130" ng-if="form.pic">
-							          </div>
-
-							        </div>
-							        <label>Highest Qualification: &nbsp;</label><span>{{form.highquad}}</span>
+							        	<br>
+							        	<label>Highest Qualification: &nbsp;</label><span>{{form.highquad}}</span>
 							            <br>
 							            <label>Specification: &nbsp;</label><span>{{form.spec}}</span>
 							            <br>
@@ -78,9 +76,10 @@ class employee1{
 							            <br>
 							            <label>Notice Period: &nbsp;</label><span>{{form.noticeperiod}}</span>
 							            <br>
-<pre>
+							        </div>   
+<!-- <pre>
 {{json || form}}
-</pre>
+</pre> -->
 
 <!-- <input type="button" ng-click="save()"> -->
 							    </div>
@@ -319,10 +318,10 @@ class employee1{
 							              <br>
 							              <div class="row">
 							                <div class="form-group col-sm-6" id="gender-group">
-							                  <input type="radio" name="gender" value="male" ng-model="form.gender">Male &nbsp;&nbsp;&nbsp;&nbsp;
-							                  <input type="radio" name="gender" value="female" ng-model="form.gender" >Female
+							                  <input type="radio" name="gender" value="male" ng-model="form.gender">&nbsp;Male &nbsp;&nbsp;&nbsp;&nbsp;
+							                  <input type="radio" name="gender" value="female" ng-model="form.gender" >&nbsp;Female
 							                  <br>
-							                  <span id="span_gender"></span>
+							                 
 							                </div>
 							              </div>
 							            </div>
@@ -336,7 +335,7 @@ class employee1{
 											Add photo <input type = "file" name="photo" nv-file-model = "form.myFile" />
 											</span> -->
 										
-											<input type="file" name="myphoto"  fileread="form.pic" />
+											<input type="file" name="myphoto"  id="file" fileread="form.pic" />
 											
 											<!-- <input type="text" id="outerr"> -->
 									
@@ -479,7 +478,7 @@ class employee1{
 
 
 							                 
-							                </select> <span id="span_currentlocation"></span>
+							                </select> 
 							              </div>
 
 
@@ -506,7 +505,7 @@ class employee1{
 
 												?>
 							                </select>
-							                <span id="span_preloc"></span>
+							                
 							              </div>
 							            </div>
 
@@ -527,7 +526,7 @@ class employee1{
 							              <label for="photo">Upload your Resume</label>
 							              <div class="form-group" id="photo-group">
 
-							                <input type="file" name="resume">
+							                <input type="file" name="resume" id="txtfile">
 							                <p class="help-block">Optionally upload your resume for employers to view. Max. file size: 1 MB</p>
 
 							              </div>
@@ -590,7 +589,7 @@ class employee1{
 							          <option value="Masters">Postgraduate</option>
 							          <option value="Undergraduate">Undergraduate</option>
 
-							        </select><span id="span_highestqualification"></span>
+							        </select>
 
 
 							      </div>
@@ -701,7 +700,7 @@ class employee1{
 							      </div>
 							      <div class="form-group col-sm-11">
 							        <label>Qualification</label>
-							        <select name="highestqualification[]" class="form-control" id="highestqualification" ng-model="x.quad">
+							        <select name="highestqualification" class="form-control" id="highestqualification" ng-model="x.quad">
 							          <option value="">Select your highest qualification</option>
 							          <option value="Doctorate/Phd">Doctorate/Phd</option>
 							          <option value="Masters">Postgraduate</option>
@@ -716,28 +715,28 @@ class employee1{
 							      
 							        <div class="form-group col-sm-11">
 							          <label>Course</label>
-							          <input type="text" class="form-control" name="course[]" placeholder="Enter Course" ng-model="x.course">
+							          <input type="text" class="form-control" name="course" placeholder="Enter Course" ng-model="x.course">
 							          <span id="span_course"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
 							          <label>Specialization</label>
-							          <input type="text" class="form-control" name="specialization[]" placeholder="Enter Specialization" ng-model="x.spec">
+							          <input type="text" class="form-control" name="specialization" placeholder="Enter Specialization" ng-model="x.spec">
 							          <span id="span_specialization"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
 							          <label>University/College</label>
-							          <input type="text" class="form-control" name="university[]" placeholder="Institute Name" ng-model="x.college">
+							          <input type="text" class="form-control" name="university" placeholder="Institute Name" ng-model="x.college">
 							          <span id="span_university"></span>
 
 							        </div>
 
 							        <div class="form-group col-sm-11">
 							          <label>City</label>
-							          <input type="text" class="form-control" name="city[]" placeholder="City Name" ng-model="x.clgcity">
+							          <input type="text" class="form-control" name="city" placeholder="City Name" ng-model="x.clgcity">
 							          <span id="span_city"></span>
 
 							        </div>
@@ -746,7 +745,7 @@ class employee1{
 							          <div class="form-group" id="education-dates-group">
 							            <label for="education-dates">Year of Passing</label>
 							            <br>
-							            <select name="year_passing[]" class="form-control" ng-model="x.pasinyr">
+							            <select name="year_passing" class="form-control" ng-model="x.pasinyr">
 							              <option value="">Select</option>
 							              <option value="2016">2016</option>
 							              <option value="2015">2015</option>
@@ -796,7 +795,7 @@ class employee1{
 							              <option value="1971">1971</option>
 							              <option value="1970">1970</option>
 
-							            </select><span id="span_year_passing"></span>
+							            </select>
 
 
 							          </div>
@@ -829,14 +828,14 @@ class employee1{
 								        <div class="row" ng-repeat="x in form.certs">
 							          <div class="col-sm-6">
 
-							            <input type="text" class="form-control" name="certificate[]" id="certificate" placeholder="Certification Name eg. CCNA" ng-model="x.cername">
+							            <input type="text" class="form-control" name="certificate" id="certificate" placeholder="Certification Name eg. CCNA" ng-model="x.cername">
 							            
 							          </div>
 							        
 							        
 							          <div class="col-sm-6" >
 
-							            <input type="text" class="form-control" name="certificatenum[]" id="certificate" placeholder="Certificate No." ng-model="x.cerno">
+							            <input type="text" class="form-control" name="certificatenum" id="certificate" placeholder="Certificate No." ng-model="x.cerno">
 
 							          </div>
 							        </div>
@@ -974,11 +973,11 @@ class employee1{
 							          <br>
 							          
 							          <div class="row">
-							          	<div class="form-group col-sm-3" id="age-group"  style="padding-top: 6px;">
-							                  <label>Working Time</label>
+							          	<div class="form-group col-sm-4" style="padding-top: 6px;">
+							                  <label>Working Since</label>
 							                 
 							                </div>
-							                <div class="form-group col-sm-3" id="age-group">
+							                <div class="form-group col-sm-4" >
 							                  <select name="workinmonth" class="form-control" placeholder="January" ng-model="form.workinmonth">
 							                    <option value="" selected="">Month</option>
 							                    <option value="01">January</option>
@@ -994,17 +993,45 @@ class employee1{
 							                    <option value="11">November</option>
 							                    <option value="12">December</option>
 							                  </select>
-							                  <span id="span_month"></span>
+							                  
 							                </div>
-							                <div class="form-group col-sm-3" id="age-group">
-							                  <input type="text"  class="form-control" name="workinday" placeholder="Date" ng-model="form.workinday">
-							                  <span id="span_day"></span>
-							                </div>
-							                <div class="form-group col-sm-3" id="age-group">
-							                  <input type="text" class="form-control" name="workinyear" placeholder="Year" ng-model="form.workinyear">
+							               
+							                <div class="form-group col-sm-4">
 							                 
+							                 <select name="year_passing" class="form-control" name="workinyear" ng-model="form.workinyear">
+								              <option value="">Year</option>
+								              <option value="2016">2016</option>
+								              <option value="2015">2015</option>
+								              <option value="2014">2014</option>
+								              <option value="2013">2013</option>
+								              <option value="2012">2012</option>
+								              <option value="2011">2011</option>
+								              <option value="2010">2010</option>
+								              <option value="2009">2009</option>
+								              <option value="2008">2008</option>
+								              <option value="2007">2007</option>
+								              <option value="2006">2006</option>
+								              <option value="2005">2005</option>
+								              <option value="2004">2004</option>
+								              <option value="2003">2003</option>
+								              <option value="2002">2002</option>
+								              <option value="2001">2001</option>
+								              <option value="2000">2000</option>
+								              <option value="1999">1999</option>
+								              <option value="1998">1998</option>
+								              <option value="1997">1997</option>
+								              <option value="1996">1996</option>
+								              <option value="1995">1995</option>
+								              <option value="1994">1994</option>
+								              <option value="1993">1993</option>
+								              <option value="1992">1992</option>
+								              <option value="1991">1991</option>
+								              <option value="1990">1990</option>
+								             
+
+							            </select>
 							                </div>
-							                 <span id="span_year"></span>
+							                 
 							              </div>
 
 
@@ -1025,64 +1052,64 @@ class employee1{
 
 							          <select name="anumsal" class="form-control error" ng-model="form.annualsalary">
 
-							            <option value="">Select</option>
-							            <option value="<1 Lac">
-							              <1 Lac</option>
-							                <option value="1" Lacs>1</option>
-							                <option value="2" Lacs>2</option>
-							                <option value="3" Lacs>3</option>
-							                <option value="4" Lacs>4</option>
-							                <option value="5" Lacs>5</option>
-							                <option value="6" Lacs>6</option>
-							                <option value="7" Lacs>7</option>
-							                <option value="8" Lacs>8</option>
-							                <option value="9" Lacs>9</option>
-							                <option value="10 Lacs">10</option>
-							                <option value="11 Lacs">11</option>
-							                <option value="12 Lacs">12</option>
-							                <option value="13 Lacs">13</option>
-							                <option value="14 Lacs">14</option>
-							                <option value="15 Lacs">15</option>
-							                <option value="16 Lacs">16</option>
-							                <option value="17 Lacs">17</option>
-							                <option value="18 Lacs">18</option>
-							                <option value="19 Lacs">19</option>
-							                <option value="20 Lacs">20</option>
-							                <option value="21 Lacs">21</option>
-							                <option value="22 Lacs">22</option>
-							                <option value="23 Lacs">23</option>
-							                <option value="24 Lacs">24</option>
-							                <option value="25 Lacs">25</option>
-							                <option value="26 Lacs">26</option>
-							                <option value="27 Lacs">27</option>
-							                <option value="28 Lacs">28</option>
-							                <option value="29 Lacs">29</option>
-							                <option value="30 Lacs">30</option>
-							                <option value="31 Lacs">31</option>
-							                <option value="32 Lacs">32</option>
-							                <option value="33 Lacs">33</option>
-							                <option value="34 Lacs">34</option>
-							                <option value="35 Lacs">35</option>
-							                <option value="36 Lacs">36</option>
-							                <option value="37 Lacs">37</option>
-							                <option value="38 Lacs">38</option>
-							                <option value="39 Lacs">39</option>
-							                <option value="40 Lacs">40</option>
-							                <option value="41 Lacs">41</option>
-							                <option value="42 Lacs">42</option>
-							                <option value="43 Lacs">43</option>
-							                <option value="44 Lacs">44</option>
-							                <option value="45 Lacs">45</option>
-							                <option value="46 Lacs">46</option>
-							                <option value="47 Lacs">47</option>
-							                <option value="48 Lacs">48</option>
-							                <option value="49 Lacs">49</option>
-							                <option value="50 Lacs">50</option>
-							                <option value="50+ Lacs">50+</option>
+							             <option value="Select">Select</option>
+					            <option value="<1 Lac">
+					              <1 Lac</option>
+					                <option value="1 Lacs">1 Lacs</option>
+					                <option value="2 Lacs">2 Lacs</option>
+					                <option value="3 Lacs">3 Lacs</option>
+					                <option value="4 Lacs">4 Lacs</option>
+					                <option value="5 Lacs">5 Lacs</option>
+					                <option value="6 Lacs">6 Lacs</option>
+					                <option value="7 Lacs">7 Lacs</option>
+					                <option value="8 Lacs">8 Lacs</option>
+					                <option value="9 Lacs">9 Lacs</option>
+					                <option value="10 Lacs">10 Lacs</option>
+					                <option value="11 Lacs">11 Lacs</option>
+					                <option value="12 Lacs">12 Lacs</option>
+					                <option value="13 Lacs">13 Lacs</option>
+					                <option value="14 Lacs">14 Lacs</option>
+					                <option value="15 Lacs">15 Lacs</option>
+					                <option value="16 Lacs">16 Lacs</option>
+					                <option value="17 Lacs">17 Lacs</option>
+					                <option value="18 Lacs">18 Lacs</option>
+					                <option value="19 Lacs">19 Lacs</option>
+					                <option value="20 Lacs">20 Lacs</option>
+					                <option value="21 Lacs">21 Lacs</option>
+					                <option value="22 Lacs">22 Lacs</option>
+					                <option value="23 Lacs">23 Lacs</option>
+					                <option value="24 Lacs">24 Lacs</option>
+					                <option value="25 Lacs">25 Lacs</option>
+					                <option value="26 Lacs">26 Lacs</option>
+					                <option value="27 Lacs">27 Lacs</option>
+					                <option value="28 Lacs">28 Lacs</option>
+					                <option value="29 Lacs">29 Lacs</option>
+					                <option value="30 Lacs">30 Lacs</option>
+					                <option value="31 Lacs">31 Lacs</option>
+					                <option value="32 Lacs">32 Lacs</option>
+					                <option value="33 Lacs">33 Lacs</option>
+					                <option value="34 Lacs">34 Lacs</option>
+					                <option value="35 Lacs">35 Lacs</option>
+					                <option value="36 Lacs">36 Lacs</option>
+					                <option value="37 Lacs">37 Lacs</option>
+					                <option value="38 Lacs">38 Lacs</option>
+					                <option value="39 Lacs">39 Lacs</option>
+					                <option value="40 Lacs">40 Lacs</option>
+					                <option value="41 Lacs">41 Lacs</option>
+					                <option value="42 Lacs">42 Lacs</option>
+					                <option value="43 Lacs">43 Lacs</option>
+					                <option value="44 Lacs">44 Lacs</option>
+					                <option value="45 Lacs">45 Lacs</option>
+					                <option value="46 Lacs">46 Lacs</option>
+					                <option value="47 Lacs">47 Lacs</option>
+					                <option value="48 Lacs">48 Lacs</option>
+					                <option value="49 Lacs">49 Lacs</option>
+					                <option value="50 Lacs">50 Lacs</option>
+					                <option value="50+ Lacs">50+ Lacs</option>
 
 
 							          </select>
-							          <span id="span_salary"></span>
+							          
 							        </div>
 							      </div>
 
@@ -1101,7 +1128,7 @@ class employee1{
 							                  <option value="2 months">2 months</option>
 							                  <option value="3 months">3 months</option>
 							            </select>
-							            <span id="span_notice"></span>
+							            
 							          </div>
 							        </div>
 							        <div class="col-sm-6" style="padding: 24px 0px 10px 40px;">
@@ -1128,12 +1155,12 @@ class employee1{
 							          <br>
 							          
 							          <div class="row">
-							          	<div class="form-group col-sm-3" id="age-group"  style="padding-top: 6px;">
-							                  <label>Working Time</label>
+							          	<div class="form-group col-sm-4" id="age-group"  style="padding-top: 6px;">
+							                  <label>Working Since</label>
 							                  <span id="span_day"></span>
 							                </div>
-							                <div class="form-group col-sm-3" id="age-group">
-							                  <select name="workinmonth[]" id="month" class="form-control" placeholder="January" ng-model="x.workinmonth">
+							                <div class="form-group col-sm-4" id="age-group">
+							                  <select name="workinmonth" class="form-control" placeholder="January" ng-model="x.workinmonth">
 							                    <option value="" selected="">Month</option>
 							                    <option value="01">January</option>
 							                    <option value="02">February</option>
@@ -1150,13 +1177,41 @@ class employee1{
 							                  </select>
 							                  <span id="span_month"></span>
 							                </div>
-							                <div class="form-group col-sm-3" id="age-group">
-							                  <input type="text" id="age" class="form-control" name="workinday[]" placeholder="Date" ng-model="x.workinday">
-							                  <span id="span_day"></span>
-							                </div>
-							                <div class="form-group col-sm-3" id="age-group">
-							                  <input type="text" id="age" class="form-control" name="workinyear[]" placeholder="Year" ng-model="x.workinyear">
-							                  <span id="span_year"></span>
+							               
+							                <div class="form-group col-sm-4" id="age-group">
+							                  
+							                  <select name="year_passing" class="form-control" name="workinyear" ng-model="x.workinyear">
+								              <option value="">Year</option>
+								              <option value="2016">2016</option>
+								              <option value="2015">2015</option>
+								              <option value="2014">2014</option>
+								              <option value="2013">2013</option>
+								              <option value="2012">2012</option>
+								              <option value="2011">2011</option>
+								              <option value="2010">2010</option>
+								              <option value="2009">2009</option>
+								              <option value="2008">2008</option>
+								              <option value="2007">2007</option>
+								              <option value="2006">2006</option>
+								              <option value="2005">2005</option>
+								              <option value="2004">2004</option>
+								              <option value="2003">2003</option>
+								              <option value="2002">2002</option>
+								              <option value="2001">2001</option>
+								              <option value="2000">2000</option>
+								              <option value="1999">1999</option>
+								              <option value="1998">1998</option>
+								              <option value="1997">1997</option>
+								              <option value="1996">1996</option>
+								              <option value="1995">1995</option>
+								              <option value="1994">1994</option>
+								              <option value="1993">1993</option>
+								              <option value="1992">1992</option>
+								              <option value="1991">1991</option>
+								              <option value="1990">1990</option>
+								             
+
+							            </select>
 							                </div>
 							              </div>
 
@@ -1277,60 +1332,61 @@ class employee1{
 							          <label for="resume-name">Expected Salary &nbsp;&nbsp;&nbsp;<span class="help-block" style="display:initial;">Lacs per anum </span></label>
 							          <select class="form-control" name="expectedsalary" class="error" ng-model="form.expsal">
 
-							            <option value="Select">Select</option>
-							            <option value="<1 Lac">
-							              <1 Lac</option>
-							                <option value="1">1</option>
-							                <option value="2">2</option>
-							                <option value="3">3</option>
-							                <option value="4">4</option>
-							                <option value="5">5</option>
-							                <option value="6">6</option>
-							                <option value="7">7</option>
-							                <option value="8">8</option>
-							                <option value="9">9</option>
-							                <option value="10">10</option>
-							                <option value="11">11</option>
-							                <option value="12">12</option>
-							                <option value="13">13</option>
-							                <option value="14">14</option>
-							                <option value="15">15</option>
-							                <option value="16">16</option>
-							                <option value="17">17</option>
-							                <option value="18">18</option>
-							                <option value="19">19</option>
-							                <option value="20">20</option>
-							                <option value="21">21</option>
-							                <option value="22">22</option>
-							                <option value="23">23</option>
-							                <option value="24">24</option>
-							                <option value="25">25</option>
-							                <option value="26">26</option>
-							                <option value="27">27</option>
-							                <option value="28">28</option>
-							                <option value="29">29</option>
-							                <option value="30">30</option>
-							                <option value="31">31</option>
-							                <option value="32">32</option>
-							                <option value="33">33</option>
-							                <option value="34">34</option>
-							                <option value="35">35</option>
-							                <option value="36">36</option>
-							                <option value="37">37</option>
-							                <option value="38">38</option>
-							                <option value="39">39</option>
-							                <option value="40">40</option>
-							                <option value="41">41</option>
-							                <option value="42">42</option>
-							                <option value="43">43</option>
-							                <option value="44">44</option>
-							                <option value="45">45</option>
-							                <option value="46">46</option>
-							                <option value="47">47</option>
-							                <option value="48">48</option>
-							                <option value="49">49</option>
-							                <option value="50">50</option>
-							                <option value="50+">50+</option>
+							           <option value="Select">Select</option>
+	            <option value="<1 Lac">
+	              <1 Lac</option>
+	                <option value="1 Lacs">1 Lacs</option>
+	                <option value="2 Lacs">2 Lacs</option>
+	                <option value="3 Lacs">3 Lacs</option>
+	                <option value="4 Lacs">4 Lacs</option>
+	                <option value="5 Lacs">5 Lacs</option>
+	                <option value="6 Lacs">6 Lacs</option>
+	                <option value="7 Lacs">7 Lacs</option>
+	                <option value="8 Lacs">8 Lacs</option>
+	                <option value="9 Lacs">9 Lacs</option>
+	                <option value="10 Lacs">10 Lacs</option>
+	                <option value="11 Lacs">11 Lacs</option>
+	                <option value="12 Lacs">12 Lacs</option>
+	                <option value="13 Lacs">13 Lacs</option>
+	                <option value="14 Lacs">14 Lacs</option>
+	                <option value="15 Lacs">15 Lacs</option>
+	                <option value="16 Lacs">16 Lacs</option>
+	                <option value="17 Lacs">17 Lacs</option>
+	                <option value="18 Lacs">18 Lacs</option>
+	                <option value="19 Lacs">19 Lacs</option>
+	                <option value="20 Lacs">20 Lacs</option>
+	                <option value="21 Lacs">21 Lacs</option>
+	                <option value="22 Lacs">22 Lacs</option>
+	                <option value="23 Lacs">23 Lacs</option>
+	                <option value="24 Lacs">24 Lacs</option>
+	                <option value="25 Lacs">25 Lacs</option>
+	                <option value="26 Lacs">26 Lacs</option>
+	                <option value="27 Lacs">27 Lacs</option>
+	                <option value="28 Lacs">28 Lacs</option>
+	                <option value="29 Lacs">29 Lacs</option>
+	                <option value="30 Lacs">30 Lacs</option>
+	                <option value="31 Lacs">31 Lacs</option>
+	                <option value="32 Lacs">32 Lacs</option>
+	                <option value="33 Lacs">33 Lacs</option>
+	                <option value="34 Lacs">34 Lacs</option>
+	                <option value="35 Lacs">35 Lacs</option>
+	                <option value="36 Lacs">36 Lacs</option>
+	                <option value="37 Lacs">37 Lacs</option>
+	                <option value="38 Lacs">38 Lacs</option>
+	                <option value="39 Lacs">39 Lacs</option>
+	                <option value="40 Lacs">40 Lacs</option>
+	                <option value="41 Lacs">41 Lacs</option>
+	                <option value="42 Lacs">42 Lacs</option>
+	                <option value="43 Lacs">43 Lacs</option>
+	                <option value="44 Lacs">44 Lacs</option>
+	                <option value="45 Lacs">45 Lacs</option>
+	                <option value="46 Lacs">46 Lacs</option>
+	                <option value="47 Lacs">47 Lacs</option>
+	                <option value="48 Lacs">48 Lacs</option>
+	                <option value="49 Lacs">49 Lacs</option>
+	                <option value="50 Lacs">50 Lacs</option>
+	                <option value="50+ Lacs">50+ Lacs</option>
+
 
 
 							          </select>
@@ -1351,7 +1407,7 @@ class employee1{
 							      </div>
 
 							      <div class="col-sm-11" >
-							        <label for="resume-name">Key Skills</label>
+							        <label >Key Skills</label>
 							        <br>
 							        <div class="row" ng-repeat="x in form.skills">
 							        <div class="form-group col-sm-7" >

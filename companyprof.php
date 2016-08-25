@@ -34,7 +34,7 @@ $user_obj=new employer();
 
 		<!-- ============ RESUME START ============ -->
 
-		<section id="resume">
+		<section ng-app="its" ng-controller="companyprof">
 			
 
 

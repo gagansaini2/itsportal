@@ -1,6 +1,6 @@
 <?php include('include/common_includes.php');  ?>
-<?php require_once("class/class.user.php"); 
-
+<?php require_once("class/class.employee1.php"); 
+$user_obj = new employee1();
  ?>
  <?php  require_once("class/config.inc.php"); ?>
 <!DOCTYPE html>
@@ -12,27 +12,14 @@
 <meta name="description" content="Jobseek - Job Board Responsive HTML Template">
 <meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
 <title>ITS Recruitment</title>
-<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-		<script src="js/html5shiv.js"></script>
-		<script src="js/respond.min.js"></script>
-		<![endif]-->
-<link rel="shortcut icon" href="images/favicon.png">
 
-    <!-- Main Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+<link rel="shortcut icon" href="images/favicon.png">
+<link href="css/style.css" rel="stylesheet">
 </head>
-<body id="home">
+<body >
 
 
 <?php include('include/header.php'); ?>
-<!-- ============ PAGE LOADER START ============ -->
-
-
-
-<!-- ============ HEADER END ============ --> 
-
-<!-- ============ SLIDES START ============ -->
 
 <div id="slider" class="sl-slider-wrapper">
   <div class="sl-slider">

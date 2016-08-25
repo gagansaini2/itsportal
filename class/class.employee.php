@@ -147,7 +147,7 @@ class employee{
 									$this->auth->Create_Session1($username,$this->user_id,$this->name,$this->user_type,$this->company_id,$this->employee_id);
 									?>
 									<script type="text/javascript">
-									window.location="emp_type.php";
+									window.location="index.php";
 									</script>
 									<?php
 									exit();
@@ -329,9 +329,9 @@ class employee{
 							$this->db->insert(TBL_USER,$insert_sql_array);
 
 
-							 $to = "gsaini94@ymail.com";
+							 $to = "gagan@itstraining.in";
 						                    
-						                            $subject = "New registration @ Sales web" ;
+						                            $subject = "New registration @ Its Recruitment" ;
 						                            $comment = '<div style="text-align:left">
 
 						                            <p>Hello ,</p>
@@ -340,12 +340,12 @@ class employee{
 						                            <p>Regards,</p>
 						                            <p>The Salesweb Team</p>
 						                            </div>';
-						                            $header = "From: noreply@Salesweb.com\r\n"; 
+						                            $header = "From: noreply@its.com\r\n"; 
 						                            $header.= "MIME-Version: 1.0\r\n"; 
 						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 						                            $header.= "X-Priority: 1\r\n"; 
 
-						                            //mail($to, $subject, $comment, $header);
+						                            // mail($to, $subject, $comment, $header);
 							
 							
 							?>

@@ -307,7 +307,16 @@ else                /* send the submitted data */
 <script src="js\bower_components\jquery\dist\jquery.min.js"></script>
 
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 <script src="angular/bower_components/angular/angular.js"></script>
+<script src="angular/bower_components/angular-route/angular-route.min.js"></script>
+<script src="angular/bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="angular/bower_components/angular-touch/angular-touch.min.js"></script>
+<script src="angular/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="angular/bower_components/angular-bootstrap/ui-bootstrap-custom-2.0.2.min.js"></script>
+<script src="angular/bower_components/angular-bootstrap/ui-bootstrap-custom-tpls-2.0.2.min.js"></script>
+
+
 <script src="angular/app.js"></script>
 <script src="js\bower_components\bower_components\angular-file-upload\dist/angular-file-upload.js"></script>
     

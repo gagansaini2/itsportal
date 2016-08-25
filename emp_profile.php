@@ -17,7 +17,7 @@ $user_obj=new employee1();
 		<link rel="stylesheet" href="js/bower_components/selectize/dist/css/selectize.default.css ">
 		<!-- <link rel="stylesheet" type="text/css" href="js\bower_components\bootstrap\dist\css\bootstrap.min.css"> -->
 		<!-- Main Stylesheet -->
-		<!-- <link href="css/style.css" rel="stylesheet"> -->
+		<link href="css/style.css" rel="stylesheet">
 
 		<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -37,7 +37,7 @@ $user_obj=new employee1();
 
 		<!-- ============ RESUME START ============ -->
 
-		<section id="resume" class="">
+		<section>
 			
 
 
@@ -65,7 +65,7 @@ $user_obj=new employee1();
 	</body>
 </html>
 
-<script src="js\bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
+<!-- <script src="js\bower_components\bootstrap\dist\js\bootstrap.min.js"></script> -->
 <script src="js\bower_components\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
 
@@ -172,6 +172,12 @@ $(document).ready(function() {
 		    },
 		    country:{
 		    	required: true
+		    },
+		    myphoto:{
+		    	extension: "jpg|jpeg|png"
+		    },
+		    resume:{
+		    	extension: "doc|docx|txt"
 		    }
 
 
@@ -245,20 +251,7 @@ $(document).ready(function() {
 });
 
 </script>
-<script type="text/javascript">
-							jQuery(document).ready(function($)
-							{
-								$("#s2example-2").select2({
-									placeholder: 'Choose your favorite US Countries',
-									allowClear: true
-								}).on('select2-open', function()
-								{
-									// Adding Custom Scrollbar
-									$(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-								});
-								
-							});
-						</script>
+
 
 
 

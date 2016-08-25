@@ -34,7 +34,28 @@ $user_obj=new employer();
 
 		<!-- ============ RESUME START ============ -->
 
-		<section id="resume">
+		<section ng-app="its" ng-controller="companyprof">
+
+			<div class="modal fade" id="myyModal" data-backdrop="static" role="dialog">
+			    <div class="modal-dialog" style="margin-top:200px;">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header  text-center">
+			          
+			          <h3 class="modal-title">Your Job has been posted</h3>
+			        </div>
+			       
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" style="float:left;" ><a href="jobslist.php">See Jobs List</a></button>
+
+			          <button type="button" class="btn btn-default" style="float:right;"><a href="" onclick="location.reload()">Add more Jobs</a></button>
+			        </div>
+			      </div>
+			      
+			    </div>
+			  </div>
+
 			
 
 

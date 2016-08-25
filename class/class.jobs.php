@@ -41,8 +41,20 @@ class jobs{
 
 			while($row= $this->db->fetch_array($result)){
 				$id=$row['job_id'];
+				$comp_id=$row['company_id'];
 
-				// print_r($id);
+				
+				$skills=json_decode($row['key_skills']);
+
+				$key_skills=implode(", ",$skills);
+
+				$sql1="select * from ".TBL_LOGO." where company_id = '".$comp_id."' ";
+				$result1= $this->db->query($sql1,__FILE__,__LINE__);
+				$row1= mysql_fetch_assoc($result1);
+				$imglogo=$row1['logo_name'];
+
+
+				// print_r($row1);
 
 			?>
 
@@ -60,7 +72,15 @@ class jobs{
 							<a href="job_details.php?id=<?php echo($id) ?>"  class="featured applied">
 								<div class="row">
 									<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
-										<img src="http://placehold.it/60x60.jpg" alt="" class="img-responsive" />
+										<?php
+										if (isset($imglogo)) { ?>
+
+											<img src='uploads/<?php echo($imglogo); ?>' class='img-responsive' >
+
+										<?php }
+										
+										?>
+										 
 									</div>
 									<div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 job-title">
 										<h5><?php echo $row['role_title']; ?></h5>
@@ -68,15 +88,16 @@ class jobs{
 									</div>
 									<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
 										
-										<p><i class="fa fa-map-marker" aria-hidden="true"></i><strong>  <?php echo $row['role_location']; ?></strong></p>
-										<p><i class="fa fa-briefcase" aria-hidden="true"></i><strong>  <?php echo $row['job_experience']; ?> years</strong></p>
+										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  <?php echo $row['role_location']; ?></strong></p>
+										<p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;<strong><?php echo $row['job_experience']; ?> years</strong></p>
 									</div>
 									<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs job-type text-center">
 										<p class="job-salary"><strong>$128,000</strong></p>
 										<p class="badge full-time"><?php echo $row['job_type']; ?></p>
 									</div>
-									<div class="col-lg-2 job-dates visible-lg-block">
-										<p class="job-posted"><strong>Posted 3 months ago</strong></p>
+									<div class="col-lg-2 visible-lg-block">
+
+										<p class="job-posted"><strong><?php echo $key_skills; ?></strong></p>
 										
 									</div>
 								</div>
@@ -220,6 +241,140 @@ class jobs{
 
 
 
+	}
+
+	function subcompany(){
+
+
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+			// print_r($_REQUEST);
+			// print_r($_FILES);
+
+			 	$fileName = $_FILES['logo']['name'];
+				$filetmp = $_FILES['logo']['tmp_name'];
+				$filesize = $_FILES["logo"]["size"];
+
+
+				$company=json_decode($_REQUEST['companydata'], true);
+
+							$insert_sql_array = array();
+							$insert_sql_array['company_name'] = $company['company_name'];
+							$insert_sql_array['company_email'] = $company['company_email'];
+							$insert_sql_array['company_location'] = $company['company_location'];
+							$insert_sql_array['company_num'] = $company['company_num'];
+							$insert_sql_array['company_website'] = $company['company_website'];
+							$insert_sql_array['company_type'] = $company['company_type'];
+							$insert_sql_array['company_description'] = $company['company_description'];
+							$insert_sql_array['company_vision'] = $company['company_vision'];
+							$insert_sql_array['company_mission'] = $company['company_mission'];
+
+							$insert_sql_array['user_id']=$_SESSION['user_id'];
+							
+							$this->db->insert(TBL_COMPANY,$insert_sql_array);
+
+							
+							$id=$this->db->last_insert_id();
+							$_SESSION['company_id']=$id;
+
+							$insert_sql_array = array();
+							$insert_sql_array['company_id']=$_SESSION['company_id'];
+							$this->db->update(TBL_USER,$insert_sql_array,user_id,$_SESSION['user_id']);
+
+				
+
+				//image............
+							
+
+							$image = sha1(uniqid());
+							$target_dir = "uploads/";
+							
+							
+							$imageFileType = pathinfo($fileName,PATHINFO_EXTENSION);
+							$image1 = $image. "." .$imageFileType;
+							$target_file = $target_dir . $image. "." .$imageFileType;
+
+							$uploadOk = 1;
+
+								if (isset($fileName)) {
+									
+							    $check = getimagesize($filetmp);
+							     // print_r($check);
+							    if($check !== false) {
+							        echo "File is an image - " . $check["mime"] . ".";
+							        $uploadOk = 1;
+
+
+							        if ($filesize > 5000000) {
+									    echo "Sorry, your file is too large.";
+									    $uploadOk = 0;
+									}
+									if (move_uploaded_file($filetmp, $target_file)) {
+									        //echo "The file ". basename($fileName). " has been uploaded.";
+									        $insert_sql_array = array();
+								            $insert_sql_array['logo_name'] = $image1;
+								            $insert_sql_array['company_id'] = $_SESSION['company_id'];
+								            $insert_sql_array['user_id'] = $_SESSION['user_id'];
+								            $this->db->insert(TBL_LOGO,$insert_sql_array);
+
+
+								    } else {
+								        echo "Sorry, there was an error uploading your file.";
+								    }
+
+							    } else {
+							        echo "File is not an image.";
+							        $uploadOk = 0;
+							    }
+							    
+								}
+							
+
+				$resp['data']=$company['company_name'];
+
+				echo json_encode($resp);
+
+	}
+
+
+	function submitjob(){
+
+		$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+			$job=json_decode($_REQUEST['job'], true);
+			$skills=json_encode($job['keyskills']);
+
+
+					$insert_sql_array = array();
+					$insert_sql_array['role_title'] = $job['roletitle'];
+					$insert_sql_array['department'] = $job['department'];
+					$insert_sql_array['role_location'] = $job['rolelocation'];
+					$insert_sql_array['job_type'] = $job['jobtype'];
+					$insert_sql_array['qualifications'] = $job['qualifications'];
+					$insert_sql_array['job_description'] = $job['description'];
+					$insert_sql_array['job_experience'] = $job['req_experience'];
+					$insert_sql_array['job_designation'] = $job['designation'];
+					$insert_sql_array['remuneration'] = $job['remuneration'];
+					$insert_sql_array['key_skills'] = $skills;
+					$insert_sql_array['keys_accountabilities'] = $job['keysaccountabilities'];
+
+					$insert_sql_array['user_id']=$_SESSION['user_id'];
+					$insert_sql_array['company_id']=$_SESSION['company_id'];
+
+
+					$this->db->insert(TBL_JOBS,$insert_sql_array);
+
+
+
+			$resp['data']=$job['roletitle'];
+
+			echo json_encode($resp);
 	}
 
 
