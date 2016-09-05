@@ -99,6 +99,12 @@ class employee{
 						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
 						<button class="btn btn-primary btn-lg" name="submit" value="register" onclick="return <?php echo $ValidationFunctionName;?>()" >Sign in <i class="fa fa-arrow-right"></i></button>
 					</div>
+
+					<div class="row text-center">
+						<br>
+						<label>New Candidate -</label> <a href="signup.php">Sign Up Now</a>
+					</div>
+
 				</div>
 					
 					<!-- Resume File Start -->
@@ -329,23 +335,28 @@ class employee{
 							$this->db->insert(TBL_USER,$insert_sql_array);
 
 
-							 $to = "gagan@itstraining.in";
+							 $to = $this->username;
 						                    
 						                            $subject = "New registration @ Its Recruitment" ;
 						                            $comment = '<div style="text-align:left">
 
 						                            <p>Hello ,</p>
-						                            <p>New user has been registered with username "'.$username.'"
+						                            <p>Your Account has been created with </p>
+						                            <p>Username: "'.$this->username.'"</p>
+						                            <p>Password: "'.$this->password.'"
+						                            
+
+
 						                            
 						                            <p>Regards,</p>
-						                            <p>The Salesweb Team</p>
+						                            <p>The Its Recruitment</p>
 						                            </div>';
 						                            $header = "From: noreply@its.com\r\n"; 
 						                            $header.= "MIME-Version: 1.0\r\n"; 
 						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 						                            $header.= "X-Priority: 1\r\n"; 
 
-						                            // mail($to, $subject, $comment, $header);
+						                             // mail($to, $subject, $comment, $header);
 							
 							
 							?>
@@ -4044,6 +4055,169 @@ class employee{
 
 	}
 
-	
+
+	function header(){
+
+
+
+
+							 ?>
+
+					<div id="loader"> <i class="fa fa-cog fa-4x fa-spin"></i> </div>
+
+					<!-- ============ PAGE LOADER END ============ --> 
+
+					<!-- ============ NAVBAR START ============ -->
+					<link rel="shortcut icon" href="images/favicon.png">
+
+					    <!-- Main Stylesheet -->
+					    <link href="css/style.css" rel="stylesheet">
+
+
+					<!-- ============ NAVBAR END ============ --> 
+
+					<!-- ============ HEADER START ============ -->
+
+
+
+
+					<?php 
+
+
+					if (isset($_SESSION['user_id'])) {
+
+					   $sql="select * from ".TBL_USER." where user_id='".$_SESSION['user_id']."' "; 
+					  $result= $this->db->query($sql,__FILE__,__LINE__);
+					  $row= mysql_fetch_assoc($result);
+					  print_r($sql);
+					  print_r($result);
+					  $usertype=$row['type'];
+
+
+					        if ($usertype ==  2) { ?>
+
+					         <header>
+					            <div class="navbar navbar-default" style="margin-top:-10px; max-height: 60px;">
+					            <div class="navbar-header">
+					              <!-- <div class="navbar-header">
+					                <a class="navbar-brand" href="#">WebSiteName</a>
+					              </div> -->
+					                <div class="navbar-brand">
+					                    <div id="logo"><a href="index.php"><img src="images/logo_new.png" alt="ITS Recruitment" /></a></div>
+					                  </div>
+					            </div>      
+					              <ul class="nav navbar-nav pull-right" style="margin-right:80px;">
+					              
+					                <li class="active"><a href="index.php">Home</a></li>
+					                <li><a href="about.php">About Us</a></li>
+					                <li><a href="company.php">Our Process</a></li>
+					                <li><a href="jobslist.php">Jobs</a></li>
+					                <li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' style='text-transform:capitalize;'><?php echo $_SESSION['name'];?> &nbsp; <span class='caret'></span></a> 
+					                <ul role='menu' class='dropdown-menu'>
+
+					                <?php 
+					  
+					                    $sql1="select count(*) as total from ".TBL_EMPLOYEE_DEL." where user_id='".$_SESSION['user_id']."'";
+					                    $result1=$this->db->query($sql1,__FILE__,__LINE__);
+					                    $row1=mysql_fetch_assoc($result1);
+					                    
+					                      if ($row1['total'] > 0) {
+					                       
+					                        echo "<li><a href='view_profile.php'>View/Edit My Profile</a></li>";
+					                      }else{
+					                        echo "<li><a href='emp_type.php'>Upload Your Profile</a></li>";
+					                      }
+					                      
+					                      echo "<li><a href='logout.php'>Logout</a></li>";
+					                ?>      
+
+					                </ul></li>      
+					              
+					              </ul>
+					            
+					            </div>
+					                
+					        </header>    
+
+					     <?php }elseif($usertype == 3) { ?>  
+					     
+
+					                 <header>
+					                        <div class="navbar navbar-default" style="margin-top:-10px; max-height: 60px;">
+					                        <div class="navbar-header">
+					                          <!-- <div class="navbar-header">
+					                            <a class="navbar-brand" href="#">WebSiteName</a>
+					                          </div> -->
+					                            <div class="navbar-brand">
+					                                <div id="logo"><a href="index.php"><img src="images/logo_new.png" alt="ITS Recruitment" /></a></div>
+					                              </div>
+					                        </div>      
+					                          <ul class="nav navbar-nav pull-right" style="margin-right:80px;">
+					                          
+					                            <li class="active"><a href="index.php">Home</a></li>
+					                            <li><a href="about.php">About Us</a></li>
+					                            <li><a href="company.php">Our Process</a></li>
+					                            <li><a href="jobslist.php">Jobs</a></li>
+					                            <li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' style='text-transform:capitalize;'><?php echo $_SESSION['name'];?> &nbsp; <span class='caret'></span></a> 
+					                            <ul role='menu' class='dropdown-menu'>
+					                            <?php 
+
+					                                $sql2="select count(*) as total from ".TBL_EMPLOYEE_DEL." where user_id='".$_SESSION['user_id']."'";
+					                                $result2=$this->db->query($sql2,__FILE__,__LINE__);
+					                                $row=mysql_fetch_assoc($result2);
+
+					                                  if ($row2['total'] > 0) {
+					                                   
+					                                    // echo "<li><a href=''>View/Edit My Profile</a></li>";
+					                                  }else{
+					                                    echo "<li><a href='companyprof.php'>Upload Your Profile</a></li>";
+					                                  }
+					                                  echo "<li><a href='postjob.php'>Post a Job</a></li>";
+					                                  echo "<li><a href='logout.php'>Logout</a></li>";
+					                            ?>
+					                                </ul></li>  
+					                            </ul>
+					                        
+					                        </div>
+					                            
+					                  </header>
+
+					          <?php   }
+
+
+					  } else{  ?>
+
+					                  <header>
+					                      <div class="navbar navbar-default" style="margin-top:-10px; max-height: 60px;">
+					                      <div class="navbar-header">
+					                        <!-- <div class="navbar-header">
+					                          <a class="navbar-brand" href="#">WebSiteName</a>
+					                        </div> -->
+					                          <div class="navbar-brand">
+					                              <div id="logo"><a href="index.php"><img src="images/logo_new.png" alt="ITS Recruitment" /></a></div>
+					                            </div>
+					                      </div>      
+					                        <ul class="nav navbar-nav pull-right" style="margin-right:80px;">
+					                        
+					                          <li class="active"><a href="index.php">Home</a></li>
+					                          <li><a href="about.php">About Us</a></li>
+					                          <li><a href="company.php">Our Process</a></li>
+					                          <li><a href="jobslist.php">Jobs</a></li>
+					                         
+					                          <li><a href='signin.php'>Post a Resume</a></li>
+					                          <li><a href='signin-employer.php'>Post a Job</a></li>  
+
+					                        </ul>
+					                      
+					                    </div>
+					                          
+					                    </header>
+
+
+
+					    <?php    }
+
+	}
+ 		
 }
 ?> 

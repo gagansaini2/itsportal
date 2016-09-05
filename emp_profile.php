@@ -178,8 +178,13 @@ $(document).ready(function() {
 		    },
 		    resume:{
 		    	extension: "doc|docx|txt"
+		    },
+		    disabilitytype:{
+		    	required: true
+		    },
+		    passportnum:{
+		    	required: true
 		    }
-
 
 		  },
 		 	errorPlacement: function(error, element) {

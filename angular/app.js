@@ -114,13 +114,18 @@ $http({
  		method: "POST",
         url: "api.php?work=get_lang"
       }).then(function(response){
-      	// console.log(response.data.data);
+      	 // console.log(response);
 
-      	angular.forEach(response.data.data, function(child){
-        $scope.myOptions1.push(child);
+      	// angular.forEach(response.data.data, function(child){
+       //  $scope.myOptions1.push(child);
 
-      	});
-		
+      	// }); 
+	       for(var x in response.data.data){
+            $scope.myOptions1.push({lang: response.data.data[x]});
+         }	
+    // for(i=0 ;i <response.data.data.length; i++){
+    //     $scope.myOptions1.push({lang: response.data.data[i]});
+    //   }
       });  
 
 
@@ -162,7 +167,7 @@ $scope.form.skills.push({});
 
 //save the info.............
 
-$( window ).unload(function() {
+$(window).unload(function() {
 
 	// console.log("super");
   				
@@ -305,7 +310,7 @@ $( window ).unload(function() {
 
 			})
 
-      // window.location="index.php"
+      //window.location="index.php"
 
 		}
 
@@ -426,14 +431,15 @@ $http({
   }).then(function(response){
     // console.log(response);
     $scope.info.personal=response.data.data.personal;
+    $scope.info.image=response.data.data.image;
     $scope.info.edducation=response.data.data.eddu;
     $scope.info.experince=response.data.data.exp;
     $scope.info.others=response.data.data.others;
     $scope.info.certificates=response.data.data.certificates;
     $scope.info.keyskills=response.data.data.keyskills;
 
-    $scope.info.others.languages=$scope.info.others.languages_known.toString();
-    console.log($scope.info);
+    // $scope.info.others.languages=$scope.info.others.languages_known.toString();
+    // console.log($scope.info.others);
   })
 
 
@@ -448,11 +454,14 @@ $http({
       }).then(function(response){
         // console.log(response.data.data);
 
-        angular.forEach(response.data.data, function(child){
-        $scope.myOptions1.push(child);
+        // angular.forEach(response.data.data, function(child){
+        // $scope.myOptions1.push(child);
         // console.log($scope.myOptions1);
-        });
-    
+        // });
+       for(var x in response.data.data){
+            $scope.myOptions1.push({lang: response.data.data[x]});
+         }  
+      
       });  
 
 
@@ -549,39 +558,48 @@ $scope.info.keyskills.push({});
 }
 
 //edit functions...........
- $scope.change1=0;
+
+$scope.changes={
+  change1 : 0,
+  change2 : 0,
+  change3 : 0,
+  change4 : 0,
+  change5 : 0,
+  change6 : 0
+}
+ 
 $scope.edit1=function(){
 
-  $scope.change1=1;
+  $scope.changes.change1=1;
 }
 
-$scope.change2=0;
+
 $scope.edit2=function(){
 
-  $scope.change2=1;
+  $scope.changes.change2=1;
 }
 
-$scope.change3=0;
+
 $scope.edit3=function(){
 
-  $scope.change3=1;
+  $scope.changes.change3=1;
 }
 
-$scope.change4=0;
+
 $scope.edit4=function(){
 
-  $scope.change4=1;
+  $scope.changes.change4=1;
 }
 
-$scope.change5=0;
+
 $scope.edit5=function(){
 
-  $scope.change5=1;
+  $scope.changes.change5=1;
 }
-$scope.change6=0;
+
 $scope.edit6=function(){
 
-  $scope.change6=1;
+  $scope.changes.change6=1;
 }
 
 //save chnages functions//////////
@@ -626,7 +644,7 @@ $scope.save_personal=function(){
 
       })
 
-      $scope.change1=0;
+      $scope.changes.change1=0;
 
 
 }
@@ -651,7 +669,7 @@ $scope.save_exp=function(){
         // console.log(response);
       });
 
-      $scope.change2=0;
+      $scope.changes.change2=0;
 
 }
 
@@ -674,7 +692,7 @@ $scope.save_education=function(){
       }).error(function(response){
         // console.log(response);
       });
-      $scope.change3=0;
+      $scope.changes.change3=0;
 }
 
 $scope.save_certification=function(){
@@ -695,7 +713,7 @@ $scope.save_certification=function(){
         // console.log(response);
       });
 
-      $scope.change4=0;
+      $scope.changes.change4=0;
 }
 
 $scope.save_skills=function(){
@@ -715,7 +733,7 @@ $scope.save_skills=function(){
       }).error(function(response){
         // console.log(response);
       });
-$scope.change5=0;
+$scope.changes.change5=0;
 }
 
 $scope.save_others=function(){
@@ -737,7 +755,7 @@ $scope.save_others=function(){
       }).error(function(response){
         // console.log(response);
       });
-      $scope.change6=0;
+      $scope.changes.change6=0;
 }
 
 
@@ -853,6 +871,113 @@ $scope.myConfig = {
 $scope.company={};
 $scope.job={};
 
+$scope.edd={};
+
+$scope.job.qualification=[];
+
+$scope.addedu=function(){
+
+$scope.edd.course_type=$scope.edd.course_type.coursetype_name;
+$scope.job.qualification.push(angular.copy($scope.edd));
+
+
+$scope.edd.degree_type="";
+$scope.edd.course_type="";
+$scope.edd.spec_type="";
+
+};
+
+$scope.removedd=function(index){
+ 
+  var indval=$scope.job.qualification.indexOf(index);
+
+  $scope.job.qualification.splice(indval,1);
+
+};
+
+
+
+$scope.$watch('edd.degree_type', function(newp,oldp){
+
+  $scope.list=[];
+
+  if (newp == "Graduate") {
+    
+      $http({
+
+        method: "POST",
+        url: "api.php?work=UG_list",
+
+      }).then(function(response){
+       
+        angular.forEach(response.data.data, function(child){
+        $scope.list.push(child);
+        // console.log($scope.list);
+        });
+      
+      })
+  };
+
+  if (newp == "Masters") {
+     
+     $http({
+
+        method: "POST",
+        url: "api.php?work=PG_list"
+
+      }).then(function(response){
+        angular.forEach(response.data.data, function(child){
+        $scope.list.push(child);
+        // console.log($scope.list);
+        });
+      })
+  };
+
+  if (newp == "Doctorate/Phd") {
+    
+    $http({
+
+        method: "POST",
+        url: "api.php?work=DOC_list"
+      }).then(function(response){
+        angular.forEach(response.data.data, function(child){
+        $scope.list.push(child);
+        // console.log($scope.list);
+        });
+      })
+  };
+
+});
+
+
+
+$scope.$watch('edd.course_type', function(newp,oldp){
+
+  $scope.speclist=[];
+
+if ($scope.edd.course_type) {
+  $http({
+    method: "POST",
+    url: "api.php?work=get_spec&spec_type="+$scope.edd.course_type.coursetype_id,
+  }).then(function(response){
+     angular.forEach(response.data.data, function(child){
+        $scope.speclist.push(child);
+     });   
+  })
+
+
+};
+
+
+
+})
+
+
+
+
+
+
+
 
 $scope.submitcomp=function(isValid){
   
@@ -890,6 +1015,12 @@ $scope.submitjob=function(isValid){
 
   var main={};
 
+   if ($scope.job.shifttimimg == true) {
+          $scope.job.shifttimimg = "Yes";
+       }else{
+        $scope.job.shifttimimg = "No";
+       }
+
   main.job=JSON.stringify($scope.job);
 
 
@@ -908,11 +1039,224 @@ $http({
 
 }
 
+$scope.login={};
+
+$scope.login=function(){
+  // console.log("yo");
+
+      $.ajax({
+              
+          method: "POST",
+          url: "api.php?work=panel_login",
+
+          data: $scope.login,
+         
+         
+                      
+         success:function(data){
+
+          var callback = JSON.parse(data);
+          console.log(callback.status);
+          
+          if (callback.status == true) {
+            
+                $("#loginerr").hide();
+              location.reload();
+          }
+
+          if (callback.status == false){
+              $("#loginerr").show();
+                
+
+          }
+
+         
+         }
+
+
+      })
+
+
+}
+
 
 });
 
 
 //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.controller('jobSearchCtrl', function($scope, $http) {
+
+$scope.search={};
+
+
+$scope.cities =[];
+ 
+$http({
+
+  method: "POST",
+  url: "api.php?work=get_cities"
+
+}).then(function(response){
+  // console.log(response.data.data.city);
+  angular.forEach(response.data.data, function(child){
+        $scope.cities.push(child);
+       
+      // console.log($scope.cities);
+        });
+});
+
+
+
+
+$scope.myOptions = [];
+
+
+$http({
+    method: "POST",
+        url: "api.php?work=get_skills"
+      }).then(function(response){
+        // console.log(response);
+
+        angular.forEach(response.data.data, function(child){
+        $scope.myOptions.push(child);
+       
+      // console.log($scope.myOptions);
+        });
+    
+      });  
+
+$scope.myConfig = {
+  valueField: 'skills',
+  labelField: 'skills',
+  delimiter: '|',
+  placeholder: 'Specify your keyskill',
+  searchField: ['skills'],
+  onInitialize: function(selectize){
+    // receives the selectize object as an argument
+  },
+  // maxItems: 1
+};
+
+
+
+
+
+$scope.searchJob=function(){
+
+$http({
+
+    method: "POST",
+    url: "api.php?work=job_search",
+    params: $scope.search
+
+}).success(function(response){
+  console.log(response);
+}).error(function(response){
+  console.log(response);
+})
+
+}
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.controller('applicantprof', function($scope, $http) {
+
+
+  var id= window.location.search;
+
+    id= id.substr(1,1);
+  // console.log(id);
+
+$scope.info={};
+
+
+ $http({
+
+    method: "POST",
+    url: "api.php?work=applicant_prof&id="+id
+
+  }).then(function(response){
+     // console.log(response);
+    $scope.info.personal=response.data.data.personal;
+    $scope.info.image=response.data.data.image;
+    $scope.info.edducation=response.data.data.eddu;
+    $scope.info.experince=response.data.data.exp;
+    $scope.info.others=response.data.data.others;
+    $scope.info.certificates=response.data.data.certificates;
+    $scope.info.keyskills=response.data.data.keyskills;
+
+    $scope.info.others.languages=$scope.info.others.languages_known.toString();
+    //console.log($scope.info);
+  })
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

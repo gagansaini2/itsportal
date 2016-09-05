@@ -1,8 +1,12 @@
 <?php include('include/common_includes.php');  ?>
-<?php require_once("class/class.employee1.php"); 
-$user_obj = new employee1();
+<?php 
+require_once("class/class.employee.php"); 
+require_once("class/class.jobs.php");
+
+$user_obj1=new employee();
+$job_obj=new jobs();
+
  ?>
- <?php  require_once("class/config.inc.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,179 +25,103 @@ $user_obj = new employee1();
 
 <?php include('include/header.php'); ?>
 
-<div id="slider" class="sl-slider-wrapper">
+<div id="slider" class="sl-slider-wrapper" ng-app="its" ng-controller="jobSearchCtrl">
   <div class="sl-slider">
     <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
       <div class="sl-slide-inner">
         <div class="bg-img bg-img-1"></div>
         <div class="tint"></div>
         <div class="slide-content">
-          <h2>Looking for a job?</h2>
-          <h3>There’s no better place to start</h3>
-          <p><a href="jobs.html" ></a></p>
+                
+               
+                  <div class="col-sm-10 well" style="padding:0px;width:95%;">
+                  
+                      
+                              
+                      <input type="text" class="form-control search" name="x" placeholder="Skills, Companies" style="width:30%;">
+                      <select class="form-control search" >
+                        <option>Location <span class="caret"></span></option> 
+                      </select>
+                      <select class="form-control search" >
+                        <option>Experience <span class="caret"></span></option> 
+                      </select>
+                      <select class="form-control search" >
+                        <option>Salary <span class="caret"></span></option> 
+                      </select>
+                          
+                         
+                        
+                      <span class="search" style="width:10%;">
+                        <button class="btn btn-primary" type="button" style="height: 45px;"><span class="glyphicon glyphicon-search"></span>Search</button>    
+                      </span>
+                      
+                  </div>
+         
+
+
+
+
+
         </div>
       </div>
     </div>
-    <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
-      <div class="sl-slide-inner">
-        <div class="bg-img bg-img-2"></div>
-        <div class="tint"></div>
-        <div class="slide-content">
-          <h2>Need an employee?</h2>
-          <h3>We've got perfect candidates</h3>
-          <p><a href="candidates.html"></a></p>
-        </div>
-      </div>
-    </div>
-    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
-      <div class="sl-slide-inner">
-        <div class="bg-img bg-img-3"></div>
-        <div class="tint"></div>
-        <div class="slide-content">
-          <h2>Evolving your career?</h2>
-          <h3>Find new opportunities here</h3>
-          <p><a href="jobs.html"></a></p>
-        </div>
-      </div>
-    </div>
-    <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
-      <div class="sl-slide-inner">
-        <div class="bg-img bg-img-4"></div>
-        <div class="tint"></div>
-        <div class="slide-content">
-          <h2>Extending your team?</h2>
-          <h3>Find a perfect match</h3>
-          <p><a href="candidates.html" class=""></a></p>
-        </div>
-      </div>
-    </div>
+  
   </div>
-  <nav id="nav-arrows" class="nav-arrows"> <span class="nav-arrow-prev">Previous</span> <span class="nav-arrow-next">Next</span> </nav>
-  <nav id="nav-dots" class="nav-dots"> <span class="nav-dot-current"></span> <span></span> <span></span> <span></span> </nav>
 </div>
 
 <!-- ============ SLIDES END ============ --> 
 
-<!-- ============ JOBS START ============ -->
 
-<section id="jobs">
+
+<!-- <section  >
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2><a href="http://itsrecruitment.in/jobs.php">Recent Jobs</a></h2>
-        <div class="jobs"> 
-          
-          <!-- Job offer 1 --> 
-          <a href="#" >
-          <div class="row">
-            <div class="col-md-1 hidden-sm hidden-xs"> </div>
-            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12 job-title">
-              <h5>Web Designer</h5>
-              <p><strong>U.K Based Retail Bank</strong> </p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 job-location">
-              <p><strong>Manchester,United Kingdom</strong></p>
-            </div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs job-type text-center">
-              <p class="job-salary"><strong></strong></p>
-              <p class="badge full-time">Full time</p>
-            </div>
-          </div>
-          </a> 
-          
-          <!-- Job offer 2 --> 
-          <a href="#" >
-          <div class="row">
-            <div class="col-md-1 hidden-sm hidden-xs"> </div>
-            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12 job-title">
-              <h5>Front End Developer</h5>
-              <p><strong>U.K Based Retail Bank</strong> </p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 job-location">
-              <p><strong>Manchester,United Kingdom</strong></p>
-            </div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs job-type text-center">
-              <p class="job-salary"><strong></strong></p>
-              <p class="badge full-time">Full time</p>
-            </div>
-          </div>
-          </a> 
-          
-          <!-- Job offer 3 --> 
-          <a href="#" >
-          <div class="row">
-            <div class="col-md-1 hidden-sm hidden-xs"> </div>
-            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12 job-title">
-              <h5>Correspondence Developer</h5>
-              <p><strong>U.K Based Retail Bank</strong></p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 job-location">
-              <p><strong>Manchester,United Kingdom</strong></p>
-            </div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs job-type text-center">
-              <p class="badge full-time">Full time</p>
-            </div>
-          </div>
-          </a> 
-          
-          <!-- Job offer 4 --> 
-          <a href="#">
-          <div class="row">
-            <div class="col-md-1 hidden-sm hidden-xs"> </div>
-            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12 job-title">
-              <h5>Senior Web Developer</h5>
-              <p><strong>U.K Based Retail Bank</strong> </p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 job-location">
-              <p><strong>Manchester,United Kingdom</strong></p>
-            </div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs job-type text-center">
-              <p class="badge full-time">Full time</p>
-            </div>
-          </div>
-          </a> 
-          
-          <!-- Job offer 5 --> 
-          <a href="#">
-          <div class="row">
-            <div class="col-md-1 hidden-sm hidden-xs"> </div>
-            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12 job-title">
-              <h5>Office Assistant</h5>
-              <p><strong>U.K Based Retail Bank</strong> </p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 job-location">
-              <p><strong>Manchester,United Kingdom</strong></p>
-            </div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs job-type text-center">
-              <p class="badge full-time">Full time</p>
-            </div>
-          </div>
-          </a> 
-          
-              <!-- Job offer 6 --> 
-          <a href="#" class="hidden-job">
-          <div class="row">
-            <div class="col-md-1 hidden-sm hidden-xs"> </div>
-            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12 job-title">
-              <h5>Web Designer</h5>
-              <p><strong>U.K Based Retail Bank</strong> </p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 job-location"> </div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs job-type text-center">
-              <p class="job-salary"><strong>$128,000</strong></p>
-              <p class="badge full-time">Full time</p>
-            </div>
-          </div>
-          </a>                          
+        <h2>How does it work</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+
+        <div>
+            <select class="form-control" name="curentloc" ng-model="search.loc" ng-options="x.city as x.city for x in cities">
+                  <option value="">Select Location</option>
+        </select>
+        </div>
+        <div>
+           <selectize config='myConfig' options='myOptions' ng-model="search.keyskills" ></selectize>
+        </div>
+        
+          <button type="submit" class="btn btn-energized" ng-click="searchJob()">Search </button>
+      </div>
+     
+    </div>
   </div>
+</section> -->
+
+
+
+
+
+
+
+
+<!-- ============ JOBS START ============ -->
+
+<section id="jobs">
+   <?php
+        
+        $job_obj->get_jobs();
+
+         ?>
 </section>
-<h2 class="inline"><a href="http://itsrecruitment.in/jobs.php">More Jobs</a></h2>
+<!-- <h2 class="inline"><a href="http://itsrecruitment.in/jobs.php">More Jobs</a></h2> -->
 
 <!-- ============ JOBS END ============ --> 
 
 <!-- ============ STATS START ============ -->
 
-<section id="stats" class="parallax text-center">
+<!-- <section id="stats" class="parallax text-center">
   <div class="tint"></div>
   <div class="container">
     <div class="row">
@@ -226,7 +154,7 @@ $user_obj = new employee1();
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ============ STATS END ============ --> 
 

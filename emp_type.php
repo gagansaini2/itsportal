@@ -1,6 +1,6 @@
 <?php include('include/common_includes.php');  ?>
 <?php require_once("class/class.employee.php"); 
-$user_obj=new employee();
+//$user_obj1=new employee();
 
  ?>
 
@@ -44,9 +44,9 @@ $user_obj=new employee();
 			<?php
 				extract($_REQUEST);
 					if($submit=='register'){
-						$user_obj->emptype('server');
+						$user_obj1->emptype('server');
 					}else{
-						$user_obj->emptype('local');
+						$user_obj1->emptype('local');
 					}
 				
 

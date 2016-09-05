@@ -1,6 +1,6 @@
 <?php include('include/common_includes.php');  ?>
 <?php require_once("class/class.employee.php"); 
-$user_obj=new employee();
+//$user_obj1=new employee();
 
  ?>
 
@@ -44,9 +44,9 @@ $user_obj=new employee();
 			<?php
 				extract($_REQUEST);
 					if($submit=='register'){
-						$user_obj->Login_form('server');
+						$user_obj1->Login_form('server');
 					}else{
-						$user_obj->Login_form('local');
+						$user_obj1->Login_form('local');
 					}
 				
 

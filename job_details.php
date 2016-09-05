@@ -3,7 +3,7 @@
 require_once("class/class.employee.php"); 
 require_once("class/class.jobs.php");
 
-$user_obj=new employee();
+$user_obj1=new employee();
 $job_obj=new jobs();
 
  ?>
@@ -42,6 +42,55 @@ $job_obj=new jobs();
 		<!-- ============ RESUME START ============ -->
 
 		<section id="resume">
+
+			<div class="modal fade" id="abc" data-backdrop="static" role="dialog">
+			    <div class="modal-dialog" style="margin-top:200px;">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header  text-center">
+			          
+			          <h3 class="modal-title">You have successfully applied to this job.</h3>
+			        </div>
+			       
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default"><a href="jobslist.php">See More Jobs</a></button>
+
+			         
+			        </div>
+			      </div>
+			      
+			    </div>
+			  </div>
+
+			 <div class="modal fade" id="loginModal"  role="dialog">
+			    <div class="modal-dialog" style="margin-top:200px;">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header  text-center" style="background:#14B1D0;">
+			          
+			          <h3 class="modal-title" style="color:#f7fcfc;">Login</h3>
+			        </div>
+			        <form ng-app="its" ng-controller="companyprof">
+			        <div class="modal-body text-center" style="background:#f4f4f4;">
+
+			        	<p class="text-center" id="loginerr" style="display:none;">Invalid username or password, please try again</p>
+			        	
+			        		<div style="padding:15%; padding-top: 50px;">
+			          		<input type="Email" class="form-control" placeholder="Enter your Email ID" ng-model="login.username"><br>
+			          		<input type="password" class="form-control" placeholder="Enter your Password" ng-model="login.password"><br><br>
+
+			          		<button type="submit" class="btn btn-primary" ng-click="login()">Login</button>
+			          		</div>
+			          	
+			        </div>
+			       </form>
+			        
+			      </div>
+			      
+			    </div>
+			  </div> 
 			
 
 

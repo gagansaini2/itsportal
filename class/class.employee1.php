@@ -377,7 +377,7 @@ class employee1{
 							              <!-- <input type="radio" name="disability" id="disability" value="0" ng-model="form.disability">No -->
 							              </div>
 							              <div ng-if="form.disability==true" class="col-sm-12">
-							              	<br><input type="text" class="form-control" name="disability" ng-model="form.disabilitytype" placeholder="Type of Disability">
+							              	<br><input type="text" class="form-control" name="disabilitytype" ng-model="form.disabilitytype" placeholder="Type of Disability" >
 							              </div>
 
 							            
@@ -392,7 +392,7 @@ class employee1{
 							              <!-- <input type="radio"  name="chkPassPort" value="0" ng-model="form.passport">No -->
 							              </div>
 							            <div ng-if="form.passport==true" class="col-sm-12">
-							              	<br><input type="text" class="form-control" ng-model="form.passportno" placeholder="Passport Number">
+							              	<br><input type="text" class="form-control" ng-model="form.passportno" name="passportnum" placeholder="Passport Number">
 							            </div>
 							              
 
@@ -1412,8 +1412,8 @@ class employee1{
 							        <div class="row" ng-repeat="x in form.skills">
 							        <div class="form-group col-sm-7" >
 
-							         <selectize config='myConfig' options='myOptions' ng-model="x.keyskill" ></selectize>
-
+							         <selectize config='myConfig' options='myOptions' ng-model="x.keyskill" required></selectize>
+							          <span ng-if="myform.$submitted && myform.x.keyskill.$invalid" style="color:black;">This field is required.</span>
 							        </div>
 							         <div class="row form-group col-sm-5" >
 							         	

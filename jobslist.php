@@ -3,7 +3,7 @@
 require_once("class/class.employee.php"); 
 require_once("class/class.jobs.php");
 
-$user_obj=new employee();
+$user_obj1=new employee();
 $job_obj=new jobs();
 
  ?>

@@ -53,6 +53,9 @@ class jobs{
 				$row1= mysql_fetch_assoc($result1);
 				$imglogo=$row1['logo_name'];
 
+				$sql2="select * from ".TBL_STATELIST." where location_id= '".$row['location_id']."' ";
+				$result2= $this->db->query($sql2,__FILE__,__LINE__);
+				$row2= mysql_fetch_assoc($result2);
 
 				// print_r($row1);
 
@@ -88,11 +91,11 @@ class jobs{
 									</div>
 									<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
 										
-										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  <?php echo $row['role_location']; ?></strong></p>
-										<p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;<strong><?php echo $row['job_experience']; ?> years</strong></p>
+										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  <?php echo $row2['city_name']; ?></strong></p>
+										<p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;<strong><?php echo $row['min_experience']; ?> - <?php echo $row['max_experience']; ?>years</strong></p>
 									</div>
 									<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs job-type text-center">
-										<p class="job-salary"><strong>$128,000</strong></p>
+										<p class="job-salary"><strong><i class="fa fa-rupee"></i>&nbsp;<?php echo $row['min_remuneration'];?> - <?php echo $row['max_remuneration'];?> Lacs</strong></p>
 										<p class="badge full-time"><?php echo $row['job_type']; ?></p>
 									</div>
 									<div class="col-lg-2 visible-lg-block">
@@ -127,13 +130,39 @@ class jobs{
 
 
 					$sql="select * from ".TBL_JOBS." where job_id='".$id."' ";
+					// $sql1="select * from ".TBL_COMPANY." where company_id='".$_SESSION['company_id']."' ";
+					
 					//$sql.="inner join ".TBL_COMPANY." on ".TBL_JOBS.".company_id=".TBL_COMPANY.".company_id ";
 
 					$result= $this->db->query($sql,__FILE__,__LINE__);
 
 					
-					$row= $this->db->fetch_array($result)
+					$row= $this->db->fetch_array($result);
+					$skills=json_decode($row['key_skills']);
+					$education=json_decode($row['qualifications'], true);
+					$comp_id=$row['company_id'];
 					
+					$row['employee_id']=$_SESSION['employee_id'];
+
+
+					//$sql1="SELECT * FROM TBL_COMPANY INNER JOIN TBL_LOGO ON TBL_COMPANY.user_id = TBL_LOGO.user_id WHERE TBL_COMPANY.company_id = '".$row['company_id']."' ";
+					// $result1= $this->db->query($sql1,__FILE__,__LINE__);
+
+					
+					// $row1= $this->db->fetch_array($result1);
+					 // print_r($row1);
+					$sql2="select * from ".TBL_STATELIST." where location_id= '".$row['location_id']."' ";
+					$result2= $this->db->query($sql2,__FILE__,__LINE__);
+					$row2= mysql_fetch_assoc($result2);
+				
+
+					$sql3="select * from ".TBL_COMPANY." where company_id='".$row['company_id']."' ";
+					$result3= $this->db->query($sql3,__FILE__,__LINE__);
+					$row3= $this->db->fetch_array($result3);
+
+					$sql4="select * from ".TBL_LOGO." where company_id='".$row['company_id']."' ";
+					$result4= $this->db->query($sql4,__FILE__,__LINE__);
+					$row4= $this->db->fetch_array($result4);
 ?>
 				
 					<section>
@@ -142,65 +171,127 @@ class jobs{
 					<div class="col-sm-12 text-center">
 						<h1><?php echo $row['role_title']; ?></h1>
 						<h4>
-							<span><i class="fa fa-map-marker"></i><?php echo $row['role_location'];?></span>
+							<span><i class="fa fa-map-marker"></i><?php echo $row2['city_name'];?></span>
 							<span><i class="fa fa-clock-o"></i><?php echo $row['job_type'];?></span>
-							<span><i class="fa fa-dollar"></i>50,000-75,000</span>
+							<span><i class="fa fa-rupee"></i><?php echo $row['min_remuneration'];?> - <?php echo $row['max_remuneration'];?> Lacs</span>
 						</h4>
 					</div>
 				</div>
 			</div>
-			</section>
+			</section> 
 					<div class="container">
 				<div class="row">
 					<div class="col-sm-8">
-						<article>
-							<div>
-							<h2>Job Details</h2>
+					
+							<div class="col-sm-8">
+								
+								<h3>Job Description</h3>
 
-							
-							
 								<h5><?php echo $row['department'];?></h5><br>
-							
-
-							<p><?php echo $row['job_description'];?></p>
-							
-							<h3>Qualifications </h3>
-							
-								<p><?php echo $row['qualifications'];?></p>
-							
-							<h3>Key skills  </h3>
-							
-								<p><?php echo $row['key_skills'];?></p>
-							
-
-							<h3>Key accountibilities  </h3>
-							
-								<p><?php echo $row['keys_accountabilities'];?></p>
-
-							
-
-							
-							<h3>Experience </h3>
-								<p><?php echo $row['job_experience'];?> years</p>
-							
+								<p><?php echo nl2br($row['job_description']);?></p>
+						
 
 								
-							<h3>Designation</h3>
-							<p><?php echo $row['job_designation'];?></p>
-							
+								<label>Job Experience :</label>&nbsp;<span><?php echo $row['min_experience'];?> - <?php echo $row['max_experience'];?> Years</span>
+								<p><?php echo nl2br($row['experience_details']);?></p>
+								<?php
 
-							
-							<h3>remuneration</h3>
-							<p><?php echo $row['remuneration'];?></p>	
-							
+									if ($row['value_proposition']!=="") { ?>
+										<label>Employee Value Proposition :</label>&nbsp;<span style="text-transform:capitalize;"><?php echo $row['value_proposition'];?></span>
+								<?php	}
 
-							</div>	<br>
-							
-							
-							<div align="center">
-								<a href="#" class="btn btn-primary btn-lg">Apply Here</a>
+									if ($row['shift_timimg']=="Yes") { ?>
+										<br><label>Shift Timing :</label>&nbsp;<span style="text-transform:capitalize;">Available </span>
+								<?php	}
+
+								?>	
 							</div>
-						</article>
+							
+							<div class="col-sm-8">	
+							<br><h6>Key Skills </h6><br>
+
+								<?php
+								// print_r($skills);
+
+									for ($i=0; $i <count($skills) ; $i++) { ?>
+										
+										<a class='btn btn-info btn-sm' style="text-transform:none;"><?php echo($skills[$i]); ?></a>
+								<?php	}
+
+								?>
+							
+								
+
+							</div>	
+							<div class="col-sm-8">	
+							<br><h6>Desired Candidate Profile </h6><br>
+
+							<label>Education :</label>&nbsp;
+							<span style="text-transform:capitalize;">
+								<?php 
+
+									for ($i=0; $i <count($education) ; $i++) { 
+
+										$edd=$education[$i];
+								?>
+									<br><b><?php echo $edd['degree_type']?></b> (<?php echo $edd['course_type']?>) in <?php echo $edd['spec_type']?>			
+
+								<?php	}
+								?>
+							</span>
+
+
+							<?php
+
+								if ($row['keys_accountabilities']!=="") { ?>
+									<br><br><label>Key Accountibilities :</label>&nbsp;<span style="text-transform:capitalize;"><?php echo $row['keys_accountabilities'];?></span>
+							
+							<?php	}
+							
+							?>
+							</div>	
+							
+							<script>
+							    var myvar = <?php echo json_encode($row); ?>;
+							    console.log(myvar);
+
+							    applyJob=function(job){
+								    		
+							    	$.ajax({
+        
+								        method: "POST",
+								        url: "api.php?work=apply_job",
+
+								        data: job,
+								       
+								       
+								                    
+								       success:function(data){
+								        console.log(data);
+
+								       $('#abc').modal('show');
+								       }
+
+								    })
+
+							    }
+
+							    loginPanel=function(){
+							    	$('#loginModal').modal('show');
+							    }
+							</script>							
+							<div class="col-sm-8" align="center">
+								<?php
+									if (isset($_SESSION['user_id'])) { ?>
+										<br><a class="btn btn-primary btn-lg" onclick="applyJob(myvar)">Apply Here</a>
+							<?php	}else{?>
+										<br><a class="btn btn-primary btn-lg" onclick="loginPanel()">Login to Apply</a>
+							<?php   } 
+						
+							?>
+								
+							</div>
+						
 					</div>
 					<div class="col-sm-4" id="sidebar">
 						<!-- <div class="sidebar-widget" id="share">
@@ -215,19 +306,52 @@ class jobs{
 						<hr>
 						<div class="sidebar-widget" id="company">
 							<h2>About this company</h2>
-							<p><img src="http://placehold.it/300x109.gif" alt="" class="img-responsive"></p>
-							<p><?php echo $row['company_description'];?></p>
+							<h3><?php echo $row3['company_name'];?></h3>
+
+							<?php  
+
+								if($row1['logo_name']!==""){  ?>
+
+								<p><img src="uploads/<?php echo $row4['logo_name'];?>" class="img-responsive" style="width:170px; height:170px;"></p>
+
+							<?php	}
+							?>
+							
+							<p><?php echo $row3['company_description'];?></p>
 							
 						</div>
 						<hr>
-						<!-- <div class="sidebar-widget" id="company-jobs">
-							<h2>More jobs from this company</h2>
-							<ul>
-								<li><a href="#">Senior Web Designer</a></li>
-								<li><a href="#">Junior System Administrator</a></li>
-								<li><a href="#">Key Account Manager</a></li>
-							</ul>
-						</div> -->
+						<h2>More jobs from this company</h2>
+						<div class="sidebar-widget jobs" style="max-height: 240px;overflow-y: scroll;display:inherit;">
+							
+							<?php
+								$sql="select * from ".TBL_JOBS." where company_id= '".$comp_id."' ";
+								$result= $this->db->query($sql,__FILE__,__LINE__);
+
+								while($row= $this->db->fetch_array($result)){
+									$id=$row['job_id'];
+							?>		
+							<a href="job_details.php?id=<?php echo($id) ?>"  class="featured applied">
+								<div class="row">
+									
+									<div class="col-lg-7 col-md-5 col-sm-6 col-xs-12 job-title" style="line-height:0;">
+										<h5><?php echo $row['role_title']; ?></h5>
+										<p><strong><?php echo $row['department']; ?></strong> <?php echo $row['job_category']; ?></p>
+									</div>
+									
+									<div class="col-lg-5 visible-lg-block" style="padding-top:10%;">
+
+										<p class="job-salary"><strong><i class="fa fa-rupee"></i>&nbsp;<?php echo $row['remuneration'];?></strong></p>
+										
+									</div>
+								</div>
+							</a>
+							
+							<?php
+								}	
+							?>
+							
+						</div>
 					</div>
 				</div>
 			</div>
@@ -240,6 +364,95 @@ class jobs{
 
 
 
+
+	}
+
+
+
+	function applyJob(){
+
+			$sql="select * from ".TBL_COMPANY." where company_id= '".$_REQUEST['company_id']."' ";
+			$result= $this->db->query($sql,__FILE__,__LINE__);
+
+			$row= $this->db->fetch_array($result);
+			
+
+			$roletitle=$_REQUEST['role_title'];
+			$department=$_REQUEST['department'];
+			$company_email=$row['company_email'];
+			$candidate_id=$_REQUEST['employee_id'];
+
+
+								$to = $company_email;
+						                    
+	                            $subject = "New registration @ ".$roletitle." in ".$department."" ;
+	                            $comment = '<div style="text-align:left">
+
+	                            <p>Hello ,</p>
+	                            <p>A Candidate is intersted in a Job you mentioned.</p>
+	                            <p>See the profile of the Candidate 
+	                            <a href="http://itsrecruitment.in/its_recruitment/applicant_prof.php?'.$candidate_id.'> Here</a></p> 
+	                            									
+
+
+	                            
+	                            <p>Regards,</p>
+	                            <p>The ITS Recruitment Team</p>
+	                            </div>';
+	                            $header = "From: ITS@itsrecruitment.in\r\n"; 
+	                            $header.= "MIME-Version: 1.0\r\n"; 
+	                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
+	                            $header.= "X-Priority: 1\r\n"; 
+
+	                           mail($to, $subject, $comment, $header);
+	}
+
+
+
+	function loginpanel(){
+
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+			// print_r($_REQUEST);
+
+
+
+				$sql = "select * from ".TBL_USER." where user='".$_REQUEST['username']."'";
+							$record = $this->db->query($sql,__FILE__,__LINE__);
+							$row = $this->db->fetch_array($record);
+							if($_REQUEST['username'] == $row['user'] and $_REQUEST['password'] == $row['password'])
+								{
+									if($row['status'] == 'block')
+									{
+									$_SESSION['error_msg1']='User is Blocked Please Contact Administrator ...';
+
+									
+								}else{
+
+									$this->user_id= $row['user_id'];
+									$this->groups= $row['auth_to'];
+									$this->user_type= $row['type'];
+									$this->name= $row['name'];
+									$this->employee_id= $row['employee_id'];
+									
+									
+									$this->auth->Create_Session1($username,$this->user_id,$this->name,$this->user_type,$this->company_id,$this->employee_id);
+									$resp['status_msg']='Login successfully';
+								}
+								}else{
+									
+									$_SESSION['error_msg1']='Invalid username or password, please try again';
+									$resp['status_msg']='Invalid username or password, please try again';
+									$resp['status']=false;
+								}
+
+
+
+
+
+			  echo json_encode($resp);
 
 	}
 
@@ -329,7 +542,7 @@ class jobs{
 							        echo "File is not an image.";
 							        $uploadOk = 0;
 							    }
-							    
+
 								}
 							
 
@@ -348,21 +561,30 @@ class jobs{
 
 
 			$job=json_decode($_REQUEST['job'], true);
-			$skills=json_encode($job['keyskills']);
+			$skills=$job['keyskills'];
+			$keyskills=json_encode($job['keyskills']);
+			$qualif=json_encode($job['qualification']);
+			
+					
+					
 
 
 					$insert_sql_array = array();
 					$insert_sql_array['role_title'] = $job['roletitle'];
 					$insert_sql_array['department'] = $job['department'];
-					$insert_sql_array['role_location'] = $job['rolelocation'];
+					$insert_sql_array['location_id'] = $job['rolelocation'];
 					$insert_sql_array['job_type'] = $job['jobtype'];
-					$insert_sql_array['qualifications'] = $job['qualifications'];
+					$insert_sql_array['qualifications'] = $qualif;
 					$insert_sql_array['job_description'] = $job['description'];
-					$insert_sql_array['job_experience'] = $job['req_experience'];
-					$insert_sql_array['job_designation'] = $job['designation'];
-					$insert_sql_array['remuneration'] = $job['remuneration'];
-					$insert_sql_array['key_skills'] = $skills;
+					$insert_sql_array['experience_details'] = $job['expdetails'];
+					$insert_sql_array['key_skills'] = $keyskills;
+					$insert_sql_array['min_remuneration'] = $job['rumeration_min'];
+					$insert_sql_array['max_remuneration'] = $job['rumeration_max'];
+					$insert_sql_array['min_experience'] = $job['min_experience'];
+					$insert_sql_array['max_experience'] = $job['max_experience'];
+					$insert_sql_array['value_proposition'] = $job['valueproposition'];
 					$insert_sql_array['keys_accountabilities'] = $job['keysaccountabilities'];
+					$insert_sql_array['shift_timimg'] = $job['shifttimimg'];
 
 					$insert_sql_array['user_id']=$_SESSION['user_id'];
 					$insert_sql_array['company_id']=$_SESSION['company_id'];
@@ -372,11 +594,48 @@ class jobs{
 
 
 
-			$resp['data']=$job['roletitle'];
+
+					$id=$this->db->last_insert_id();
+					
+
+					 for ($i=0; $i <count($skills) ; $i++) { 
+								
+
+								
+								$insert_sql_array = array();
+								$insert_sql_array['skill_name'] = $skills[$i];
+								$insert_sql_array['job_id'] = $id;
+
+								
+								$this->db->insert(TBL_JOBSKILLS,$insert_sql_array);
+							
+						 }
+
+
+			 $resp['data']=$job['roletitle'];
 
 			echo json_encode($resp);
 	}
 
+
+
+	function applicant_prof($id){
+
+
+
+		?>
+		<div class="container">
+				<div class="col-sm-12 text-center">
+						<h1>Candidate Profile</h1><br><br>
+						
+					</div>
+
+					</div>
+		
+				 <div class="container">
+				 </div>
+		<?php		 
+	}
 
 }
 ?> 

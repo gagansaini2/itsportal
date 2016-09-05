@@ -183,7 +183,7 @@ else                /* send the submitted data */
         <p> B 100 A, South city 1, Near Signature Towers,<br>
           Gurgaon – 122001<br>
         <p><i class="fa fa-phone"></i>124-4243759<br>
-          <i class="fa fa-envelope"></i><a href="mailto:ny@jobseek.com">enquiry@itsrecruitment.in</a></p>
+          <i class="fa fa-envelope"></i><a href="mailto:ny@jobseek.com">its.sangita@itsgroup.com</a></p>
         <div class="col-sm-6"> </div>
       </div>
     </div>

@@ -21,5 +21,8 @@ define("TBL_EMPINFO",'tbl_empinfo',true);
 define("TBL_COUNTRYCODE",'tbl_countrycode',true);
 define("TBL_RESUME",'tbl_resume',true);
 define("TBL_LOGO",'tbl_logo',true);
+define("TBL_COURSETYPE",'tbl_coursetype',true);
+define("TBL_SPECIFICATION",'tbl_specification',true);
+define("TBL_JOBSKILLS",'tbl_jobskills',true);
 
 ?>

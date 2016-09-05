@@ -5,6 +5,7 @@ require_once("class/class.employee.php");
 require_once("class/class.employer.php");
 require_once("class/class.jobs.php");
 require_once("class/class.skills.php");
+require_once("class/class.search.php");
 
 
 $user_obj= new user();
@@ -12,9 +13,11 @@ $employee_obj=new employee();
 $employer_obj=new employer();
 $jobs_obj=new jobs();
 $skill_obj=new skills();
+$search_obj=new search();
 
 
-
+// echo "<pre>";
+// ini_set('max_execution_time', 800);
 extract($_REQUEST);
 
 // print_r($id);
@@ -121,4 +124,55 @@ if ($work=='job_submit') {
 	
 	$jobs_obj -> submitjob();
 }
+
+if ($work=='UG_list') {
+	
+	$employer_obj -> undergrad_list();
+}
+
+if ($work=='PG_list') {
+	
+	$employer_obj -> postgrad_list();
+}
+
+if ($work=='DOC_list') {
+	
+	$employer_obj -> doctorate_list();
+}
+
+if ($work=='get_spec') {
+	
+	$employer_obj -> getspec($spec_type);
+}
+
+
+
+if ($work=='apply_job') {
+	
+	$jobs_obj -> applyJob();
+}
+
+
+if ($work=='panel_login') {
+	
+	$jobs_obj -> loginpanel();
+}
+
+
+if ($work=='job_search') {
+	
+	$search_obj -> jobsearch();
+}
+
+if ($work=='applicant_prof') {
+	
+	$skill_obj -> candidateprof($id);
+}
+
+if ($work=='candidate_prof') {
+	
+	$skill_obj -> cand_profile($id);
+}
+
+
  ?>

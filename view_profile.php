@@ -40,6 +40,14 @@ $user_obj=new employee1();
 		<!-- ============ RESUME START ============ -->
 
 		<section >
+
+			<div class="container">
+				<div class="col-sm-12 text-center">
+						<h1>Your Profile</h1><br><br>
+						
+					</div>
+
+			</div>
 		
 				 <div class="container">
 
@@ -60,7 +68,7 @@ $user_obj=new employee1();
       </uib-accordion-heading>
       
       
-      <div ng-if="change1=='0'">
+      <div ng-if="changes.change1=='0'">
       <div class="col-sm-8">
       	<div class="col-sm-12">
       		<a style="float:right;" ng-click="edit1()">EDIT</a>
@@ -81,13 +89,13 @@ $user_obj=new employee1();
       	<label>Email :</label>&nbsp;<span>{{info.personal.email}}</span>
       	<br><label>Phone :</label>&nbsp;<span style="text-transform:capitalize;">{{info.personal.phoneno}}</span>
       	<br><label>Alt Phone :</label>&nbsp;<span style="text-transform:capitalize;">{{info.personal.altphoneno}}</span>
-      	<br><label>Facebook ID :</label>&nbsp;<span style="text-transform:capitalize;">{{info.personal.facebook_id}}</span>
-      	<br><label>linkedin ID :</label>&nbsp;<span style="text-transform:capitalize;">{{info.personal.linkedin_id}}</span>
+      	<br><label>Facebook ID :</label>&nbsp;<span >{{info.personal.facebook_id}}</span>
+      	<br><label>linkedin ID :</label>&nbsp;<span >{{info.personal.linkedin_id}}</span>
       	</div>
       	
       </div>
      	<div class="col-sm-4 text-center" >
-     		 <img src="uploads/{{info.personal.image_name}}" class="img-circle" id="img" width="200" height="200" ng-hide="info.pic">
+     		 <img src="uploads/{{info.image.image_name}}" class="img-circle" id="img" width="200" height="200" ng-hide="info.pic">
      		  <img src="{{info.pic}}" class="img-circle" id="img" width="200" height="200" ng-if="info.pic">
   
      	</div>
@@ -95,13 +103,13 @@ $user_obj=new employee1();
 
 
 
-     <div ng-if="change1=='1'">
+     <div ng-if="changes.change1=='1'">
      	<div class="col-sm-8">
 
      		 <div class="col-sm-12">
 
               <label>Name*</label>
-            	<input type="text" class="form-control " name="name" placeholder="Name" ng-model="info.personal.name"><br>  
+            	<input type="text" class="form-control " name="name" placeholder="Name" ng-model="info.personal.name" ><br>  
 			  
             </div>
 
@@ -194,18 +202,18 @@ $user_obj=new employee1();
             </div>
             <div class="row text-center col-sm-12">
             	<button type="submit" class="btn btn-info" ng-click="save_personal()">Save Changes</button>
-            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="change1=0">cancel</button>
+            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="changes.change1=0">cancel</button>
             </div>
             
 
            
      	</div>
      	<div class="col-sm-4 text-center" >
-     		 <img src="uploads/{{info.personal.image_name}}" class="img-circle" id="img" width="200" height="200" ng-hide="info.pic">
+     		 <img src="uploads/{{info.image.image_name}}" class="img-circle" id="img" width="200" height="200" ng-hide="info.pic">
      		  <img src="{{info.pic}}" class="img-circle" id="img" width="200" height="200" ng-if="info.pic">
      		 
      		  <span class="btn btn-file">
-				Change Photo<input type="file" name="change" fileread="info.pic">
+				Add/edit Photo<input type="file" name="change" fileread="info.pic">
 				</span>
 
      	</div>
@@ -224,7 +232,7 @@ $user_obj=new employee1();
        Employment Details <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
       </uib-accordion-heading>
 
-       <div ng-if="change2=='0'">
+       <div ng-if="changes.change2=='0'">
       <div class="col-sm-8">
       	<div class="col-sm-12">
       		<a style="float:right;" ng-click="edit2()">EDIT</a>
@@ -264,7 +272,7 @@ $user_obj=new employee1();
      	
       </div>
       
-      <div ng-if="change2=='1'">	
+      <div ng-if="changes.change2=='1'">	
       	<div class="form-group" ng-repeat="x in info.experince.empwork">
 	      	
 	      		<div class="col-sm-8">
@@ -440,7 +448,7 @@ $user_obj=new employee1();
 	    </div>
 	      <div class="row text-center col-sm-8">
             	<button type="submit" class="btn btn-info" ng-click="save_exp()">Save Changes</button>
-            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="change2=0">cancel</button>
+            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="changes.change2=0">cancel</button>
             </div>
       </div>      
        
@@ -454,7 +462,7 @@ $user_obj=new employee1();
        Education <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
       </uib-accordion-heading>
 
-       <div ng-if="change3=='0'">
+       <div ng-if="changes.change3=='0'">
       <div class="col-sm-8">
       	<div class="col-sm-12">
       		<a style="float:right;" ng-click="edit3()">EDIT</a>
@@ -471,7 +479,7 @@ $user_obj=new employee1();
      	
       </div>
 
-      <div  ng-if="change3=='1'">
+      <div  ng-if="changes.change3=='1'">
       	<div ng-repeat="x in info.edducation">
      		
      		<div class="col-sm-8">
@@ -590,7 +598,7 @@ $user_obj=new employee1();
 	      </div>
 	      <div class="row text-center col-sm-8">
             	<button type="submit" class="btn btn-info" ng-click="save_education()">Save Changes</button>
-            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="change3=0">cancel</button>
+            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="changes.change3=0">cancel</button>
             </div>
 	       </div>
 
@@ -608,7 +616,7 @@ $user_obj=new employee1();
 
 
 
-      	 <div ng-if="change4=='0'">
+      	 <div ng-if="changes.change4=='0'">
 	      <div class="col-sm-8">
 	      	<div class="col-sm-12">
 	      		<a style="float:right;" ng-click="edit4()">EDIT</a>
@@ -625,7 +633,7 @@ $user_obj=new employee1();
 	     	
 	      </div>
 
-      <div ng-if="change4=='1'">
+      <div ng-if="changes.change4=='1'">
      	 <div class="row col-sm-8" ng-repeat="x in info.certificates">
           <div class="col-sm-6">
           	<label>Certification Name</label>
@@ -648,7 +656,7 @@ $user_obj=new employee1();
 	    </div>
 	     <div class="row text-center col-sm-8">
             	<button type="submit" class="btn btn-info" ng-click="save_certification()">Save Changes</button>
-            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="change4=0">cancel</button>
+            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="changes.change4=0">cancel</button>
             </div>
       </div>      
 	     
@@ -664,7 +672,7 @@ $user_obj=new employee1();
       </uib-accordion-heading>
 
 
-       <div ng-if="change5=='0'">
+       <div ng-if="changes.change5=='0'">
 	      <div class="col-sm-8">
 	      	<div class="col-sm-12">
 	      		<a style="float:right;" ng-click="edit5()">EDIT</a>
@@ -684,7 +692,7 @@ $user_obj=new employee1();
 
 
 
-     <div ng-if="change5=='1'">
+     <div ng-if="changes.change5=='1'">
       	 <div class="col-sm-8" >
 	        <label >Key Skills</label>
 
@@ -712,7 +720,7 @@ $user_obj=new employee1();
         
 	     <div class="row text-center col-sm-8">
             	<button type="submit" class="btn btn-info" ng-click="save_skills()">Save Changes</button>
-            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="change5=0">cancel</button>
+            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="changes.change5=0">cancel</button>
             </div>
       </div>      
          
@@ -730,7 +738,7 @@ $user_obj=new employee1();
       </uib-accordion-heading>
 
 
-       <div ng-if="change6=='0'">
+       <div ng-if="changes.change6=='0'">
 	      <div class="col-sm-8">
 	      	<div class="col-sm-12">
 	      		<a style="float:right;" ng-click="edit6()">EDIT</a>
@@ -738,7 +746,7 @@ $user_obj=new employee1();
 	      	
 
 	      	<div class="col-sm-12">
-	      	<label>Language Known :</label>&nbsp;<span style="text-transform:capitalize;">{{info.others.languages}}</span>
+	      	<label>Language Known :</label>&nbsp;<span style="text-transform:capitalize;" ng-repeat="x in info.others.languages_known">{{x}} </span>
 	      	<br><label>Expected Salary :</label>&nbsp;<span style="text-transform:capitalize;">{{info.others.expected_salary}}</span>
 	      	<br><label>Any Other Detail :</label>&nbsp;<span style="text-transform:capitalize;">{{info.others.anyother_detail}}</span>
 	      	</div>
@@ -748,7 +756,7 @@ $user_obj=new employee1();
 	     	
 	      </div>
 
-      <div ng-if="change6=='1'">
+      <div ng-if="changes.change6=='1'">
      	<div class="col-sm-8">
      		<label>Language Known*</label>
      		 <selectize config='myConfig1' options='myOptions1' ng-model="info.others.languages_known"></selectize>
@@ -823,7 +831,7 @@ $user_obj=new employee1();
 
      	 <div class="row text-center col-sm-8">
             	<button type="submit" class="btn btn-info" ng-click="save_others()">Save Changes</button>
-            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="change6=0">cancel</button>
+            	<button type="submit" class="btn btn-default" style="color:#72d2ff;" ng-click="changes.change6=0">cancel</button>
           </div>
 
        </div>     

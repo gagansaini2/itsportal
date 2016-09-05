@@ -15,6 +15,41 @@ class skills{
 		}
 	
 
+
+
+		function getlang(){
+			// print_r("expression");
+
+				$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+
+				$sql="select * from ".TBL_LANGUAGES." where 1 ";
+
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				while ( $row= $this->db->fetch_array($result)) {
+				// $lang=array();
+					
+				// $lang['lang']=$row['Language'];
+
+				$data[]=trim($row['Language']);
+				// print_r($data);
+				}
+				//print_r($data);
+
+				$resp['data']=$data;
+
+				echo json_encode($resp);
+
+		}
+
+
+
 		function skillfun1($runat){
 			switch($runat){
 			case 'local' :
@@ -101,35 +136,7 @@ class skills{
 
 
 
-		function getlang(){
-			// print_r("expression");
-
-				$resp=array();
-				$resp['status']=true;
-				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
-
-
-
-				$sql="select * from ".TBL_LANGUAGES." where 1  ";
-				$result= $this->db->query($sql,__FILE__,__LINE__);
-
-
-				$data=array();
-				$lang=array();
-				while ( $row= $this->db->fetch_array($result)) {
-					
-				$lang['lang']=$row['Language'];
-
-				$data[]=$lang;
-				
-				}
-				//print_r($data);
-
-				$resp['data']=$data;
-
-				echo json_encode($resp);
-
-		}
+		
 
 
 		function saveinfo(){
@@ -138,11 +145,14 @@ class skills{
 			$resp['status']=false;
 			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
 
- 			
-			 $result=mysql_query("SELECT count(*) as total from TBL_EMPINFO where user_id='".$_SESSION['user_id']."'");
-			$sql=mysql_fetch_assoc($result);
-		
-			if ($sql['total'] > 0 ) {
+ 			$sql="select count(*) as total from ".TBL_EMPINFO." where user_id='".$_SESSION['user_id']."'";
+            $result=$this->db->query($sql,__FILE__,__LINE__);
+            $row=mysql_fetch_assoc($result);
+
+			 
+		print_r();
+			
+			if ($row['total'] > 0 ) {
 				
 
 				$insert_sql_array=array();
@@ -246,6 +256,7 @@ class skills{
 				while ( $row= $this->db->fetch_array($result)) {
 					
 				$city['city']=$row['city_name'];
+				$city['city_id']=$row['location_id'];
 
 				$data[]=$city;
 				
@@ -617,7 +628,8 @@ class skills{
 				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
 
 				
-				$sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_IMAGE ON TBL_EMPLOYEE_DEL.user_id = TBL_IMAGE.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
+				$sql="select * from ".TBL_EMPLOYEE_DEL." where employee_id='".$_SESSION['employee_id']."' ";
+				$sql1="select * from ".TBL_IMAGE." where employee_id='".$_SESSION['employee_id']."' ";
 				$sql2="select * from ".TBL_EMPLOYEE_EDD." where employee_id='".$_SESSION['employee_id']."' ";
 				$sql3="select * from ".TBL_EMPLOYEE_EXP." where employee_id='".$_SESSION['employee_id']."' ";
 				$sql4="select * from ".TBL_OTHERS." where employee_id='".$_SESSION['employee_id']."' ";
@@ -629,7 +641,7 @@ class skills{
 				
 
 				$row= mysql_fetch_assoc($this->db->query($sql,__FILE__,__LINE__));
-				
+				$row1= mysql_fetch_assoc($this->db->query($sql1,__FILE__,__LINE__));
 				$result2=$this->db->query($sql2,__FILE__,__LINE__);
 				while($roww = mysql_fetch_assoc($result2)) {
 				$row2[]=$roww;
@@ -662,6 +674,7 @@ class skills{
 
 				$data=array();
 				$data['personal']=$row;
+				$data['image']=$row1;
 				$data['eddu']=$row2;
 				$data['exp']=$row3;
 				$data['exp']['empwork']=$row7;
@@ -980,7 +993,83 @@ class skills{
 
 			}
 
+
+			function candidateprof($id){
+
+				 // print_r($id);
+
+
+				$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+				$sql="select * from ".TBL_EMPLOYEE_DEL." where employee_id='".$id."' ";
+				$sql1="select * from ".TBL_IMAGE." where employee_id='".$id."' ";
+				$sql2="select * from ".TBL_EMPLOYEE_EDD." where employee_id='".$id."' ";
+				$sql3="select * from ".TBL_EMPLOYEE_EXP." where employee_id='".$id."' ";
+				$sql4="select * from ".TBL_OTHERS." where employee_id='".$id."' ";
+				$sql5="select * from ".TBL_EMPLOYEE_CERTIFICATION." where employee_id='".$id."' ";
+				$sql7="select * from ".TBL_EMPLOYEE_WORKEX." where employee_id='".$id."' ";
+				$sql6="select * from ".TBL_EMPLOYEE_KEYSKILS." where employee_id='".$id."' ";
+				
+				// $sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_IMAGE ON TBL_EMPLOYEE_DEL.user_id = TBL_IMAGE.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
+				
+
+				$row= mysql_fetch_assoc($this->db->query($sql,__FILE__,__LINE__));
+				$row1= mysql_fetch_assoc($this->db->query($sql1,__FILE__,__LINE__));
+				
+				$result2=$this->db->query($sql2,__FILE__,__LINE__);
+				while($roww = mysql_fetch_assoc($result2)) {
+				$row2[]=$roww;
+				}
+				
+
+				$row3= mysql_fetch_assoc($this->db->query($sql3,__FILE__,__LINE__));
+				
+				$row4= mysql_fetch_assoc($this->db->query($sql4,__FILE__,__LINE__));
+				$row4['languages_known']=json_decode($row4['languages_known']);
+
+
+				$result5=$this->db->query($sql5,__FILE__,__LINE__);
+				while($roww = mysql_fetch_assoc($result5)) {
+				$row5[]=$roww;
+				}
+								
+
+				$result6=$this->db->query($sql6,__FILE__,__LINE__);
+				while($roww = mysql_fetch_assoc($result6)) {
+				$row6[]=$roww;
+				}
+				
+				$result7=$this->db->query($sql7,__FILE__,__LINE__);
+				while($roww= mysql_fetch_assoc($result7)) {
+					$row7[]=$roww;
+				}
+				
+				// $row8= $this->db->fetch_array($this->db->query($sql8,__FILE__,__LINE__));
+
+				$data=array();
+				$data['personal']=$row;
+				$data['image']=$row1;
+				$data['eddu']=$row2;
+				$data['exp']=$row3;
+				$data['exp']['empwork']=$row7;
+				$data['others']=$row4;
+				$data['certificates']=$row5;
+				$data['keyskills']=$row6;
+
+				
+				
+				$resp['data']=$data;
+				
+				echo json_encode($resp);
+ 	
+			
+				
+			}
 		
+
+			
 
 }
 ?> 

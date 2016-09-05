@@ -153,7 +153,7 @@ class employer{
 
 									?>
 									<script type="text/javascript">
-									window.location="companyprof.php";
+									window.location="index.php";
 									</script>
 									<?php
 									exit();
@@ -341,23 +341,28 @@ class employer{
 							$this->db->insert(TBL_USER,$insert_sql_array);
 
 
-							 $to = "gsaini94@ymail.com";
+							  $to = $this->username;
 						                    
-						                            $subject = "New registration @ Sales web" ;
+						                            $subject = "New registration @ Its Recruitment" ;
 						                            $comment = '<div style="text-align:left">
 
 						                            <p>Hello ,</p>
-						                            <p>New user has been registered with username "'.$username.'"
+						                            <p>Your Account has been created with </p>
+						                            <p>Username: "'.$this->username.'"</p>
+						                            <p>Password: "'.$this->password.'"
+						                            
+
+
 						                            
 						                            <p>Regards,</p>
-						                            <p>The Salesweb Team</p>
+						                            <p>The Its Recruitment</p>
 						                            </div>';
-						                            $header = "From: noreply@Salesweb.com\r\n"; 
+						                            $header = "From: noreply@its.com\r\n"; 
 						                            $header.= "MIME-Version: 1.0\r\n"; 
 						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 						                            $header.= "X-Priority: 1\r\n"; 
 
-						                           // mail($to, $subject, $comment, $header);
+						                             // mail($to, $subject, $comment, $header);
 							
 							$_SESSION['msg'] = 'User has been created Successfully';
 								
@@ -484,11 +489,260 @@ class employer{
 							</div>
 							</div>
 							<div class="form-group" id="company-group">
-								<label for="company">Location*</label>
+								<label for="company">Company Headquaters*</label>
 								
-								<select class="form-control" name="company_location" ng-model="company.company_location" ng-options="x.city as x.city for x in cities" required>
+								<select class="form-control" name="company_location" ng-model="company.company_location" required>
 									<option value="">Select Location</option>
-								</select>
+									<option value="AF">Afghanistan</option>
+									<option value="AX">Åland Islands</option>
+									<option value="AL">Albania</option>
+									<option value="DZ">Algeria</option>
+									<option value="AS">American Samoa</option>
+									<option value="AD">Andorra</option>
+									<option value="AO">Angola</option>
+									<option value="AI">Anguilla</option>
+									<option value="AQ">Antarctica</option>
+									<option value="AG">Antigua and Barbuda</option>
+									<option value="AR">Argentina</option>
+									<option value="AM">Armenia</option>
+									<option value="AW">Aruba</option>
+									<option value="AU">Australia</option>
+									<option value="AT">Austria</option>
+									<option value="AZ">Azerbaijan</option>
+									<option value="BS">Bahamas</option>
+									<option value="BH">Bahrain</option>
+									<option value="BD">Bangladesh</option>
+									<option value="BB">Barbados</option>
+									<option value="BY">Belarus</option>
+									<option value="BE">Belgium</option>
+									<option value="BZ">Belize</option>
+									<option value="BJ">Benin</option>
+									<option value="BM">Bermuda</option>
+									<option value="BT">Bhutan</option>
+									<option value="BO">Bolivia, Plurinational State of</option>
+									<option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+									<option value="BA">Bosnia and Herzegovina</option>
+									<option value="BW">Botswana</option>
+									<option value="BV">Bouvet Island</option>
+									<option value="BR">Brazil</option>
+									<option value="IO">British Indian Ocean Territory</option>
+									<option value="BN">Brunei Darussalam</option>
+									<option value="BG">Bulgaria</option>
+									<option value="BF">Burkina Faso</option>
+									<option value="BI">Burundi</option>
+									<option value="KH">Cambodia</option>
+									<option value="CM">Cameroon</option>
+									<option value="CA">Canada</option>
+									<option value="CV">Cape Verde</option>
+									<option value="KY">Cayman Islands</option>
+									<option value="CF">Central African Republic</option>
+									<option value="TD">Chad</option>
+									<option value="CL">Chile</option>
+									<option value="CN">China</option>
+									<option value="CX">Christmas Island</option>
+									<option value="CC">Cocos (Keeling) Islands</option>
+									<option value="CO">Colombia</option>
+									<option value="KM">Comoros</option>
+									<option value="CG">Congo</option>
+									<option value="CD">Congo, the Democratic Republic of the</option>
+									<option value="CK">Cook Islands</option>
+									<option value="CR">Costa Rica</option>
+									<option value="CI">Côte d'Ivoire</option>
+									<option value="HR">Croatia</option>
+									<option value="CU">Cuba</option>
+									<option value="CW">Curaçao</option>
+									<option value="CY">Cyprus</option>
+									<option value="CZ">Czech Republic</option>
+									<option value="DK">Denmark</option>
+									<option value="DJ">Djibouti</option>
+									<option value="DM">Dominica</option>
+									<option value="DO">Dominican Republic</option>
+									<option value="EC">Ecuador</option>
+									<option value="EG">Egypt</option>
+									<option value="SV">El Salvador</option>
+									<option value="GQ">Equatorial Guinea</option>
+									<option value="ER">Eritrea</option>
+									<option value="EE">Estonia</option>
+									<option value="ET">Ethiopia</option>
+									<option value="FK">Falkland Islands (Malvinas)</option>
+									<option value="FO">Faroe Islands</option>
+									<option value="FJ">Fiji</option>
+									<option value="FI">Finland</option>
+									<option value="FR">France</option>
+									<option value="GF">French Guiana</option>
+									<option value="PF">French Polynesia</option>
+									<option value="TF">French Southern Territories</option>
+									<option value="GA">Gabon</option>
+									<option value="GM">Gambia</option>
+									<option value="GE">Georgia</option>
+									<option value="DE">Germany</option>
+									<option value="GH">Ghana</option>
+									<option value="GI">Gibraltar</option>
+									<option value="GR">Greece</option>
+									<option value="GL">Greenland</option>
+									<option value="GD">Grenada</option>
+									<option value="GP">Guadeloupe</option>
+									<option value="GU">Guam</option>
+									<option value="GT">Guatemala</option>
+									<option value="GG">Guernsey</option>
+									<option value="GN">Guinea</option>
+									<option value="GW">Guinea-Bissau</option>
+									<option value="GY">Guyana</option>
+									<option value="HT">Haiti</option>
+									<option value="HM">Heard Island and McDonald Islands</option>
+									<option value="VA">Holy See (Vatican City State)</option>
+									<option value="HN">Honduras</option>
+									<option value="HK">Hong Kong</option>
+									<option value="HU">Hungary</option>
+									<option value="IS">Iceland</option>
+									<option value="IN">India</option>
+									<option value="ID">Indonesia</option>
+									<option value="IR">Iran, Islamic Republic of</option>
+									<option value="IQ">Iraq</option>
+									<option value="IE">Ireland</option>
+									<option value="IM">Isle of Man</option>
+									<option value="IL">Israel</option>
+									<option value="IT">Italy</option>
+									<option value="JM">Jamaica</option>
+									<option value="JP">Japan</option>
+									<option value="JE">Jersey</option>
+									<option value="JO">Jordan</option>
+									<option value="KZ">Kazakhstan</option>
+									<option value="KE">Kenya</option>
+									<option value="KI">Kiribati</option>
+									<option value="KP">Korea, Democratic People's Republic of</option>
+									<option value="KR">Korea, Republic of</option>
+									<option value="KW">Kuwait</option>
+									<option value="KG">Kyrgyzstan</option>
+									<option value="LA">Lao People's Democratic Republic</option>
+									<option value="LV">Latvia</option>
+									<option value="LB">Lebanon</option>
+									<option value="LS">Lesotho</option>
+									<option value="LR">Liberia</option>
+									<option value="LY">Libya</option>
+									<option value="LI">Liechtenstein</option>
+									<option value="LT">Lithuania</option>
+									<option value="LU">Luxembourg</option>
+									<option value="MO">Macao</option>
+									<option value="MK">Macedonia, the former Yugoslav Republic of</option>
+									<option value="MG">Madagascar</option>
+									<option value="MW">Malawi</option>
+									<option value="MY">Malaysia</option>
+									<option value="MV">Maldives</option>
+									<option value="ML">Mali</option>
+									<option value="MT">Malta</option>
+									<option value="MH">Marshall Islands</option>
+									<option value="MQ">Martinique</option>
+									<option value="MR">Mauritania</option>
+									<option value="MU">Mauritius</option>
+									<option value="YT">Mayotte</option>
+									<option value="MX">Mexico</option>
+									<option value="FM">Micronesia, Federated States of</option>
+									<option value="MD">Moldova, Republic of</option>
+									<option value="MC">Monaco</option>
+									<option value="MN">Mongolia</option>
+									<option value="ME">Montenegro</option>
+									<option value="MS">Montserrat</option>
+									<option value="MA">Morocco</option>
+									<option value="MZ">Mozambique</option>
+									<option value="MM">Myanmar</option>
+									<option value="NA">Namibia</option>
+									<option value="NR">Nauru</option>
+									<option value="NP">Nepal</option>
+									<option value="NL">Netherlands</option>
+									<option value="NC">New Caledonia</option>
+									<option value="NZ">New Zealand</option>
+									<option value="NI">Nicaragua</option>
+									<option value="NE">Niger</option>
+									<option value="NG">Nigeria</option>
+									<option value="NU">Niue</option>
+									<option value="NF">Norfolk Island</option>
+									<option value="MP">Northern Mariana Islands</option>
+									<option value="NO">Norway</option>
+									<option value="OM">Oman</option>
+									<option value="PK">Pakistan</option>
+									<option value="PW">Palau</option>
+									<option value="PS">Palestinian Territory, Occupied</option>
+									<option value="PA">Panama</option>
+									<option value="PG">Papua New Guinea</option>
+									<option value="PY">Paraguay</option>
+									<option value="PE">Peru</option>
+									<option value="PH">Philippines</option>
+									<option value="PN">Pitcairn</option>
+									<option value="PL">Poland</option>
+									<option value="PT">Portugal</option>
+									<option value="PR">Puerto Rico</option>
+									<option value="QA">Qatar</option>
+									<option value="RE">Réunion</option>
+									<option value="RO">Romania</option>
+									<option value="RU">Russian Federation</option>
+									<option value="RW">Rwanda</option>
+									<option value="BL">Saint Barthélemy</option>
+									<option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+									<option value="KN">Saint Kitts and Nevis</option>
+									<option value="LC">Saint Lucia</option>
+									<option value="MF">Saint Martin (French part)</option>
+									<option value="PM">Saint Pierre and Miquelon</option>
+									<option value="VC">Saint Vincent and the Grenadines</option>
+									<option value="WS">Samoa</option>
+									<option value="SM">San Marino</option>
+									<option value="ST">Sao Tome and Principe</option>
+									<option value="SA">Saudi Arabia</option>
+									<option value="SN">Senegal</option>
+									<option value="RS">Serbia</option>
+									<option value="SC">Seychelles</option>
+									<option value="SL">Sierra Leone</option>
+									<option value="SG">Singapore</option>
+									<option value="SX">Sint Maarten (Dutch part)</option>
+									<option value="SK">Slovakia</option>
+									<option value="SI">Slovenia</option>
+									<option value="SB">Solomon Islands</option>
+									<option value="SO">Somalia</option>
+									<option value="ZA">South Africa</option>
+									<option value="GS">South Georgia and the South Sandwich Islands</option>
+									<option value="SS">South Sudan</option>
+									<option value="ES">Spain</option>
+									<option value="LK">Sri Lanka</option>
+									<option value="SD">Sudan</option>
+									<option value="SR">Suriname</option>
+									<option value="SJ">Svalbard and Jan Mayen</option>
+									<option value="SZ">Swaziland</option>
+									<option value="SE">Sweden</option>
+									<option value="CH">Switzerland</option>
+									<option value="SY">Syrian Arab Republic</option>
+									<option value="TW">Taiwan, Province of China</option>
+									<option value="TJ">Tajikistan</option>
+									<option value="TZ">Tanzania, United Republic of</option>
+									<option value="TH">Thailand</option>
+									<option value="TL">Timor-Leste</option>
+									<option value="TG">Togo</option>
+									<option value="TK">Tokelau</option>
+									<option value="TO">Tonga</option>
+									<option value="TT">Trinidad and Tobago</option>
+									<option value="TN">Tunisia</option>
+									<option value="TR">Turkey</option>
+									<option value="TM">Turkmenistan</option>
+									<option value="TC">Turks and Caicos Islands</option>
+									<option value="TV">Tuvalu</option>
+									<option value="UG">Uganda</option>
+									<option value="UA">Ukraine</option>
+									<option value="AE">United Arab Emirates</option>
+									<option value="GB">United Kingdom</option>
+									<option value="US">United States</option>
+									<option value="UM">United States Minor Outlying Islands</option>
+									<option value="UY">Uruguay</option>
+									<option value="UZ">Uzbekistan</option>
+									<option value="VU">Vanuatu</option>
+									<option value="VE">Venezuela, Bolivarian Republic of</option>
+									<option value="VN">Viet Nam</option>
+									<option value="VG">Virgin Islands, British</option>
+									<option value="VI">Virgin Islands, U.S.</option>
+									<option value="WF">Wallis and Futuna</option>
+									<option value="EH">Western Sahara</option>
+									<option value="YE">Yemen</option>
+									<option value="ZM">Zambia</option>
+									<option value="ZW">Zimbabwe</option>
+							</select>
 								<span id="span_location"></span>
 							</div>
 							
@@ -729,7 +983,7 @@ class employer{
 						
 							
 							<div class="form-group" id="job-title-group">
-								<label for="job-title">Job Title*</label>
+								<label for="job-title">Job Title/Designation*</label>
 								<input type="text" class="form-control" name="roletitle" ng-model="job.roletitle" placeholder="e.g. Web Designer" required>
 								<span id="span_roletitle"></span>
 							</div>
@@ -750,10 +1004,17 @@ class employer{
 							<div class="form-group" id="job-location-group">
 								<label for="job-location">Role Location*</label>
 								
-								<select class="form-control" name="rolelocation" ng-model="job.rolelocation" ng-options="x.city as x.city for x in cities" required>
+								<select class="form-control" name="rolelocation" ng-if="!check1" ng-model="job.rolelocation" ng-options="x.city_id as x.city for x in cities" required>
 									<option value="">Select Location</option>
 								</select>
-								<span id="span_location"></span>
+
+								
+								<div ng-if="check1">
+									
+									<input type="text" class="form-control" ng-model="job.rolelocation" placeholder="Name of the place" required>
+								</div>
+								
+								<label style="float:right;"><input type="checkbox" ng-model="check1">Outside India</label>
 							</div>
 							
 							
@@ -772,15 +1033,13 @@ class employer{
 							
 							
 							
-							<div class="form-group" id="job-description-group">
-								<label for="job-description">Qualifications*</label>
-								<input type="text" class="form-control" name="qualifications" ng-model="job.qualifications" placeholder="Needed as per Job" required>
-								<span id="span_qualifications"></span>
-							</div>
+							
 							 
 							<div class="form-group" id="job-description-group">
 								<label for="job-description">Description*</label>
-								<input type="text" class="form-control" name="description" ng-model="job.description" placeholder="Description" required>
+								
+								<textarea  ng-model="job.description" placeholder="Description" style="height:195px;" ng-required="job.description" ></textarea>
+
 								<span id="span_descrip"></span>
 							</div>
 							
@@ -791,52 +1050,234 @@ class employer{
 						<div class="col-sm-6">
 
 							<div class="form-group" id="job-location-group">
-								<label for="job-location">Experience*</label>
-								<select name="req_experience" class="form-control" ng-model="job.req_experience" required>
-									<option value="">Experience required in years</option>
-									<option value="Fresher">Fresher</option>
-									<option value="0-2">0-2</option>
-									<option value="2-5">2-5</option>
-									<option value="5-8">5-8</option>
-									<option value="8-11">8-11</option>
-									<option value="11-14">11-14</option>
-									<option value="14-17">14-17</option>
-									<option value="17-20">17-20</option>
-									<option value="20+">20+</option>
+								<label for="job-location">Experience*</label><br>
+								<select name="req_experience" class="form-control" ng-model="job.min_experience" style="display:inline;width:45%;" required>
+									<option value="">minimum</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
 									</select>
+								&nbsp;&nbsp;to&nbsp;&nbsp;
+								<select name="req_experience" class="form-control" ng-model="job.max_experience" style="display:inline;width:45%;" required>
+									<option value="">maximum</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									</select>
+
+
+									
 								<span id="span_experience"></span>
 							</div>
 							<div class="form-group" id="job-location-group">
-								<label for="job-location">Designation*</label>
-								<input type="text" class="form-control" name="designation" ng-model="job.designation" placeholder="Designation" required>
-								<span id="span_designation"></span>
+								
+								<textarea  ng-model="job.expdetails" placeholder="Experience Details" style="height:222px;"></textarea>
+
 							</div>
-							<div class="form-group" id="job-location-group">
-								<label for="job-location">Remuneration*</label>
-								<input type="text" class="form-control" name="remuneration" ng-model="job.remuneration" placeholder="Remuneration" required>
-								<span id="span_remuneration"></span>
+							<div class="form-group">
+								<label for="job-location">Remuneration*</label> &nbsp;&nbsp;&nbsp;
+								<p class="help-block" style="display:initial;">in Lacs</p>
+								<br>
+								<select name="remuneration" class="form-control" ng-model="job.rumeration_min" style="display:inline;width:45%;" required>
+									<option value="">minimum</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									</select>
+								&nbsp;&nbsp;to&nbsp;&nbsp;
+								<select name="remuneration" class="form-control" ng-model="job.rumeration_max" style="display:inline;width:45%;" required>
+									<option value="">maximum</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									</select>
+								
 							</div>
 							<div class="form-group" id="job-location-group">
 								<label for="job-location">Employee Value Proposition</label>
-								<input type="text" class="form-control" name="valueproposition" ng-model="job.valueproposition" placeholder="Value Proposition">
+								<input type="text" class="form-control" name="valueproposition" ng-model="job.valueproposition" placeholder="eg. Relocation Bonus,Meals,Health Insurance">
 								<span id="span_remuneration"></span>
 							</div>
 
 							
+							
 							<div class="form-group" >
-								<label for="job-description">Key Skills*</label>
-								
-								<selectize config='myConfig' options='myOptions' ng-model="job.keyskills" name="keyskills" required></selectize>
-								 <span ng-if="jobform.$submitted && jobform.keyskills.$invalid" style="color:black;">This field is required.</span>
-							</div>
-							<div class="form-group" >
-								<label for="job-description">Key Accountabilities*</label>
-								<input type="text" class="form-control"  name="keysaccountabilities" ng-model="job.keysaccountabilities" placeholder="Key Accountabilities" required>
+								<label for="job-description">Key Accountabilities</label>
+								<input type="text" class="form-control"  name="keysaccountabilities" ng-model="job.keysaccountabilities" placeholder="Key Accountabilities">
 								<span id="span_keysaccountabilities"></span>
 							</div>
 							
 						</div>
 
+						<div class="col-sm-12">
+
+							<br><h6>Desired Candidate Profile</h6><br>
+						<div class="col-sm-6" >
+								<label for="job-description">Key Skills*</label>
+								
+								<selectize config='myConfig' options='myOptions' ng-model="job.keyskills" name="keyskills" required></selectize>
+								 <span ng-if="jobform.$submitted && jobform.keyskills.$invalid" style="color:black;">This field is required.</span>
+						</div>
+						
+						 <div class="col-sm-6" style="padding: 24px 0px 10px 40px;">
+
+							          <label style="width:295px;">Required Candidate to be flexible for shift timing</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							          <!-- <input type="checkbox" name="buyback" data-size='small' data-on-text="Yes" data-off-text="No" data-on-color="info" ng-value="yes" ng-model="form.buyback">
+							           -->
+							           <toggle-switch class="switch-info switch-small" on-label="Yes" off-label="No" ng-model="job.shifttimimg" style="position: absolute;"></toggle-switch>
+
+
+						</div>
+
+
+						<br><label for="job-description">Specify Qualifications*</label>
+						
+						<div class="row form-group"  style="display:flex;">
+								
+								<div class="col-sm-3">
+								<select name="qualifitype" class="form-control" ng-model="edd.degree_type" >
+							          <option value="">Select Qualification</option>
+							          <option value="Doctorate/Phd">Doctorate/Phd</option>
+							          <option value="Masters">Postgraduate</option>
+							          <option value="Graduate">Graduate</option>
+
+							    </select>
+							    </div>
+							    <div class="col-sm-3" ng-if="edd.degree_type">
+								<select name="coursetype" class="form-control" ng-model="edd.course_type" ng-options="x.coursetype_name for x in list" required>
+							          <option value="">Select Course type</option>
+							          
+
+							    </select>
+							    </div>
+							    <div class="col-sm-3" ng-if="edd.course_type">
+								<select name="spectype" class="form-control" ng-model="edd.spec_type" ng-options="x.spec_name as x.spec_name for x in speclist" required>
+							          <option value="">Select Specification</option>
+							         
+
+							    </select>
+								</div>
+								<div class="col-sm-3 text-center" ng-if="edd.spec_type && edd.course_type">
+									<input type="button" class="btn btn-sm" ng-click="addedu()" value="add">
+
+
+								</div>
+
+								<!-- <input type="text" class="form-control" name="qualifications" ng-model="job.qualifications" placeholder="Needed as per Job" required> -->
+								
+							</div>
+							<div class="col-sm-12" ng-repeat="x in job.qualification">
+								<p><b>{{x.degree_type}}</b> ({{x.course_type}}) in {{x.spec_type}}  <a class="glyphicon glyphicon-remove" ng-click="removedd(x)"></a></p>
+							</div>		
+						</div>	
 
 					</div><br><br>
 					
@@ -895,27 +1336,27 @@ class employer{
 								
 							// }
 								
-							if($return){
+							// if($return){
 							
-							$insert_sql_array = array();
-							$insert_sql_array['role_title'] = $this->roletitle;
-							$insert_sql_array['department'] = $this->department;
-							$insert_sql_array['role_location'] = $this->rolelocation;
-							$insert_sql_array['job_type'] = $this->jobtype;
-							$insert_sql_array['job_category'] = $this->jobcategory;
-							$insert_sql_array['qualifications'] = $this->qualifications;
-							$insert_sql_array['job_description'] = $this->description;
-							$insert_sql_array['job_experience'] = $this->experience;
-							$insert_sql_array['job_designation'] = $this->designation;
-							$insert_sql_array['remuneration'] = $this->remuneration;
-							$insert_sql_array['key_skills'] = $this->keyskills;
-							$insert_sql_array['keys_accountabilities'] = $this->keysaccountabilities;
+							// $insert_sql_array = array();
+							// $insert_sql_array['role_title'] = $this->roletitle;
+							// $insert_sql_array['department'] = $this->department;
+							// $insert_sql_array['role_location'] = $this->rolelocation;
+							// $insert_sql_array['job_type'] = $this->jobtype;
+							// $insert_sql_array['job_category'] = $this->jobcategory;
+							// $insert_sql_array['qualifications'] = $this->qualifications;
+							// $insert_sql_array['job_description'] = $this->description;
+							// $insert_sql_array['job_experience'] = $this->experience;
+							// $insert_sql_array['job_designation'] = $this->designation;
+							// $insert_sql_array['remuneration'] = $this->remuneration;
+							// $insert_sql_array['key_skills'] = $this->keyskills;
+							// $insert_sql_array['keys_accountabilities'] = $this->keysaccountabilities;
 
-							$insert_sql_array['user_id']=$_SESSION['user_id'];
-							$insert_sql_array['company_id']=$_SESSION['company_id'];
+							// $insert_sql_array['user_id']=$_SESSION['user_id'];
+							// $insert_sql_array['company_id']=$_SESSION['company_id'];
 
 
-							$this->db->insert(tbl_jobs,$insert_sql_array);
+							// $this->db->insert(tbl_jobs,$insert_sql_array);
 
 					
 
@@ -959,16 +1400,159 @@ class employer{
 							
 							
 							
-							} else {
-							echo $this->Form->ErrtxtPrefix.$this->Form->ErrorString.$this->Form->ErrtxtSufix; 
-							$this->CreateUser.('local');
-							}
+							// } else {
+							// echo $this->Form->ErrtxtPrefix.$this->Form->ErrorString.$this->Form->ErrtxtSufix; 
+							// $this->CreateUser.('local');
+							// }
 							break;
 			default 	: 
 							echo "Wrong Parameter passed";
 		}
 	}
 
+
+	function undergrad_list(){
+
+
+				$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+
+				$sql="select * from ".TBL_COURSETYPE." where qualification_type= 1 ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				$course=array();
+				while ($row= $this->db->fetch_array($result)) {
+					
+				$course['coursetype_id']=$row['coursetype_id'];
+				$course['coursetype_name']=$row['coursetype_name'];
+
+				$data[]=$course;
+				}
+				//print_r($data);
+
+				$resp['data']=$data;
+
+				echo json_encode($resp);
+	}
+
+
+	function postgrad_list(){
+
+			$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+
+				$sql="select * from ".TBL_COURSETYPE." where qualification_type= 2 ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				$course=array();
+				while ($row= $this->db->fetch_array($result)) {
+					
+				$course['coursetype_id']=$row['coursetype_id'];
+				$course['coursetype_name']=$row['coursetype_name'];
+
+				$data[]=$course;
+				}
+				//print_r($data);
+
+				$resp['data']=$data;
+
+				echo json_encode($resp);
+	}
+
+
+	function doctorate_list(){
+	$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+
+				$sql="select * from ".TBL_COURSETYPE." where qualification_type= 3 ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				$course=array();
+				while ($row= $this->db->fetch_array($result)) {
+					
+				$course['coursetype_id']=$row['coursetype_id'];
+				$course['coursetype_name']=$row['coursetype_name'];
+
+				$data[]=$course;
+				}
+				//print_r($data);
+
+				$resp['data']=$data;
+
+				echo json_encode($resp);
+	}
+
+
+	// function undergrad_list(){
+
+				
+	// 	 $sql="select * from ".TBL_SPECIFICATION." where 1 ";
+	// 	 $result= $this->db->query($sql,__FILE__,__LINE__);
+	// 	 static $x= 0;
+	// 	 while ($row= $this->db->fetch_array($result)) {
+
+
+		 		
+
+	// 	 		if ($row['flags'] == 1) {
+	// 	 			$x++;
+
+	// 	 		}
+
+		 		
+	// 	 		$insert_sql_array = array();
+	// 	            $insert_sql_array['coursetype_id'] = $x;
+		           
+	// 	            $this->db->update(TBL_SPECIFICATION,$insert_sql_array,spec_id,$row['spec_id']);
+	// 	}
+
+
+	//}
+
+
+	function  getspec($spec_type){
+
+			$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+
+				$sql="select * from ".TBL_SPECIFICATION." where coursetype_id= '".$spec_type."' ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				$spec=array();
+				while ($row= $this->db->fetch_array($result)) {
+					
+				$spec['spec_id']=$row['spec_id'];
+				$spec['spec_name']=$row['spec_name'];
+
+				$data[]=$spec;
+				}
+				//print_r($data);
+
+				$resp['data']=$data;
+
+				echo json_encode($resp);
+
+	}
 
 	
 }
