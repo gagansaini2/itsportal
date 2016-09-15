@@ -13,6 +13,7 @@
 @import url(select2.css);
 @import url(selectize.css);
 @import url(angular-input-stars.css);
+
 /*------------------------------------------------------------------
 
 
@@ -2116,7 +2117,12 @@ background-repeat: no-repeat;
 
 .well{
 	border:3px solid ;
-	padding-bottom: 0px;
+	padding: 0px;
+}
+
+.selectize-input{
+	margin-bottom: -6px;
+	line-height: 2;
 }
 
 textarea.ng-untouched {
@@ -2252,4 +2258,14 @@ textarea.ng-invalid    {
 	border-radius: 0 0 3px 3px;
 	height: 200px;
    
+}
+
+p.des{
+	/*white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	max-width: 2000px;*/
+}
+.morecontent span {
+	display: none;
 }

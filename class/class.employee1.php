@@ -587,7 +587,7 @@ class employee1{
 							          <option value="">Select your highest qualification</option>
 							          <option value="Doctorate/Phd">Doctorate/Phd</option>
 							          <option value="Masters">Postgraduate</option>
-							          <option value="Undergraduate">Undergraduate</option>
+							          <option value="Graduate">Graduate</option>
 
 							        </select>
 
@@ -704,7 +704,7 @@ class employee1{
 							          <option value="">Select your highest qualification</option>
 							          <option value="Doctorate/Phd">Doctorate/Phd</option>
 							          <option value="Masters">Postgraduate</option>
-							          <option value="Undergraduate">Undergraduate</option>
+							          <option value="Graduate">Graduate</option>
 
 							        </select><span id="span_highestqualification"></span>
 
@@ -1085,27 +1085,7 @@ class employee1{
 					                <option value="28 Lacs">28 Lacs</option>
 					                <option value="29 Lacs">29 Lacs</option>
 					                <option value="30 Lacs">30 Lacs</option>
-					                <option value="31 Lacs">31 Lacs</option>
-					                <option value="32 Lacs">32 Lacs</option>
-					                <option value="33 Lacs">33 Lacs</option>
-					                <option value="34 Lacs">34 Lacs</option>
-					                <option value="35 Lacs">35 Lacs</option>
-					                <option value="36 Lacs">36 Lacs</option>
-					                <option value="37 Lacs">37 Lacs</option>
-					                <option value="38 Lacs">38 Lacs</option>
-					                <option value="39 Lacs">39 Lacs</option>
-					                <option value="40 Lacs">40 Lacs</option>
-					                <option value="41 Lacs">41 Lacs</option>
-					                <option value="42 Lacs">42 Lacs</option>
-					                <option value="43 Lacs">43 Lacs</option>
-					                <option value="44 Lacs">44 Lacs</option>
-					                <option value="45 Lacs">45 Lacs</option>
-					                <option value="46 Lacs">46 Lacs</option>
-					                <option value="47 Lacs">47 Lacs</option>
-					                <option value="48 Lacs">48 Lacs</option>
-					                <option value="49 Lacs">49 Lacs</option>
-					                <option value="50 Lacs">50 Lacs</option>
-					                <option value="50+ Lacs">50+ Lacs</option>
+					                <option value="30+ Lacs">30+ Lacs</option>
 
 
 							          </select>
@@ -1438,7 +1418,7 @@ class employee1{
 
 	    </div>
 		
-		<ul class="pager wizard">
+		<ul class="pager wizard" style="margin-top:80px;">
 			<li class="previous first btn btn-lg" style="display:none;"><a href="#">First</a></li>
 			<li class="previous btn"><a href="#">Previous</a></li>
 			<li class="next last btn" style="display:none;"><a href="#">Last</a></li>

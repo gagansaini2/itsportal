@@ -41,13 +41,41 @@ $user_obj=new employee1();
 			
 
 
+
+
 			<?php
-				extract($_REQUEST);
+
+
+
+
+			if (isset($_SESSION['user_id'])) {
+				
+				if ($_SESSION['user_type']=='2') {
+					
+					extract($_REQUEST);
 					if($submit1=='register'){
 						$user_obj->empprofile('server');
 					}else{
 						$user_obj->empprofile('local');
 					}
+
+				}else{
+					?>
+					<script type="text/javascript">
+						window.location="index.php"
+					</script>
+					<?php	
+				}
+				
+			}else{
+				?>
+				<script type="text/javascript">
+					window.location="signin.php"
+				</script>
+				<?php
+			}	
+
+				
 				
 
 				 ?>

@@ -34,8 +34,27 @@ $user_obj2=new employer();
 
 		<!-- ============ RESUME START ============ -->
 
-		<section ng-app="its" ng-controller="companyprof">
+		<section ng-app="its" ng-controller="companylist">
 			
+
+			<div class="modal fade" id="delcomp" role="dialog">
+			    <div class="modal-dialog modal-sm"  style="margin-top:200px;">
+			      <div class="modal-content">
+			       
+			        <div class="modal-body text-center">
+			          <p><b>Remove this Company Profile</b></p>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-primary" ng-click="del()">Yes</button>
+			          <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+ 
+
+
+
 
 
 			<?php
@@ -51,12 +70,9 @@ $user_obj2=new employer();
 				if ($_SESSION['user_type']=='4') {
 					
 						extract($_REQUEST);
-						if($submit=='register'){
-							$user_obj2->comp_prof('server');
 
-						}else{
-							$user_obj2->comp_prof('local');
-						}
+						$user_obj2->comp_list();
+						
 				
 				}elseif ($_SESSION['user_type']=='3') {
 						
@@ -70,12 +86,9 @@ $user_obj2=new employer();
 					}else{
 
 						extract($_REQUEST);
-						if($submit=='register'){
-							$user_obj2->comp_prof('server');
 
-						}else{
-							$user_obj2->comp_prof('local');
-						}
+						$user_obj2->comp_list();
+						
 					}
 
 				}else{
@@ -110,3 +123,10 @@ $user_obj2=new employer();
 
 	</body>
 </html>
+<script>
+
+delcomp=function(){
+			alert(" r u sure");
+		}
+
+</script>

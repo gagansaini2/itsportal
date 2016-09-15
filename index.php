@@ -32,29 +32,97 @@ $job_obj=new jobs();
         <div class="bg-img bg-img-1"></div>
         <div class="tint"></div>
         <div class="slide-content">
-                
-               
-                  <div class="col-sm-10 well" style="padding:0px;width:95%;">
-                  
                       
-                              
-                      <input type="text" class="form-control search" name="x" placeholder="Skills, Companies" style="width:30%;">
-                      <select class="form-control search" >
+               
+                 <pre>{{JSON || search}}</pre>
+                  
+                    <div class="col-sm-12 well">
+              
+                      
+                      <div class="row col-sm-5"><selectize config='myConfig' options='myOptions' ng-model="form.langs"></selectize></div>        
+                      <!-- <input type="text" class="form-control search" name="x" placeholder="Skills, Companies" ng-model="search.any" style="width:30%;"> -->
+                       <div class="row col-sm-3"><selectize config='myConfig1' options='cities' ng-model="search.location"></selectize></div>
+                     <!--  <select class="form-control search" ng-model="search.location" ng-options="x.city as x.city for x in cities">
                         <option>Location <span class="caret"></span></option> 
-                      </select>
-                      <select class="form-control search" >
-                        <option>Experience <span class="caret"></span></option> 
-                      </select>
-                      <select class="form-control search" >
-                        <option>Salary <span class="caret"></span></option> 
-                      </select>
+                      </select> -->
+                       <div class="row col-sm-2"><selectize config='myConfig2' options='exp' ng-model="search.experience"></selectize></div>
+                     <!--  <select class="form-control search" ng-model="search.experience">
+                        <option>Experience <span class="caret" ></span></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+
+                      </select> -->
+                       <div class="row col-sm-2"><selectize config='myConfig3' options='salary' ng-model="search.salary"></selectize></div>
+                      <!-- <select class="form-control search" ng-model="search.salary">
+                        <option>Salary <span class="caret" ></span></option> 
+                        <option value="1 Lacs">1 Lacs</option>
+                        <option value="2 Lacs">2 Lacs</option>
+                        <option value="3 Lacs">3 Lacs</option>
+                        <option value="4 Lacs">4 Lacs</option>
+                        <option value="5 Lacs">5 Lacs</option>
+                        <option value="6 Lacs">6 Lacs</option>
+                        <option value="7 Lacs">7 Lacs</option>
+                        <option value="8 Lacs">8 Lacs</option>
+                        <option value="9 Lacs">9 Lacs</option>
+                        <option value="10 Lacs">10 Lacs</option>
+                        <option value="11 Lacs">11 Lacs</option>
+                        <option value="12 Lacs">12 Lacs</option>
+                        <option value="13 Lacs">13 Lacs</option>
+                        <option value="14 Lacs">14 Lacs</option>
+                        <option value="15 Lacs">15 Lacs</option>
+                        <option value="16 Lacs">16 Lacs</option>
+                        <option value="17 Lacs">17 Lacs</option>
+                        <option value="18 Lacs">18 Lacs</option>
+                        <option value="19 Lacs">19 Lacs</option>
+                        <option value="20 Lacs">20 Lacs</option>
+                        <option value="21 Lacs">21 Lacs</option>
+                        <option value="22 Lacs">22 Lacs</option>
+                        <option value="23 Lacs">23 Lacs</option>
+                        <option value="24 Lacs">24 Lacs</option>
+                        <option value="25 Lacs">25 Lacs</option>
+                        <option value="26 Lacs">26 Lacs</option>
+                        <option value="27 Lacs">27 Lacs</option>
+                        <option value="28 Lacs">28 Lacs</option>
+                        <option value="29 Lacs">29 Lacs</option>
+                        <option value="30 Lacs">30 Lacs</option>
+                        <option value="30+ Lacs">30+ Lacs</option>
+                      </select> -->
                           
                          
                         
-                      <span class="search" style="width:10%;">
-                        <button class="btn btn-primary" type="button" style="height: 45px;"><span class="glyphicon glyphicon-search"></span>Search</button>    
-                      </span>
-                      
+                      <div class="row" >
+                        <button class="btn btn-primary" type="button" ng-click="searchJob()" style="line-height:2.3;width:120px;"><span class="glyphicon glyphicon-search"></span>Search</button>    
+                      </div>
+                    
+
                   </div>
          
 
@@ -111,7 +179,7 @@ $job_obj=new jobs();
 <section id="jobs">
    <?php
         
-        $job_obj->get_jobs();
+        $job_obj->getjobs_home();
 
          ?>
 </section>

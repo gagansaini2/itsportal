@@ -56,16 +56,103 @@ $user_obj2=new employer();
 			    </div>
 			  </div>
 
-			
 
+<?php
+
+	if ($_SESSION['user_type']=='4') {
+
+?>		
+	
+			  <div class="modal fade" id="companymodal" data-backdrop="static" role="dialog" ng-init="load()">
+			    <div class="modal-dialog" style="margin-top:200px;">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content" style="padding:10%;">
+			      	 <div class="modal-body" >
+
+			        	<h4 >JOB for :</h4><br>
+			        	<div class="col-sm-12">
+				        	<div class="col-sm-4 text-center" ng-repeat="x in companylist">
+				        		<a ng-click="selectcomp(x)">
+				        			<img src="uploads/{{x.company_logo.logo_name}}" style="width:100px; height:100px;"><br>
+				        			<h6>{{x.company.company_name}}</h6>
+				        		</a><br>
+
+
+
+				        	</div>
+				        	
+			        	</div>
+		        		<div class="row">
+						    <div class="col-sm-5">
+						          <hr class="dashed">
+				        	</div>
+				        	<span class="col-sm-1">
+				        	<b>OR</b>
+				        	</span>
+				        	<div class="col-sm-5">
+						          <hr class="dashed">
+				        	</div>
+				        </div>
+
+				        <div class="row text-center">
+				        	<br><a class="btn btn-primary" href="companyprof.php">new company profile</a>
+				        </div>
+		          	
+			        </div>
+			       
+			      </div>
+			      
+			    </div>
+			  </div>
+<?php	}		
+?>
 
 			<?php
-				extract($_REQUEST);
-					if($submit=='register'){
-						$user_obj2->post_job('server');
+
+			$sql2="select count(*) as total from ".TBL_COMPANY." where user_id='".$_SESSION['user_id']."'";
+            $result2=$user_obj2->db->query($sql2,__FILE__,__LINE__);
+            $row=mysql_fetch_assoc($result2);
+					                          
+
+			if (isset($_SESSION['user_id'])) {
+
+				if ($_SESSION['user_type']=='4' || '3') {
+					
+					if ($row['total'] > 0) {
+
+
+						extract($_REQUEST);
+						if($submit=='register'){
+							$user_obj2->post_job('server');
+						}else{
+							$user_obj2->post_job('local');
+						}
+
 					}else{
-						$user_obj2->post_job('local');
+						?>
+					<script type="text/javascript">
+						window.location="companyprof.php"
+					</script>
+					<?php
+
 					}
+				}else{
+					
+					?>
+					<script type="text/javascript">
+						window.location="index.php"
+					</script>
+					<?php	
+				}
+			}else{
+				?>
+					<script type="text/javascript">
+						window.location="signin-employer.php"
+					</script>
+					<?php	
+			}
+				
 				
 
 				 ?>

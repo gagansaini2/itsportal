@@ -36,7 +36,28 @@ class jobs{
 				<?php
 
 
-			$sql="select * from ".TBL_JOBS." where 1 ";
+				$sql="select * from ".TBL_JOBS." where 1 ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+				$total_rec= $this->db->num_rows($result);
+
+				// print_r($total_rec);
+
+				$rec_per_page=2;
+
+				$total_pages=ceil($total_rec/$rec_per_page);
+
+				 $cur_page=$_GET['page'];
+
+				if (!isset($cur_page) || $cur_page=='1') {
+					$start=0;
+				}else{
+					$start=($cur_page*$rec_per_page) - $rec_per_page;
+				}
+
+
+
+
+			$sql="select * from ".TBL_JOBS." where 1 limit ".$start.",2 ";
 			$result= $this->db->query($sql,__FILE__,__LINE__);
 
 			while($row= $this->db->fetch_array($result)){
@@ -118,10 +139,129 @@ class jobs{
 					</div>
 				</div>
 			</div>
+
+
 			<?php
 
 			}
+		
+			?>
+			<div class="container">
+				<ul class="pagination">
+					<?php
+
+					for ($i=1; $i <=$total_pages ; $i++) { 
+						echo '<li class="we"><a href="jobslist.php?page='.$i.'">'.$i.'</a></li>';		
+					}
+					?>
+				  
+				  
+				</ul>
+			</div>
 	
+			<?php
+	}
+
+
+	function getjobs_home(){
+
+
+		?>
+		<div class="row text-center">
+					<div class="col-sm-12">
+						<h1 style="font-size:38px;">jobs</h1>
+						
+				</div>		
+				</div><br><br><br>
+
+				<?php
+
+			$sql="select * from ".TBL_JOBS." where 1 limit 0,6";
+			$result= $this->db->query($sql,__FILE__,__LINE__);
+
+			while($row= $this->db->fetch_array($result)){
+				$id=$row['job_id'];
+				$comp_id=$row['company_id'];
+
+				
+				$skills=json_decode($row['key_skills']);
+
+				$key_skills=implode(", ",$skills);
+
+				$sql1="select * from ".TBL_LOGO." where company_id = '".$comp_id."' ";
+				$result1= $this->db->query($sql1,__FILE__,__LINE__);
+				$row1= mysql_fetch_assoc($result1);
+				$imglogo=$row1['logo_name'];
+
+				$sql2="select * from ".TBL_STATELIST." where location_id= '".$row['location_id']."' ";
+				$result2= $this->db->query($sql2,__FILE__,__LINE__);
+				$row2= mysql_fetch_assoc($result2);
+
+				// print_r($row1);
+
+			?>
+
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-sm-12">
+
+
+
+						<div class="jobs">
+							
+							<!-- Job offer 1 -->
+							<a href="job_details.php?id=<?php echo($id) ?>"  class="featured applied">
+								<div class="row">
+									<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
+										<?php
+										if (isset($imglogo)) { ?>
+
+											<img src='uploads/<?php echo($imglogo); ?>' class='img-responsive' >
+
+										<?php }
+										
+										?>
+										 
+									</div>
+									<div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 job-title">
+										<h5><?php echo $row['role_title']; ?></h5>
+										<p><strong><?php echo $row['department']; ?></strong> <?php echo $row['job_category']; ?></p>
+									</div>
+									<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
+										
+										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  <?php echo $row2['city_name']; ?></strong></p>
+										<p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;<strong><?php echo $row['min_experience']; ?> - <?php echo $row['max_experience']; ?>years</strong></p>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs job-type text-center">
+										<p class="job-salary"><strong><i class="fa fa-rupee"></i>&nbsp;<?php echo $row['min_remuneration'];?> - <?php echo $row['max_remuneration'];?> Lacs</strong></p>
+										<p class="badge full-time"><?php echo $row['job_type']; ?></p>
+									</div>
+									<div class="col-lg-2 visible-lg-block">
+
+										<p class="job-posted"><strong><?php echo $key_skills; ?></strong></p>
+										
+									</div>
+								</div>
+							</a>
+							
+							
+
+						</div>
+
+						
+
+					</div>
+				</div>
+			</div>
+			<?php
+
+			}
+
+
+
+
 	}
 
 
@@ -193,9 +333,14 @@ class jobs{
 
 								
 								<label>Job Experience :</label>&nbsp;<span><?php echo $row['min_experience'];?> - <?php echo $row['max_experience'];?> Years</span>
-								<p><?php echo nl2br($row['experience_details']);?></p>
+								
 								<?php
-
+								if ($row['experience_details']!=="") {
+								?>
+									<p><?php echo nl2br($row['experience_details']);?></p>	
+								<?php
+								}
+								
 									if ($row['value_proposition']!=="") { ?>
 										<label>Employee Value Proposition :</label>&nbsp;<span style="text-transform:capitalize;"><?php echo $row['value_proposition'];?></span>
 								<?php	}
@@ -279,18 +424,24 @@ class jobs{
 							    loginPanel=function(){
 							    	$('#loginModal').modal('show');
 							    }
-							</script>							
-							<div class="col-sm-8" align="center">
-								<?php
-									if (isset($_SESSION['user_id'])) { ?>
-										<br><a class="btn btn-primary btn-lg" onclick="applyJob(myvar)">Apply Here</a>
-							<?php	}else{?>
-										<br><a class="btn btn-primary btn-lg" onclick="loginPanel()">Login to Apply</a>
-							<?php   } 
-						
-							?>
-								
-							</div>
+							</script>	
+
+							<?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type']=='2') {
+							?>	
+									<div class="col-sm-8" align="center">
+									<?php
+										if (isset($_SESSION['user_id'])) { ?>
+											<br><a class="btn btn-primary btn-lg" onclick="applyJob(myvar)">Apply Here</a>
+								<?php	}else{?>
+											<br><a class="btn btn-primary btn-lg" onclick="loginPanel()">Login to Apply</a>
+								<?php   } 
+							
+								?>
+									
+								</div>
+							<?php }
+							?>						
+							
 						
 					</div>
 					<div class="col-sm-4" id="sidebar">
@@ -391,7 +542,7 @@ class jobs{
 	                            <p>Hello ,</p>
 	                            <p>A Candidate is intersted in a Job you mentioned.</p>
 	                            <p>See the profile of the Candidate 
-	                            <a href="http://itsrecruitment.in/its_recruitment/applicant_prof.php?'.$candidate_id.'> Here</a></p> 
+	                            <a href="http://itsrecruitment.in/its_recruitment/applicant_prof.php?'.$candidate_id.'"> Here</a></p> 
 	                            									
 
 
@@ -399,7 +550,7 @@ class jobs{
 	                            <p>Regards,</p>
 	                            <p>The ITS Recruitment Team</p>
 	                            </div>';
-	                            $header = "From: ITS@itsrecruitment.in\r\n"; 
+	                            $header = "From: its.sangita@itsgroup.com\r\n"; 
 	                            $header.= "MIME-Version: 1.0\r\n"; 
 	                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 	                            $header.= "X-Priority: 1\r\n"; 
@@ -587,7 +738,12 @@ class jobs{
 					$insert_sql_array['shift_timimg'] = $job['shifttimimg'];
 
 					$insert_sql_array['user_id']=$_SESSION['user_id'];
-					$insert_sql_array['company_id']=$_SESSION['company_id'];
+					
+					if (isset($job['company_id'])) {
+						$insert_sql_array['company_id']=$job['company_id'];
+					}else{
+						$insert_sql_array['company_id']=$_SESSION['company_id'];
+					}	
 
 
 					$this->db->insert(TBL_JOBS,$insert_sql_array);
@@ -619,23 +775,58 @@ class jobs{
 
 
 
-	function applicant_prof($id){
+	function get_companies(){
 
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
 
+			$sql="select * from ".TBL_COMPANY." where user_id= '".$_SESSION['user_id']."' ";
+			$result= $this->db->query($sql,__FILE__,__LINE__);
+			
+			$data=array();
+			while ($row= $this->db->fetch_array($result)){
 
-		?>
-		<div class="container">
-				<div class="col-sm-12 text-center">
-						<h1>Candidate Profile</h1><br><br>
-						
-					</div>
+				$sql1="select * from ".TBL_LOGO." where company_id= '".$row['company_id']."' ";
+				$result1= $this->db->query($sql1,__FILE__,__LINE__);
+				$row1= $this->db->fetch_array($result1);
+			
+				
+					
+				$com['company']=$row;
+				$com['company_logo']=$row1;
 
-					</div>
+				$data[]=$com;
+				}
+
+				
+			$resp['data']=$data;
+
+			echo json_encode($resp);
 		
-				 <div class="container">
-				 </div>
-		<?php		 
 	}
+
+	function delete_company($comp_id){
+
+
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+			$sql=mysql_query("DELETE FROM TBL_COMPANY WHERE company_id= '".$comp_id."' ");
+			// $result= $this->db->query($sql,__FILE__,__LINE__);
+			// $row= $this->db->fetch_array($result);
+
+
+			// print_r($sql);
+
+
+			// $resp['data']=$row;
+
+			echo json_encode($resp);
+
+	}
+
 
 }
 ?> 

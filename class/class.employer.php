@@ -102,7 +102,7 @@ class employer{
 
 					<div class="row text-center">
 						<br>
-						<label>New Clients -</label> <a href="signup-employer.php">Sign Up Now</a>
+						<label>New Clients -</label> <a href="employer_type.php">Sign Up Now</a>
 					</div>
 
 				</div>
@@ -187,7 +187,8 @@ class employer{
                 $this->username = $username;
                 $this->password = $password;
                 $this->phoneno = $phoneno;
-              
+              	$this->terms = $terms;
+	
                
             }
             $FormName = "signup_form";
@@ -196,8 +197,8 @@ class employer{
                                 "name"=>array('name',"''","Please enter Name","span_name"),
                                 "password"=>array('password',"Password","Please enter Password","span_password"),
                                 "username"=>array('username',"EMail","Please enter Email","span_username"),
-                                "phoneno"=>array('phoneno',"Number","Please enter Phone Number","span_phoneno")
-                               
+                                "phoneno"=>array('phoneno',"Number","Please enter Phone Number","span_phoneno"),
+                               	"terms"=>array('terms',"Agree","","span_terms")
             );
 
             $ValidationFunctionName="CreateUser";
@@ -271,6 +272,12 @@ class employer{
 							</div>
 						</div>
 					</div>
+
+					
+					<div>
+						<input type="checkbox" name="terms"><label>&nbsp; I agree to <a href="TermsConditions.html" target="_blank">Terms & Conditions</a></label><br>
+						<span id="span_terms"></span>
+					</div>
 					<div class="row text-center">
 						<p>&nbsp;</p>
 						
@@ -302,6 +309,8 @@ class employer{
 							$this->name = $name;
 							$this->phoneno = $phoneno;
 
+							// 
+							//print_r($user_type);
 							//$this->type = $type;
 							//$this->auth_to = $auth_to;
 
@@ -335,6 +344,7 @@ class employer{
 							$insert_sql_array['user'] = $this->username;
 							$insert_sql_array['password'] = $this->password;
 							$insert_sql_array['phoneno'] = $this->phoneno;
+
 							$insert_sql_array['type'] = '3';
 							$insert_sql_array['status'] = '1';
 							//$insert_sql_array['auth_to'] = 'Superadmin';
@@ -357,16 +367,18 @@ class employer{
 						                            <p>Regards,</p>
 						                            <p>The Its Recruitment</p>
 						                            </div>';
-						                            $header = "From: noreply@its.com\r\n"; 
+						                            $header = "From: its.sangita@itsgroup.com\r\n"; 
 						                            $header.= "MIME-Version: 1.0\r\n"; 
 						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 						                            $header.= "X-Priority: 1\r\n"; 
 
-						                             // mail($to, $subject, $comment, $header);
+						                             mail($to, $subject, $comment, $header);
 							
 							$_SESSION['msg'] = 'User has been created Successfully';
 								
 							?>
+
+							
 								
 						<div class="container">
 						
@@ -389,7 +401,9 @@ class employer{
 			
 
 			</div>
-							<?php
+
+
+		  				<?php 
 						
 							
 							} else {
@@ -401,6 +415,249 @@ class employer{
 							echo "Wrong Parameter passed";
 		}
 	}
+
+
+	function CreateUser1($runat)
+	{
+		switch($runat){
+			case 'local':
+
+
+
+					 if(count($_POST)>0 and $_POST['submit']=='Submit'){
+                extract($_POST);
+                $this->name = $name;
+                $this->username = $username;
+                $this->password = $password;
+                $this->phoneno = $phoneno;
+              	$this->terms = $terms;
+	
+               
+            }
+            $FormName = "signup_form";
+            $ControlNames=array(
+                                 
+                                "name"=>array('name',"''","Please enter Name","span_name"),
+                                "password"=>array('password',"Password","Please enter Password","span_password"),
+                                "username"=>array('username',"EMail","Please enter Email","span_username"),
+                                "phoneno"=>array('phoneno',"Number","Please enter Phone Number","span_phoneno"),
+                               	"terms"=>array('terms',"Agree","","span_terms")
+            );
+
+            $ValidationFunctionName="CreateUser";
+          
+            $JsCodeForFormValidation=$this->validity->ShowJSFormValidationCode($FormName,$ControlNames,$ValidationFunctionName,$SameFields,$ErrorMsgForSameFields);
+            echo $JsCodeForFormValidation;
+						
+
+						?>
+
+
+					<div class="container">
+						<div class="row text-center">
+							<div class="col-sm-12">
+							<h1>Sign Up Here</h1>
+							<style>
+							h2::after {
+								
+								/*content: none;*/
+								
+								/*display: block;
+								height: 5px;
+								margin-top: 10px;
+								width: 60px;*/
+							}
+							</style>
+							<h4>For Free!!</h4>
+						
+							</div>
+						</div>
+
+				<form name="<?php echo $FormName?>" method="POST">
+
+					
+
+					<!-- Resume Details Start -->
+				<div class="jumbotron">	
+					<h5 class="text-center"><?php if (isset($_SESSION['error_msg'])) {
+							echo $_SESSION['error_msg'];
+							
+					}?></h5><br><br>
+					
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group" id="name-group">
+								<label for="resume-name">Name</label>
+								<input type="text" class="form-control" name="name" id="name" placeholder="e.g. John Doe">
+								<span id="span_name"></span>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group" id="email-group">
+								<label for="resume-name">Email</label>
+								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								<span id="span_username"></span>
+							</div>
+						</div>
+						
+						<div class="col-sm-6">
+							<div class="form-group" id="password-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" name="password" id="password" placeholder="password">
+								<span id="span_password"></span>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group" id="phoneno-group">
+								<label for="resume-name">Phone No.</label>
+								<input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="e.g. John Doe">
+								<span id="span_phoneno"></span>
+							</div>
+						</div>
+					</div>
+					
+					<div>
+						<input type="checkbox" name="terms"><label>&nbsp; I agree to <a href="TermsConditions.html" target="_blank">Terms & Conditions</a></label><br>
+						<span id="span_terms"></span>
+					</div>
+					<div class="row text-center">
+						<p>&nbsp;</p>
+						
+						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
+						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Sign up <i class="fa fa-arrow-right"></i></button>
+					</div>
+				</div>
+					
+					<!-- Resume File Start -->
+
+					
+
+				</form>
+
+			</div>
+
+
+								<?php 
+										
+
+						break;
+			
+
+			case 'server':
+							extract($_POST);
+							
+							$this->password = $password;
+							$this->username = $username;
+							$this->name = $name;
+							$this->phoneno = $phoneno;
+
+							// 
+							//print_r($user_type);
+							//$this->type = $type;
+							//$this->auth_to = $auth_to;
+
+							//server side validation
+							$return =true;
+							// if($this->Form->ValidField($username,'empty','User field is Empty or Invalid')==false)
+							// 	$return =false;
+							// if($this->Form->ValidField($password,'empty','Password name field is Empty or Invalid')==false)
+							// 	$return =false;	
+							
+							$sql="select * from ".TBL_USER." where user='".$this->username."'";
+							$result= $this->db->query($sql,__FILE__,__LINE__);
+							if($this->db->num_rows($result)>0)
+							{
+								$_SESSION['error_msg'] = 'User already exist. Please select another username';
+								?>
+								<script type="text/javascript">
+									window.location = "signup-employer.php"
+								</script>
+								<?php
+									exit();
+
+							
+								
+							}
+								
+							if($return){
+							
+							$insert_sql_array = array();
+							$insert_sql_array['name'] = $this->name;
+							$insert_sql_array['user'] = $this->username;
+							$insert_sql_array['password'] = $this->password;
+							$insert_sql_array['phoneno'] = $this->phoneno;
+
+							$insert_sql_array['type'] = '4';
+							$insert_sql_array['status'] = '1';
+							//$insert_sql_array['auth_to'] = 'Superadmin';
+							$this->db->insert(TBL_USER,$insert_sql_array);
+
+
+							  $to = $this->username;
+						                    
+						                            $subject = "New registration @ Its Recruitment" ;
+						                            $comment = '<div style="text-align:left">
+
+						                            <p>Hello ,</p>
+						                            <p>Your Account has been created with </p>
+						                            <p>Username: "'.$this->username.'"</p>
+						                            <p>Password: "'.$this->password.'"
+						                            
+
+
+						                            
+						                            <p>Regards,</p>
+						                            <p>The Its Recruitment</p>
+						                            </div>';
+						                            $header = "From: its.sangita@itsgroup.com\r\n"; 
+						                            $header.= "MIME-Version: 1.0\r\n"; 
+						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
+						                            $header.= "X-Priority: 1\r\n"; 
+
+						                             mail($to, $subject, $comment, $header);
+							
+							$_SESSION['msg'] = 'User has been created Successfully';
+								
+							?>
+
+						
+								
+						<div class="container">
+						
+
+			
+					
+				<div class="jumbotron">	
+					
+					<div class="row text-center">
+						<h4>You are successfully registered</h4>
+						<h5>Click next to proceed</h5>
+					</div>
+					<div class="row text-center">
+						<p>&nbsp;</p>
+						
+						<a class="btn btn-primary btn-lg" name="submit" href="signin-employer.php" value="register">Next <i class="fa fa-arrow-right"></i></a>
+						
+					</div>
+				</div>
+			
+
+			</div>
+
+
+		  				<?php 
+						
+							
+							} else {
+							echo $this->Form->ErrtxtPrefix.$this->Form->ErrorString.$this->Form->ErrtxtSufix; 
+							$this->CreateUser.('local');
+							}
+							break;
+			default 	: 
+							echo "Wrong Parameter passed";
+		}
+	}
+
 
 
 
@@ -491,258 +748,9 @@ class employer{
 							<div class="form-group" id="company-group">
 								<label for="company">Company Headquaters*</label>
 								
-								<select class="form-control" name="company_location" ng-model="company.company_location" required>
-									<option value="">Select Location</option>
-									<option value="AF">Afghanistan</option>
-									<option value="AX">Åland Islands</option>
-									<option value="AL">Albania</option>
-									<option value="DZ">Algeria</option>
-									<option value="AS">American Samoa</option>
-									<option value="AD">Andorra</option>
-									<option value="AO">Angola</option>
-									<option value="AI">Anguilla</option>
-									<option value="AQ">Antarctica</option>
-									<option value="AG">Antigua and Barbuda</option>
-									<option value="AR">Argentina</option>
-									<option value="AM">Armenia</option>
-									<option value="AW">Aruba</option>
-									<option value="AU">Australia</option>
-									<option value="AT">Austria</option>
-									<option value="AZ">Azerbaijan</option>
-									<option value="BS">Bahamas</option>
-									<option value="BH">Bahrain</option>
-									<option value="BD">Bangladesh</option>
-									<option value="BB">Barbados</option>
-									<option value="BY">Belarus</option>
-									<option value="BE">Belgium</option>
-									<option value="BZ">Belize</option>
-									<option value="BJ">Benin</option>
-									<option value="BM">Bermuda</option>
-									<option value="BT">Bhutan</option>
-									<option value="BO">Bolivia, Plurinational State of</option>
-									<option value="BQ">Bonaire, Sint Eustatius and Saba</option>
-									<option value="BA">Bosnia and Herzegovina</option>
-									<option value="BW">Botswana</option>
-									<option value="BV">Bouvet Island</option>
-									<option value="BR">Brazil</option>
-									<option value="IO">British Indian Ocean Territory</option>
-									<option value="BN">Brunei Darussalam</option>
-									<option value="BG">Bulgaria</option>
-									<option value="BF">Burkina Faso</option>
-									<option value="BI">Burundi</option>
-									<option value="KH">Cambodia</option>
-									<option value="CM">Cameroon</option>
-									<option value="CA">Canada</option>
-									<option value="CV">Cape Verde</option>
-									<option value="KY">Cayman Islands</option>
-									<option value="CF">Central African Republic</option>
-									<option value="TD">Chad</option>
-									<option value="CL">Chile</option>
-									<option value="CN">China</option>
-									<option value="CX">Christmas Island</option>
-									<option value="CC">Cocos (Keeling) Islands</option>
-									<option value="CO">Colombia</option>
-									<option value="KM">Comoros</option>
-									<option value="CG">Congo</option>
-									<option value="CD">Congo, the Democratic Republic of the</option>
-									<option value="CK">Cook Islands</option>
-									<option value="CR">Costa Rica</option>
-									<option value="CI">Côte d'Ivoire</option>
-									<option value="HR">Croatia</option>
-									<option value="CU">Cuba</option>
-									<option value="CW">Curaçao</option>
-									<option value="CY">Cyprus</option>
-									<option value="CZ">Czech Republic</option>
-									<option value="DK">Denmark</option>
-									<option value="DJ">Djibouti</option>
-									<option value="DM">Dominica</option>
-									<option value="DO">Dominican Republic</option>
-									<option value="EC">Ecuador</option>
-									<option value="EG">Egypt</option>
-									<option value="SV">El Salvador</option>
-									<option value="GQ">Equatorial Guinea</option>
-									<option value="ER">Eritrea</option>
-									<option value="EE">Estonia</option>
-									<option value="ET">Ethiopia</option>
-									<option value="FK">Falkland Islands (Malvinas)</option>
-									<option value="FO">Faroe Islands</option>
-									<option value="FJ">Fiji</option>
-									<option value="FI">Finland</option>
-									<option value="FR">France</option>
-									<option value="GF">French Guiana</option>
-									<option value="PF">French Polynesia</option>
-									<option value="TF">French Southern Territories</option>
-									<option value="GA">Gabon</option>
-									<option value="GM">Gambia</option>
-									<option value="GE">Georgia</option>
-									<option value="DE">Germany</option>
-									<option value="GH">Ghana</option>
-									<option value="GI">Gibraltar</option>
-									<option value="GR">Greece</option>
-									<option value="GL">Greenland</option>
-									<option value="GD">Grenada</option>
-									<option value="GP">Guadeloupe</option>
-									<option value="GU">Guam</option>
-									<option value="GT">Guatemala</option>
-									<option value="GG">Guernsey</option>
-									<option value="GN">Guinea</option>
-									<option value="GW">Guinea-Bissau</option>
-									<option value="GY">Guyana</option>
-									<option value="HT">Haiti</option>
-									<option value="HM">Heard Island and McDonald Islands</option>
-									<option value="VA">Holy See (Vatican City State)</option>
-									<option value="HN">Honduras</option>
-									<option value="HK">Hong Kong</option>
-									<option value="HU">Hungary</option>
-									<option value="IS">Iceland</option>
-									<option value="IN">India</option>
-									<option value="ID">Indonesia</option>
-									<option value="IR">Iran, Islamic Republic of</option>
-									<option value="IQ">Iraq</option>
-									<option value="IE">Ireland</option>
-									<option value="IM">Isle of Man</option>
-									<option value="IL">Israel</option>
-									<option value="IT">Italy</option>
-									<option value="JM">Jamaica</option>
-									<option value="JP">Japan</option>
-									<option value="JE">Jersey</option>
-									<option value="JO">Jordan</option>
-									<option value="KZ">Kazakhstan</option>
-									<option value="KE">Kenya</option>
-									<option value="KI">Kiribati</option>
-									<option value="KP">Korea, Democratic People's Republic of</option>
-									<option value="KR">Korea, Republic of</option>
-									<option value="KW">Kuwait</option>
-									<option value="KG">Kyrgyzstan</option>
-									<option value="LA">Lao People's Democratic Republic</option>
-									<option value="LV">Latvia</option>
-									<option value="LB">Lebanon</option>
-									<option value="LS">Lesotho</option>
-									<option value="LR">Liberia</option>
-									<option value="LY">Libya</option>
-									<option value="LI">Liechtenstein</option>
-									<option value="LT">Lithuania</option>
-									<option value="LU">Luxembourg</option>
-									<option value="MO">Macao</option>
-									<option value="MK">Macedonia, the former Yugoslav Republic of</option>
-									<option value="MG">Madagascar</option>
-									<option value="MW">Malawi</option>
-									<option value="MY">Malaysia</option>
-									<option value="MV">Maldives</option>
-									<option value="ML">Mali</option>
-									<option value="MT">Malta</option>
-									<option value="MH">Marshall Islands</option>
-									<option value="MQ">Martinique</option>
-									<option value="MR">Mauritania</option>
-									<option value="MU">Mauritius</option>
-									<option value="YT">Mayotte</option>
-									<option value="MX">Mexico</option>
-									<option value="FM">Micronesia, Federated States of</option>
-									<option value="MD">Moldova, Republic of</option>
-									<option value="MC">Monaco</option>
-									<option value="MN">Mongolia</option>
-									<option value="ME">Montenegro</option>
-									<option value="MS">Montserrat</option>
-									<option value="MA">Morocco</option>
-									<option value="MZ">Mozambique</option>
-									<option value="MM">Myanmar</option>
-									<option value="NA">Namibia</option>
-									<option value="NR">Nauru</option>
-									<option value="NP">Nepal</option>
-									<option value="NL">Netherlands</option>
-									<option value="NC">New Caledonia</option>
-									<option value="NZ">New Zealand</option>
-									<option value="NI">Nicaragua</option>
-									<option value="NE">Niger</option>
-									<option value="NG">Nigeria</option>
-									<option value="NU">Niue</option>
-									<option value="NF">Norfolk Island</option>
-									<option value="MP">Northern Mariana Islands</option>
-									<option value="NO">Norway</option>
-									<option value="OM">Oman</option>
-									<option value="PK">Pakistan</option>
-									<option value="PW">Palau</option>
-									<option value="PS">Palestinian Territory, Occupied</option>
-									<option value="PA">Panama</option>
-									<option value="PG">Papua New Guinea</option>
-									<option value="PY">Paraguay</option>
-									<option value="PE">Peru</option>
-									<option value="PH">Philippines</option>
-									<option value="PN">Pitcairn</option>
-									<option value="PL">Poland</option>
-									<option value="PT">Portugal</option>
-									<option value="PR">Puerto Rico</option>
-									<option value="QA">Qatar</option>
-									<option value="RE">Réunion</option>
-									<option value="RO">Romania</option>
-									<option value="RU">Russian Federation</option>
-									<option value="RW">Rwanda</option>
-									<option value="BL">Saint Barthélemy</option>
-									<option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
-									<option value="KN">Saint Kitts and Nevis</option>
-									<option value="LC">Saint Lucia</option>
-									<option value="MF">Saint Martin (French part)</option>
-									<option value="PM">Saint Pierre and Miquelon</option>
-									<option value="VC">Saint Vincent and the Grenadines</option>
-									<option value="WS">Samoa</option>
-									<option value="SM">San Marino</option>
-									<option value="ST">Sao Tome and Principe</option>
-									<option value="SA">Saudi Arabia</option>
-									<option value="SN">Senegal</option>
-									<option value="RS">Serbia</option>
-									<option value="SC">Seychelles</option>
-									<option value="SL">Sierra Leone</option>
-									<option value="SG">Singapore</option>
-									<option value="SX">Sint Maarten (Dutch part)</option>
-									<option value="SK">Slovakia</option>
-									<option value="SI">Slovenia</option>
-									<option value="SB">Solomon Islands</option>
-									<option value="SO">Somalia</option>
-									<option value="ZA">South Africa</option>
-									<option value="GS">South Georgia and the South Sandwich Islands</option>
-									<option value="SS">South Sudan</option>
-									<option value="ES">Spain</option>
-									<option value="LK">Sri Lanka</option>
-									<option value="SD">Sudan</option>
-									<option value="SR">Suriname</option>
-									<option value="SJ">Svalbard and Jan Mayen</option>
-									<option value="SZ">Swaziland</option>
-									<option value="SE">Sweden</option>
-									<option value="CH">Switzerland</option>
-									<option value="SY">Syrian Arab Republic</option>
-									<option value="TW">Taiwan, Province of China</option>
-									<option value="TJ">Tajikistan</option>
-									<option value="TZ">Tanzania, United Republic of</option>
-									<option value="TH">Thailand</option>
-									<option value="TL">Timor-Leste</option>
-									<option value="TG">Togo</option>
-									<option value="TK">Tokelau</option>
-									<option value="TO">Tonga</option>
-									<option value="TT">Trinidad and Tobago</option>
-									<option value="TN">Tunisia</option>
-									<option value="TR">Turkey</option>
-									<option value="TM">Turkmenistan</option>
-									<option value="TC">Turks and Caicos Islands</option>
-									<option value="TV">Tuvalu</option>
-									<option value="UG">Uganda</option>
-									<option value="UA">Ukraine</option>
-									<option value="AE">United Arab Emirates</option>
-									<option value="GB">United Kingdom</option>
-									<option value="US">United States</option>
-									<option value="UM">United States Minor Outlying Islands</option>
-									<option value="UY">Uruguay</option>
-									<option value="UZ">Uzbekistan</option>
-									<option value="VU">Vanuatu</option>
-									<option value="VE">Venezuela, Bolivarian Republic of</option>
-									<option value="VN">Viet Nam</option>
-									<option value="VG">Virgin Islands, British</option>
-									<option value="VI">Virgin Islands, U.S.</option>
-									<option value="WF">Wallis and Futuna</option>
-									<option value="EH">Western Sahara</option>
-									<option value="YE">Yemen</option>
-									<option value="ZM">Zambia</option>
-									<option value="ZW">Zimbabwe</option>
-							</select>
+								<select class="form-control" name="company_location" ng-model="company.company_location" ng-options="x.countries as x.countries for x in countries" required>
+									
+								</select>
 								<span id="span_location"></span>
 							</div>
 							
@@ -965,8 +973,8 @@ class employer{
 					</div>
 				</div><br><br><br>
 				<h2 >Job Details</h2>
-<pre>{{JSON || job}}</pre>
-
+	<!-- <pre>{{JSON || job}}</pre>
+ -->
 
 				
 
@@ -1038,7 +1046,7 @@ class employer{
 							<div class="form-group" id="job-description-group">
 								<label for="job-description">Description*</label>
 								
-								<textarea  ng-model="job.description" placeholder="Description" style="height:195px;" ng-required="job.description" ></textarea>
+								<textarea  ng-model="job.description" placeholder="Description" style="height:195px; max-height:195px; max-width:450px;" ng-required="job.description" data-toggle="tooltip" title="Press Enter for the new line"></textarea>
 
 								<span id="span_descrip"></span>
 							</div>
@@ -1125,11 +1133,11 @@ class employer{
 							</div>
 							<div class="form-group" id="job-location-group">
 								
-								<textarea  ng-model="job.expdetails" placeholder="Experience Details" style="height:222px;"></textarea>
+								<textarea  ng-model="job.expdetails" placeholder="Experience Details" style="height:222px; max-height:222px; max-width:450px;" data-toggle="tooltip" title="Press Enter for the new line" ></textarea>
 
 							</div>
 							<div class="form-group">
-								<label for="job-location">Remuneration*</label> &nbsp;&nbsp;&nbsp;
+								<label for="job-location" >Remuneration*</label> &nbsp;&nbsp;&nbsp;
 								<p class="help-block" style="display:initial;">in Lacs</p>
 								<br>
 								<select name="remuneration" class="form-control" ng-model="job.rumeration_min" style="display:inline;width:45%;" required>
@@ -1220,7 +1228,7 @@ class employer{
 						<div class="col-sm-12">
 
 							<br><h6>Desired Candidate Profile</h6><br>
-						<div class="col-sm-6" >
+						<div class="row col-sm-6" >
 								<label for="job-description">Key Skills*</label>
 								
 								<selectize config='myConfig' options='myOptions' ng-model="job.keyskills" name="keyskills" required></selectize>
@@ -1554,6 +1562,68 @@ class employer{
 
 	}
 
+
+	function comp_list(){
+
+
+?>
+		<div class="row text-center">
+					<div class="col-sm-12">
+						<h1 style="font-size:38px;">My Companies</h1>
+						
+					</div>
+				</div><br><br><br><br><br>
+
+				
+				
+		<div class="container" ng-repeat="x in companylist">
+			<div class="row panel panel-info" >
+				<div class="panel-body">
+					<div class="text-center">
+						<h3 style="margin-bottom:0px;">{{x.company.company_name}}</h3>
+						<h5>{{x.company.company_location}}</h5><br>
+					</div>	
+					<div class="col-sm-2 text-center">
+						
+						
+							<img src="uploads/{{x.company_logo.logo_name}}" class="img-responsive" style="width:120px; height:120px;" ng-if="x.company_logo.logo_name">
+						
+						
+						
+
+					</div>
+					
+					<div class="col-sm-10">
+					
+					
+						<div class="col-sm-8">
+							<p><span class="more">{{x.company.company_description}}</span> </p>
+						</div>
+					
+
+					
+						<div class="col-sm-3">
+							<span><b> {{x.company.company_num}}</b></span><br>
+							<span><b> {{x.company.company_email}}</b></span><br>	
+							<span><b> {{x.company.company_website}}</b></span><br>
+							<span><b> {{x.company.company_type}}</b></span><br>
+							
+						</div>
+						<div class="col-sm-1">
+							<a class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete this Company" ng-click="deletecomp(x)"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+
+
+<?php
+		
+	}	
+
 	
+
 }
 ?> 

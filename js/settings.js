@@ -566,58 +566,86 @@
 		
 		
 		
+		var page=window.location.search;
+		
+			if (page) {
+				page=page.substr(6,1);
+				page-=1;
+
+			}else{
+
+				page=0;
+				
+			}
+
+			
+			
+			 // console.log(page);
+			var yo=$("ul.pagination li:eq("+page+")").addClass('active');
+
+			
+	//company list view more.......
+
+		// $(".des").each(function(){
+		// 	var showchar= 250;
+		// 	var start=$(this).text().substr(0,showchar);
+		// 	var len=$(this).text().length;
+		// 	var more= $(this).text().substr(showchar,len);
+		// 	$(this).html(start);
+
+		// 	$("#desclick").click(function(){
+		// 		$("#more").html(more);
+		// 		$("#desclick").hide();
+		// 		$("#closeclick").show();			
+		// 	})
+
+		// 	$("#closeclick").click(function(){
+		// 		$("#more").html("");
+		// 		$("#desclick").show();
+		// 		$("#closeclick").hide();	
+		// 	})
+
+
+		// })
+			
+		var showChar = 250;
+		var ellipsestext = "...";
+		var moretext = "more";
+		var lesstext = "less";
+		$('.more').each(function() {
+			var content = $(this).html();
+
+			if(content.length > showChar) {
+
+				var c = content.substr(0, showChar);
+				var h = content.substr(showChar, content.length);
+
+				var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+				$(this).html(html);
+			}
+
+		});
+
+		$(".morelink").click(function(){
+			if($(this).hasClass("less")) {
+				$(this).removeClass("less");
+				$(this).html(moretext);
+			} else {
+				$(this).addClass("less");
+				$(this).html(lesstext);
+			}
+			$(this).parent().prev().toggle();
+			$(this).prev().toggle();
+			return false;
+		});	
+			
+
+			
 		
 
-		// var boo = ['cars','trunks'];
-  //          var myarray = $.grep('example' , function(){
-					
 
-		// 		});
-  //          console.log(myarray);
-
-		// $('.selectpicker').selectpicker();
-		// $("#fff").validate({
-		//     rules: { langknown: "required" }
-		// });
-		// $('.selectpicker').selectpicker({
-		// 	  style: 'btn-info',
-		// 	  height: '30px',
-  //   		  text-transform: 'initial',
-  //   		  background-color: '#f8f8f8'
-
-			 
-		// 	});
-	//$('.selectpicker').addClass('selectpickerr').selectpicker('setStyle')
-		
- 
-		// $("#emptype").click(function(){
-		// 	$("#li1").addClass("active");
-		// 	$("#li2").removeClass("active");
-		// 	$("#li3").removeClass("active");
-		// 	$("#li4").removeClass("active");
-		// })
-
-		// $("#submitpersonal").click(function(){
-		// 	$("#li2").addClass("active");
-		// 	$("#li1").removeClass("active");
-		// 	$("#li3").removeClass("active");
-		// 	$("#li4").removeClass("active");
-		// })
-
-		// $("#submiteducation").click(function(){
-		// 	$("#li3").addClass("active");
-		// 	$("#li2").removeClass("active");
-		// 	$("#li1").removeClass("active");
-		// 	$("#li4").removeClass("active");
-		// })
-
-		// $("#submitexperience").click(function(){
-		// 	$("#li4").addClass("active");
-		// 	$("#li3").removeClass("active");
-		// 	$("#li2").removeClass("active");
-		// 	$("#li1").removeClass("active");
-		// })
-
+			
 			
  		// ====================================================================
 

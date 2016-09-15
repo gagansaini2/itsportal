@@ -66,6 +66,7 @@
 			}
 		}
 
+
 		public function update($table,$DataArray,$updateOnField,$updateOnFieldValue,$printSQL = false) {
 			if(count($DataArray) == 0) {
 				die($this->error("UPDATE statement has not been created",__FILE__,__LINE__));

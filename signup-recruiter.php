@@ -1,11 +1,8 @@
 <?php include('include/common_includes.php');  ?>
-<?php require_once("class/class.employee.php"); 
-//$user_obj1=new employee();
+<?php require_once("class/class.employer.php"); 
+$user_obj2=new employer();
 
  ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -42,31 +39,13 @@
 
 
 			<?php
-
-			if (isset($_SESSION['user_id'])) {
-				
-				if ($_SESSION['user_type']=='2') {
-					extract($_REQUEST);
+				extract($_REQUEST);
 					if($submit=='register'){
-						$user_obj1->emptype('server');
+						$user_obj2->CreateUser1('server');
 					}else{
-						$user_obj1->emptype('local');
+						$user_obj2->CreateUser1('local');
 					}
-				}else{
-					?>
-					<script type="text/javascript">
-						window.location="index.php"
-					</script>
-					<?php	
-				}
 				
-			}else{
-				?>
-				<script type="text/javascript">
-					window.location="signin.php"
-				</script>
-				<?php
-			}	
 
 				 ?>
 

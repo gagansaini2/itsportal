@@ -32,7 +32,8 @@ class employee{
             $ControlNames=array(
                                  
                                 "name"=>array('username',"EMail","Please enter Email","span_username"),
-                                "password"=>array('password',"","Please enter Password","span_password")
+                                "password"=>array('password',"","Please enter Password","span_password"),
+                                "terms"=>array('terms',"","Please enter Password","span_terms")
                                
             );
 
@@ -79,7 +80,7 @@ class employee{
 						<div class="col-sm-6">
 							<div class="form-group" id="email-group">
 								<label for="resume-name">Email</label>
-								<input type="text" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
+								<input type="email" class="form-control" name="username" id="resume-name" placeholder="e.g.  abc@xyz.com">
 								 <span id="span_username"></span>
 							</div>
 						</div>
@@ -93,6 +94,8 @@ class employee{
 						</div>
 						
 					</div>
+
+					
 					<div class="row text-center">
 						<p>&nbsp;</p>
 						
@@ -184,7 +187,8 @@ class employee{
                 $this->username = $username;
                 $this->password = $password;
                 $this->phoneno = $phoneno;
-              
+              	$this->terms = $terms;
+
                
             }
             $FormName = "signup_form";
@@ -193,8 +197,8 @@ class employee{
                                 "name"=>array('name',"''","Please enter Name","span_name"),
                                 "password"=>array('password',"Password","Please enter Password","span_password"),
                                 "username"=>array('username',"EMail","Please enter Email","span_username"),
-                                "phoneno"=>array('phoneno',"Number","Please enter Phone Number","span_phoneno")
-                               
+                                "phoneno"=>array('phoneno',"Number","Please enter Phone Number","span_phoneno"),
+                               	"terms"=>array('terms',"Agree","","span_terms")
             );
 
             $ValidationFunctionName="CreateUser";
@@ -264,6 +268,10 @@ class employee{
 								<span id="span_phoneno"></span>
 							</div>
 						</div>
+					</div>
+					<div>
+						<input type="checkbox" name="terms"><label>&nbsp; I agree to <a href="TermsConditions.html" target="_blank">Terms & Conditions</a></label><br>
+						<span id="span_terms"></span>
 					</div>
 					<div class="row text-center">
 						<p>&nbsp;</p>
@@ -351,12 +359,12 @@ class employee{
 						                            <p>Regards,</p>
 						                            <p>The Its Recruitment</p>
 						                            </div>';
-						                            $header = "From: noreply@its.com\r\n"; 
+						                            $header = "From: its.sangita@itsgroup.com\r\n"; 
 						                            $header.= "MIME-Version: 1.0\r\n"; 
 						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 						                            $header.= "X-Priority: 1\r\n"; 
 
-						                             // mail($to, $subject, $comment, $header);
+						                             mail($to, $subject, $comment, $header);
 							
 							
 							?>
@@ -4162,17 +4170,18 @@ class employee{
 					                            <ul role='menu' class='dropdown-menu'>
 					                            <?php 
 
-					                                $sql2="select count(*) as total from ".TBL_EMPLOYEE_DEL." where user_id='".$_SESSION['user_id']."'";
+					                                $sql2="select count(*) as total from ".TBL_COMPANY." where user_id='".$_SESSION['user_id']."'";
 					                                $result2=$this->db->query($sql2,__FILE__,__LINE__);
-					                                $row=mysql_fetch_assoc($result2);
+					                                $row2=mysql_fetch_assoc($result2);
 
 					                                  if ($row2['total'] > 0) {
 					                                   
 					                                    // echo "<li><a href=''>View/Edit My Profile</a></li>";
+					                                    echo "<li><a href='postjob.php'>Post a Job</a></li>";
 					                                  }else{
 					                                    echo "<li><a href='companyprof.php'>Upload Your Profile</a></li>";
 					                                  }
-					                                  echo "<li><a href='postjob.php'>Post a Job</a></li>";
+					                                  
 					                                  echo "<li><a href='logout.php'>Logout</a></li>";
 					                            ?>
 					                                </ul></li>  
@@ -4182,7 +4191,52 @@ class employee{
 					                            
 					                  </header>
 
-					          <?php   }
+					          <?php   }else{
+					          ?>
+
+					           		<header>
+					                        <div class="navbar navbar-default" style="margin-top:-10px; max-height: 60px;">
+					                        <div class="navbar-header">
+					                          <!-- <div class="navbar-header">
+					                            <a class="navbar-brand" href="#">WebSiteName</a>
+					                          </div> -->
+					                            <div class="navbar-brand">
+					                                <div id="logo"><a href="index.php"><img src="images/logo_new.png" alt="ITS Recruitment" /></a></div>
+					                              </div>
+					                        </div>      
+					                          <ul class="nav navbar-nav pull-right" style="margin-right:80px;">
+					                          
+					                            <li class="active"><a href="index.php">Home</a></li>
+					                            <li><a href="about.php">About Us</a></li>
+					                            <li><a href="company.php">Our Process</a></li>
+					                            <li><a href="jobslist.php">Jobs</a></li>
+					                            <li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' style='text-transform:capitalize;'><?php echo $_SESSION['name'];?> &nbsp; <span class='caret'></span></a> 
+					                            <ul role='menu' class='dropdown-menu'>
+					                            <?php 
+
+					                                $sql2="select count(*) as total from ".TBL_COMPANY." where user_id='".$_SESSION['user_id']."'";
+					                                $result2=$this->db->query($sql2,__FILE__,__LINE__);
+					                                $row=mysql_fetch_assoc($result2);
+					                               
+					                                  if ($row['total'] > 0) {
+					                                   
+					                                     //echo "<li><a href=''>View/Edit My Profile</a></li>";
+					                                  		echo "<li><a href='postjob.php'>Post a Job</a></li>";
+					                                  }
+					                                  
+					                                  echo "<li><a href='companyprof.php'>Upload Profile</a></li>";
+					                                  echo "<li><a href='logout.php'>Logout</a></li>";
+					                            ?>
+					                                </ul></li>  
+					                            </ul>
+					                        
+					                        </div>
+					                            
+					                  </header>
+
+
+					          <?php
+					          }
 
 
 					  } else{  ?>

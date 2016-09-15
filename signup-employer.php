@@ -1,6 +1,6 @@
 <?php include('include/common_includes.php');  ?>
 <?php require_once("class/class.employer.php"); 
-$user_obj2=new employer();
+// $user_obj2=new employer();
 
  ?>
 

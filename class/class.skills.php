@@ -150,7 +150,7 @@ class skills{
             $row=mysql_fetch_assoc($result);
 
 			 
-		print_r();
+		// print_r();
 			
 			if ($row['total'] > 0 ) {
 				
@@ -444,7 +444,7 @@ class skills{
 							$insert_sql_array = array();
 							$insert_sql_array['company_name'] = $allinfo['compname'];
 							$insert_sql_array['job_title'] = $allinfo['jobtitle'];
-							$insert_sql_array['working_time'] = $allinfo['workinday'].'-'.$allinfo['workinmonth'].'-'.$allinfo['workinyear'];
+							$insert_sql_array['working_time'] = $allinfo['workinmonth'].'-'.$allinfo['workinyear'];
 							
 
 
@@ -469,7 +469,7 @@ class skills{
 								$insert_sql_array = array();
 								$insert_sql_array['company_name'] = $this->companyname;
 								$insert_sql_array['job_title'] = $this->jobtitle;
-								$insert_sql_array['working_time'] = $this->workinday.'-'.$this->workinmonth.'-'.$this->workinyear;
+								$insert_sql_array['working_time'] =$this->workinmonth.'-'.$this->workinyear;
 
 								$insert_sql_array['user_id'] = $_SESSION['user_id'];
 								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
@@ -485,8 +485,8 @@ class skills{
 
 
 							$insert_sql_array = array();
-							$insert_sql_array['expected_salary'] = $allinfo['compname'];
-							$insert_sql_array['anyother_detail'] = $allinfo['jobtitle'];
+							$insert_sql_array['expected_salary'] = $allinfo['expsal'];
+							$insert_sql_array['anyother_detail'] = $allinfo['anyother'];
 							$insert_sql_array['languages_known'] = $languages;
 							
 							
@@ -1066,6 +1066,35 @@ class skills{
  	
 			
 				
+			}
+
+
+
+			function get_countries(){
+
+				$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+				$sql="select * from ".TBL_COUNTRIES." where 1  ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+				$data=array();
+				$city=array();
+				while ( $row= $this->db->fetch_array($result)) {
+					
+				$city['countries']=$row['country_name'];
+				// $city['city_id']=$row['location_id'];
+
+				 $data[]=$city;
+				
+				}
+
+
+				$resp['data']=$data;
+				
+				echo json_encode($resp);
 			}
 		
 

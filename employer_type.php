@@ -1,5 +1,5 @@
 <?php include('include/common_includes.php');  ?>
-<?php require_once("class/class.employee.php"); 
+<?php require_once("class/class.employer.php"); 
 //$user_obj1=new employee();
 
  ?>
@@ -39,37 +39,30 @@
 
 		<section id="resume">
 			
+				<div class="container">
+					<div class="jumbotron text-center"style="margin-top:0px;">
+						<h1 style="font-size:34px;">Tell us about you</h1>
+						<h4>you are </h4><br><br><br>
+						<div class="row">
+							<div class="col-sm-6 ">
+
+								<a href="signup-employer.php"><img src="images/1466098131_1.png" ><div><h4><b>COMPANY PROFESSIONAL</b></h4></div></a>
+								<!-- <p class="help-block">I have at least 1 month of work experience</p> -->
+							</div>
+							<div class="col-sm-6 ">
+
+							<!-- 	<a href="emp_prof1.php"><img src="images/1466102498_avatar-03.png" id="emptype"><div></div><h4><b>FRESHER</b></h4></div></a> -->
+							<a href="signup-recruiter.php"><img src="images/Recruiter-Blog.jpg" class="img-circle" style="height: 150px;width: 150px;" ><div><h4><b>RECRUITER</b></h4></div></a>
+
+								<!-- <p class="help-block">I have just graduated/I haven't worked after graduation</p> -->
+							</div>
+
+						</div>
+
+					</div>
 
 
-			<?php
-
-			if (isset($_SESSION['user_id'])) {
-				
-				if ($_SESSION['user_type']=='2') {
-					extract($_REQUEST);
-					if($submit=='register'){
-						$user_obj1->emptype('server');
-					}else{
-						$user_obj1->emptype('local');
-					}
-				}else{
-					?>
-					<script type="text/javascript">
-						window.location="index.php"
-					</script>
-					<?php	
-				}
-				
-			}else{
-				?>
-				<script type="text/javascript">
-					window.location="signin.php"
-				</script>
-				<?php
-			}	
-
-				 ?>
-
+				</div>
 
 
 		</section>
@@ -82,3 +75,4 @@
 
 	</body>
 </html>
+

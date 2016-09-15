@@ -82,6 +82,12 @@ if ($work=='get_cities') {
 	$skill_obj -> getcities();
 }
 
+
+if ($work=='get_countries') {
+	
+	$skill_obj -> get_countries();
+}
+
 if ($work=='save_personal') {
 	
 	$skill_obj -> savechanges_personal();
@@ -172,6 +178,20 @@ if ($work=='applicant_prof') {
 if ($work=='candidate_prof') {
 	
 	$skill_obj -> cand_profile($id);
+}
+
+
+
+if ($work=='get_companieslist') {
+	
+	$jobs_obj -> get_companies();
+}
+
+
+
+if ($work=='del_company') {
+	
+	$jobs_obj -> delete_company($companyid);
 }
 
 
