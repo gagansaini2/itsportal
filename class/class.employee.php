@@ -4222,6 +4222,8 @@ class employee{
 					                                   
 					                                     //echo "<li><a href=''>View/Edit My Profile</a></li>";
 					                                  		echo "<li><a href='postjob.php'>Post a Job</a></li>";
+					                                  		echo "<li><a href='company_list.php'>View My Companies</a></li>";
+					                                  		echo "<li><a href='myjob_list.php'>View My Jobs</a></li>";
 					                                  }
 					                                  
 					                                  echo "<li><a href='companyprof.php'>Upload Profile</a></li>";

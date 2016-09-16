@@ -25,5 +25,6 @@ define("TBL_COURSETYPE",'tbl_coursetype',true);
 define("TBL_SPECIFICATION",'tbl_specification',true);
 define("TBL_JOBSKILLS",'tbl_jobskills',true);
 define("TBL_COUNTRIES",'tbl_countries',true);
+define("TBL_EMP_RESPONDED",'tbl_emp_responded',true);
 
 ?>

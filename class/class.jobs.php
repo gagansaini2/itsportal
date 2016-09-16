@@ -398,7 +398,7 @@ class jobs{
 							
 							<script>
 							    var myvar = <?php echo json_encode($row); ?>;
-							    console.log(myvar);
+							    // console.log(myvar);
 
 							    applyJob=function(job){
 								    		
@@ -532,6 +532,15 @@ class jobs{
 			$department=$_REQUEST['department'];
 			$company_email=$row['company_email'];
 			$candidate_id=$_REQUEST['employee_id'];
+			$job_id=$_REQUEST['job_id'];
+
+			$insert_sql_array=array();
+
+			$insert_sql_array['job_id'] = $job_id;
+			$insert_sql_array['employee_id'] = $candidate_id;
+			$this->db->insert(TBL_EMP_RESPONDED,$insert_sql_array);
+								
+
 
 
 								$to = $company_email;
@@ -813,10 +822,11 @@ class jobs{
 			$resp['status']=true;
 			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
 
-			$sql=mysql_query("DELETE FROM TBL_COMPANY WHERE company_id= '".$comp_id."' ");
-			// $result= $this->db->query($sql,__FILE__,__LINE__);
+			$sql="delete from ".TBL_COMPANY." where company_id= '".$comp_id."' ";
+			$result= $this->db->query($sql,__FILE__,__LINE__);
 			// $row= $this->db->fetch_array($result);
-
+			$sql1="delete from ".TBL_LOGO." where company_id= '".$comp_id."' ";
+			$result1= $this->db->query($sql1,__FILE__,__LINE__);
 
 			// print_r($sql);
 
@@ -827,6 +837,154 @@ class jobs{
 
 	}
 
+
+	function get_myjobs(){
+
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+			$sql="select * from ".TBL_JOBS." where user_id= '".$_SESSION['user_id']."' ";
+			$result= $this->db->query($sql,__FILE__,__LINE__);
+			
+			$data=array();
+			while ($row= $this->db->fetch_array($result)){
+
+				$sql1="select * from ".TBL_COMPANY." where company_id= '".$row['company_id']."' ";
+				$result1= $this->db->query($sql1,__FILE__,__LINE__);
+				$row1= $this->db->fetch_array($result1);
+				
+				$sql2="select * from ".TBL_LOGO." where company_id= '".$row['company_id']."' ";
+				$result2= $this->db->query($sql2,__FILE__,__LINE__);
+				$row2= $this->db->fetch_array($result2);
+
+
+				$sql4="select * from ".TBL_STATELIST." where location_id= '".$row['location_id']."' ";
+				$result4= $this->db->query($sql4,__FILE__,__LINE__);
+				$row4= $this->db->fetch_array($result4);
+				
+				
+				$com['job']=$row;	
+				$com['company']=$row1;
+				$com['company_logo']=$row2;
+				$com['job_loc']=$row4['city_name'];
+
+				$data[]=$com;
+				}
+
+				
+			$resp['data']=$data;
+
+			echo json_encode($resp);
+
+
+
+	}
+
+
+	function delete_myjob($job_id){
+
+
+		$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+			$sql="delete from ".TBL_JOBS." where job_id= '".$job_id."' ";
+			$result= $this->db->query($sql,__FILE__,__LINE__);
+			// $row= $this->db->fetch_array($result);
+			
+
+			// print_r($sql);
+
+
+			// $resp['data']=$row;
+
+			echo json_encode($resp);
+
+
+	}
+
+
+	function get_employeelist($job_id){
+
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+			$sql="select * from ".TBL_EMP_RESPONDED." where job_id= '".$job_id."' ";
+			$result= $this->db->query($sql,__FILE__,__LINE__);
+			
+			$data=array();
+			while ($row= $this->db->fetch_array($result)){
+
+				
+
+				$sql0="select * from ".TBL_EMPLOYEE_DEL." where employee_id='".$row['employee_id']."' ";
+				$sql1="select * from ".TBL_IMAGE." where employee_id='".$row['employee_id']."' ";
+				$sql2="select * from ".TBL_EMPLOYEE_EDD." where employee_id='".$row['employee_id']."' ";
+				$sql3="select * from ".TBL_EMPLOYEE_EXP." where employee_id='".$row['employee_id']."' ";
+				$sql4="select * from ".TBL_OTHERS." where employee_id='".$row['employee_id']."' ";
+				$sql5="select * from ".TBL_EMPLOYEE_CERTIFICATION." where employee_id='".$row['employee_id']."' ";
+				$sql7="select * from ".TBL_EMPLOYEE_WORKEX." where employee_id='".$row['employee_id']."' ";
+				$sql6="select * from ".TBL_EMPLOYEE_KEYSKILS." where employee_id='".$row['employee_id']."' ";
+				
+				// $sql="SELECT * FROM TBL_EMPLOYEE_DEL INNER JOIN TBL_IMAGE ON TBL_EMPLOYEE_DEL.user_id = TBL_IMAGE.user_id WHERE TBL_EMPLOYEE_DEL.employee_id = '".$_SESSION['employee_id']."' ";
+				
+
+				
+				$row0= mysql_fetch_assoc($this->db->query($sql0,__FILE__,__LINE__));
+				$row1= mysql_fetch_assoc($this->db->query($sql1,__FILE__,__LINE__));
+				$result2=$this->db->query($sql2,__FILE__,__LINE__);
+				while($roww = mysql_fetch_assoc($result2)) {
+				$row2[]=$roww;
+				}
+				
+
+				$row3= mysql_fetch_assoc($this->db->query($sql3,__FILE__,__LINE__));
+				
+				$row4= mysql_fetch_assoc($this->db->query($sql4,__FILE__,__LINE__));
+				$row4['languages_known']=json_decode($row4['languages_known']);
+
+
+				$result5=$this->db->query($sql5,__FILE__,__LINE__);
+				while($roww = mysql_fetch_assoc($result5)) {
+				$row5[]=$roww;
+				}
+								
+
+				$result6=$this->db->query($sql6,__FILE__,__LINE__);
+				while($roww = mysql_fetch_assoc($result6)) {
+				$row6[]=$roww;
+				}
+				
+				$result7=$this->db->query($sql7,__FILE__,__LINE__);
+				while($roww= mysql_fetch_assoc($result7)) {
+					$row7[]=$roww;
+				}
+				
+				// $row8= $this->db->fetch_array($this->db->query($sql8,__FILE__,__LINE__));
+
+				$emp=array();
+				$emp['personal']=$row0;
+				$emp['image']=$row1;
+				$emp['eddu']=$row2;
+				$emp['exp']=$row3;
+				$emp['exp']['empwork']=$row7;
+				$emp['others']=$row4;
+				$emp['certificates']=$row5;
+				$emp['keyskills']=$row6;
+			
+
+
+				$data[]=$emp;
+		}
+
+				
+			$resp['data']=$data;
+
+			echo json_encode($resp);
+
+	}
 
 }
 ?> 

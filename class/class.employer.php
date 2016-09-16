@@ -1567,7 +1567,7 @@ class employer{
 
 
 ?>
-		<div class="row text-center">
+		<div class="row text-center" ng-init="load1()">
 					<div class="col-sm-12">
 						<h1 style="font-size:38px;">My Companies</h1>
 						
@@ -1576,7 +1576,7 @@ class employer{
 
 				
 				
-		<div class="container" ng-repeat="x in companylist">
+		<div class="container" ng-repeat="x in companylist" >
 			<div class="row panel panel-info" >
 				<div class="panel-body">
 					<div class="text-center">
@@ -1623,6 +1623,154 @@ class employer{
 		
 	}	
 
+
+
+	function myjob_list(){
+
+	?>	
+
+
+				<div class="row text-center" ng-init="load2()">
+					<div class="col-sm-12">
+						<h1 style="font-size:38px;">My Jobs</h1>
+						
+					</div>
+				</div><br><br><br><br><br>
+
+				
+
+
+				<div class="container" style="margin-bottom:2em;" ng-repeat="x in myjoblist">
+
+				<div class="row">
+					<div class="col-sm-12">
+
+
+
+						<div class="jobs">
+							
+							<a href="job_details.php?id={{x.job.job_id}}"  class="featured applied">
+								<div class="row">
+									<div class="col-lg-1 col-md-1 hidden-sm hidden-xs text-center">
+										
+											<img src='uploads/{{x.company_logo.logo_name}}' class='img-responsive' ><br>
+											<h6>{{x.company.company_name}}</h6>
+
+										 
+									</div>
+									<div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 job-title">
+										<h5>{{x.job.role_title}}</h5>
+										<p><strong>{{x.job.department}}</strong></p>
+									</div>
+									<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
+										
+										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  {{x.job_loc}}</strong></p>
+										<p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;<strong>{{x.job.min_experience}} - {{x.job.max_experience}} years</strong></p>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs job-type text-center">
+										<p class="job-salary"><strong><i class="fa fa-rupee"></i>&nbsp;{{x.job.min_remuneration}} - {{x.job.max_remuneration}} Lacs</strong></p>
+										<p class="badge full-time">{{x.job.job_type}}</p>
+									</div>
+									<div class="col-lg-2 visible-lg-block">
+
+										<p class="job-posted"><strong ng-repeat="item in x.job.key_skills">{{item}}&nbsp;</strong></p>
+										
+									</div>
+									
+								</div>
+							</a>
+							
+							
+						</div>
+						<div class="col-sm-12 " style="background-color:#eee;">
+						<div class="col-sm-2 col-sm-offset-8">
+								<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i><a ng-click="deljob(x)" data-toggle="tooltip" title="Delete this Company"> Delete</a>
+						</div> 
+						<div class="col-sm-2 ">
+								<i class="fa fa-users fa-lg" aria-hidden="true"></i><a href="employee_list.php?job_id={{x.job.job_id}}" > View Applicants </a>
+						</div> 
+						</div>
+
+					</div>
+				</div>
+			</div>
+				
+	
+
+<?php
+	}
+
+
+	function employee_list(){
+
+	?>	
+
+			<div class="row text-center" ng-init="load3()">
+					<div class="col-sm-12">
+						<h1 style="font-size:38px;">applicants</h1>
+						
+					</div>
+				</div><br><br><br><br><br>
+
+				
+				
+		<div class="container" ng-repeat="x in emplist" >
+			<div class="row panel panel-info" >
+				<div class="panel-body">
+					<div class="text-center">
+						<h4 style="margin-bottom:0px;">{{x.personal.name}}</h4><br>
+						
+					</div>	
+					<div class="col-sm-2 text-center">
+						
+						
+							<img src="uploads/{{x.image.image_name}}" class="img-responsive img-circle" width="200" height="200" ng-if="x.image.image_name">
+						
+						
+						
+
+					</div>
+					
+					<div class="col-sm-6">
+					
+					
+						<div class="col-sm-4 text-center">
+							<p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;<b>{{x.exp.experience_yrs}} </b></p>
+						</div>
+						<div class="col-sm-4 text-center">
+							<p><i class="fa fa-rupee"></i>&nbsp;<b>{{x.exp.current_salary}} </b></p>
+						</div>
+						<div class="col-sm-4 text-center">
+							<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;<b>{{x.personal.current_loc}} </b></p>
+						</div>
+
+						<div class="col-sm-12" style="padding-left:4em;">
+							<label>Current :</label>&nbsp;{{x.exp.empwork.job_title}} - {{x.exp.empwork.company_name}}<br>
+							<label>Education :</label>&nbsp;{{x.eddu.course_name}} - {{x.eddu.university_name}} in {{x.eddu.passing_year}}<br>
+							<label>Pref Loc :</label>&nbsp;{{x.personal.prefered_loc}}<br>
+							<label>Gender :</label>&nbsp;{{x.personal.gender}}<br>
+							<label>DOB :</label>&nbsp;{{x.personal.age}}<br>
+						</div>
+					
+
+					</div>
+						
+
+					<div class="col-sm-4" style="padding-top:50px;padding-left:2em">
+							<label>Key Skills :</label>
+							<p ng-repeat="item in x.keyskills" style="margin-bottom:0px;">{{item.keyskill_name}} <input-stars max="{{item.key_rating}}" ng-attr-readonly="true"ng-model="item.key_rating"></input-stars></p>
+							
+					</div>
+						
+					<div>
+						<a href="applicant_prof.php?{{x.personal.employee_id}}">Show more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<?php
+	}
 	
 
 }

@@ -188,11 +188,29 @@ if ($work=='get_companieslist') {
 }
 
 
+if ($work=='get_myjoblist') {
+	
+	$jobs_obj -> get_myjobs();
+}
+
+
+if ($work=='get_emplist') {
+	
+	$jobs_obj -> get_employeelist($jobid);
+}
+
 
 if ($work=='del_company') {
 	
 	$jobs_obj -> delete_company($companyid);
 }
+
+
+if ($work=='del_myjob') {
+	
+	$jobs_obj -> delete_myjob($jobid);
+}
+
 
 
  ?>
