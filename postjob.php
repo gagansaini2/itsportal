@@ -58,8 +58,19 @@ $user_obj2=new employer();
 
 
 <?php
+	
+	$compid=$_GET['companyid'];
 
-	if ($_SESSION['user_type']=='4') {
+	if (isset($compid)) {
+?>		
+		<div ng-init="load3()">
+		</div>
+
+
+<?php
+	}
+
+	elseif ($_SESSION['user_type']=='4') {
 
 ?>		
 	
@@ -74,7 +85,7 @@ $user_obj2=new employer();
 			        	<div class="col-sm-12">
 				        	<div class="col-sm-4 text-center" ng-repeat="x in companylist">
 				        		<a ng-click="selectcomp(x)">
-				        			<img src="uploads/{{x.company_logo.logo_name}}" style="width:100px; height:100px;"><br>
+				        			<img src="uploads/{{x.company_logo.logo_name}}" style="width:100px; height:100px;" class="img-circle" ng-if="x.company_logo.logo_name"><br>
 				        			<h6>{{x.company.company_name}}</h6>
 				        		</a><br>
 

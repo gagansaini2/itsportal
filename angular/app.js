@@ -808,6 +808,8 @@ $scope.save_others=function(){
 app.controller('companyprof', function($scope, $http) {
 
 
+
+//companylist popup on post job page
   $scope.load=function(){
     
 
@@ -824,13 +826,95 @@ $http({
   angular.forEach(response.data.data, function(child){
         $scope.companylist.push(child);
      });   
- console.log($scope.companylist);
+ // console.log($scope.companylist);
  $("#companymodal").modal('show');
 });
 
 
 
+
   }
+
+
+
+
+//company edit page aftr company listings
+  $scope.load2=function(){
+    
+
+  var compid=location.search;
+
+  compid=compid.substr(4);
+  // console.log(compid);
+
+$http({
+
+  method: "POST",
+  url: "api.php?work=edit_company&compid="+compid
+
+}).then(function(response){
+  // console.log(response);
+    $scope.company=angular.copy(response.data.data);
+    // $scope.company.push(response.data.data.logo);
+    console.log($scope.company);
+});
+
+
+
+  }
+
+
+
+//directly posting a job through companylist page without any popup.......
+  $scope.load3=function(){
+    
+
+  var compid=location.search;
+
+  compid=compid.substr(11);
+  // console.log(compid);
+  $scope.job.company_id=compid;
+  } 
+
+
+
+
+$scope.load4=function(){
+
+
+  var jobid=location.search;
+
+  jobid=jobid.substr(7);
+  // console.log(jobid);
+
+$http({
+
+  method: "POST",
+  url: "api.php?work=edit_myjob&jobid="+jobid
+
+}).then(function(response){
+  console.log(response);
+    $scope.job=angular.copy(response.data.data.job);
+    $scope.job.key_skills=JSON.parse($scope.job.key_skills);
+    $scope.job.qualification=JSON.parse($scope.job.qualification);
+
+      if ($scope.job.shift_timimg == "Yes") {
+
+          $scope.job.shift_timimg=true;
+      }
+      if ($scope.job.shift_timimg == "No") {
+         
+         $scope.job.shift_timimg=false;
+      }
+    console.log($scope.job);
+});
+
+
+}
+
+
+
+
 
 $scope.cities =[];
  
@@ -1131,13 +1215,128 @@ $("#companymodal").modal('hide');
 
 }
 
+$scope.editcomp=function(isValid){
 
+
+
+  if (isValid) {
+
+  var formData = new FormData();
+        formData.append('logo', $('#company_logo')[0].files[0] );
+        
+        formData.append('companydata',  JSON.stringify($scope.company.company));
+
+  $.ajax({
+        
+        method: "POST",
+        url: "api.php?work=comp_submit",
+
+        //params: main,
+        data: formData,
+        contentType: false,
+        processData: false,
+       
+                    
+       success:function(data){
+        console.log(data);
+       }
+
+      })
+
+     window.location="company_list.php"
+    };
+
+}
+
+
+
+$scope.editmyjob=function(isValid){
+
+
+
+  if (isValid) {
+
+  var main={};
+
+   if ($scope.job.shift_timimg == true) {
+          $scope.job.shift_timimg = "Yes";
+       }else{
+        $scope.job.shift_timimg = "No";
+       }
+
+  main.job=JSON.stringify($scope.job);
+
+
+$http({
+
+  method: "POST",
+  url: "api.php?work=edit_subjob",
+  params: main
+
+}).then(function(response){
+  // console.log(response);
+  
+  window.location="myjob_list.php"
+})
+
+};
+
+}
 
 
 });
 
 
 //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.controller('companyedit', function($scope, $http) {
+
+
+
+})
+
+
+
+
+
+
 
 
 
@@ -1191,7 +1390,7 @@ $http({
      }); 
 
 
- console.log($scope.companylist);
+ // console.log($scope.companylist);
 });
 
 
@@ -1212,7 +1411,7 @@ $http({
   url: "api.php?work=get_myjoblist"
 
 }).then(function(response){
-   console.log(response);
+   // console.log(response);
 
      angular.forEach(response.data.data, function(child){ 
         $scope.myjoblist.push(child);
@@ -1221,7 +1420,10 @@ $http({
          for(var x in $scope.myjoblist){
             $scope.myjoblist[x].job.key_skills=JSON.parse($scope.myjoblist[x].job.key_skills);
          }
-
+         // console.log($scope.myjoblist);
+         if ($scope.myjoblist.valueOf()=="") {
+          $('#myjoblistempty').modal('show');
+         };
 });
 
   
@@ -1244,7 +1446,7 @@ $http({
   url: "api.php?work=get_emplist&jobid="+jobid
 
 }).then(function(response){
-   // console.log(response);
+   console.log(response);
 
      angular.forEach(response.data.data, function(child){ 
         $scope.emplist.push(child);
@@ -1263,6 +1465,9 @@ $http({
          }
 
         // console.log($scope.emplist);
+        if ($scope.emplist.valueOf()=="") {
+          $("#emplist").modal('show');
+        };
 });
 
   
@@ -1410,7 +1615,7 @@ $http({
 
         angular.forEach(response.data.data, function(child){
         $scope.cities.push(child);
-       
+        $scope.myOptions.push(child);
       // console.log($scope.cities);
         });
     

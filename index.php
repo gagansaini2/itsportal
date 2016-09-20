@@ -35,7 +35,7 @@ $job_obj=new jobs();
                       
                
                  <pre>{{JSON || search}}</pre>
-                  
+                  <form>
                     <div class="col-sm-12 well">
               
                       
@@ -124,7 +124,7 @@ $job_obj=new jobs();
                     
 
                   </div>
-         
+                </form>
 
 
 

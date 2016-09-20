@@ -42,7 +42,7 @@ class jobs{
 
 				// print_r($total_rec);
 
-				$rec_per_page=2;
+				$rec_per_page=10;
 
 				$total_pages=ceil($total_rec/$rec_per_page);
 
@@ -57,7 +57,7 @@ class jobs{
 
 
 
-			$sql="select * from ".TBL_JOBS." where 1 limit ".$start.",2 ";
+			$sql="select * from ".TBL_JOBS." where 1 limit ".$start.",10 ";
 			$result= $this->db->query($sql,__FILE__,__LINE__);
 
 			while($row= $this->db->fetch_array($result)){
@@ -66,7 +66,7 @@ class jobs{
 
 				
 				$skills=json_decode($row['key_skills']);
-
+				$skills=array_slice($skills, 0,4);
 				$key_skills=implode(", ",$skills);
 
 				$sql1="select * from ".TBL_LOGO." where company_id = '".$comp_id."' ";
@@ -79,6 +79,10 @@ class jobs{
 				$row2= mysql_fetch_assoc($result2);
 
 				// print_r($row1);
+
+				$sql3="select * from ".TBL_COMPANY." where company_id = '".$comp_id."' ";
+				$result3= $this->db->query($sql3,__FILE__,__LINE__);
+				$row3= mysql_fetch_assoc($result3);
 
 			?>
 
@@ -100,7 +104,7 @@ class jobs{
 										if (isset($imglogo)) { ?>
 
 											<img src='uploads/<?php echo($imglogo); ?>' class='img-responsive' >
-
+											<h6><?php echo $row3['company_name']; ?></h6>
 										<?php }
 										
 										?>
@@ -112,7 +116,7 @@ class jobs{
 									</div>
 									<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
 										
-										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  <?php echo $row2['city_name']; ?></strong></p>
+										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  <?php echo $row2['city_name']; ?><?php echo $row['location_outside']; ?></strong></p>
 										<p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;<strong><?php echo $row['min_experience']; ?> - <?php echo $row['max_experience']; ?>years</strong></p>
 									</div>
 									<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs job-type text-center">
@@ -279,7 +283,7 @@ class jobs{
 					
 					$row= $this->db->fetch_array($result);
 					$skills=json_decode($row['key_skills']);
-					$education=json_decode($row['qualifications'], true);
+					$education=json_decode($row['qualification'], true);
 					$comp_id=$row['company_id'];
 					
 					$row['employee_id']=$_SESSION['employee_id'];
@@ -303,6 +307,7 @@ class jobs{
 					$sql4="select * from ".TBL_LOGO." where company_id='".$row['company_id']."' ";
 					$result4= $this->db->query($sql4,__FILE__,__LINE__);
 					$row4= $this->db->fetch_array($result4);
+					
 ?>
 				
 					<section>
@@ -311,7 +316,7 @@ class jobs{
 					<div class="col-sm-12 text-center">
 						<h1><?php echo $row['role_title']; ?></h1>
 						<h4>
-							<span><i class="fa fa-map-marker"></i><?php echo $row2['city_name'];?></span>
+							<span><i class="fa fa-map-marker"></i><?php echo $row2['city_name'];?><?php echo $row['location_outside']; ?></span>
 							<span><i class="fa fa-clock-o"></i><?php echo $row['job_type'];?></span>
 							<span><i class="fa fa-rupee"></i><?php echo $row['min_remuneration'];?> - <?php echo $row['max_remuneration'];?> Lacs</span>
 						</h4>
@@ -342,7 +347,8 @@ class jobs{
 								}
 								
 									if ($row['value_proposition']!=="") { ?>
-										<label>Employee Value Proposition :</label>&nbsp;<span style="text-transform:capitalize;"><?php echo $row['value_proposition'];?></span>
+										
+										<br><label>Employee Value Proposition :</label>&nbsp;<span style="text-transform:capitalize;"><?php echo $row['value_proposition'];?></span>
 								<?php	}
 
 									if ($row['shift_timimg']=="Yes") { ?>
@@ -461,7 +467,7 @@ class jobs{
 
 							<?php  
 
-								if($row1['logo_name']!==""){  ?>
+								if(isset($row4['logo_name'])){  ?>
 
 								<p><img src="uploads/<?php echo $row4['logo_name'];?>" class="img-responsive" style="width:170px; height:170px;"></p>
 
@@ -473,10 +479,10 @@ class jobs{
 						</div>
 						<hr>
 						<h2>More jobs from this company</h2>
-						<div class="sidebar-widget jobs" style="max-height: 240px;overflow-y: scroll;display:inherit;">
+						<div class="sidebar-widget jobs" style="max-height: 290px;overflow-y: scroll;display:inherit;">
 							
 							<?php
-								$sql="select * from ".TBL_JOBS." where company_id= '".$comp_id."' ";
+								$sql="select * from ".TBL_JOBS." where company_id= '".$comp_id."' and job_id!= '".$id."' ";
 								$result= $this->db->query($sql,__FILE__,__LINE__);
 
 								while($row= $this->db->fetch_array($result)){
@@ -492,7 +498,7 @@ class jobs{
 									
 									<div class="col-lg-5 visible-lg-block" style="padding-top:10%;">
 
-										<p class="job-salary"><strong><i class="fa fa-rupee"></i>&nbsp;<?php echo $row['remuneration'];?></strong></p>
+										<p class="job-salary"><strong><i class="fa fa-rupee"></i>&nbsp;<?php echo $row['min_remuneration'];?> - <?php echo $row['max_remuneration'];?> Lacs</strong></p>
 										
 									</div>
 								</div>
@@ -634,6 +640,11 @@ class jobs{
 
 				$company=json_decode($_REQUEST['companydata'], true);
 
+				$sql="select count(*) as total from ".TBL_COMPANY." where company_id= '".$company['company_id']."' ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+				$row= $this->db->fetch_array($result);
+				
+
 							$insert_sql_array = array();
 							$insert_sql_array['company_name'] = $company['company_name'];
 							$insert_sql_array['company_email'] = $company['company_email'];
@@ -647,6 +658,10 @@ class jobs{
 
 							$insert_sql_array['user_id']=$_SESSION['user_id'];
 							
+
+							if ($row['total'] > 0) {
+								$this->db->update(TBL_COMPANY,$insert_sql_array,company_id,$company['company_id']);
+							}else{
 							$this->db->insert(TBL_COMPANY,$insert_sql_array);
 
 							
@@ -656,7 +671,7 @@ class jobs{
 							$insert_sql_array = array();
 							$insert_sql_array['company_id']=$_SESSION['company_id'];
 							$this->db->update(TBL_USER,$insert_sql_array,user_id,$_SESSION['user_id']);
-
+							}
 				
 
 				//image............
@@ -689,10 +704,18 @@ class jobs{
 									        //echo "The file ". basename($fileName). " has been uploaded.";
 									        $insert_sql_array = array();
 								            $insert_sql_array['logo_name'] = $image1;
-								            $insert_sql_array['company_id'] = $_SESSION['company_id'];
-								            $insert_sql_array['user_id'] = $_SESSION['user_id'];
-								            $this->db->insert(TBL_LOGO,$insert_sql_array);
+								           	$insert_sql_array['user_id'] = $_SESSION['user_id'];
 
+
+								            if ($row['total'] > 0) {
+								            	$insert_sql_array['company_id'] = $company['company_id'];
+												
+												$this->db->update(TBL_LOGO,$insert_sql_array,company_id,$company['company_id']);
+											}else{
+												$insert_sql_array['company_id'] = $_SESSION['company_id'];
+									            
+									            $this->db->insert(TBL_LOGO,$insert_sql_array);
+									        }    
 
 								    } else {
 								        echo "Sorry, there was an error uploading your file.";
@@ -734,7 +757,7 @@ class jobs{
 					$insert_sql_array['department'] = $job['department'];
 					$insert_sql_array['location_id'] = $job['rolelocation'];
 					$insert_sql_array['job_type'] = $job['jobtype'];
-					$insert_sql_array['qualifications'] = $qualif;
+					$insert_sql_array['qualification'] = $qualif;
 					$insert_sql_array['job_description'] = $job['description'];
 					$insert_sql_array['experience_details'] = $job['expdetails'];
 					$insert_sql_array['key_skills'] = $keyskills;
@@ -745,6 +768,7 @@ class jobs{
 					$insert_sql_array['value_proposition'] = $job['valueproposition'];
 					$insert_sql_array['keys_accountabilities'] = $job['keysaccountabilities'];
 					$insert_sql_array['shift_timimg'] = $job['shifttimimg'];
+					$insert_sql_array['location_outside'] = $job['location_outside'];
 
 					$insert_sql_array['user_id']=$_SESSION['user_id'];
 					
@@ -986,5 +1010,134 @@ class jobs{
 
 	}
 
+
+
+	function edit_comp($compid){
+
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+			$sql="select * from ".TBL_COMPANY." where company_id= '".$compid."' ";
+                        $sql1="select * from ".TBL_LOGO." where company_id= '".$compid."' ";
+
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+                                $result2= $this->db->query($sql1,__FILE__,__LINE__);
+				
+				$data=array();
+				$row= $this->db->fetch_array($result); 
+				$row2= $this->db->fetch_array($result2);
+
+
+				$data['company']=$row;
+				$data['logo']=$row2;
+
+				// print_r($data);
+				//print_r($compid);
+
+	
+			$resp['data']=$data;
+
+			echo json_encode($resp);
+
+
+	}
+
+
+	function edit_myjob($jobid){
+
+		$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+			$sql="select * from ".TBL_JOBS." where job_id= '".$jobid."' ";
+                      
+
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+                                
+				
+				$data=array();
+				$row= $this->db->fetch_array($result); 
+				
+
+
+				$data['job']=$row;
+				
+
+				// print_r($data);
+				//print_r($compid);
+
+	
+			$resp['data']=$data;
+
+			echo json_encode($resp);
+
+
+	}
+
+
+	function sub_editjob(){
+
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+
+			$job=json_decode($_REQUEST['job'], true);
+			$skills=$job['key_skills'];
+			$keyskills=json_encode($job['key_skills']);
+			$qualif=json_encode($job['qualification']);
+			
+					
+					
+
+
+					$insert_sql_array = array();
+					$insert_sql_array['role_title'] = $job['role_title'];
+					$insert_sql_array['department'] = $job['department'];
+					$insert_sql_array['location_id'] = $job['location_id'];
+					$insert_sql_array['job_type'] = $job['job_type'];
+					$insert_sql_array['qualification'] = $qualif;
+					$insert_sql_array['job_description'] = $job['job_description'];
+					$insert_sql_array['experience_details'] = $job['experience_details'];
+					$insert_sql_array['key_skills'] = $keyskills;
+					$insert_sql_array['min_remuneration'] = $job['min_remuneration'];
+					$insert_sql_array['max_remuneration'] = $job['max_remuneration'];
+					$insert_sql_array['min_experience'] = $job['min_experience'];
+					$insert_sql_array['max_experience'] = $job['max_experience'];
+					$insert_sql_array['value_proposition'] = $job['value_proposition'];
+					$insert_sql_array['keys_accountabilities'] = $job['keys_accountabilities'];
+					$insert_sql_array['shift_timimg'] = $job['shift_timimg'];
+					$insert_sql_array['location_outside'] = $job['location_outside'];
+
+					
+
+					$this->db->update(TBL_JOBS,$insert_sql_array,job_id,$job['job_id']);
+
+					
+					$sql="delete from ".TBL_JOBSKILLS." where job_id= '".$job['job_id']."' ";
+					$result= $this->db->query($sql,__FILE__,__LINE__);
+
+
+					 for ($i=0; $i <count($skills) ; $i++) { 
+								
+
+								
+								$insert_sql_array = array();
+								$insert_sql_array['skill_name'] = $skills[$i];
+								$insert_sql_array['job_id'] = $job['job_id'];
+
+								$this->db->insert(TBL_JOBSKILLS,$insert_sql_array);								
+								
+							
+						 }
+
+					// print_r($job);	
+			 $resp['data']=$job['role_title'];
+
+			echo json_encode($resp);
+
+
+	}
 }
 ?> 

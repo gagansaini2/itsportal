@@ -213,4 +213,25 @@ if ($work=='del_myjob') {
 
 
 
+
+if ($work=='edit_company') {
+	
+	$jobs_obj -> edit_comp($compid);
+}
+
+
+
+if ($work=='edit_myjob') {
+	
+	$jobs_obj -> edit_myjob($jobid);
+}
+
+
+
+
+if ($work=='edit_subjob') {
+	
+	$jobs_obj -> sub_editjob();
+}
+
  ?>

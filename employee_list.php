@@ -37,20 +37,20 @@ $user_obj2=new employer();
 		<section ng-app="its" ng-controller="companylist">
 			
 
-			<!-- <div class="modal fade" id="deljob" role="dialog">
+			<div class="modal fade" id="emplist" data-backdrop="static" role="dialog">
 			    <div class="modal-dialog modal-sm"  style="margin-top:200px;">
 			      <div class="modal-content">
 			       
 			        <div class="modal-body text-center">
-			          <p><b>Remove this Job</b></p>
+			           <h5>there is none who respond to this job</h5>
 			        </div>
 			        <div class="modal-footer">
-			          <button type="button" class="btn btn-primary" ng-click="jobdel()">Yes</button>
-			          <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+			          <a href="myjob_list.php" class="btn btn-primary">Back</a>
+			         
 			        </div>
 			      </div>
 			    </div>
-			</div> -->
+			</div>
  
 
 
@@ -67,30 +67,13 @@ $user_obj2=new employer();
 
 			if (isset($_SESSION['user_id'])) {
 
-				if ($_SESSION['user_type']=='4') {
+				if ($_SESSION['user_type']=='4' || '3') {
 					
 						extract($_REQUEST);
 
 						$user_obj2->employee_list();
 						
 				
-				}elseif ($_SESSION['user_type']=='3') {
-						
-					if ($row['total'] > 0) {
-
-						?>
-					<script type="text/javascript">
-						window.location="index.php"
-					</script>
-					<?php	
-					}else{
-
-						extract($_REQUEST);
-
-						$user_obj2->employee_list();
-						
-					}
-
 				}else{
 					
 					?>

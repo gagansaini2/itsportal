@@ -4176,7 +4176,8 @@ class employee{
 
 					                                  if ($row2['total'] > 0) {
 					                                   
-					                                    // echo "<li><a href=''>View/Edit My Profile</a></li>";
+					                                    echo "<li><a href='company_list.php'>View/Edit My Profile</a></li>";
+					                                    echo "<li><a href='myjob_list.php'>View My Jobs</a></li>"; 
 					                                    echo "<li><a href='postjob.php'>Post a Job</a></li>";
 					                                  }else{
 					                                    echo "<li><a href='companyprof.php'>Upload Your Profile</a></li>";

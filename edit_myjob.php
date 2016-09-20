@@ -34,24 +34,8 @@ $user_obj2=new employer();
 
 		<!-- ============ RESUME START ============ -->
 
-		<section ng-app="its" ng-controller="companylist">
+		<section ng-app="its" ng-controller="companyprof">
 			
-
-			<div class="modal fade" id="delcomp" role="dialog">
-			    <div class="modal-dialog modal-sm"  style="margin-top:200px;">
-			      <div class="modal-content">
-			       
-			        <div class="modal-body text-center">
-			          <p><b>Remove this Company Profile</b></p>
-			        </div>
-			        <div class="modal-footer">
-			          <button type="button" class="btn btn-primary" ng-click="del()">Yes</button>
-			          <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-			        </div>
-			      </div>
-			    </div>
-			</div>
-
 
 			
  
@@ -74,7 +58,7 @@ $user_obj2=new employer();
 					
 						extract($_REQUEST);
 
-						$user_obj2->comp_list();
+						$user_obj2->myjob_edit();
 						
 				
 				}else{

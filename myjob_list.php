@@ -53,6 +53,21 @@ $user_obj2=new employer();
 			</div>
  
 
+			<div class="modal fade" id="myjoblistempty" data-backdrop="static" role="dialog">
+			    <div class="modal-dialog modal-sm"  style="margin-top:200px;">
+			      <div class="modal-content">
+			      
+			        <div class="modal-body text-center">
+			           <h5>no job is added by you yet!</h5>
+			        </div>
+			        <div class="modal-footer text-center">
+			          <a href="postjob.php" class="btn btn-primary">add now</a>
+			         
+			        </div>
+			      </div>
+			    </div>
+			</div>
+ 
 
 
 
@@ -67,30 +82,13 @@ $user_obj2=new employer();
 
 			if (isset($_SESSION['user_id'])) {
 
-				if ($_SESSION['user_type']=='4') {
+				if ($_SESSION['user_type']=='4' || '3') {
 					
 						extract($_REQUEST);
 
 						$user_obj2->myjob_list();
 						
 				
-				}elseif ($_SESSION['user_type']=='3') {
-						
-					if ($row['total'] > 0) {
-
-						?>
-					<script type="text/javascript">
-						window.location="index.php"
-					</script>
-					<?php	
-					}else{
-
-						extract($_REQUEST);
-
-						$user_obj2->myjob_list();
-						
-					}
-
 				}else{
 					
 					?>
