@@ -6,6 +6,7 @@ require_once("class/class.employer.php");
 require_once("class/class.jobs.php");
 require_once("class/class.skills.php");
 require_once("class/class.search.php");
+require_once("class/class.auth.php");
 
 
 $user_obj= new user();
@@ -14,6 +15,7 @@ $employer_obj=new employer();
 $jobs_obj=new jobs();
 $skill_obj=new skills();
 $search_obj=new search();
+$auth_obj=new auth();
 
 
 // echo "<pre>";
@@ -233,5 +235,12 @@ if ($work=='edit_subjob') {
 	
 	$jobs_obj -> sub_editjob();
 }
+
+
+if ($work=='forgot') {
+	
+	$auth_obj -> forgot_password($email);
+}
+
 
  ?>

@@ -25,7 +25,7 @@ $job_obj=new jobs();
 
 <?php include('include/header.php'); ?>
 
-<div id="slider" class="sl-slider-wrapper" ng-app="its" ng-controller="jobSearchCtrl">
+<div id="slider" class="sl-slider-wrapper"  ng-app="its" ng-controller="jobSearchCtrl">
   <div class="sl-slider">
     <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
       <div class="sl-slide-inner">
@@ -39,13 +39,13 @@ $job_obj=new jobs();
                     <div class="col-sm-12 well">
               
                       
-                      <div class="row col-sm-5"><selectize config='myConfig' options='myOptions' ng-model="form.langs"></selectize></div>        
+                      <div class="row col-sm-5"><selectize config='myConfig' class="search" options='myOptions' ng-model="search.options"></selectize></div>        
                       <!-- <input type="text" class="form-control search" name="x" placeholder="Skills, Companies" ng-model="search.any" style="width:30%;"> -->
-                       <div class="row col-sm-3"><selectize config='myConfig1' options='cities' ng-model="search.location"></selectize></div>
+                       <div class="row col-sm-3"><selectize config='myConfig1' class="search" options='cities' ng-model="search.location"></selectize></div>
                      <!--  <select class="form-control search" ng-model="search.location" ng-options="x.city as x.city for x in cities">
                         <option>Location <span class="caret"></span></option> 
                       </select> -->
-                       <div class="row col-sm-2"><selectize config='myConfig2' options='exp' ng-model="search.experience"></selectize></div>
+                       <div class="row col-sm-2"><selectize config='myConfig2' class="search" options='exp' ng-model="search.experience"></selectize></div>
                      <!--  <select class="form-control search" ng-model="search.experience">
                         <option>Experience <span class="caret" ></span></option>
                         <option value="1">1</option>
@@ -80,7 +80,7 @@ $job_obj=new jobs();
                         <option value="30">30</option>
 
                       </select> -->
-                       <div class="row col-sm-2"><selectize config='myConfig3' options='salary' ng-model="search.salary"></selectize></div>
+                       <div class="row col-sm-2"><selectize config='myConfig3' class="search" options='salary' ng-model="search.salary"></selectize></div>
                       <!-- <select class="form-control search" ng-model="search.salary">
                         <option>Salary <span class="caret" ></span></option> 
                         <option value="1 Lacs">1 Lacs</option>
@@ -141,32 +141,6 @@ $job_obj=new jobs();
 
 
 
-<!-- <section  >
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h2>How does it work</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-8">
-
-        <div>
-            <select class="form-control" name="curentloc" ng-model="search.loc" ng-options="x.city as x.city for x in cities">
-                  <option value="">Select Location</option>
-        </select>
-        </div>
-        <div>
-           <selectize config='myConfig' options='myOptions' ng-model="search.keyskills" ></selectize>
-        </div>
-        
-          <button type="submit" class="btn btn-energized" ng-click="searchJob()">Search </button>
-      </div>
-     
-    </div>
-  </div>
-</section> -->
-
 
 
 
@@ -176,7 +150,7 @@ $job_obj=new jobs();
 
 <!-- ============ JOBS START ============ -->
 
-<section id="jobs">
+<section id="jobs" >
    <?php
         
         $job_obj->getjobs_home();

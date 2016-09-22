@@ -2106,23 +2106,24 @@ background-repeat: no-repeat;
 	    display: block;
 	     
 	}
-	
-.search{
-	display: inline;
-	height: 45px;
-	width: 20%;
-	margin-bottom: 0px;
 
-}
 
 .well{
 	border:3px solid ;
 	padding: 0px;
 }
 
-.selectize-input{
+.search .selectize-input{
 	margin-bottom: -6px;
 	line-height: 2;
+	overflow-x: scroll;
+	white-space: nowrap; 
+}
+
+.search .selectize-input::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    display: none;
+    background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 textarea.ng-untouched {

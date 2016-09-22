@@ -318,6 +318,14 @@ else                /* send the submitted data */
 
 
 <script src="angular/app.js"></script>
+<script src="angular/user_service.js"></script>
+<script src="angular/controllers/applicantctrl.js"></script>
+<script src="angular/controllers/comp_recru_ctrl.js"></script>
+<script src="angular/controllers/companyctrl.js"></script>
+<script src="angular/controllers/employee_editctrl.js"></script>
+<script src="angular/controllers/employeectrl.js"></script>
+<script src="angular/controllers/loginctrl.js"></script>
+<script src="angular/controllers/searchctrl.js"></script>
 <script src="js\bower_components\bower_components\angular-file-upload\dist/angular-file-upload.js"></script>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

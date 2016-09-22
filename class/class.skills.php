@@ -122,6 +122,7 @@ class skills{
 				while ( $row= $this->db->fetch_array($result)) {
 					
 				$lang['skills']=$row['key_val'];
+				$lang['skill_id']=$row['skill_id'];
 
 				$data[]=$lang;
 				

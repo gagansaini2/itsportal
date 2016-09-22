@@ -98,6 +98,36 @@ class employer{
 						
 						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
 						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Sign in <i class="fa fa-arrow-right"></i></button>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span ng-app="its" ng-controller="login"><a ng-click="forget_pass()">Forgot Password?</a>
+
+							<div class="modal fade" id="forgot" >
+							    <div class="modal-dialog" style="margin-top:200px;">
+							    
+							      <!-- Modal content-->
+							     
+
+							      <div class="modal-content" style="text-align:left;">
+							        <div class="modal-header ">
+							          
+							          <h3 class="modal-title">Enter your Email</h3>
+							        </div>
+							         <form name="forgetform1">
+							         <div class="modal-body">
+							          <label>Email</label>
+							          <input type="email" class="form-control" ng-model="login.email" required>
+							        </div>
+							       </form>
+							       
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-primary" ng-click="forget(forgetform1.$valid)">submit</button>
+
+							        </div>
+							      </div>
+							      
+							    </div>
+							  </div>
+
+						</span>
 					</div>
 
 					<div class="row text-center">
