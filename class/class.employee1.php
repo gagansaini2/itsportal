@@ -70,17 +70,18 @@ class employee1{
 							            <br>
 							            <label>Specification: &nbsp;</label><span>{{form.spec}}</span>
 							            <br>
-							            <label>Experience: &nbsp;</label><span>{{form.expyrs}}</span>
+							            <div ng-if="form.expyrs"><label>Experience: &nbsp;</label><span>{{form.expyrs}}</span>
 							            <br>
 							            <label>Annual Salary: &nbsp;</label><span>{{form.annualsalary}}</span>
 							            <br>
 							            <label>Notice Period: &nbsp;</label><span>{{form.noticeperiod}}</span>
 							            <br>
+							            </div>
 							        </div>   
 <!-- <pre>
 {{json || form}}
-</pre> -->
-
+</pre>
+ -->
 <!-- <input type="button" ng-click="save()"> -->
 							    </div>
 
@@ -146,7 +147,7 @@ class employee1{
 							              <label for="resume-name">Email*</label>
 							              <div class="form-group" id="email-group">
 
-							                <input type="text" class="form-control" name="username"  placeholder="e.g.  abc@xyz.com" ng-model="form.email">
+							                <input type="email" class="form-control" name="username"  placeholder="e.g.  abc@xyz.com" ng-model="form.email" disabled>
 							                <span id="span_username"></span>
 							              </div>
 							            </div>
@@ -527,7 +528,7 @@ class employee1{
 							              <div class="form-group" id="photo-group">
 
 							                <input type="file" name="resume" id="txtfile">
-							                <p class="help-block">Optionally upload your resume for employers to view. Max. file size: 1 MB</p>
+							                <p class="help-block">Optionally upload your resume for employers to view. Max. file size: 2 MB</p>
 
 							              </div>
 							            </div>
@@ -1387,13 +1388,14 @@ class employee1{
 							      </div>
 
 							      <div class="col-sm-11" >
-							        <label >Key Skills</label>
-							        <br>
+							      	<div class="row col-sm-7"><label>Key Skills</label></div>
+							      	<div class="col-sm-5 text-center"><label>Rate Yourself</label></div>
+							       
 							        <div class="row" ng-repeat="x in form.skills">
 							        <div class="form-group col-sm-7" >
 
-							         <selectize config='myConfig' options='myOptions' ng-model="x.keyskill" required></selectize>
-							          <span ng-if="myform.$submitted && myform.x.keyskill.$invalid" style="color:black;">This field is required.</span>
+							         <selectize config='myConfig' options='myOptions' ng-model="x.keyskill"></selectize>
+							         
 							        </div>
 							         <div class="row form-group col-sm-5" >
 							         	
@@ -1421,7 +1423,7 @@ class employee1{
 		<ul class="pager wizard" style="margin-top:80px;">
 			<li class="previous first btn btn-lg" style="display:none;"><a href="#">First</a></li>
 			<li class="previous btn"><a href="#">Previous</a></li>
-			<li class="next last btn" style="display:none;"><a href="#">Last</a></li>
+			<!-- <li class="next last btn" style="display:none;"><a href="#">Last</a></li> -->
 		  	<li class="next btn"><a href="#">Next</a></li>
 		  	<button type="submit" class="finish btn btan" name="submit" value="submit" style="display:none;">Submit</button> 
 		</ul>

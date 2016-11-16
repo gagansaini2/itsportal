@@ -230,6 +230,504 @@
             }
 
 
+             function get_emplist(jobid) {
+                var deferred = $q.defer();
+                $http({
+                 
+                  method: "POST",
+                  url: "api.php?work=get_emplist&jobid="+jobid
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+             function del_company(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                  method: "POST",
+                    url: "api.php?work=del_company&companyid="+main
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+            function del_myjob(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    method: "POST",
+                    url: "api.php?work=del_myjob&jobid="+main
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+            function edit_company(compid) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                  method: "POST",
+                  url: "api.php?work=edit_company&compid="+compid
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+             function edit_myjob(jobid) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                  method: "POST",
+                 url: "api.php?work=edit_myjob&jobid="+jobid
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+            function edit_subjob(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                  url: "api.php?work=edit_subjob",
+                  params: main
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+            function view_prof() {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                 url: "api.php?work=view_prof"
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+             function save_exp(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                    url: "api.php?work=save_exp",
+                    params: main
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+            function save_education(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                  method: "POST",
+                    url: "api.php?work=save_education",
+                    params: main
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+            function save_certification(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                method: "POST",
+                url: "api.php?work=save_certification",
+                params: main
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+            function save_skills(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                url: "api.php?work=save_skills",
+                params: main
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+            function save_others(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                url: "api.php?work=save_others",
+                params: main
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+            function get_info() {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                url: "api.php?work=get_info"
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             function get_cities() {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                  method: "POST",
+                    url: "api.php?work=get_cities"
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+            function get_countries() {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                url: "api.php?work=get_countries"
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+            function get_skills() {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                 url: "api.php?work=get_skills"
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+             function add_skills(data) {
+                var deferred = $q.defer();
+                $http({
+                 
+                    
+                 method: "POST",
+                url: "api.php?work=add_skills",
+                params: data
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+            function get_lang() {
+                var deferred = $q.defer();
+                $http({
+                 
+                method: "POST",
+                url: "api.php?work=get_lang"
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+            function get_name() {
+                var deferred = $q.defer();
+                $http({
+                 
+                method: "POST",
+                url: "api.php?work=get_name"
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+            function save_profile(main) {
+                var deferred = $q.defer();
+                $http({
+                 
+                method: "POST",
+                url: "api.php?work=save_profile",
+                params: main,
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+
+             function get_jobs() {
+                var deferred = $q.defer();
+                $http({
+                 
+                method: "POST",
+                url: "api.php?work=get_jobs",
+
+
+                }).success(function (response) {
+
+                    deferred.resolve(response);
+
+
+                }).error(function (reason) {
+                    deferred.resolve(reason);
+                });
+                return deferred.promise;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -244,9 +742,33 @@
                 register: register,
                 forgot: forgot,
                 job_search: job_search,
+                applicant_prof: applicant_prof,
+                get_companieslist: get_companieslist,
+                get_myjoblist: get_myjoblist,
+                get_emplist: get_emplist,
+                del_company: del_company,
+                del_myjob: del_myjob,
+                edit_company: edit_company,
+                edit_myjob: edit_myjob,
+                edit_subjob: edit_subjob,
+                view_prof: view_prof,
+                save_exp: save_exp,
+                save_education: save_education,
+                save_certification: save_certification,
+                save_skills: save_skills,
+                save_others: save_others,
+                get_info: get_info,
+                get_cities: get_cities,
+                get_countries: get_countries,
+                get_skills: get_skills,
+                add_skills: add_skills,
+                get_lang: get_lang,
+                get_name: get_name,
+                save_profile: save_profile,
+                get_jobs: get_jobs,
                 
             };
 
-            return api;
+          return api;
 
         }]);

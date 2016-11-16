@@ -8,10 +8,27 @@
 app.controller('wizform', ["$scope", "$http", "$user_service", function($scope, $http, $user_service) {
  
 
+$scope.form={};      //holds all employee details.....
+
+//gettin username and name..........
+$user_service.get_name().then(function(response){
+  console.log(response);
+
+  $scope.form.fname=response.data.name;
+  $scope.form.email=response.data.user;
+  $scope.form.phnno=response.data.phoneno; 
+},function(){
+
+})
+
+
+
+
+
 $scope.myModel;          //for selectize.........
 
 
-$scope.form={};      //holds all employee details.....
+
   
 
 //add more functions.............
@@ -47,14 +64,10 @@ $scope.form.extraexp.push({});
 
 $scope.myOptions = [];
 
-
-$http({
- 		method: "POST",
-        url: "api.php?work=get_skills"
-      }).then(function(response){
+$user_service.get_skills().then(function(response){
       	// console.log(response);
 
-      	angular.forEach(response.data.data, function(child){
+      	angular.forEach(response.data, function(child){
         $scope.myOptions.push(child);
        
       // console.log($scope.myOptions);
@@ -65,7 +78,7 @@ $http({
 $scope.myConfig = {
   create: true,
   maxItems: 1,
-  valueField: 'skills',
+  valueField: 'skill_id',
   labelField: 'skills',
   delimiter: '|',
   placeholder: 'Specify your keyskill',
@@ -75,18 +88,12 @@ $scope.myConfig = {
   },
   // maxItems: 1
   onOptionAdd: function(lang,data){
-  	$http({
-				
-				method: "POST",
-				url: "api.php?work=add_skills",
-				params: data
-
-			}).success(function(response){
-				console.log(response);
-			}).error(function(response){
-				console.log(response);
-			});
-
+  	
+    $user_service.add_skills(data).then(function(response){
+        // console.log(response);
+      },function(){
+    })
+    
   },
 };
 
@@ -100,23 +107,15 @@ $scope.myConfig = {
 
 $scope.myOptions1 = [];
 
-
-$http({
- 		method: "POST",
-        url: "api.php?work=get_lang"
-      }).then(function(response){
+$user_service.get_lang().then(function(response){
       	 // console.log(response);
 
-      	// angular.forEach(response.data.data, function(child){
-       //  $scope.myOptions1.push(child);
-
-      	// }); 
-	       for(var x in response.data.data){
-            $scope.myOptions1.push({lang: response.data.data[x]});
+	       for(var x in response.data){
+            $scope.myOptions1.push({lang: response.data[x]});
          }	
-    // for(i=0 ;i <response.data.data.length; i++){
-    //     $scope.myOptions1.push({lang: response.data.data[i]});
-    //   }
+    
+      },function(){
+
       });  
 
 
@@ -215,13 +214,7 @@ $(window).unload(function() {
 
 		$(window).load(function() {
 			
-			$http({
-				
-				method: "POST",
-				url: "api.php?work=get_info"
-				
-
-			}).success(function(response){
+			$user_service.get_info().then(function(response){
 				// console.log(response);
 				
 				 var returninfo=response.data.backinfo;
@@ -232,7 +225,7 @@ $(window).unload(function() {
 				
 				 // console.log(backinfoo);
 				
-			}).error(function(response){
+			},function(response){
 				console.log(response);
 			});
 

@@ -89,8 +89,8 @@ $user_obj=new employee1();
       	<label>Email :</label>&nbsp;<span>{{info.personal.email}}</span>
       	<br><label>Phone :</label>&nbsp;<span style="text-transform:capitalize;">{{info.personal.phoneno}}</span>
       	<br><label>Alt Phone :</label>&nbsp;<span style="text-transform:capitalize;">{{info.personal.altphoneno}}</span>
-      	<br><label>Facebook ID :</label>&nbsp;<span >{{info.personal.facebook_id}}</span>
-      	<br><label>linkedin ID :</label>&nbsp;<span >{{info.personal.linkedin_id}}</span>
+      	<br><label>Facebook ID :</label>&nbsp;<span ><a href="{{info.personal.facebook_id}}">{{info.personal.facebook_id}}</a></span>
+      	<br><label>linkedin ID :</label>&nbsp;<span ><a href="{{info.personal.linkedin_id}}">{{info.personal.linkedin_id}}</a></span>
       	</div>
       	
       </div>
@@ -224,7 +224,7 @@ $user_obj=new employee1();
 
    
   </uib-accordion>
-
+<pre>{{JSON || info}}</pre>
    <uib-accordion close-others="oneAtATime">
   
     <div uib-accordion-group class="panel-default" is-open="status.open" >
@@ -233,7 +233,9 @@ $user_obj=new employee1();
       </uib-accordion-heading>
 
        <div ng-if="changes.change2=='0'">
-      <div class="col-sm-8">
+       	<div ng-if="info.experince.experience_yrs==''"><button class="btn btn-warning" ng-click="edit2()">Add Experience</button></div>
+
+      <div class="col-sm-8" ng-if="info.experince.experience_yrs!=''">
       	<div class="col-sm-12">
       		<a style="float:right;" ng-click="edit2()">EDIT</a>
       	</div>
@@ -250,8 +252,9 @@ $user_obj=new employee1();
       	
       	
       	</div>
-      	<div class="col-sm-12">
+      	<div class="col-sm-12" ng-if="info.experince.empwork!=''">
       		<br><h6>Previous Employment(s)/Job Title(s)</h6>
+      		
       	</div>
       	
 
@@ -277,7 +280,7 @@ $user_obj=new employee1();
 	      	
 	      		<div class="col-sm-8">
 
-	              <label>Company Name</label>
+	              <label style="float: left;">Company Name</label><a ng-click="remexp($index)" style="float: right;"><i class="fa fa-times fa-1x" aria-hidden="true" ></i></a>
 	            	<input type="text" class="form-control" name="compname" placeholder="Company Name" ng-model="x.company_name">  
 				  
 	            </div>
@@ -488,7 +491,7 @@ $user_obj=new employee1();
 		          <option value="">Select your highest qualification</option>
 		          <option value="Doctorate/Phd">Doctorate/Phd</option>
 		          <option value="Masters">Postgraduate</option>
-		          <option value="Undergraduate">Undergraduate</option>
+		          <option value="Graduate">Graduate</option>
 
 		        </select>
 
@@ -617,7 +620,10 @@ $user_obj=new employee1();
 
 
       	 <div ng-if="changes.change4=='0'">
-	      <div class="col-sm-8">
+      	 		<div ng-if="info.certificates==''"><button class="btn btn-warning" ng-click="edit4()">Add Certification</button></div>
+	     
+	      <div class="col-sm-8" ng-if="info.certificates!=''">
+	      	
 	      	<div class="col-sm-12">
 	      		<a style="float:right;" ng-click="edit4()">EDIT</a>
 	      	</div>
@@ -643,7 +649,7 @@ $user_obj=new employee1();
         
         
           <div class="col-sm-6" >
-          	<label>Certificate Number</label>
+          	<label>Certificate Number</label><a ng-click="remcerti($index)" style="float: right;"><i class="fa fa-times fa-1x" aria-hidden="true" ></i></a>
             <input type="text" class="form-control" name="certificatenum" placeholder="Certificate No." ng-model="x.certificate_number">
 
           </div>
@@ -673,15 +679,18 @@ $user_obj=new employee1();
 
 
        <div ng-if="changes.change5=='0'">
-	      <div class="col-sm-8">
+
+       	<div ng-if="info.keyskills==''"><button class="btn btn-warning" ng-click="edit5()">Add skills</button></div>
+	      <div class="col-sm-8" ng-if="info.keyskills!=''">
 	      	<div class="col-sm-12">
 	      		<a style="float:right;" ng-click="edit5()">EDIT</a>
 	      	</div>
 	      	
-
-	      	<div class="col-sm-12">
-	      	<label>Key Skills :</label>&nbsp;<span style="text-transform:capitalize;" ng-repeat="x in info.keyskills">{{x.keyskill_name}}, </span>
-	      	<br>
+	      	<label>Key Skills :</label>&nbsp;
+	      	<div class="col-sm-12" ng-repeat="x in info.keyskills">
+	      	
+            <div class="col-sm-4 text-center">{{x.skills}}</div> 
+            <div class="col-sm-6"><input-stars max="5" ng-attr-readonly="true" ng-model="x.key_rating" ></input-stars></div>
 	      	</div>
 	      	
 	      	
@@ -699,10 +708,11 @@ $user_obj=new employee1();
 	        <div class="row" ng-repeat="x in info.keyskills">
 	        <div class="col-sm-7" >
 
-	         <selectize config='myConfig' options='myOptions' ng-model="x.keyskill_name" ></selectize>
+	         <selectize config='myConfig' options='myOptions' ng-model="x.skill_id" ></selectize>
 
 	        </div>
 	         <div class="col-sm-5" >
+	         	<a ng-click="remskill($index)" style="float: right;"><i class="fa fa-times fa-1x" aria-hidden="true" ></i></a>
 	         	
 	         	<input-stars max="5"  ng-attr-icon-full="{{ enableReadonly ? 'fa-cog' : 'fa-star fa-lg' }}" ng-model="x.key_rating"></input-stars>
 	      

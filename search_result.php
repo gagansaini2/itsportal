@@ -45,9 +45,9 @@ $job_obj=new jobs();
 			
 			
 
-<div  ng-if="result_obj" >
+<div  ng-if="search_result" >
 
-  <div class="container"  ng-repeat="x in result_obj" >
+  <div class="container"  ng-repeat="x in search_result" >
 
         <div class="row">
           <div class="col-sm-12">

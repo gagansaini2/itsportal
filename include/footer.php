@@ -326,6 +326,7 @@ else                /* send the submitted data */
 <script src="angular/controllers/employeectrl.js"></script>
 <script src="angular/controllers/loginctrl.js"></script>
 <script src="angular/controllers/searchctrl.js"></script>
+<script src="angular/controllers/quesCtrl.js"></script>
 <script src="js\bower_components\bower_components\angular-file-upload\dist/angular-file-upload.js"></script>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -380,8 +381,10 @@ else                /* send the submitted data */
     <script src="js/bootstrap-switch.min.js"></script>
 
     <script src="js/settings.js"></script>
-
+    <script src="js/jcvalidate/jcs-auto-validate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+     <script src="js/bower_components/moment/moment.js"></script>
+    <script src="js/bower_components/angular-moment/angular-moment.js"></script>
 
     
     <script type="text/javascript" src="js/bower_components/selectize/dist/js/standalone/selectize.min.js"></script>

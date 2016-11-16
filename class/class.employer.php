@@ -31,7 +31,7 @@ class employer{
             $ControlNames=array(
                                  
                                 "name"=>array('username',"EMail","Please enter Email","span_username"),
-                                "password"=>array('password',"","Please enter Password","span_password")
+                                "password"=>array('password',"Password","Please enter Password","span_password")
                                
             );
 
@@ -98,36 +98,7 @@ class employer{
 						
 						<!--a class="btn btn-primary btn-lg" name="submit" value="register">Sign up <i class="fa fa-arrow-right"></i></a-->
 						<button class="btn btn-primary btn-lg" name="submit" onclick="return <?php echo $ValidationFunctionName;?>()" value="register">Sign in <i class="fa fa-arrow-right"></i></button>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span ng-app="its" ng-controller="login"><a ng-click="forget_pass()">Forgot Password?</a>
-
-							<div class="modal fade" id="forgot" >
-							    <div class="modal-dialog" style="margin-top:200px;">
-							    
-							      <!-- Modal content-->
-							     
-
-							      <div class="modal-content" style="text-align:left;">
-							        <div class="modal-header ">
-							          
-							          <h3 class="modal-title">Enter your Email</h3>
-							        </div>
-							         <form name="forgetform1">
-							         <div class="modal-body">
-							          <label>Email</label>
-							          <input type="email" class="form-control" ng-model="login.email" required>
-							        </div>
-							       </form>
-							       
-							        <div class="modal-footer">
-							          <button type="button" class="btn btn-primary" ng-click="forget(forgetform1.$valid)">submit</button>
-
-							        </div>
-							      </div>
-							      
-							    </div>
-							  </div>
-
-						</span>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span><a onclick="launch()">Forgot Password?</a></span>
 					</div>
 
 					<div class="row text-center">
@@ -160,34 +131,35 @@ class employer{
 							$row = $this->db->fetch_array($record);
 							if($username == $row['user'] and $password == $row['password'])
 								{
-									if($row['status'] == 'block')
-									{
-									$_SESSION['error_msg1']='User is Blocked Please Contact Administrator ...';
-									?>
-									<script type="text/javascript">
-									window.location="index.php";
-									</script>
-									<?php
-									exit();
-									}
-									else
-									{
+									if ($row['status'] == 0) {
+										$_SESSION['error_msg1']='Your Account is not activated yet,check your mail';
+										$this->Login_form('local');
+									}else{
+											if($row['type'] == 2)
+											{
+											$_SESSION['error_msg1']='You are a Jobseeker,goto <a href="signin.php"> post a resume<a/a> section to Sign In';
+											$this->Login_form('local');
+											
+											}
+											else
+											{
 
-									$this->user_id= $row['user_id'];
-									//$this->groups= $row['auth_to'];
-									$this->user_type= $row['type'];
-									$this->name = $row['name'];
-                                    $this->company_id = $row['company_id'];
-									
-									$this->auth->Create_Session1($username,$this->user_id,$this->name,$this->user_type,$this->company_id);
+											$this->user_id= $row['user_id'];
+											//$this->groups= $row['auth_to'];
+											$this->user_type= $row['type'];
+											$this->name = $row['name'];
+		                                    $this->company_id = $row['company_id'];
+											
+											$this->auth->Create_Session1($username,$this->user_id,$this->name,$this->user_type,$this->company_id);
 
-									?>
-									<script type="text/javascript">
-									window.location="index.php";
-									</script>
-									<?php
-									exit();
-									}
+											?>
+											<script type="text/javascript">
+											window.location="index.php";
+											</script>
+											<?php
+											exit();
+											}
+										}
 								}
 								else
 								{
@@ -196,7 +168,7 @@ class employer{
                                     $this->Login_form('local');
                                     
 								}
-						
+								unset($_SESSION['error_msg1']);	
 						break;
 			default :		echo "Invalid Parameter";
 		}
@@ -376,7 +348,7 @@ class employer{
 							$insert_sql_array['phoneno'] = $this->phoneno;
 
 							$insert_sql_array['type'] = '3';
-							$insert_sql_array['status'] = '1';
+							$insert_sql_array['status'] = '0';
 							//$insert_sql_array['auth_to'] = 'Superadmin';
 							$this->db->insert(TBL_USER,$insert_sql_array);
 
@@ -389,15 +361,33 @@ class employer{
 						                            <p>Hello ,</p>
 						                            <p>Your Account has been created with </p>
 						                            <p>Username: "'.$this->username.'"</p>
-						                            <p>Password: "'.$this->password.'"
-						                            
+						                            <p>Password: "'.$this->password.'"<br>
+
+
+						                            <p><a style="   background: #04803a;
+										            background-image: -webkit-linear-gradient(top, #04803a, #09961e);
+										            background-image: -moz-linear-gradient(top, #04803a, #09961e);
+										            background-image: -ms-linear-gradient(top, #04803a, #09961e);
+										            background-image: -o-linear-gradient(top, #04803a, #09961e);
+										            background-image: linear-gradient(to bottom, #04803a, #09961e);
+										            -webkit-border-radius: 5;
+										            -moz-border-radius: 5;
+										            border-radius: 5px;
+										            font-family: Arial;
+										            color: #ffffff;
+										            font-size: 20px;
+										            padding: 10px 20px 10px 20px;
+										            text-decoration: none;
+										            margin:20px;
+													" href="http://itsrecruitment.in/api.php?work=activation&email='.$email.'">Activate now</a></p>
+										                            
 
 
 						                            
 						                            <p>Regards,</p>
 						                            <p>The Its Recruitment</p>
 						                            </div>';
-						                            $header = "From: its.sangita@itsgroup.com\r\n"; 
+						                            $header = "From: noreply@Itsrecruiment.in\r\n"; 
 						                            $header.= "MIME-Version: 1.0\r\n"; 
 						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 						                            $header.= "X-Priority: 1\r\n"; 
@@ -418,8 +408,8 @@ class employer{
 				<div class="jumbotron">	
 					
 					<div class="row text-center">
-						<h4>You are successfully registered</h4>
-						<h5>Click next to proceed</h5>
+						<h4>An Activation link has been send to your email</h4>
+						<h5>Activate Your Account and then sign in</h5>
 					</div>
 					<div class="row text-center">
 						<p>&nbsp;</p>
@@ -618,28 +608,46 @@ class employer{
 							$insert_sql_array['phoneno'] = $this->phoneno;
 
 							$insert_sql_array['type'] = '4';
-							$insert_sql_array['status'] = '1';
+							$insert_sql_array['status'] = '0';
 							//$insert_sql_array['auth_to'] = 'Superadmin';
 							$this->db->insert(TBL_USER,$insert_sql_array);
 
 
 							  $to = $this->username;
 						                    
-						                            $subject = "New registration @ Its Recruitment" ;
+						                             $subject = "New registration @ Its Recruitment" ;
 						                            $comment = '<div style="text-align:left">
 
 						                            <p>Hello ,</p>
 						                            <p>Your Account has been created with </p>
 						                            <p>Username: "'.$this->username.'"</p>
-						                            <p>Password: "'.$this->password.'"
-						                            
+						                            <p>Password: "'.$this->password.'"<br>
+
+
+						                            <p><a style="   background: #04803a;
+										            background-image: -webkit-linear-gradient(top, #04803a, #09961e);
+										            background-image: -moz-linear-gradient(top, #04803a, #09961e);
+										            background-image: -ms-linear-gradient(top, #04803a, #09961e);
+										            background-image: -o-linear-gradient(top, #04803a, #09961e);
+										            background-image: linear-gradient(to bottom, #04803a, #09961e);
+										            -webkit-border-radius: 5;
+										            -moz-border-radius: 5;
+										            border-radius: 5px;
+										            font-family: Arial;
+										            color: #ffffff;
+										            font-size: 20px;
+										            padding: 10px 20px 10px 20px;
+										            text-decoration: none;
+										            margin:20px;
+													" href="http://itsrecruitment.in/api.php?work=activation&email='.$username.'">Activate now</a></p>
+										                            
 
 
 						                            
 						                            <p>Regards,</p>
 						                            <p>The Its Recruitment</p>
 						                            </div>';
-						                            $header = "From: its.sangita@itsgroup.com\r\n"; 
+						                            $header = "From: noreply@Itsrecruiment.in\r\n"; 
 						                            $header.= "MIME-Version: 1.0\r\n"; 
 						                            $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 						                            $header.= "X-Priority: 1\r\n"; 
@@ -650,7 +658,7 @@ class employer{
 								
 							?>
 
-						
+							
 								
 						<div class="container">
 						
@@ -660,8 +668,8 @@ class employer{
 				<div class="jumbotron">	
 					
 					<div class="row text-center">
-						<h4>You are successfully registered</h4>
-						<h5>Click next to proceed</h5>
+						<h4>An Activation link has been send to your email</h4>
+						<h5>Activate Your Account and then sign in</h5>
 					</div>
 					<div class="row text-center">
 						<p>&nbsp;</p>
@@ -673,7 +681,6 @@ class employer{
 			
 
 			</div>
-
 
 		  				<?php 
 						
@@ -771,7 +778,7 @@ class employer{
 							</div>
 							<div class="form-group col-sm-6" id="company-group">
 								<label for="company">Phone Number*</label>
-								<input type="text" class="form-control" name="company_num" placeholder="Phone Number" ng-model="company.company_num" required>
+								<input type="text" class="form-control" name="company_num" placeholder="Phone Number" ng-model="company.company_num" ng-minlength="10" required>
 								<span id="span_phoneno"></span>
 							</div>
 							</div>
@@ -1089,7 +1096,9 @@ class employer{
 
 							<div class="form-group" id="job-location-group">
 								<label for="job-location">Experience*</label><br>
-								<select name="req_experience" class="form-control" ng-model="job.min_experience" style="display:inline;width:45%;" required>
+								<div style="margin-bottom: 50px;">
+								<div class="row col-sm-6">
+									<select name="min_experience" class="form-control" ng-model="job.min_experience" required>
 									<option value="">minimum</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -1122,8 +1131,14 @@ class employer{
 									<option value="29">29</option>
 									<option value="30">30</option>
 									</select>
-								&nbsp;&nbsp;to&nbsp;&nbsp;
-								<select name="req_experience" class="form-control" ng-model="job.max_experience" style="display:inline;width:45%;" required>
+
+								</div>
+								<div class="col-sm-1 text-center">
+									<b>to</b>
+								</div>
+								
+								<div class="row col-sm-6">
+									<select name="max_experience" class="form-control" ng-model="job.max_experience"  required>
 									<option value="">maximum</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -1156,10 +1171,8 @@ class employer{
 									<option value="29">29</option>
 									<option value="30">30</option>
 									</select>
-
-
-									
-								<span id="span_experience"></span>
+								</div>
+								</div>
 							</div>
 							<div class="form-group" id="job-location-group">
 								
@@ -1170,77 +1183,86 @@ class employer{
 								<label for="job-location" >Remuneration*</label> &nbsp;&nbsp;&nbsp;
 								<p class="help-block" style="display:initial;">in Lacs</p>
 								<br>
-								<select name="remuneration" class="form-control" ng-model="job.rumeration_min" style="display:inline;width:45%;" required>
-									<option value="">minimum</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-									<option value="13">13</option>
-									<option value="14">14</option>
-									<option value="15">15</option>
-									<option value="16">16</option>
-									<option value="17">17</option>
-									<option value="18">18</option>
-									<option value="19">19</option>
-									<option value="20">20</option>
-									<option value="21">21</option>
-									<option value="22">22</option>
-									<option value="23">23</option>
-									<option value="24">24</option>
-									<option value="25">25</option>
-									<option value="26">26</option>
-									<option value="27">27</option>
-									<option value="28">28</option>
-									<option value="29">29</option>
-									<option value="30">30</option>
-									</select>
-								&nbsp;&nbsp;to&nbsp;&nbsp;
-								<select name="remuneration" class="form-control" ng-model="job.rumeration_max" style="display:inline;width:45%;" required>
-									<option value="">maximum</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-									<option value="13">13</option>
-									<option value="14">14</option>
-									<option value="15">15</option>
-									<option value="16">16</option>
-									<option value="17">17</option>
-									<option value="18">18</option>
-									<option value="19">19</option>
-									<option value="20">20</option>
-									<option value="21">21</option>
-									<option value="22">22</option>
-									<option value="23">23</option>
-									<option value="24">24</option>
-									<option value="25">25</option>
-									<option value="26">26</option>
-									<option value="27">27</option>
-									<option value="28">28</option>
-									<option value="29">29</option>
-									<option value="30">30</option>
-									</select>
+								<div class="row" style="margin-left: 0px; margin-right: 0px;">
+									<div class="row col-sm-6">
+										<select name="remuneration" class="form-control" ng-model="job.rumeration_min"  required>
+										<option value="">minimum</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										</select>
+									</div>
+									<div class="col-sm-1">
+										<b>to</b>
+									</div>
+									<div class="row col-sm-6">
+										<select name="remuneration" class="form-control" ng-model="job.rumeration_max"  required>
+										<option value="">maximum</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										</select>
+									</div>
+								</div>
+								
 								
 							</div>
 							<div class="form-group" id="job-location-group">
-								<label for="job-location">Employee Value Proposition</label>
+								<label >Employee Value Proposition</label>
 								<input type="text" class="form-control" name="valueproposition" ng-model="job.valueproposition" placeholder="eg. Relocation Bonus,Meals,Health Insurance">
 								<span id="span_remuneration"></span>
 							</div>
@@ -1262,7 +1284,8 @@ class employer{
 								<label for="job-description">Key Skills*</label>
 								
 								<selectize config='myConfig' options='myOptions' ng-model="job.keyskills" name="keyskills" required></selectize>
-								 <span ng-if="jobform.$submitted && jobform.keyskills.$invalid" style="color:black;">This field is required.</span>
+						
+								 <span class="help-block has-error error-msg" style="color: #a94442;" ng-if="jobform.$submitted && jobform.keyskills.$invalid">This field is required</span>
 						</div>
 						
 						 <div class="col-sm-6" style="padding: 24px 0px 10px 40px;">
@@ -1289,6 +1312,7 @@ class employer{
 							          <option value="Graduate">Graduate</option>
 
 							    </select>
+							    <span class="help-block has-error error-msg" style="color: #a94442;" id="quaferr">This field is required</span>
 							    </div>
 							    <div class="col-sm-3" ng-if="edd.degree_type">
 								<select name="coursetype" class="form-control" ng-model="edd.course_type" ng-options="x.coursetype_name for x in list" required>
@@ -1607,7 +1631,7 @@ class employer{
 
 				
 				
-		<div class="container" ng-repeat="x in companylist" >
+		<div class="container" ng-repeat="x in companylist | limitTo : list.stop : list.start" >
 			<div class="row panel panel-info" >
 				<div class="panel-body">
 					<div class="text-center">
@@ -1651,6 +1675,14 @@ class employer{
 				</div>
 			</div>
 		</div>
+		<img src="" id="searchloader" >
+		<div class="container" ng-if="companylist.check > 10">
+	      	<div class="col-sm-12">
+	      		<br><span class="col-sm-4"><button class="btn btn-danger" ng-click="prev()" ng-if="list.start >= 10" style="float:left;">Previous</button></span>
+	      		<span class="col-sm-4 text-center">{{list.start + 1}}-{{list.start + 10}} of {{companylist.check}}</span>
+	      		<span class="col-sm-4"><button class="btn btn-danger" ng-click="next()" ng-if="list.start < companylist.check - 10" style="float:right;">Next</button></span>
+	      	</div>
+	    </div>	
 			
 
 
@@ -1675,7 +1707,7 @@ class employer{
 				
 
 
-				<div class="container" style="margin-bottom:2em;" ng-repeat="x in myjoblist">
+				<div class="container" style="margin-bottom:2em;" ng-repeat="x in myjoblist | limitTo : list.stop : list.start">
 
 				<div class="row">
 					<div class="col-sm-12">
@@ -1689,17 +1721,18 @@ class employer{
 									<div class="col-lg-1 col-md-1 hidden-sm hidden-xs text-center">
 										
 											<img src='uploads/{{x.company_logo.logo_name}}' class='img-responsive' ><br>
-											<h6>{{x.company.company_name}}</h6>
+											<h6 ng-if="!x.company_logo.logo_name">{{x.company.company_name}}</h6>
 
 										 
 									</div>
 									<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 job-title">
 										<h5>{{x.job.role_title}}</h5>
-										<p><strong>{{x.job.department}}</strong></p>
+										<p><strong>{{x.job.department}}</strong></p><br>	
+										<p>Posted <b>{{x.job.posted_on}}</b> </p>
 									</div>
 									<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
 										
-										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  {{x.job_loc}}</strong></p>
+										<p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  {{x.job_loc}}{{x.job.location_outside}}</strong></p>
 										<p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;<strong>{{x.job.min_experience}} - {{x.job.max_experience}} years</strong></p>
 									</div>
 									<div class="col-lg-3 col-md-2 col-sm-2 hidden-xs job-type ">
@@ -1730,6 +1763,14 @@ class employer{
 					</div>
 				</div>
 			</div>
+			<img src="" id="searchloader" >
+			<div class="container" ng-if="myjoblist.check > 10">
+	      	<div class="col-sm-12">
+	      		<br><span class="col-sm-4"><button class="btn btn-danger" ng-click="prev()" ng-if="list.start >= 10" style="float:left;">Previous</button></span>
+	      		<span class="col-sm-4 text-center">{{list.start + 1}}-{{list.start + 10}} of {{myjoblist.check}}</span>
+	      		<span class="col-sm-4"><button class="btn btn-danger" ng-click="next()" ng-if="list.start < myjoblist.check - 10" style="float:right;">Next</button></span>
+	      	</div>
+	    </div>	
 				
 	
 
@@ -1750,7 +1791,7 @@ class employer{
 
 				
 				
-		<div class="container" ng-repeat="x in emplist" >
+		<div class="container" ng-repeat="x in emplist | limitTo : list.stop : list.start" >
 			<div class="row panel panel-info" >
 				<div class="panel-body" style="position:relative;">
 					<div class="text-center">
@@ -1781,7 +1822,7 @@ class employer{
 						</div>
 
 						<div class="col-sm-12" style="padding-left:4em;">
-							<label>Current :</label>&nbsp;{{x.exp.empwork.job_title}} - {{x.exp.empwork.company_name}}<br>
+							<label>Current :</label>&nbsp;{{x.empwork.job_title}} - {{x.empwork.company_name}}<br>
 							<label>Education :</label>&nbsp;{{x.eddu.course_name}} - {{x.eddu.university_name}} in {{x.eddu.passing_year}}<br>
 							<label>Pref Loc :</label>&nbsp;{{x.personal.prefered_loc}}<br>
 							<label>Gender :</label>&nbsp;{{x.personal.gender}}<br>
@@ -1794,16 +1835,32 @@ class employer{
 
 					<div class="col-sm-4" style="padding-top:50px;padding-left:2em">
 							<label>Key Skills :</label>
-							<p ng-repeat="item in x.keyskills" style="margin-bottom:0px;">{{item.keyskill_name}} <input-stars max="{{item.key_rating}}" ng-attr-readonly="true"ng-model="item.key_rating"></input-stars></p>
+							<div ng-repeat="item in x.keyskills | limitTo:4" class="row">
+							<div class="col-sm-4">
+								<b>{{item.skills}}</b>
+							</div>
+							<div class="col-sm-8">
+								<input-stars max="{{item.key_rating}}" ng-attr-readonly="true"ng-model="item.key_rating" style="margin-bottom:0px;"></input-stars>
+							</div>
+							</div>
+							
 							
 					</div>
 						
-					<div style="position: absolute;margin-left: 90%;margin-top: 15%;">
+					<div class="col-sm-12" style="padding-left:73em;">
 						<a href="applicant_prof.php?{{x.personal.employee_id}}">Show more</a>
 					</div>
 				</div>
 			</div>
 		</div>
+		<img src="" id="searchloader" >
+			<div class="container" ng-if="emplist.check > 10">
+	      	<div class="col-sm-12">
+	      		<br><span class="col-sm-4"><button class="btn btn-danger" ng-click="prev()" ng-if="list.start >= 10" style="float:left;">Previous</button></span>
+	      		<span class="col-sm-4 text-center">{{list.start + 1}}-{{list.start + 10}} of {{emplist.check}}</span>
+	      		<span class="col-sm-4"><button class="btn btn-danger" ng-click="next()" ng-if="list.start < emplist.check - 10" style="float:right;">Next</button></span>
+	      	</div>
+	    </div>	
 
 <?php
 	}
@@ -1820,7 +1877,7 @@ class employer{
 						<h1 style="font-size:38px;">edit company</h1>
 					</div>
 				</div><br><br><br>
-				
+			<!-- <pre>{{JSON || company}}</pre> -->	
 
 				
 			
@@ -1851,7 +1908,7 @@ class employer{
 							</div>
 							<div class="form-group col-sm-6" id="company-group">
 								<label for="company">Phone Number*</label>
-								<input type="text" class="form-control" name="company_num" placeholder="Phone Number" ng-model="company.company.company_num" required>
+								<input type="text" class="form-control" name="company_num" placeholder="Phone Number" ng-model="company.company.company_num" ng-maxlength="10" required>
 								<span id="span_phoneno"></span>
 							</div>
 							</div>
@@ -2165,7 +2222,7 @@ class employer{
 							</div>
 							<div class="form-group" id="job-location-group">
 								
-								<textarea  ng-model="job.expdetails" placeholder="Experience Details" style="height:222px; max-height:222px; max-width:450px;" data-toggle="tooltip" title="Press Enter for the new line" ></textarea>
+								<textarea  ng-model="job.experience_details" placeholder="Experience Details" style="height:222px; max-height:222px; max-width:450px;" data-toggle="tooltip" title="Press Enter for the new line" ></textarea>
 
 							</div>
 							<div class="form-group">
@@ -2264,7 +2321,8 @@ class employer{
 								<label for="job-description">Key Skills*</label>
 								
 								<selectize config='myConfig' options='myOptions' ng-model="job.key_skills" name="keyskills" required></selectize>
-								 <span ng-if="jobform.$submitted && jobform.keyskills.$invalid" style="color:black;">This field is required.</span>
+								<span class="help-block has-error error-msg" style="color: #a94442;" ng-if="jobform.$submitted && jobform.keyskills.$invalid">This field is required</span>
+								 
 						</div>
 						
 						 <div class="col-sm-6" style="padding: 24px 0px 10px 40px;">
@@ -2291,6 +2349,8 @@ class employer{
 							          <option value="Graduate">Graduate</option>
 
 							    </select>
+							     
+ 								<span class="help-block has-error error-msg" style="color: #a94442;" id="quaferr">This field is required</span>
 							    </div>
 							    <div class="col-sm-3" ng-if="edd.degree_type">
 								<select name="coursetype" class="form-control" ng-model="edd.course_type" ng-options="x.coursetype_name for x in list" required>

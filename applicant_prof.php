@@ -87,8 +87,9 @@ $job_obj=new jobs();
       	<label>Email :</label>&nbsp;<span>{{info.personal.email}}</span>
       	<br><label>Phone :</label>&nbsp;<span style="text-transform:capitalize;">{{info.personal.phoneno}}</span>
       	<br><label>Alt Phone :</label>&nbsp;<span style="text-transform:capitalize;">{{info.personal.altphoneno}}</span>
-      	<br><label>Facebook ID :</label>&nbsp;<span >{{info.personal.facebook_id}}</span>
-      	<br><label>linkedin ID :</label>&nbsp;<span >{{info.personal.linkedin_id}}</span>
+        <br><label>Facebook ID :</label>&nbsp;<span ><a href="{{info.personal.facebook_id}}">{{info.personal.facebook_id}}</a></span>
+        <br><label>linkedin ID :</label>&nbsp;<span ><a href="{{info.personal.linkedin_id}}">{{info.personal.linkedin_id}}</a></span>
+      	
       	</div>
       	
       </div>
@@ -234,7 +235,8 @@ $job_obj=new jobs();
 	      	<label>Key Skills :</label>&nbsp;
           <div style="text-transform:capitalize;" ng-repeat="x in info.keyskills">
 
-            {{x.keyskill_name}} <input-stars max="5" ng-attr-readonly="true" ng-model="x.key_rating" ></input-stars>
+            <div class="col-sm-4 text-center">{{x.keyskill_name}}</div> 
+            <div class="col-sm-6"><input-stars max="5" ng-attr-readonly="true" ng-model="x.key_rating" ></input-stars></div>
 
           </div>
 	      	<br>

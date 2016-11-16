@@ -194,11 +194,11 @@ class skills{
 
 
 			$insert_sql_array=array();
-			$insert_sql_array['key_val']=$_REQUEST[skills];
+			$insert_sql_array['key_val']=$_REQUEST['skills'];
 			$this->db->insert(TBL_SKILLS,$insert_sql_array);
 
 			$resp['status']=true;
-			$resp['data']=$_REQUEST[skills];
+			$resp['data']=$_REQUEST['skills'];
 			echo json_encode($resp);
 
 
@@ -398,7 +398,7 @@ class skills{
 							}
 						}		
 
-						if (count($certificates) > 1) {
+						if (count($certificates) > 0) {
 							
 						
 							for ($i=0; $i <count($certificates) ; $i++) { 
@@ -421,7 +421,9 @@ class skills{
 
 	// //tab3...........................
 
-
+						if (isset($allinfo['expyrs'])) {
+							
+						
 
 							$insert_sql_array = array();
 							$insert_sql_array['experience_yrs'] = $allinfo['expyrs'];
@@ -479,7 +481,7 @@ class skills{
 							}
 						 }
 	
-
+						 }
 
 	// 			//tab4.....................
 
@@ -498,6 +500,9 @@ class skills{
 							$this->db->insert(TBL_OTHERS,$insert_sql_array);
 
 
+							if (sizeof($skills) > 0) {
+								
+							
 							for ($i=0; $i <count($skills) ; $i++) { 
 								
 
@@ -506,7 +511,7 @@ class skills{
 								$this->skillrating=$finalskills['rating'];
 
 								$insert_sql_array = array();
-								$insert_sql_array['keyskill_name'] = $this->skillname;
+								$insert_sql_array['skill_id'] = $this->skillname;
 								$insert_sql_array['key_rating'] = $this->skillrating;
 
 								$insert_sql_array['user_id'] = $_SESSION['user_id'];
@@ -514,7 +519,7 @@ class skills{
 								$this->db->insert(TBL_EMPLOYEE_KEYSKILS,$insert_sql_array);
 							
 							}
-
+							}
 				// image upload....
 
 							
@@ -663,6 +668,13 @@ class skills{
 
 				$result6=$this->db->query($sql6,__FILE__,__LINE__);
 				while($roww = mysql_fetch_assoc($result6)) {
+
+					$sql8="select * from ".TBL_SKILLS." where skill_id='".$roww['skill_id']."' ";
+					$result8=$this->db->query($sql8,__FILE__,__LINE__);
+					$row8= mysql_fetch_assoc($result8);
+
+					$roww['skills']=$row8['key_val'];
+
 				$row6[]=$roww;
 				}
 				
@@ -792,40 +804,30 @@ class skills{
 
 				$this->db->update(TBL_EMPLOYEE_EXP,$insert_sql_array,employee_id,$_SESSION['employee_id']);
 
+				
+				
+				
+					$sql="delete from ".TBL_EMPLOYEE_WORKEX." where employee_id = '".$_SESSION['employee_id']."' ";
+					$result= $this->db->query($sql,__FILE__,__LINE__);
 
-				for ($i=0; $i <count($workarray) ; $i++) { 
+
+					for ($i=0; $i <count($workarray) ; $i++) { 
 
 						$wrk=$workarray[$i];
-						$workexid=$wrk['workex_id'];
-						$workexcomp=$wrk['company_name'];
-						
-					if (isset($workexid)) {
-							
 
-								$insert_sql_array = array();
-								$insert_sql_array['company_name'] = $wrk['company_name'];
-								$insert_sql_array['job_title'] = $wrk['job_title'];
-								$insert_sql_array['working_time'] = $wrk['working_time'];
-					
-								$this->db->update(TBL_EMPLOYEE_WORKEX,$insert_sql_array,workex_id,$workexid);
+									$insert_sql_array = array();
+									$insert_sql_array['company_name'] = $wrk['company_name'];
+									$insert_sql_array['job_title'] = $wrk['job_title'];
+									$insert_sql_array['working_time'] = $wrk['working_time'];
 
-					}else{
-
-						if (isset($workexcomp)) {
-
-								$insert_sql_array = array();
-								$insert_sql_array['company_name'] = $wrk['company_name'];
-								$insert_sql_array['job_title'] = $wrk['job_title'];
-								$insert_sql_array['working_time'] = $wrk['working_time'];
-
-								$insert_sql_array['user_id'] = $_SESSION['user_id'];
-								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-								$this->db->insert(TBL_EMPLOYEE_WORKEX,$insert_sql_array);
-						}
+									$insert_sql_array['user_id'] = $_SESSION['user_id'];
+									$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
+									$this->db->insert(TBL_EMPLOYEE_WORKEX,$insert_sql_array);
 						
 					}
-					
-				}
+				
+
+
 
 				
 				echo json_encode($resp);	
@@ -892,37 +894,30 @@ class skills{
 
 
 				$info_cert=json_decode($_REQUEST['exp'], true);
-				print_r($info_cert);
+				// print_r($info_cert);
 
+
+				$sql="delete from ".TBL_EMPLOYEE_CERTIFICATION." where employee_id = '".$_SESSION['employee_id']."' ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
 
 				for ($i=0; $i <count($info_cert) ; $i++) { 
 					
 					$cert=$info_cert[$i];
-					$certid=$cert['certificate_id'];
 					// print_r($eduid);
 
-					if (isset($certid)) {
 
-								$insert_sql_array = array();
-								$insert_sql_array['certificate_name'] = $cert['certificate_name'];
-								$insert_sql_array['certificate_number'] = $cert['certificate_number'];
-							
-
-							$this->db->update(tbl_employee_certification,$insert_sql_array,certificate_id,$certid);
-						
-					}else{
-						if (isset($cert['certificate_name'])) {
-							
-								$insert_sql_array = array();
+					$insert_sql_array = array();
 								$insert_sql_array['certificate_name'] = $cert['certificate_name'];
 								$insert_sql_array['certificate_number'] = $cert['certificate_number'];
 
 								$insert_sql_array['user_id'] = $_SESSION['user_id'];
 								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
-								$this->db->insert(tbl_employee_certification,$insert_sql_array);
-						}
-					}
+								$this->db->insert(TBL_EMPLOYEE_CERTIFICATION,$insert_sql_array);
+
+	
+
 				}
+
 				echo json_encode($resp);
 
 			}
@@ -937,33 +932,23 @@ class skills{
 					$info_skills=json_decode($_REQUEST['exp'], true);
 					// print_r($info_skills);
 				
+				$sql="delete from ".TBL_EMPLOYEE_KEYSKILS." where employee_id = '".$_SESSION['employee_id']."' ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
 				for ($i=0; $i <count($info_skills) ; $i++) { 
 					
 					$skills=$info_skills[$i];
-					$skillid=$skills['skill_id'];
+					$skillid=$skills['empskill_id'];
 					// print_r($eduid);
 
-					if (isset($skillid)) {
-
 								$insert_sql_array = array();
-								$insert_sql_array['keyskill_name'] = $skills['keyskill_name'];
-								$insert_sql_array['key_rating'] = $skills['key_rating'];
-							
-
-								$this->db->update(TBL_EMPLOYEE_KEYSKILS,$insert_sql_array,skill_id,$skillid);
-						
-					}else{
-						if (isset($skills['keyskill_name'])) {
-							
-								$insert_sql_array = array();
-								$insert_sql_array['keyskill_name'] =$skills['keyskill_name'];
+								$insert_sql_array['skill_id'] =$skills['skill_id'];
 								$insert_sql_array['key_rating'] = $skills['key_rating'];
 
 								$insert_sql_array['user_id'] = $_SESSION['user_id'];
 								$insert_sql_array['employee_id'] = $_SESSION['employee_id'];
 								$this->db->insert(TBL_EMPLOYEE_KEYSKILS,$insert_sql_array);
-						}
-					}
+					
 				}
 
 				echo json_encode($resp);
@@ -1039,6 +1024,13 @@ class skills{
 
 				$result6=$this->db->query($sql6,__FILE__,__LINE__);
 				while($roww = mysql_fetch_assoc($result6)) {
+
+					$sql8="select * from ".TBL_SKILLS." where skill_id='".$roww['skill_id']."' ";
+					$result8=$this->db->query($sql8,__FILE__,__LINE__);
+					$row8= mysql_fetch_assoc($result8);
+
+					$roww['keyskill_name']=$row8['key_val'];
+
 				$row6[]=$roww;
 				}
 				
@@ -1098,6 +1090,68 @@ class skills{
 				echo json_encode($resp);
 			}
 		
+
+
+		public function get_emp_name(){
+
+			$resp=array();
+				$resp['status']=true;
+				$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+				$sql="select * from ".TBL_USER." where user_id= '".$_SESSION['user_id']."' ";
+				$result= $this->db->query($sql,__FILE__,__LINE__);
+
+				$row= $this->db->fetch_array($result);
+					
+				$data=$row;					
+
+				$resp['data']=$data;
+				
+				 echo json_encode($resp);
+
+
+
+		}
+
+
+	function save_myprofile(){
+
+
+			$resp=array();
+			$resp['status']=true;
+			$resp['status_msg']=ERRORCODE_PROPERY_FAILURE_FIELD_MISING;
+
+			
+			$profdata=$_REQUEST;
+
+			$sql="select * from ".TBL_USER." where user_id= '".$profdata['user_id']."' ";
+			$result= $this->db->query($sql,__FILE__,__LINE__);
+			$row= $this->db->fetch_array($result);
+			
+
+			$insert_sql_array=array();
+			$insert_sql_array['name']=$profdata['name'];
+			$insert_sql_array['user']=$profdata['user'];
+			$insert_sql_array['phoneno']=$profdata['phoneno'];
+
+			if ($profdata['pass'] == $row['password']) {
+
+				$insert_sql_array['password']=$profdata['newpass'];
+			}
+
+			$this->db->update(TBL_USER,$insert_sql_array,user_id,$profdata['user_id']);	
+			
+
+			$resp['data']=$profdata['user'];
+
+			echo json_encode($resp);
+
+
+
+
+	}
+
+
 
 			
 

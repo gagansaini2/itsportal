@@ -14,7 +14,7 @@ function activate_account($email){
 	$resp=array();
 	$resp['status']=true;
 	$resp['status_msg']=ERRORCODE_ACTIVATION_FAILURE;
-	if($this->formvalid->IsEmail($email) && !$this->formvalid->IsEmpty($key)){
+	if($this->formvalid->IsEmail($email)){
 		// true email valid 
 		$resp['status']=true;
 		$sql="select * from ".TBL_USER." where user = '".$email."' ";
@@ -26,8 +26,8 @@ function activate_account($email){
 				$update_sql_array = array();
 				$update_sql_array['status'] = 1;
                 
-				$update_sql_array['key'] = "Activated at :".time();
-				$this->db->update(TBL_USER,$update_sql_array,'email',$email);
+				// $update_sql_array['key'] = "Activated at :".time();
+				$this->db->update(TBL_USER,$update_sql_array,'user',$email);
 			}else{
 				$resp['status']=false;
 				$resp['status_msg']=ERRORCODE_ACTIVATION_EMAIL_NOT_EXIST;
@@ -76,7 +76,7 @@ function forgot_password($email){
                             <p>Regards,</p>
                             <p>The Itsrecruiment Team</p>
                             </div>';
-                            $header = "From: noreply@Itsrecruiment.com\r\n"; 
+                            $header = "From: noreply@Itsrecruiment.in\r\n"; 
                             $header.= "MIME-Version: 1.0\r\n"; 
                             $header.= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
                             $header.= "X-Priority: 1\r\n"; 

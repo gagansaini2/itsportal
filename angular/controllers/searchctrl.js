@@ -1,7 +1,7 @@
 
   'use strict';
 
-app.controller('jobSearchCtrl', ["$scope", "$http", "$user_service", function($scope, $http, $user_service) {
+app.controller('jobSearchCtrl', ["$scope", "$http", "$user_service", "$location", "$timeout",function($scope, $http, $user_service, $location, $timeout) {
 
 $scope.search={};
 
@@ -13,13 +13,10 @@ $scope.myOptions = [];
 
 
 
-$http({
-    method: "POST",
-        url: "api.php?work=get_skills"
-      }).then(function(response){
+$user_service.get_skills().then(function(response){
         // console.log(response);
 
-        angular.forEach(response.data.data, function(child){
+        angular.forEach(response.data, function(child){
         $scope.myOptions.push(child);
        
       
@@ -56,13 +53,10 @@ $scope.myConfig = {
 $scope.cities =[];
 
 
-$http({
-    method: "POST",
-        url: "api.php?work=get_cities"
-      }).then(function(response){
+$user_service.get_cities().then(function(response){
         // console.log(response);
 
-        angular.forEach(response.data.data, function(child){
+        angular.forEach(response.data, function(child){
         $scope.cities.push(child);
         // $scope.myOptions.push(child);
       // console.log($scope.cities);
@@ -370,45 +364,136 @@ $scope.myConfig3 = {
   // maxItems: 1
 };
 
+
+
+
+
+
+
+
+$scope.list_describer={
+
+    start: 1,
+    stop: 25,
+
+};
+
+$scope.list_describer.backstart=$scope.list_describer.start - 1;
+
+
+
+
+
+
+
+
 $scope.result_obj={};
-$scope.searchJob=function(){
+$scope.result_obj.show=false;
+
+
+
+$scope.searchJob=function(isValid){
+
+  if (isValid) {
+
+  $('#searchloader').show();
+   $("#srcherr").hide();
+   $scope.list.start=0;
 
   var main={};
   main.search=JSON.stringify($scope.search);
 
-  $user_service.job_search(main).then(function(response){
-  console.log(response);
+  $timeout(function() {
 
-    $user_service.set_searchObj(response.data);
-      
-      window.location="search_result.php"
+    $user_service.job_search(main).then(function(response){
+    
+      console.log(response);
+      // $user_service.set_searchObj(response.data);
+    
+      $scope.result_obj.show=true;
+      $scope.result_obj.data=response.data;
+      $scope.result_obj.check=$scope.result_obj.data.length;  
 
-// $scope.result_obj=response.data;
+
+      if ($scope.result_obj.check < 25) {
+
+          $scope.list_describer.stop=$scope.result_obj.check;
+      };
 
 
-//          for(var x in $scope.result_obj){
-//             $scope.result_obj[x].key_skills=JSON.parse($scope.result_obj[x].key_skills);
-//          }
+      for(var x in $scope.result_obj.data){
+        $scope.result_obj.data[x].key_skills=JSON.parse($scope.result_obj.data[x].key_skills);
+      }
 
-      
-// console.log($scope.result_obj);
-  },function(response){
-    console.log(response);
+      $('#searchloader').hide();
+
+      // console.log($scope.result_obj);
+    },function(response){
+        // console.log(response);
+    })
+
+  }, 1000);
+
+
+    $('html,body').animate({
+      scrollTop: $("#searchedjobs").offset().top},
+      'slow');
+
+  }else{
+    $("#srcherr").show();
+    $(".opt .selectize-input").click();
+
+  }  
+
+}
+
+$scope.list={
+  start: 0,
+  stop: 20
+}
+
+$scope.load=function(){
+
+
+  $user_service.get_jobs().then(function(response){
+     $scope.result_obj.data=response.data;
+     $scope.result_obj.check=$scope.result_obj.data.length; 
+     // console.log($scope.result_obj.check);
+     
+     for(var x in $scope.result_obj.data){
+        $scope.result_obj.data[x].key_skills=JSON.parse($scope.result_obj.data[x].key_skills);
+      }
+
+  },function(){
+
   })
 
 
 
 }
 
-$scope.load=function(){
 
+$scope.next=function(){
+$scope.list.start+=20;
+$('#searchloader').show();
+$timeout(function() {
 
-  $scope.result_obj=$user_service.get_searchObj();
-
-    console.log($scope.result_obj);
+  $('#searchloader').hide();
+}, 1000);
+  
+ 
 }
 
 
+$scope.prev=function(){
+$scope.list.start-=20;
+$('#searchloader').show();
+$timeout(function() {
+  $('#searchloader').hide();
+}, 1000);
+  
+ 
+}
 
 
 }]);

@@ -222,6 +222,10 @@ if ($work=='edit_company') {
 }
 
 
+if ($work=='edit_subcomp') {
+	
+	$jobs_obj -> sub_editcompany();
+}
 
 if ($work=='edit_myjob') {
 	
@@ -240,6 +244,35 @@ if ($work=='edit_subjob') {
 if ($work=='forgot') {
 	
 	$auth_obj -> forgot_password($email);
+}
+
+if ($work=='get_name') {
+	
+	$skill_obj -> get_emp_name();
+}
+
+
+if ($work=='save_profile') {
+	
+	$skill_obj -> save_myprofile();
+}
+
+
+if ($work=='get_jobs') {
+	
+	$jobs_obj -> get_jobs();
+}
+
+
+
+
+
+
+
+if ($work=='activation') {
+	
+	$auth_obj -> activate_account($email);
+	$employee_obj ->activation_msg();	
 }
 
 

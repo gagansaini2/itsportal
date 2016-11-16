@@ -640,9 +640,14 @@
 			return false;
 		});	
 			
+		//===================active class for navs=============================
 
+		var path=window.location.pathname;
+		// haha=haha.substr(11);
+		// console.log(haha);
 		
-			
+		$(".navbar-nav li [href='"+path+"']").parent().addClass("active");
+				// console.log(list);			
 			
  		// ====================================================================
 

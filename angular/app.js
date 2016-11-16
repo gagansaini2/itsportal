@@ -9,9 +9,18 @@
  * Main module of the application.
  */
 
-var app = angular.module('its', ['selectize','angular-input-stars','toggle-switch','ui.bootstrap','ngAnimate','ngTouch']);
+var app = angular.module('its', ['selectize','angular-input-stars','toggle-switch','ui.bootstrap','ngAnimate','ngTouch','ngRoute','angularMoment','jcs-autoValidate']);
 
-
+// app.config(function($routeProvider) {
+//     $routeProvider
+//     // .when("/", {
+//     //     templateUrl : "main.htm"
+//     // })
+//     .when("/search", {
+//         templateUrl : "test1.html"
+//         // controller : "jobSearchCtrl"
+//     });
+// });
 
 
 
@@ -35,3 +44,5 @@ app.directive("fileread", ['$http', function ($http) {
         }
     }
 }]);
+
+

@@ -97,6 +97,20 @@ $user_obj=new employee1();
 <script src="js\bower_components\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
 
+var type=location.search;
+type=type.substr(6);
+// console.log(type);
+ if (type == "fresh") {
+
+	 $("#tab3").html("");
+	 $("ul.text-center li:eq(2)").html("");
+
+	
+ };
+
+
+
+
 $(document).ready(function() {
 
 		var $validator = $("#fooorm").validate({
@@ -266,7 +280,7 @@ $(document).ready(function() {
 
 			
 		}, onTabClick:  function(tab, navigation, index){
-			// return false;
+			return false;
 
 		}, onFinish: function(tab, navigation, index){
 			

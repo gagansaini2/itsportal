@@ -63,6 +63,40 @@ $job_obj=new jobs();
 			    </div>
 			  </div>
 
+
+
+			<div ng-app="its" ng-controller="login">
+				<div class="modal fade" id="forgot" >
+							    <div class="modal-dialog" style="margin-top:200px;">
+							    
+							      <!-- Modal content-->
+							     
+
+							      <div class="modal-content" style="text-align:left;">
+							        <div class="modal-header ">
+							          
+							          <h3 class="modal-title">Enter your Email</h3>
+							        </div>
+							        
+							         <div class="modal-body">
+							          <label>Email</label>
+							          <input type="email" class="form-control" ng-model="login.email" required><br>
+							          <h6 id="recovrmsg" style="display: none;">A recovery password has been send to your email</h6>
+							          <span id="idregnot" style="display: none;color:red;">This is not a registered username</span>
+							        </div>
+							      
+							       
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-primary" ng-disabled="!login.email" ng-click="forget()">submit</button>
+
+							        </div>
+							      </div>
+							      
+							    </div>
+							  </div>
+							  
+
+
 			 <div class="modal fade" id="loginModal"  role="dialog">
 			    <div class="modal-dialog" style="margin-top:200px;">
 			    
@@ -72,18 +106,19 @@ $job_obj=new jobs();
 			          
 			          <h3 class="modal-title" style="color:#f7fcfc;">Login</h3>
 			        </div>
-			        <form ng-app="its" ng-controller="companyprof">
+			        <form>
 			        <div class="modal-body text-center" style="background:#f4f4f4;">
 
 			        	<p class="text-center" id="loginerr" style="display:none;">Invalid username or password, please try again</p>
 			        	
-			        		<div style="padding:15%; padding-top: 50px;">
-			          		<input type="Email" class="form-control" placeholder="Enter your Email ID" ng-model="login.username"><br>
-			          		<input type="password" class="form-control" placeholder="Enter your Password" ng-model="login.password"><br><br>
+			        		<div style="padding:15%; padding-top: 50px;padding-bottom:50px;">
+			          		<input type="Email" class="form-control" placeholder="Enter your Email ID" ng-model="loginpan.username"><br>
+			          		<input type="password" class="form-control" placeholder="Enter your Password" ng-model="loginpan.password"><br><br>
 
-			          		<button type="submit" class="btn btn-primary" ng-click="login()">Login</button>
+			          		<button type="submit" class="btn btn-primary" ng-disabled="!loginpan.username|| !loginpan.password" ng-click="signin()">Login</button><br><br>
+			          		<a ng-click="panelforgot()">Forgot Password?</a>
 			          		</div>
-			          	
+			          		
 			        </div>
 			       </form>
 			        
@@ -91,7 +126,7 @@ $job_obj=new jobs();
 			      
 			    </div>
 			  </div> 
-			
+			</div>
 
 
 			<?php

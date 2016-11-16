@@ -35,15 +35,10 @@ app.controller('viewprofile', ["$scope", "$http", "$user_service", function($sco
 //cities api
 
 $scope.cities =[];
- 
-$http({
 
-  method: "POST",
-  url: "api.php?work=get_cities"
-
-}).then(function(response){
+ $user_service.get_cities().then(function(response){
   // console.log(response.data.data.city);
-  angular.forEach(response.data.data, function(child){
+  angular.forEach(response.data, function(child){
         $scope.cities.push(child);
        
       // console.log($scope.cities);
@@ -61,22 +56,26 @@ $http({
 
   $scope.info={};
 
-  $http({
-
-    method: "POST",
-    url: "api.php?work=view_prof"
-  }).then(function(response){
-    // console.log(response);
-    $scope.info.personal=response.data.data.personal;
-    $scope.info.image=response.data.data.image;
-    $scope.info.edducation=response.data.data.eddu;
-    $scope.info.experince=response.data.data.exp;
-    $scope.info.others=response.data.data.others;
-    $scope.info.certificates=response.data.data.certificates;
-    $scope.info.keyskills=response.data.data.keyskills;
-
+  $user_service.view_prof().then(function(response){
+    console.log(response);
+    $scope.info.personal=response.data.personal;
+    $scope.info.image=response.data.image;
+    $scope.info.edducation=response.data.eddu;
+    $scope.info.experince=response.data.exp;
+    $scope.info.others=response.data.others;
+    $scope.info.certificates=response.data.certificates;
+    $scope.info.keyskills=response.data.keyskills;
+    if ($scope.info.certificates == null) {
+        $scope.info.certificates=[];
+    };
+     if ($scope.info.keyskills == null) {
+        $scope.info.keyskills=[];
+    };
+     if ($scope.info.experince.empwork == null) {
+        $scope.info.experince.empwork=[];
+    };
     // $scope.info.others.languages=$scope.info.others.languages_known.toString();
-     // console.log($scope.info);
+     console.log($scope.info);
   })
 
 
@@ -85,18 +84,15 @@ $http({
 $scope.myOptions1 = [];
 
 
-$http({
-    method: "POST",
-        url: "api.php?work=get_lang"
-      }).then(function(response){
+$user_service.get_lang().then(function(response){
         // console.log(response.data.data);
 
         // angular.forEach(response.data.data, function(child){
         // $scope.myOptions1.push(child);
         // console.log($scope.myOptions1);
         // });
-       for(var x in response.data.data){
-            $scope.myOptions1.push({lang: response.data.data[x]});
+       for(var x in response.data){
+            $scope.myOptions1.push({lang: response.data[x]});
          }  
       
       });  
@@ -123,13 +119,10 @@ $scope.myConfig1 = {
 $scope.myOptions = [];
 
 
-$http({
-    method: "POST",
-        url: "api.php?work=get_skills"
-      }).then(function(response){
+$user_service.get_skills().then(function(response){
         // console.log(response);
 
-        angular.forEach(response.data.data, function(child){
+        angular.forEach(response.data, function(child){
         $scope.myOptions.push(child);
        
       // console.log($scope.myOptions);
@@ -140,7 +133,7 @@ $http({
 $scope.myConfig = {
   create: true,
   maxItems: 1,
-  valueField: 'skills',
+  valueField: 'skill_id',
   labelField: 'skills',
   delimiter: '|',
   placeholder: 'Specify your keyskill',
@@ -150,16 +143,11 @@ $scope.myConfig = {
   },
   // maxItems: 1
   onOptionAdd: function(lang,data){
-    $http({
-        
-        method: "POST",
-        url: "api.php?work=add_skills",
-        params: data
-
-      }).success(function(response){
+     
+     $user_service.add_skills(data).then(function(response){
         // console.log(response);
-      }).error(function(response){
-        // console.log(response);
+      },function(response){
+        // console.log(response); 
       });
 
   },
@@ -239,6 +227,64 @@ $scope.edit6=function(){
   $scope.changes.change6=1;
 }
 
+
+
+
+
+
+
+
+//remove the exp 
+
+
+$scope.remexp=function(index){
+
+  // console.log(index);
+
+  $scope.info.experince.empwork.splice(index,1);
+
+}
+
+
+$scope.remcerti=function(index){
+
+  $scope.info.certificates.splice(index,1)
+}
+
+
+$scope.remskill=function(index){
+
+   $scope.info.keyskills.splice(index,1)  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //save chnages functions//////////
 
 $scope.save_personal=function(){
@@ -247,19 +293,7 @@ $scope.save_personal=function(){
 
   main=angular.copy($scope.info.personal);
 
-  $http({
-        
-        method: "POST",
-        url: "api.php?work=save_personal",
-        params: main
-
-      }).success(function(response){
-        // console.log(response);
-      }).error(function(response){
-        // console.log(response);
-      });
-
-
+  
         var formData = new FormData();
         formData.append('file', $('input[type=file]')[0].files[0] );
        
@@ -294,15 +328,9 @@ $scope.save_exp=function(){
 
   main.exp=JSON.stringify($scope.info.experince);
 
-  $http({
-        
-        method: "POST",
-        url: "api.php?work=save_exp",
-        params: main
-
-      }).success(function(response){
+ $user_service.save_exp(main).then(function(response){
         // console.log(response);
-      }).error(function(response){
+      },function(response){
         // console.log(response);
       });
 
@@ -318,15 +346,9 @@ $scope.save_education=function(){
 
   main.exp=JSON.stringify($scope.info.edducation);
 
-  $http({
-        
-        method: "POST",
-        url: "api.php?work=save_education",
-        params: main
-
-      }).success(function(response){
+  $user_service.save_education(main).then(function(response){
         // console.log(response);
-      }).error(function(response){
+      },function(response){
         // console.log(response);
       });
       $scope.changes.change3=0;
@@ -338,15 +360,9 @@ $scope.save_certification=function(){
 
   main.exp=JSON.stringify($scope.info.certificates);
 
-  $http({
-        
-        method: "POST",
-        url: "api.php?work=save_certification",
-        params: main
-
-      }).success(function(response){
+  $user_service.save_certification(main).then(function(response){
         // console.log(response);
-      }).error(function(response){
+      },function(response){
         // console.log(response);
       });
 
@@ -359,15 +375,9 @@ $scope.save_skills=function(){
 
   main.exp=JSON.stringify($scope.info.keyskills);
 
-  $http({
-        
-        method: "POST",
-        url: "api.php?work=save_skills",
-        params: main
-
-      }).success(function(response){
+  $user_service.save_skills(main).then(function(response){
         // console.log(response);
-      }).error(function(response){
+      },function(response){
         // console.log(response);
       });
 $scope.changes.change5=0;
@@ -381,15 +391,9 @@ $scope.save_others=function(){
 
  
 
-  $http({
-        
-        method: "POST",
-        url: "api.php?work=save_others",
-        params: main
-
-      }).success(function(response){
+  $user_service.save_others(main).then(function(response){
         // console.log(response);
-      }).error(function(response){
+      },function(response){
         // console.log(response);
       });
       $scope.changes.change6=0;

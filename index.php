@@ -25,7 +25,9 @@ $job_obj=new jobs();
 
 <?php include('include/header.php'); ?>
 
-<div id="slider" class="sl-slider-wrapper"  ng-app="its" ng-controller="jobSearchCtrl">
+<div ng-app="its" ng-controller="jobSearchCtrl">
+
+<div id="slider" class="sl-slider-wrapper">
   <div class="sl-slider">
     <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
       <div class="sl-slide-inner">
@@ -34,98 +36,23 @@ $job_obj=new jobs();
         <div class="slide-content">
                       
                
-                 <pre>{{JSON || search}}</pre>
-                  <form>
+                 <!-- <pre>{{JSON || search}}</pre> -->
+                  <form name="searchform">
                     <div class="col-sm-12 well">
               
                       
-                      <div class="row col-sm-5"><selectize config='myConfig' class="search" options='myOptions' ng-model="search.options"></selectize></div>        
-                      <!-- <input type="text" class="form-control search" name="x" placeholder="Skills, Companies" ng-model="search.any" style="width:30%;"> -->
-                       <div class="row col-sm-3"><selectize config='myConfig1' class="search" options='cities' ng-model="search.location"></selectize></div>
-                     <!--  <select class="form-control search" ng-model="search.location" ng-options="x.city as x.city for x in cities">
-                        <option>Location <span class="caret"></span></option> 
-                      </select> -->
-                       <div class="row col-sm-2"><selectize config='myConfig2' class="search" options='exp' ng-model="search.experience"></selectize></div>
-                     <!--  <select class="form-control search" ng-model="search.experience">
-                        <option>Experience <span class="caret" ></span></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-
-                      </select> -->
-                       <div class="row col-sm-2"><selectize config='myConfig3' class="search" options='salary' ng-model="search.salary"></selectize></div>
-                      <!-- <select class="form-control search" ng-model="search.salary">
-                        <option>Salary <span class="caret" ></span></option> 
-                        <option value="1 Lacs">1 Lacs</option>
-                        <option value="2 Lacs">2 Lacs</option>
-                        <option value="3 Lacs">3 Lacs</option>
-                        <option value="4 Lacs">4 Lacs</option>
-                        <option value="5 Lacs">5 Lacs</option>
-                        <option value="6 Lacs">6 Lacs</option>
-                        <option value="7 Lacs">7 Lacs</option>
-                        <option value="8 Lacs">8 Lacs</option>
-                        <option value="9 Lacs">9 Lacs</option>
-                        <option value="10 Lacs">10 Lacs</option>
-                        <option value="11 Lacs">11 Lacs</option>
-                        <option value="12 Lacs">12 Lacs</option>
-                        <option value="13 Lacs">13 Lacs</option>
-                        <option value="14 Lacs">14 Lacs</option>
-                        <option value="15 Lacs">15 Lacs</option>
-                        <option value="16 Lacs">16 Lacs</option>
-                        <option value="17 Lacs">17 Lacs</option>
-                        <option value="18 Lacs">18 Lacs</option>
-                        <option value="19 Lacs">19 Lacs</option>
-                        <option value="20 Lacs">20 Lacs</option>
-                        <option value="21 Lacs">21 Lacs</option>
-                        <option value="22 Lacs">22 Lacs</option>
-                        <option value="23 Lacs">23 Lacs</option>
-                        <option value="24 Lacs">24 Lacs</option>
-                        <option value="25 Lacs">25 Lacs</option>
-                        <option value="26 Lacs">26 Lacs</option>
-                        <option value="27 Lacs">27 Lacs</option>
-                        <option value="28 Lacs">28 Lacs</option>
-                        <option value="29 Lacs">29 Lacs</option>
-                        <option value="30 Lacs">30 Lacs</option>
-                        <option value="30+ Lacs">30+ Lacs</option>
-                      </select> -->
-                          
-                         
-                        
+                      <div class="row col-sm-5"><selectize config='myConfig' class="search opt" options='myOptions' ng-model="search.options" required></selectize></div>
+                      <div class="row col-sm-3"><selectize config='myConfig1' class="search" options='cities' ng-model="search.location"></selectize></div>
+                      <div class="row col-sm-2"><selectize config='myConfig2' class="search" options='exp' ng-model="search.experience" required></selectize></div>
+                      <div class="row col-sm-2"><selectize config='myConfig3' class="search" options='salary' ng-model="search.salary"></selectize></div>  
                       <div class="row" >
-                        <button class="btn btn-primary" type="button" ng-click="searchJob()" style="line-height:2.3;width:120px;"><span class="glyphicon glyphicon-search"></span>Search</button>    
+                        <button class="btn btn-primary" type="button" ng-click="searchJob(searchform.$valid)" style="line-height:2.3;width:120px;"><span class="glyphicon glyphicon-search"></span>Search</button>    
                       </div>
-                    
+                      
 
                   </div>
                 </form>
-
+               <span class="error" id="srcherr" style="display: none;">Please enter Keyskill and Experience to search</span>
 
 
 
@@ -135,11 +62,93 @@ $job_obj=new jobs();
     </div>
   
   </div>
-</div>
 
+  
+</div>
 <!-- ============ SLIDES END ============ --> 
 
+<img src="" id="searchloader" >
+<div></div>
+<section id="searchedjobs"  >
 
+  
+
+  <div ng-if="result_obj.show==true">
+
+    <div class="container">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+        <div class="col-sm-3">
+          <strong><b>{{list_describer.start}}-{{list_describer.stop}} of {{result_obj.data.length}}</b></strong>
+        </div>
+        <div class="col-sm-6 text-center"> 
+          <h3 style="margin:4px;">Searched jobs</h3>
+        </div>
+        <div class="col-sm-3" style="text-align: right;">
+          <label>show:</label>
+          <input type="text" ng-model="list_describer.start" class="listsetter">
+          -
+          <input type="text" ng-model="list_describer.stop" class="listsetter">
+        </div>  
+        </div>
+      </div>
+    </div>
+
+        <div class="text-center" ng-if="result_obj.check==0">
+          <p><b>No match found...</b></p>
+        </div>
+<div class="jobresult">
+  <div class="container"  ng-repeat="x in result_obj.data | limitTo : list_describer.stop : list_describer.backstart " >
+
+        <div class="row">
+          <div class="col-sm-12">
+
+
+
+            <div class="jobs">
+              
+              <a href="job_details.php?id={{x.job_id}}"  class="featured applied">
+                <div class="row">
+                  <div class="col-lg-1 col-md-1 hidden-sm hidden-xs text-center">
+                    
+                      <img src='uploads/{{x.logo_name}}' class='img-responsive' ng-if="x.logo_name"><br>
+                      <h6 ng-if="!x.logo_name">{{x.company_name}}</h6>
+
+                     
+                  </div>
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 job-title">
+                    <h5>{{x.role_title}}</h5>
+                    <p><strong>{{x.department}}</strong></p><br>  
+                    <p>Posted <b>{{x.posted_on}}</b> </p>
+                  </div>
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
+                    
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;<strong style="text-transform:capitalize;" >  {{x.job_loc}}{{x.location_outside}}</strong></p>
+                    <p><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;<strong>{{x.min_experience}} - {{x.max_experience}} years</strong></p>
+                  </div>
+                  <div class="col-lg-3 col-md-2 col-sm-2 hidden-xs job-type ">
+                    <p class="job-salary"><strong><i class="fa fa-rupee"></i>&nbsp;{{x.min_remuneration}} - {{x.max_remuneration}} Lacs</strong></p>
+                    <p class="badge full-time">{{x.job_type}}</p>
+                  </div>
+                  <div class="col-lg-2 visible-lg-block">
+
+                    <p class="job-posted" ng-repeat="item in x.key_skills | limitTo : 4"><strong>{{item}}&nbsp;</strong></p>
+                    
+                  </div>
+                  
+                </div>
+              </a>
+              
+              
+            </div>
+            
+
+          </div>
+        </div>
+      </div>
+      </div>
+     </div> 
+      </section>
 
 
 
@@ -150,13 +159,14 @@ $job_obj=new jobs();
 
 <!-- ============ JOBS START ============ -->
 
-<section id="jobs" >
+<section id="jobs" ng-if="result_obj.show==false" style="padding-top:0px;">
    <?php
         
         $job_obj->getjobs_home();
 
          ?>
 </section>
+</div>
 <!-- <h2 class="inline"><a href="http://itsrecruitment.in/jobs.php">More Jobs</a></h2> -->
 
 <!-- ============ JOBS END ============ --> 

@@ -38,6 +38,37 @@ $user_obj2=new employer();
 		<!-- ============ RESUME START ============ -->
 
 		<section id="resume">
+
+			<div ng-app="its" ng-controller="login">
+				<div class="modal fade" id="forgot" >
+							    <div class="modal-dialog" style="margin-top:200px;">
+							    
+							      <!-- Modal content-->
+							     
+
+							      <div class="modal-content" style="text-align:left;">
+							        <div class="modal-header ">
+							          
+							          <h3 class="modal-title">Enter your Email</h3>
+							        </div>
+							        
+							         <div class="modal-body">
+							          <label>Email</label>
+							          <input type="email" class="form-control" ng-model="login.email" required><br>
+							          <h6 id="recovrmsg" style="display: none;">A recovery password has been send to your email</h6>
+							          <span id="idregnot" style="display: none;color:red;">This is not a registered username</span>
+							        </div>
+							      
+							       
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-primary" ng-disabled="!login.email" ng-click="forget()">submit</button>
+
+							        </div>
+							      </div>
+							      
+							    </div>
+							  </div>
+							  </div>
 			
 
 
@@ -64,3 +95,11 @@ $user_obj2=new employer();
 
 	</body>
 </html>
+<script >
+
+	launch=function(){
+		$("#forgot").modal('show');	
+	}
+	
+
+</script>

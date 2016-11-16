@@ -2111,6 +2111,7 @@ background-repeat: no-repeat;
 .well{
 	border:3px solid ;
 	padding: 0px;
+	margin-bottom: 0px;
 }
 
 .search .selectize-input{
@@ -2121,6 +2122,11 @@ background-repeat: no-repeat;
 }
 
 .search .selectize-input::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    display: none;
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+.search .selectize-input::-moz-scrollbar {
     width: 0px;  /* remove scrollbar space */
     display: none;
     background: transparent;  /* optional: just make scrollbar invisible */
@@ -2271,3 +2277,43 @@ p.des{
 	display: none;
 }
 
+#searchloader {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://sampsonresume.com/labs/pIkfp.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+
+.listsetter{
+
+	width: 3em;
+}
+.jobresult{
+	    overflow-y: scroll
+}
+
+
+.jobresult::-webkit-scrollbar {
+
+    width: 0px;  /* remove scrollbar space */
+    display: none;
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+.error{
+	color: #008000;
+	font-weight: bolder;
+	
+
+}
+.navbar >.nav >li >a{
+	cursor: pointer;
+}

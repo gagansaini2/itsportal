@@ -11,18 +11,12 @@ app.controller('companyprof', ["$scope", "$http", "$user_service", function($sco
 
 $scope.companylist=[];
 
-
-$http({
-
-  method: "POST",
-  url: "api.php?work=get_companieslist"
-
-}).then(function(response){
+$user_service.get_companieslist().then(function(response){
   // console.log(response);
-  angular.forEach(response.data.data, function(child){
+  angular.forEach(response.data, function(child){
         $scope.companylist.push(child);
      });   
- // console.log($scope.companylist);
+ console.log($scope.companylist);
  $("#companymodal").modal('show');
 });
 
@@ -43,16 +37,11 @@ $http({
   compid=compid.substr(4);
   // console.log(compid);
 
-$http({
-
-  method: "POST",
-  url: "api.php?work=edit_company&compid="+compid
-
-}).then(function(response){
+$user_service.edit_company(compid).then(function(response){
   // console.log(response);
-    $scope.company=angular.copy(response.data.data);
+    $scope.company=angular.copy(response.data);
     // $scope.company.push(response.data.data.logo);
-    console.log($scope.company);
+    // console.log($scope.company);
 });
 
 
@@ -83,15 +72,9 @@ $scope.load4=function(){
   jobid=jobid.substr(7);
   // console.log(jobid);
 
-$http({
-
-  method: "POST",
-  url: "api.php?work=edit_myjob&jobid="+jobid
-
-}).then(function(response){
+$user_service.edit_myjob(jobid).then(function(response){
   console.log(response);
-    $scope.job=angular.copy(response.data.data.job);
-    $scope.job.key_skills=JSON.parse($scope.job.key_skills);
+    $scope.job=angular.copy(response.data.job);
     $scope.job.qualification=JSON.parse($scope.job.qualification);
 
       if ($scope.job.shift_timimg == "Yes") {
@@ -102,7 +85,7 @@ $http({
          
          $scope.job.shift_timimg=false;
       }
-    console.log($scope.job);
+    // console.log($scope.job);
 });
 
 
@@ -114,14 +97,9 @@ $http({
 
 $scope.cities =[];
  
-$http({
-
-  method: "POST",
-  url: "api.php?work=get_cities"
-
-}).then(function(response){
+$user_service.get_cities().then(function(response){
   // console.log(response.data.data.city);
-  angular.forEach(response.data.data, function(child){
+  angular.forEach(response.data, function(child){
         $scope.cities.push(child);
        
       // console.log($scope.cities);
@@ -131,14 +109,9 @@ $http({
 
 $scope.countries =[];
  
-$http({
-
-  method: "POST",
-  url: "api.php?work=get_countries"
-
-}).then(function(response){
+$user_service.get_countries().then(function(response){
   // console.log(response.data.data.city);
-  angular.forEach(response.data.data, function(child){
+  angular.forEach(response.data, function(child){
         $scope.countries.push(child);
        
       // console.log($scope.cities);
@@ -148,13 +121,10 @@ $http({
 $scope.myOptions = [];
 
 
-$http({
-    method: "POST",
-        url: "api.php?work=get_skills"
-      }).then(function(response){
+$user_service.get_skills().then(function(response){
         // console.log(response);
 
-        angular.forEach(response.data.data, function(child){
+        angular.forEach(response.data, function(child){
         $scope.myOptions.push(child);
        
       // console.log($scope.myOptions);
@@ -164,7 +134,7 @@ $http({
 
 $scope.myConfig = {
   create: true,
-  valueField: 'skills',
+  valueField: 'skill_id',
   labelField: 'skills',
   delimiter: '|',
   placeholder: 'Specify keyskills',
@@ -174,17 +144,11 @@ $scope.myConfig = {
   },
   // maxItems: 1
   onOptionAdd: function(lang,data){
-    $http({
-        
-        method: "POST",
-        url: "api.php?work=add_skills",
-        params: data
-
-      }).success(function(response){
+    
+    $user_service.add_skills(data).then(function(response){
         // console.log(response);
-      }).error(function(response){
-        // console.log(response);
-      });
+      },function(){
+    })
 
   },
 };
@@ -293,6 +257,14 @@ if ($scope.edd.course_type) {
 
 })
 
+$scope.$watch('edd.degree_type', function(newp,oldp){
+
+  if (newp!="") {
+    $("#quaferr").hide();
+  };
+
+})
+
 
 
 
@@ -334,69 +306,34 @@ $scope.submitjob=function(isValid){
 
   if (isValid) {
 
-  var main={};
+    if ($scope.job.qualification.length != 0) {
 
-   if ($scope.job.shifttimimg == true) {
-          $scope.job.shifttimimg = "Yes";
-       }else{
+    var main={};
+
+      if ($scope.job.shifttimimg == true) {
+        $scope.job.shifttimimg = "Yes";
+      }else{
         $scope.job.shifttimimg = "No";
-       }
+      }
 
-  main.job=JSON.stringify($scope.job);
-
-
-$http({
-
-  method: "POST",
-  url: "api.php?work=job_submit",
-  params: main
-
-}).then(function(response){
-  // console.log(response);
-  $('#myyModal').modal('show');
-})
-
-};
-
-}
-
-$scope.login={};
-
-$scope.login=function(){
-  // console.log("yo");
-
-      $.ajax({
-              
-          method: "POST",
-          url: "api.php?work=panel_login",
-
-          data: $scope.login,
-         
-         
-                      
-         success:function(data){
-
-          var callback = JSON.parse(data);
-          console.log(callback.status);
-          
-          if (callback.status == true) {
-            
-                $("#loginerr").hide();
-              location.reload();
-          }
-
-          if (callback.status == false){
-              $("#loginerr").show();
-                
-
-          }
-
-         
-         }
+     main.job=JSON.stringify($scope.job);
 
 
-      })
+    $http({
 
+      method: "POST",
+      url: "api.php?work=job_submit",
+      params: main
+
+    }).then(function(response){
+      // console.log(response);
+      $('#myyModal').modal('show');
+    })
+
+    }else{
+      $("#quaferr").show();
+    }
+  }
 
 }
 
@@ -425,7 +362,7 @@ $scope.editcomp=function(isValid){
   $.ajax({
         
         method: "POST",
-        url: "api.php?work=comp_submit",
+        url: "api.php?work=edit_subcomp",
 
         //params: main,
         data: formData,
@@ -451,6 +388,7 @@ $scope.editmyjob=function(isValid){
 
 
   if (isValid) {
+      if ($scope.job.qualification.length != 0) {
 
   var main={};
 
@@ -463,20 +401,16 @@ $scope.editmyjob=function(isValid){
   main.job=JSON.stringify($scope.job);
 
 
-$http({
-
-  method: "POST",
-  url: "api.php?work=edit_subjob",
-  params: main
-
-}).then(function(response){
+$user_service.edit_subjob(main).then(function(response){
   // console.log(response);
   
   window.location="myjob_list.php"
 })
 
-};
-
+}else{
+   $("#quaferr").show();
+}
+}
 }
 
 

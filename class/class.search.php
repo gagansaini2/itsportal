@@ -35,79 +35,81 @@ class search{
 				
 				$search_result=array();
 
-				if (sizeof($location) > 0) {
-
-						
-						for ($i=0; $i <count($location) ; $i++) { 
-
-							$sql="select * from ".TBL_JOBS." where location_id= '".$location[$i]."' ";
-							$result= $this->db->query($sql,__FILE__,__LINE__);
-							while ( $row= $this->db->fetch_array($result)) {
-						
-
-							$search_result[]=$row['job_id'];
-							// print_r($search_result);
-							}
-							
-
-						}
-				}
-// print_r(sizeof($options));
 
 				if (sizeof($options) > 0) {
+								
+					for ($i=0; $i <count($options) ; $i++) { 
 
-						
-						for ($i=0; $i <count($options) ; $i++) { 
+						if (sizeof($location) > 0) {
+							
+							for ($j=0; $j <count($location) ; $j++) {
+
+								$sql_job="select * from ".TBL_JOBS." inner join ".TBL_JOBSKILLS." on ".TBL_JOBSKILLS.".job_id=".TBL_JOBS.".job_id where skill_id= '".$options[$i]."' and location_id = '".$location[$j]."' ";
+								
+								$max_exp=$experience + 3;
+								$sql_job.=" and min_experience >= '".$experience."' and max_experience <= '".$max_exp."'";					
 
 
-							$sql="select * from ".TBL_JOBSKILLS." where skill_id= '".$options[$i]."' ";
-							$result= $this->db->query($sql,__FILE__,__LINE__);
+								if (isset($salary)) {
+									
+									$sql_job.="and min_remuneration >= '".$salary."' ";
+								}
+
+								
+								$result= $this->db->query($sql_job,__FILE__,__LINE__);
+								while ( $row= $this->db->fetch_array($result)) {
+								
+								
+								$search_result[]=$row['job_id'];
+								// print_r($search_result);
+								}
+							} 
+							
+
+						}else{
+
+							$sql_job="select * from ".TBL_JOBS." inner join ".TBL_JOBSKILLS." on ".TBL_JOBSKILLS.".job_id=".TBL_JOBS.".job_id where skill_id= '".$options[$i]."' ";
+								
+							$max_exp=$experience + 3;
+							$sql_job.=" and min_experience >= '".$experience."' and max_experience <= '".$max_exp."'";					
+
+
+							if (isset($salary)) {
+								
+								$sql_job.="and min_remuneration >= '".$salary."' ";
+							}
+
+							// print_r($sql_job);
+							$result= $this->db->query($sql_job,__FILE__,__LINE__);
 							while ( $row= $this->db->fetch_array($result)) {
 							
 							
 							$search_result[]=$row['job_id'];
 							// print_r($search_result);
 							}
-							
+
+
 
 						}
+
+
+
+					}
 				}
 
 
-				if (isset($experience)) {
-
-
-
-						$sql="select * from ".TBL_JOBS." where min_experience= '".$experience."' ";
-						$result= $this->db->query($sql,__FILE__,__LINE__);
-						while ( $row= $this->db->fetch_array($result)) {
-						
-
-							$search_result[]=$row['job_id'];
-
-						}
-				}
-
-
-				if (isset($salary)) {
-
-
-
-						$sql="select * from ".TBL_JOBS." where max_remuneration= '".$salary."' ";
-						$result= $this->db->query($sql,__FILE__,__LINE__);
-						while ( $row= $this->db->fetch_array($result)) {
-						
-
-							$search_result[]=$row['job_id'];
-
-						}
-				}
-
-
+				
+				
 				$search_result=array_unique($search_result);
+// print_r($search_result);
+
+				$search_result=array_values($search_result);
 
 
-				$final=array();
+// print_r($search_result);
+
+			$final=array();
+			
 				for ($i=0; $i <count($search_result) ; $i++) { 
 
 
@@ -115,6 +117,57 @@ class search{
 						$result= $this->db->query($sql,__FILE__,__LINE__);
 						$row= $this->db->fetch_array($result); 
 						
+
+						if ($row['posted_on']!="") {
+					
+				
+						$post_time=$row['posted_on'];		
+						$curr_time=time();
+						$diff=$curr_time - $post_time;
+
+
+						//no. minutes,hours,days,mnths....
+						$min=floor($diff/60);
+						$hours=floor($diff/(60*60));
+						$days=floor($diff/(60*60*24));
+						$weeks=floor($diff/(60*60*24*7));
+
+						if ($min > 60) {
+							
+							if ($hours > 24) {
+								
+								if ($days > 7) {
+									
+									if ($weeks > 1) {
+										$posted_on=$weeks." weeks ago";	
+									}elseif($weeks == 1){
+										$posted_on="a week ago";	
+									}
+
+								}elseif($days == 1){
+									$posted_on="a day ago";							
+								}else{
+									$posted_on=$days." days ago";	
+								}
+
+							}elseif($hours == 1){
+
+								$posted_on="an hour ago";
+							}else{
+
+								$posted_on=$hours." hours ago";
+							}
+
+						}else{
+							$posted_on=$min." minutes ago";
+						}
+
+						$row['posted_on']=$posted_on;
+						}	
+
+
+
+
 
 						$sql1="select * from ".TBL_LOGO." where company_id= '".$row['company_id']."' ";
 						$result1= $this->db->query($sql1,__FILE__,__LINE__);
@@ -140,7 +193,7 @@ class search{
 				}
 
 
-			// $resp['status']=true;
+			$resp['status']=true;
 			$resp['data']=$final;
 			echo json_encode($resp);
 
